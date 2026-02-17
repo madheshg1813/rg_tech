@@ -26,6 +26,5 @@ yarn-error.log*
 !.vscode/extensions.json
 .history
 
-# TEMPORARY: Ignore large assets to allow chunked pushing
+# TEMPORARY: Ignore large gallery to push catalogues first
 public/gallery/
-public/catalogues/
