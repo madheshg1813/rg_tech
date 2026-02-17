@@ -26,9 +26,8 @@ yarn-error.log*
 !.vscode/extensions.json
 .history
 
-# TEMPORARY: Allow Fabrication Services only
+# TEMPORARY: Allow Fabrication & Laser Cutting
 public/gallery/Decorative Metal Panels/
-public/gallery/Laser Cutting Services/
 public/gallery/Metal Safety Doors/
 public/gallery/Sheet Metal Laser Cutting/
 public/gallery/Steel Gates/
