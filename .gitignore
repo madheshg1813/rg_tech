@@ -31,3 +31,6 @@ public/gallery/Decorative Metal Panels/
 public/gallery/Metal Safety Doors/
 public/gallery/Sheet Metal Laser Cutting/
 public/gallery/Steel Gates/
+
+# Local Netlify folder
+.netlify

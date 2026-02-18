@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, Link, useLocation, useParams } from 'react-router-dom'
+import { Routes, Route, Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, ChevronLeft, ArrowRight, Send, Upload, Star, MessageCircle, Menu, X, Shield, Target, Zap, Wrench, Building2, Paintbrush, Users, Factory, Cpu, Wind, CheckCircle, FileText, Package, Truck, Eye, Settings, DoorOpen, Layers, PanelTop, Scissors, Ruler, Sparkles, Plus, Minus, Home, Download } from 'lucide-react'
 
@@ -16,34 +16,40 @@ const CHENNAI_LOCALITIES = [
 
 const SERVICE_IMAGE_POOLS = {
     'laser-cutting-services': [
-        'https://images.unsplash.com/photo-1764114235896-034c8772de01?q=80&w=1200',
-        'https://images.unsplash.com/photo-1729944950511-e9c71556cfd4?q=80&w=1200',
-        'https://images.unsplash.com/photo-1738162837619-5d0b158abcec?q=80&w=1200',
-        'https://images.unsplash.com/photo-1745422899427-047466540679?q=80&w=1200'
+        '/gallery/Laser Cutting Services/kw_fiber_hd.png',
+        '/gallery/Laser Cutting Services/kw_cnc_machine_hd.png',
+        '/gallery/Laser Cutting Services/kw_aluminum_hd.png',
+        '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_10.jpg'
     ],
     'sheet-metal-laser-cutting-services': [
-        'https://images.unsplash.com/photo-1763926025420-adf538deaee4?q=80&w=1200',
-        'https://images.unsplash.com/photo-1764115424769-ebdd2683d5a8?q=80&w=1200',
-        'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1200'
+        '/gallery/Sheet Metal Laser Cutting/sm_01.jpg',
+        '/gallery/Sheet Metal Laser Cutting/sm_02.jpg',
+        '/gallery/Sheet Metal Laser Cutting/sm_03.jpg',
+        '/gallery/Sheet Metal Laser Cutting/sm_12.jpg'
     ],
     'fabrication-services': [
-        'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1200',
-        'https://images.unsplash.com/photo-1598302936664-407d6c250e2c?q=80&w=1200',
-        'https://images.unsplash.com/photo-1517520287167-4bbf64a00d66?q=80&w=1200'
+        '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0016.jpg',
+        '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0018.jpg',
+        '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0008.jpg',
+        '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0010.jpg'
     ],
     'steel-gates': [
-        'https://images.unsplash.com/photo-1715541275956-4845a5cf74c1?q=80&w=1200',
-        'https://images.unsplash.com/photo-1510166089176-b57564a542b1?q=80&w=1200',
-        'https://images.unsplash.com/photo-1511253018283-0570b5dcb989?q=80&w=1200'
+        '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0120.jpg',
+        '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0125.jpg',
+        '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0129.jpg',
+        '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0135.jpg'
     ],
     'metal-safety-doors': [
-        'https://images.unsplash.com/photo-1760597307381-2bec368dcf26?q=80&w=1200',
-        'https://images.unsplash.com/photo-1534349762230-e0cadf78f5db?q=80&w=1200'
+        '/gallery/Metal Safety Doors/premium-quality-are-made-of-heavy-duty-stainless-steel-safety-doors--144.jpg',
+        '/gallery/Metal Safety Doors/mild-steel-hinged-safety-door.jpg',
+        '/gallery/Metal Safety Doors/7x3-5-feet-18-3-kilograms-paint-coated-mild-steel-safety-doors-466.jpg',
+        '/gallery/Metal Safety Doors/1-13.jpg'
     ],
     'decorative-metal-panels': [
-        'https://images.unsplash.com/photo-1762813632307-1e094bcfee68?q=80&w=1200',
-        'https://images.unsplash.com/photo-1766485019016-710d7e121add?q=80&w=1200',
-        'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1200'
+        '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0054.jpg',
+        '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0062.jpg',
+        '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0004.jpg',
+        '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0011.jpg'
     ]
 }
 
@@ -164,7 +170,7 @@ const CatalogueModal = ({ isOpen, onClose }) => {
     )
 }
 
-const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, servicesDropdown, pillarServices, setCatalogueModalOpen }) => {
+const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, setMobileMenuOpen, servicesDropdown, setServicesDropdown, pillarServices, setCatalogueModalOpen }) => {
     return (
         <>
             {/* Top Info Bar - Sleeker & More Professional */}
@@ -186,9 +192,9 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, serv
                             <Phone className="w-3 h-3" />
                             <span>+91 63807-36439</span>
                         </a>
-                        <a href="mailto:rgtech97@gmail.com" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors lowercase tracking-normal">
+                        <a href="mailto:admin@rgtechengineeringworks.com" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors lowercase tracking-normal">
                             <Mail className="w-3 h-3 uppercase" />
-                            <span>rgtech97@gmail.com</span>
+                            <span>admin@rgtechengineeringworks.com</span>
                         </a>
                     </div>
                 </div>
@@ -199,10 +205,8 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, serv
                 <div className="max-w-7xl mx-auto px-4 py-4">
                     <div className="flex justify-between items-center">
                         <Link to="/" className="flex items-center gap-3.5 group">
-                            <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform duration-300">
-                                <span className="text-lg font-black text-white italic tracking-tighter">RG</span>
-                            </div>
-                            <div className="transition-all">
+                            <img src="/RG-Tech-Logo.png" alt="RG Tech Logo" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
+                            <div className="transition-all hidden sm:block">
                                 <h1 className="text-xl font-bold text-primary leading-none tracking-tight font-heading">
                                     RG Tech <span className="text-accent">Engineering</span>
                                 </h1>
@@ -259,8 +263,8 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, serv
                                                                 {CHENNAI_LOCALITIES.map((city, idx) => (
                                                                     <Link
                                                                         key={idx}
-                                                                        to={`${s.slug}/${city.toLowerCase().replace(/\s+/g, '-')}`}
-                                                                        onClick={() => toggleServicesDropdown()}
+                                                                        to={`${s.slug}-in-${city.toLowerCase().replace(/\s+/g, '-')}`}
+                                                                        onClick={() => setServicesDropdown(false)}
                                                                         className="text-[13px] text-text-muted hover:text-accent py-1.5 transition-all font-medium border-b border-transparent hover:border-accent/10 whitespace-nowrap"
                                                                     >
                                                                         {city}
@@ -303,7 +307,7 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, serv
                                 <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-2 pl-1">Services</p>
                                 {pillarServices.map((s, i) => (
                                     <div key={i} className="flex flex-col">
-                                        <Link to={s.slug} onClick={toggleMobileMenu} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 bg-slate-50/30 border border-slate-100/50 mb-2 transition-all">{s.name}</Link>
+                                        <Link to={s.slug} onClick={() => setMobileMenuOpen(false)} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 bg-slate-50/30 border border-slate-100/50 mb-2 transition-all">{s.name}</Link>
 
                                         {/* Mobile Localities Toggle for current service */}
                                         <div className="flex flex-col gap-2 p-4 mb-4 bg-slate-50/30 rounded-2xl border border-slate-100/50">
@@ -311,14 +315,14 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, serv
                                             {CHENNAI_LOCALITIES.slice(0, 8).map((city, idx) => (
                                                 <Link
                                                     key={idx}
-                                                    to={`${s.slug}/${city.toLowerCase().replace(/\s+/g, '-')}`}
-                                                    onClick={toggleMobileMenu}
+                                                    to={`${s.slug}-in-${city.toLowerCase().replace(/\s+/g, '-')}`}
+                                                    onClick={() => setMobileMenuOpen(false)}
                                                     className="text-[14px] text-text-muted py-2 px-1 hover:text-accent transition-all font-medium border-b border-slate-100/50 last:border-0"
                                                 >
                                                     {city}
                                                 </Link>
                                             ))}
-                                            <Link to={s.slug} onClick={toggleMobileMenu} className="text-center text-[13px] font-bold text-accent pt-4">Main Service Details</Link>
+                                            <Link to={s.slug} onClick={() => setMobileMenuOpen(false)} className="text-center text-[13px] font-bold text-accent pt-4">Main Service Details</Link>
                                         </div>
                                     </div>
                                 ))}
@@ -326,16 +330,16 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, serv
 
                             <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-slate-100">
                                 <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-2 pl-1">Navigation</p>
-                                <a href="/#industries" onClick={toggleMobileMenu} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">Industries</a>
-                                <Link to="/gallery" onClick={toggleMobileMenu} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">Gallery</Link>
-                                <a href="/#about" onClick={toggleMobileMenu} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">About Us</a>
-                                <a href="/#contact" onClick={toggleMobileMenu} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">Contact</a>
+                                <a href="/#industries" onClick={() => setMobileMenuOpen(false)} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">Industries</a>
+                                <Link to="/gallery" onClick={() => setMobileMenuOpen(false)} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">Gallery</Link>
+                                <a href="/#about" onClick={() => setMobileMenuOpen(false)} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">About Us</a>
+                                <a href="/#contact" onClick={() => setMobileMenuOpen(false)} className="text-primary font-bold text-base py-3 px-4 rounded-2xl hover:bg-slate-50 transition-all">Contact</a>
                             </div>
                             <div className="grid grid-cols-2 gap-3 mt-4">
                                 <a href="https://wa.me/916380736439" className="text-primary font-bold py-3.5 rounded-2xl bg-slate-100 flex items-center justify-center gap-2 text-sm shadow-sm">
                                     <MessageCircle className="w-4 h-4" /> WhatsApp
                                 </a>
-                                <a href="#contact" onClick={toggleMobileMenu} className="bg-accent text-white py-3.5 rounded-2xl font-bold text-center text-sm shadow-lg shadow-accent/20">Get Quote</a>
+                                <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="bg-accent text-white py-3.5 rounded-2xl font-bold text-center text-sm shadow-lg shadow-accent/20">Get Quote</a>
                             </div>
                         </nav>
                     )}
@@ -353,11 +357,11 @@ const Footer = ({ pillarServices }) => {
                 <div className="grid lg:grid-cols-12 gap-16 mb-20">
                     <div className="lg:col-span-4">
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10">
-                                <span className="text-lg font-black text-white italic tracking-tighter">RG</span>
+                            <div className="bg-white/10 p-2 rounded-xl backdrop-blur-sm border border-white/10">
+                                <img src="/RG-Tech-Logo.png" alt="RG Tech Engineering" className="h-12 w-auto object-contain" />
                             </div>
                             <div>
-                                <h5 className="font-bold text-xl tracking-tight leading-none font-heading">RG Tech Engineering</h5>
+                                <h5 className="font-bold text-xl tracking-tight leading-none font-heading text-white">RG Tech Engineering</h5>
                                 <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">CNC Fiber Laser Specialist</p>
                             </div>
                         </div>
@@ -489,63 +493,24 @@ const ScrollToTop = () => {
     return null
 }
 
-const ServiceDirectory = ({ services }) => {
-    return (
-        <section className="py-24 bg-slate-50 border-t border-slate-200">
-            <div className="max-w-7xl mx-auto px-4">
-                <div className="mb-16">
-                    <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Service Directory</p>
-                    <h3 className="text-3xl md:text-5xl font-bold text-[#1C3D5A] font-heading">Explore Our Expertise</h3>
-                    <p className="text-[#5A6C7D] mt-4 font-medium max-w-2xl text-lg">
-                        Discover the full range of engineering solutions and specialized services we provide across Chennai.
-                        Each capability is optimized for high-precision industrial and architectural requirements.
-                    </p>
-                </div>
 
-                <div className="space-y-20">
-                    {services.map((s, i) => (
-                        <div key={i}>
-                            <div className="flex items-center gap-6 mb-8">
-                                <h4 className="text-2xl font-bold text-[#1C3D5A] font-heading">
-                                    {s.name}
-                                </h4>
-                                <div className="flex-1 h-[1px] bg-slate-200"></div>
-                            </div>
-
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                                {s.keywords.map((kw, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="group relative h-40 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-default border border-slate-200"
-                                    >
-                                        <img
-                                            src={kw.img}
-                                            alt={kw.text}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#1C3D5A]/90 via-[#1C3D5A]/20 to-transparent opacity-100 group-hover:opacity-90 transition-opacity"></div>
-                                        <div className="absolute bottom-0 left-0 p-4 w-full">
-                                            <p className="text-white font-bold text-xs leading-tight group-hover:text-[#E85A4F] transition-colors line-clamp-2">
-                                                {kw.text}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    )
-}
 
 const ServicePage = ({ services }) => {
-    const { city, serviceSlug } = useParams()
+    const { combinedSlug, serviceSlug: oldServiceSlug, city: oldCity } = useParams()
     const location = useLocation()
 
+    // Support both old and new URL patterns
+    const isInCity = combinedSlug?.includes('-in-')
+    const serviceSlugPart = combinedSlug
+        ? (isInCity ? combinedSlug.substring(0, combinedSlug.lastIndexOf('-in-')) : combinedSlug)
+        : oldServiceSlug
+
+    const city = combinedSlug
+        ? (isInCity ? combinedSlug.substring(combinedSlug.lastIndexOf('-in-') + 4) : oldCity)
+        : oldCity
+
     // Resolve content either by prop directly or by slug from URL
-    const content = services ? services.find(s => s.slug === location.pathname || s.slug === `/chennai/${serviceSlug}`) : null
+    const content = services ? services.find(s => s.slug === location.pathname || s.slug === `/chennai/${serviceSlugPart}`) : null
 
     if (!content) return <Navigate to="/" />
 
@@ -588,8 +553,8 @@ const ServicePage = ({ services }) => {
     const displaySecondaryImage = cityName ? pool[(cityIndex + 1) % pool.length] : content.secondaryImage
 
     const displayTitle = cityName ? `${content.name} in ${cityName}` : content.title
-    const displayMetaTitle = cityName ? `${content.name} in ${cityName} | Precision CNC Fiber Cutting` : content.metaTitle
-    const displayMetaDesc = cityName ? `Best ${content.name.toLowerCase()} in ${cityName}, Chennai. Precision fiber laser cutting for industrial parts. Fast 24h delivery.` : content.metaDescription
+    const displayMetaTitle = cityName ? `Top-Rated ${content.name} in ${cityName} | RG Tech Engineering` : content.metaTitle
+    const displayMetaDesc = cityName ? `Looking for high-precision ${content.name.toLowerCase()} in ${cityName}, Chennai? RG Tech Engineering provides premium industrial metal solutions with fast 24h response. Get a free quote today.` : content.metaDescription
 
     const displaySeoParagraph = cityName ? localizeText(content.seoParagraph) : content.seoParagraph
     const displayAltText = cityName ? `${content.name} in ${cityName} - Precision Industrial Work` : `${content.name} - RG Tech Engineering works`
@@ -800,6 +765,58 @@ const ServicePage = ({ services }) => {
                 </div>
             </section>
 
+            {/* Service Highlights Section - Filtered to Current Service */}
+            <section className="py-24 bg-slate-50 border-y border-slate-200">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="mb-16">
+                        <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Service Showcase</p>
+                        <h3 className="text-3xl md:text-5xl font-bold text-primary font-heading tracking-tight">
+                            {content.name} Quality & Finish
+                        </h3>
+                        <p className="text-text-muted mt-4 font-medium max-w-2xl text-lg opacity-80">
+                            Take a closer look at our {content.name.toLowerCase()} work samples and precision benchmarks.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {(content.keywords || []).slice(0, 5).map((kw, idx) => (
+                            <div
+                                key={idx}
+                                className={`group relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-premium hover:shadow-2xl transition-all duration-500 cursor-default border border-slate-100 bg-[#2c2e33] ${idx === 0 ? 'lg:col-span-2' : ''}`}
+                            >
+                                <img
+                                    src={kw.img}
+                                    alt={kw.text}
+                                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                                <div className="absolute bottom-0 left-0 p-8 w-full">
+                                    <p className="text-white font-bold text-lg leading-tight group-hover:text-accent transition-colors">
+                                        {kw.text}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-16 bg-white p-10 rounded-[3rem] border border-slate-100 shadow-premium flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div>
+                            <h4 className="text-2xl font-bold text-primary font-heading mb-2">Want to see more industrial samples?</h4>
+                            <p className="text-text-muted font-medium text-base">Explore our complete catalog of {content.name.toLowerCase()} projects.</p>
+                        </div>
+                        <Link
+                            to={`/gallery?category=${encodeURIComponent(content.name)}`}
+                            className="inline-flex items-center gap-4 bg-accent text-white px-10 py-5 rounded-2xl font-bold text-[15px] hover:bg-accent-dark transition-all shadow-xl shadow-accent/20 group whitespace-nowrap"
+                        >
+                            View Full {content.name} Gallery
+                            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
             {/* Quotation Aid */}
             <section className="bg-slate-50 py-24">
                 <div className="max-w-4xl mx-auto px-4">
@@ -911,7 +928,7 @@ const ServicePage = ({ services }) => {
                             {CHENNAI_LOCALITIES.filter(c => c !== cityName).slice(0, 18).map((cityLink, i) => (
                                 <Link
                                     key={i}
-                                    to={`${content.slug}/${cityLink.toLowerCase().replace(/\s+/g, '-')}`}
+                                    to={`${content.slug}-in-${cityLink.toLowerCase().replace(/\s+/g, '-')}`}
                                     className="bg-white px-5 py-3 rounded-xl text-[12px] font-bold text-text-muted hover:text-accent hover:shadow-premium hover:translate-y-[-2px] border border-white text-center transition-all shadow-sm"
                                 >
                                     {cityLink}
@@ -922,8 +939,7 @@ const ServicePage = ({ services }) => {
                 </section>
             )}
 
-            {/* Service Directory Section with Keywords */}
-            <ServiceDirectory services={services} />
+
 
             {/* Final CTA */}
             <section id="quote" className="bg-primary pt-24 pb-32 relative overflow-hidden text-center text-white">
@@ -961,17 +977,24 @@ function App() {
     const handleInputChange = (e) => { const { name, value } = e.target; setFormData(prev => ({ ...prev, [name]: value })) }
     const handleSubmit = (e) => { e.preventDefault(); alert('Thank you! We will respond within 24 hours.') }
     const toggleFaq = (i) => setOpenFaq(prev => prev === i ? null : i)
+    const location = useLocation()
+
+    useEffect(() => {
+        setMobileMenuOpen(false)
+        setServicesDropdown(false)
+    }, [location])
 
     const pillarServices = [
         {
             name: 'Laser Cutting Services',
             slug: '/chennai/laser-cutting-services',
-            title: 'Laser Cutting Services in Chennai',
-            metaTitle: 'Laser Cutting Services in Chennai | Precision CNC Fiber Cutting',
-            metaDescription: 'Best laser cutting services in Chennai using advanced CNC fiber laser technology. Precision cuts for MS, SS, Aluminum, Copper & Brass. 24hr delivery.',
-            heroImage: 'https://images.unsplash.com/photo-1764114235896-034c8772de01?q=80&w=1200',
-            heroDesc: 'Fast, accurate CNC & fiber laser cutting for industrial parts, brackets, panels, enclosures, and production components — built for repeatability and clean edges.',
-            secondaryImage: 'https://images.unsplash.com/photo-1729944950511-e9c71556cfd4?q=80&w=800',
+            mainIcon: Scissors,
+            title: 'Precision Laser Cutting Services in Chennai',
+            metaTitle: 'Precision CNC Fiber Laser Cutting Services Chennai | RG Tech',
+            metaDescription: 'Looking for laser cutting in Chennai? RG Tech offers high-precision CNC fiber laser cutting for MS, SS, and Aluminum. Reliable industrial job work with fast delivery.',
+            heroImage: '/gallery/Laser Cutting Services/lc_01.jpg',
+            heroDesc: 'High-precision industrial laser cutting in Chennai. We deliver +/- 0.1mm accuracy for MS, SS, and Aluminum parts with the latest fiber technology.',
+            secondaryImage: '/gallery/Laser Cutting Services/lc_12.jpg',
             trustStrip: [
                 { icon: Layers, label: 'MS, SS, Al, Cu, Brass', sub: 'Multi-material cutting' },
                 { icon: Factory, label: 'OEM & Job Work', sub: 'Industrial-grade output' },
@@ -1023,27 +1046,28 @@ function App() {
             ],
             seoParagraph: 'If you\'re searching for <strong class="text-[#2C3E50]">laser cutting services in Chennai</strong> for repeat industrial parts, choosing the right process — <strong class="text-[#2C3E50]">CNC laser cutting</strong> or <strong class="text-[#2C3E50]">fiber laser cutting</strong> — directly impacts edge quality, accuracy, and overall fabrication cost. At RG Tech Engineering Works, we support engineering customers with stable cutting, nesting efficiency, and production-friendly documentation so parts fit right the first time.',
             keywords: [
-                { text: 'CNC Laser Cutting', img: '/gallery/Laser Cutting Services/kw_unique_laser_cnc.png' },
-                { text: 'Fiber Laser Cutting', img: '/gallery/Laser Cutting Services/kw_unique_laser_fiber.png' },
-                { text: 'MS Laser Cutting', img: '/gallery/Laser Cutting Services/kw_unique_laser_ms_plate.png' },
-                { text: 'SS Laser Cutting', img: '/gallery/Laser Cutting Services/kw_unique_laser_ss_mirror.png' },
-                { text: 'Aluminum Laser Cutting', img: '/gallery/Laser Cutting Services/kw_aluminum_hd.png' },
-                { text: 'Brass Laser Cutting', img: '/gallery/Laser Cutting Services/kw_brass_hd.png' },
-                { text: 'Copper Laser Cutting', img: '/gallery/Laser Cutting Services/kw_copper_hd.png' },
-                { text: 'Laser Cutting Job Work', img: '/gallery/Laser Cutting Services/kw_laser_hd.png' },
-                { text: 'Precision Metal Cutting', img: '/gallery/Laser Cutting Services/kw_fiber_hd.png' },
-                { text: 'CNC Cutting', img: '/gallery/Laser Cutting Services/kw_cnc_machine_hd.png' }
+                { text: 'CNC Laser Cutting', img: '/gallery/Laser Cutting Services/lc_01.jpg' },
+                { text: 'Fiber Laser Cutting', img: '/gallery/Laser Cutting Services/lc_02.jpg' },
+                { text: 'MS Laser Cutting', img: '/gallery/Laser Cutting Services/lc_03.jpg' },
+                { text: 'SS Laser Cutting', img: '/gallery/Laser Cutting Services/lc_04.jpg' },
+                { text: 'Aluminum Laser Cutting', img: '/gallery/Laser Cutting Services/lc_05.jpg' },
+                { text: 'Brass Laser Cutting', img: '/gallery/Laser Cutting Services/lc_06.jpg' },
+                { text: 'Copper Laser Cutting', img: '/gallery/Laser Cutting Services/lc_07.jpg' },
+                { text: 'Precision Metal Cutting', img: '/gallery/Laser Cutting Services/lc_08.jpg' },
+                { text: 'Industrial Parts', img: '/gallery/Laser Cutting Services/lc_09.jpg' },
+                { text: 'CNC Cutting', img: '/gallery/Laser Cutting Services/lc_10.jpg' }
             ]
         },
         {
             name: 'Sheet Metal Laser Cutting',
             slug: '/chennai/sheet-metal-laser-cutting-services',
-            title: 'Sheet Metal Laser Cutting in Chennai',
-            metaTitle: 'Sheet Metal Laser Cutting Services Chennai | MS & SS Cutting',
-            metaDescription: 'Specialized sheet metal laser cutting services in Chennai. Thick plate cutting, MS sheet cutting, and SS precision processing for industrial vendors.',
-            heroImage: 'https://images.unsplash.com/photo-1763926025420-adf538deaee4?q=80&w=1200',
+            mainIcon: PanelTop,
+            title: 'Industrial Sheet Metal Laser Cutting Chennai',
+            metaTitle: 'Sheet Metal Laser Cutting Services Chennai | MS & SS Processing',
+            metaDescription: 'Expert sheet metal laser cutting services in Chennai. We handle thick plates (up to 45mm), MS sheet cutting, and precision SS processing for industrial OEMs.',
+            heroImage: '/gallery/Sheet Metal Laser Cutting/sm_12.jpg',
             heroDesc: 'High-volume sheet metal laser cutting for MS, SS, and Aluminum plates. We handle everything from thin sheets to heavy industrial plates up to 45mm.',
-            secondaryImage: 'https://images.unsplash.com/photo-1764115424769-ebdd2683d5a8?q=80&w=800',
+            secondaryImage: '/gallery/Sheet Metal Laser Cutting/sm_06.jpg',
             trustStrip: [
                 { icon: Layers, label: 'Thin to Heavy Plate', sub: 'Up to 45mm processed' },
                 { icon: Target, label: 'High Yield Nesting', sub: 'Reduce material waste' },
@@ -1099,25 +1123,28 @@ function App() {
             ],
             seoParagraph: 'For <strong class="text-[#2C3E50]">sheet metal laser cutting in Chennai</strong>, especially for thick plates and high-volume orders, our advanced fiber laser technology ensures superior edge quality and minimal material waste. We cater to a wide range of industrial applications, providing precise <strong class="text-[#2C3E50]">MS sheet cutting</strong> and <strong class="text-[#2C3E50]">SS precision processing</strong> for various sectors.',
             keywords: [
-                { text: 'Sheet Metal Fabrication', img: '/gallery/Fabrication Services/kw_unique_fab_weld.png' },
-                { text: 'Sheet Metal Cutting', img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.32 PM (1).jpeg' },
-                { text: 'Plate Cutting', img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.21 PM.jpeg' },
-                { text: 'Thick Plate Cutting', img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.43 PM (2).jpeg' },
-                { text: 'CRCA Sheet Cutting', img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 9.33.05 PM (1).jpeg' },
-                { text: 'GI Sheet Cutting', img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.43 PM.jpeg' },
-                { text: 'Industrial Sheet Processing', img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.33 PM (1).jpeg' },
-                { text: 'CNC Fiber Laser Sheet Cutting', img: '/gallery/Laser Cutting Services/kw_unique_laser_fiber.png' }
+                { text: 'Sheet Metal Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_01.jpg' },
+                { text: 'Plate Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_02.jpg' },
+                { text: 'Thick Plate Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_03.jpg' },
+                { text: 'CRCA Sheet Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_04.jpg' },
+                { text: 'GI Sheet Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_05.jpg' },
+                { text: 'Industrial Sheet Processing', img: '/gallery/Sheet Metal Laser Cutting/sm_06.jpg' },
+                { text: 'CNC Fiber Laser Sheet Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_07.jpg' },
+                { text: 'MS Plate Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_08.jpg' },
+                { text: 'SS Sheet Cutting', img: '/gallery/Sheet Metal Laser Cutting/sm_09.jpg' },
+                { text: 'Precision Sheet Metal', img: '/gallery/Sheet Metal Laser Cutting/sm_10.jpg' }
             ]
         },
         {
             name: 'Fabrication Services',
             slug: '/chennai/fabrication-services',
-            title: 'Industrial Fabrication Services in Chennai',
-            metaTitle: 'Industrial Fabrication Services Chennai | Sheet Metal & SS',
-            metaDescription: 'Expert industrial fabrication services in Chennai. We provide bending, welding, and assembly for sheet metal and stainless steel projects.',
-            heroImage: 'https://images.unsplash.com/photo-1598302936664-407d6c250e2c?q=80&w=1200',
+            mainIcon: Wrench,
+            title: 'Metal Fabrication & Job Work in Chennai',
+            metaTitle: 'Best Metal Fabrication Services Chennai | Sheet Metal & SS',
+            metaDescription: 'Looking for professional metal fabrication in Chennai? We offer precision bending, TIG/MIG welding, and complete assembly for industrial and pharma projects.',
+            heroImage: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0016.jpg',
             heroDesc: 'Comprehensive industrial fabrication in Chennai. From precise laser cutting to specialized bending and high-strength welding, we handle the full production cycle.',
-            secondaryImage: 'https://images.unsplash.com/photo-1764114441097-6a475eca993d?q=80&w=800',
+            secondaryImage: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0018.jpg',
             trustStrip: [
                 { icon: Wrench, label: 'High-Precision Bending', sub: 'Up to 3m hydraulic' },
                 { icon: Shield, label: 'TIG/MIG Welding', sub: 'High-strength joints' },
@@ -1164,26 +1191,28 @@ function App() {
             ],
             seoParagraph: 'Professional fabrication services in Chennai for industrial and architectural needs.',
             keywords: [
-                { text: 'Metal Fabrication', img: '/gallery/Fabrication Services/kw_unique_fab_weld.png' },
-                { text: 'Industrial Fabrication Services', img: '/gallery/Fabrication Services/kw_fab_industrial_hd.png' },
-                { text: 'Welded Assemblies', img: '/gallery/Fabrication Services/kw_fab_welding_hd.png' },
-                { text: 'CNC Bending', img: '/gallery/Fabrication Services/kw_unique_fab_bending.png' },
-                { text: 'Folding', img: '/gallery/Fabrication Services/kw_fab_folding_hd.png' },
-                { text: 'TIG/MIG Welding', img: '/gallery/Fabrication Services/kw_fab_hd.png' },
-                { text: 'Structural Fabrication', img: '/gallery/Fabrication Services/architectural_fabrication_ceiling.png' },
-                { text: 'Machine Enclosures', img: '/gallery/Fabrication Services/kw_fab_custom_hd.png' },
-                { text: 'Custom Steel Fabrication', img: '/gallery/Fabrication Services/kw_unique_fab_weld.png' }
+                { text: 'Metal Fabrication', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0008.jpg' },
+                { text: 'Industrial Fabrication Services', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0009.jpg' },
+                { text: 'Welded Assemblies', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0010.jpg' },
+                { text: 'CNC Bending', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0011.jpg' },
+                { text: 'Folding', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0012.jpg' },
+                { text: 'TIG/MIG Welding', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0013.jpg' },
+                { text: 'Structural Fabrication', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0015.jpg' },
+                { text: 'Machine Enclosures', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0016.jpg' },
+                { text: 'Custom Steel Fabrication', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0017.jpg' },
+                { text: 'Production Weldment', img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0018.jpg' }
             ]
         },
         {
             name: 'Steel Gates',
             slug: '/chennai/steel-gates',
-            title: 'Laser Cut Steel Gates in Chennai',
-            metaTitle: 'Laser Cut Steel Gates Chennai | Designer SS Gates Online',
-            metaDescription: 'Custom designer steel gates in Chennai. Laser cut gate designs in MS and Stainless Steel. Modern entrances for homes and factories. Durable finishes.',
-            heroImage: 'https://images.unsplash.com/photo-1715541275956-4845a5cf74c1?q=80&w=1200',
+            mainIcon: Home,
+            title: 'Designer Laser Cut Steel Gates Chennai',
+            metaTitle: 'Laser Cut Steel Gates Chennai | Designer Main Gate Fabricators',
+            metaDescription: 'Custom designer main gates in Chennai. Laser cut gate patterns in MS and Stainless Steel. Modern entrances for villas and factories with durable PU finishes.',
+            heroImage: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0129.jpg',
             heroDesc: 'Elevate your property with custom laser-cut steel gates. Combining modern aesthetics with industrial-grade security, our gates are built to last.',
-            secondaryImage: 'https://images.unsplash.com/photo-1766485019016-710d7e121add?q=80&w=800',
+            secondaryImage: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0135.jpg',
             trustStrip: [
                 { icon: Sparkles, label: 'Designer Patterns', sub: '100+ CNC designs' },
                 { icon: Shield, label: 'Heavy Duty', sub: 'Structural frames' },
@@ -1230,26 +1259,28 @@ function App() {
             ],
             seoParagraph: 'Modern laser cut gate designs in Chennai for residential and commercial properties.',
             keywords: [
-                { text: 'Laser Cut Gates', img: '/gallery/Steel Gates/kw_unique_gate_laser.png' },
-                { text: 'Designer Steel Gates', img: '/gallery/Steel Gates/kw_unique_gate_designer.png' },
-                { text: 'Modern Entrance Gates', img: '/gallery/Steel Gates/kw_unique_gate_pattern.png' },
-                { text: 'Sliding Gates', img: '/gallery/Steel Gates/kw_unique_gate_sliding.png' },
-                { text: 'Automated Gates', img: '/gallery/Steel Gates/kw_gate_hd.png' },
-                { text: 'Front Gate Designs', img: '/gallery/Steel Gates/gen_gate_front.png' },
-                { text: 'MS Gate Fabrication', img: '/gallery/Steel Gates/kw_unique_gate_minimal.png' },
-                { text: 'SS Gate Designs', img: '/gallery/Steel Gates/kw_gate_modern_hd.png' },
-                { text: 'Villa Gates', img: '/gallery/Steel Gates/kw_unique_gate_villa.png' }
+                { text: 'Laser Cut Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0120.jpg' },
+                { text: 'Designer Steel Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0121.jpg' },
+                { text: 'Modern Entrance Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0122.jpg' },
+                { text: 'Sliding Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0123.jpg' },
+                { text: 'Automated Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0124.jpg' },
+                { text: 'Front Gate Designs', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0125.jpg' },
+                { text: 'MS Gate Fabrication', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0126.jpg' },
+                { text: 'SS Gate Designs', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0127.jpg' },
+                { text: 'Villa Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0128.jpg' },
+                { text: 'Architectural Gates', img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0129.jpg' }
             ]
         },
         {
             name: 'Metal Safety Doors',
             slug: '/chennai/metal-safety-doors',
-            title: 'Metal Safety Doors in Chennai',
-            metaTitle: 'Metal Safety Doors Chennai | Laser Cut Security Doors',
-            metaDescription: 'Premium metal safety doors in Chennai. Secure your home with laser-cut designer security doors. Custom sizes in MS and SS for residential use.',
-            heroImage: 'https://images.unsplash.com/photo-1760597307381-2bec368dcf26?q=80&w=1200',
+            mainIcon: DoorOpen,
+            title: 'Premium Metal Safety Doors in Chennai',
+            metaTitle: 'Designer Metal Safety Doors Chennai | Laser Cut Security Doors',
+            metaDescription: 'Best metal safety doors in Chennai. Secure your home with aesthetic laser-cut security doors. Custom multi-lock prep in MS and SS for residential use.',
+            heroImage: '/gallery/Metal Safety Doors/premium-quality-are-made-of-heavy-duty-stainless-steel-safety-doors--144.jpg',
             heroDesc: 'Uncompromising security meets stunning design. Our laser-cut metal safety doors provide industrial-grade protection with a premium look.',
-            secondaryImage: 'https://images.unsplash.com/photo-1764115424769-ebdd2683d5a8?q=80&w=800',
+            secondaryImage: '/gallery/Metal Safety Doors/mild-steel-hinged-safety-door.jpg',
             trustStrip: [
                 { icon: Shield, label: 'Anti-Theft', sub: 'High-strength panels' },
                 { icon: Zap, label: 'Breathable Jali', sub: 'Airflow + Security' },
@@ -1296,24 +1327,27 @@ function App() {
             ],
             seoParagraph: 'Designer safety doors in Chennai with laser cut patterns for home security.',
             keywords: [
-                { text: 'Security Doors', img: '/gallery/Metal Safety Doors/kw_unique_door_security.png' },
-                { text: 'Apartment Safety Doors', img: '/gallery/Metal Safety Doors/kw_door_hd.png' },
-                { text: 'Laser Cut Door Jali', img: '/gallery/Metal Safety Doors/kw_unique_door_jali_hero.png' },
-                { text: 'Residential Safety Doors', img: '/gallery/Metal Safety Doors/gen_door_apt.png' },
-                { text: 'Main Door Safety Grill', img: '/gallery/Metal Safety Doors/modern_safety_door_installation.jpg' },
-                { text: 'Designer Security Doors', img: '/gallery/Metal Safety Doors/kw_unique_door_security.png' },
-                { text: 'Metal Jali Doors', img: '/gallery/Metal Safety Doors/kw_unique_door_jali_hero.png' }
+                { text: 'Security Doors', img: '/gallery/Metal Safety Doors/metal-ms-safety-door-for-resi-20240524162939656.jpg' },
+                { text: 'Apartment Safety Doors', img: '/gallery/Metal Safety Doors/mild-steel-hinged-safety-door.jpg' },
+                { text: 'Laser Cut Door Jali', img: '/gallery/Metal Safety Doors/safety-door-jali.jpg' },
+                { text: 'Residential Safety Doors', img: '/gallery/Metal Safety Doors/image5.jpg' },
+                { text: 'Main Door Safety Grill', img: '/gallery/Metal Safety Doors/steel-safety-door.jpg' },
+                { text: 'Designer Security Doors', img: '/gallery/Metal Safety Doors/mild-steel-safety-door-500x500.webp' },
+                { text: 'Metal Jali Doors', img: '/gallery/Metal Safety Doors/flowert-safety-door.webp' },
+                { text: 'Premium Safety Entry', img: '/gallery/Metal Safety Doors/product-jpeg.jpg' },
+                { text: 'Reinforced Metal Doors', img: '/gallery/Metal Safety Doors/premium-quality-are-made-of-heavy-duty-stainless-steel-safety-doors--144.jpg' }
             ]
         },
         {
             name: 'Decorative Metal Panels',
             slug: '/chennai/decorative-metal-panels',
-            title: 'Decorative Metal Panels in Chennai',
-            metaTitle: 'Laser Cut Jali & Decorative Panels Chennai | CNC Metal Art',
-            metaDescription: 'Best decorative metal panels in Chennai. Laser cut jali for interiors, pooja rooms, partitions, and balconies. CNC metal wall art and 3D panels.',
-            heroImage: 'https://images.unsplash.com/photo-1762813632307-1e094bcfee68?q=80&w=1200',
+            mainIcon: Sparkles,
+            title: 'Custom Laser Cut Decorative Panels Chennai',
+            metaTitle: 'Laser Cut Metal Jali & Decorative Panels Chennai | CNC Art',
+            metaDescription: 'Stunning decorative metal panels in Chennai. Laser cut jali for interiors, pooja rooms, partitions, and facades. CNC metal wall art and 3D PVD-coated panels.',
+            heroImage: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0054.jpg',
             heroDesc: 'Premium CNC jali and decorative metal panels for modern architecture. Perfect for interiors, partitions, balconies, and exterior facades.',
-            secondaryImage: 'https://images.unsplash.com/photo-1766485019016-710d7e121add?q=80&w=800',
+            secondaryImage: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0062.jpg',
             trustStrip: [
                 { icon: Sparkles, label: 'Artistic CNC', sub: 'Precision detailing' },
                 { icon: Layers, label: 'Al, Cu, Brass, SS', sub: 'Premium metals' },
@@ -1360,19 +1394,21 @@ function App() {
             ],
             seoParagraph: 'Custom CNC jali panels and laser cut decorative screens for Chennai interiors.',
             keywords: [
-                { text: 'CNC Jali', img: '/gallery/Decorative Metal Panels/kw_jali_hd.png' },
-                { text: 'Metal Partitions', img: '/gallery/Decorative Metal Panels/gen_dec_tree.png' },
-                { text: 'Room Divider Panels', img: '/gallery/Decorative Metal Panels/decorative_jali_pattern_01.png' },
-                { text: 'Wall Art', img: '/gallery/Decorative Metal Panels/gen_dec_peacock.png' },
-                { text: 'Religious Laser Cutting', img: '/gallery/Decorative Metal Panels/gen_dec_vinayagar.png' },
-                { text: 'Vinayagar Designs', img: '/gallery/Decorative Metal Panels/gen_dec_vinayagar_v2.png' },
-                { text: 'Buddha Designs', img: '/gallery/Decorative Metal Panels/gen_dec_buddha.png' },
-                { text: 'Perumal Designs', img: '/gallery/Decorative Metal Panels/gen_dec_perumal.png' },
-                { text: 'Jesus Designs', img: '/gallery/Decorative Metal Panels/gen_dec_jesus.png' },
-                { text: 'Butterfly Patterns', img: '/gallery/Decorative Metal Panels/gen_dec_butterfly.png' },
-                { text: 'Peacock Patterns', img: '/gallery/Decorative Metal Panels/gen_dec_peacock_ss.png' },
-                { text: 'Tree of Life Jali', img: '/gallery/Decorative Metal Panels/gen_dec_tree_v2.png' },
-                { text: 'Balcony Panels', img: '/gallery/Decorative Metal Panels/gen_dec_murugar.png' }
+                { text: 'Divine Durga & Spiritual Art', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0004.jpg' },
+                { text: 'Traditional Deity Designs', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0005.jpg' },
+                { text: 'Sacred Icon Patterns', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0006.jpg' },
+                { text: 'Lord Ganesha Wall Art', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0011.jpg' },
+                { text: 'Spiritual Religious Panels', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0012.jpg' },
+                { text: 'Vinayagar Designs', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0013.jpg' },
+                { text: 'Buddha Designs', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0018.jpg' },
+                { text: 'Perumal Designs', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0019.jpg' },
+                { text: 'Jesus Designs', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0020.jpg' },
+                { text: 'Butterfly Patterns', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0025.jpg' },
+                { text: 'Peacock Patterns', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0026.jpg' },
+                { text: 'Tree of Life Jali', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0027.jpg' },
+                { text: 'Balcony Panels', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0032.jpg' },
+                { text: 'Interior Screens', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0033.jpg' },
+                { text: 'Facade Panels', img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0034.jpg' }
             ]
         }
     ]
@@ -1421,6 +1457,9 @@ function App() {
     ]
 
     const GalleryPage = () => {
+        const [searchParams] = useSearchParams()
+        const categoryParam = searchParams.get('category')
+
         const [activeFilter, setActiveFilter] = useState('All')
         const [visibleItems, setVisibleItems] = useState(12)
         const [lightboxIndex, setLightboxIndex] = useState(null)
@@ -1436,164 +1475,666 @@ function App() {
             'Decorative Metal Panels'
         ]
 
+        useEffect(() => {
+            if (categoryParam && filters.includes(categoryParam)) {
+                setActiveFilter(categoryParam)
+            }
+        }, [categoryParam])
+
         const items = [
-            // Laser Cutting Services (Representative Set of 60)
-            { img: '/gallery/Laser Cutting Services/lc_01.jpg', title: 'Laser Cutting Project 01', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_02.jpg', title: 'Laser Cutting Project 02', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_03.jpg', title: 'Laser Cutting Project 03', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_04.jpg', title: 'Laser Cutting Project 04', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_05.jpg', title: 'Laser Cutting Project 05', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_06.jpg', title: 'Laser Cutting Project 06', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_07.jpg', title: 'Laser Cutting Project 07', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_08.jpg', title: 'Laser Cutting Project 08', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_09.jpg', title: 'Laser Cutting Project 09', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_10.jpg', title: 'Laser Cutting Project 10', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_11.jpg', title: 'Laser Cutting Project 11', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_12.jpg', title: 'Laser Cutting Project 12', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_13.jpg', title: 'Laser Cutting Project 13', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_14.jpg', title: 'Laser Cutting Project 14', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_15.jpg', title: 'Laser Cutting Project 15', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_16.jpg', title: 'Laser Cutting Project 16', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_17.jpg', title: 'Laser Cutting Project 17', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_18.jpg', title: 'Laser Cutting Project 18', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_19.jpg', title: 'Laser Cutting Project 19', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_20.jpg', title: 'Laser Cutting Project 20', material: 'MS/SS Industrial', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_whatsapp_01.jpg', title: 'Client Project 01', material: 'Precision Cut', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_whatsapp_02.jpg', title: 'Client Project 02', material: 'Precision Cut', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_whatsapp_03.jpg', title: 'Client Project 03', material: 'Precision Cut', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/lc_whatsapp_04.jpg', title: 'Client Project 04', material: 'Precision Cut', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/kw_laser_hd.png', title: 'High Density Laser Work', material: 'MS Plate', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/kw_aluminum_hd.png', title: 'Aluminum Laser Cutting', material: 'Industrial Aluminum', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/kw_brass_hd.png', title: 'Brass Laser Cutting', material: 'Premium Brass', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/kw_copper_hd.png', title: 'Copper Laser Cutting', material: 'Pure Copper', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/kw_cnc_machine_hd.png', title: 'CNC Machine Output', material: 'Precision Engineered', filter: 'Laser Cutting Services' },
-            { img: '/gallery/Laser Cutting Services/kw_fiber_hd.png', title: 'Fiber Laser Work', material: 'SS Components', filter: 'Laser Cutting Services' },
-
-            // Sheet Metal Laser Cutting
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_01.jpg', title: 'Sheet Metal Project 01', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_02.jpg', title: 'Sheet Metal Project 02', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_03.jpg', title: 'Sheet Metal Project 03', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_04.jpg', title: 'Sheet Metal Project 04', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_05.jpg', title: 'Sheet Metal Project 05', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_06.jpg', title: 'Sheet Metal Project 06', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_07.jpg', title: 'Sheet Metal Project 07', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_08.jpg', title: 'Sheet Metal Project 08', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_09.jpg', title: 'Sheet Metal Project 09', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_10.jpg', title: 'Sheet Metal Project 10', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_11.jpg', title: 'Sheet Metal Project 11', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_12.jpg', title: 'Sheet Metal Project 12', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_13.jpg', title: 'Sheet Metal Project 13', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_14.jpg', title: 'Sheet Metal Project 14', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_15.jpg', title: 'Sheet Metal Project 15', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_16.jpg', title: 'Sheet Metal Project 16', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_17.jpg', title: 'Sheet Metal Project 17', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_18.jpg', title: 'Sheet Metal Project 18', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_19.jpg', title: 'Sheet Metal Project 19', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/sm_20.jpg', title: 'Sheet Metal Project 20', material: 'Custom Bending', filter: 'Sheet Metal Laser Cutting' },
-            { img: '/gallery/Sheet Metal Laser Cutting/gen_blank.png', title: 'Sheet Metal Base', material: 'Metal Sheet', filter: 'Sheet Metal Laser Cutting' },
-
-            // Fabrication Services
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0008.jpg', title: 'Fabrication Design 01', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0009.jpg', title: 'Fabrication Design 02', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0010.jpg', title: 'Fabrication Design 03', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0011.jpg', title: 'Fabrication Design 04', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0012.jpg', title: 'Fabrication Design 05', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0013.jpg', title: 'Fabrication Design 06', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0015.jpg', title: 'Fabrication Design 07', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0016.jpg', title: 'Fabrication Design 08', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0017.jpg', title: 'Fabrication Design 09', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0018.jpg', title: 'Fabrication Design 10', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0019.jpg', title: 'Fabrication Design 11', material: 'Industrial Steel', filter: 'Fabrication Services' },
-            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0020.jpg', title: 'Fabrication Design 12', material: 'Industrial Steel', filter: 'Fabrication Services' },
-
-            // Steel Gates
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0120.jpg', title: 'Steel Gate Design 01', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0121.jpg', title: 'Steel Gate Design 02', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0122.jpg', title: 'Steel Gate Design 03', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0123.jpg', title: 'Steel Gate Design 04', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0124.jpg', title: 'Steel Gate Design 05', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0125.jpg', title: 'Steel Gate Design 06', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0126.jpg', title: 'Steel Gate Design 07', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0127.jpg', title: 'Steel Gate Design 08', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0128.jpg', title: 'Steel Gate Design 09', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0129.jpg', title: 'Steel Gate Design 10', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0130.jpg', title: 'Steel Gate Design 11', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0131.jpg', title: 'Steel Gate Design 12', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0132.jpg', title: 'Steel Gate Design 13', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0133.jpg', title: 'Steel Gate Design 14', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0134.jpg', title: 'Steel Gate Design 15', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0135.jpg', title: 'Steel Gate Design 16', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0136.jpg', title: 'Steel Gate Design 17', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0137.jpg', title: 'Steel Gate Design 18', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0138.jpg', title: 'Steel Gate Design 19', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0139.jpg', title: 'Steel Gate Design 20', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0140.jpg', title: 'Steel Gate Design 21', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0141.jpg', title: 'Steel Gate Design 22', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0142.jpg', title: 'Steel Gate Design 23', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0143.jpg', title: 'Steel Gate Design 24', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0144.jpg', title: 'Steel Gate Design 25', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0145.jpg', title: 'Steel Gate Design 26', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0146.jpg', title: 'Steel Gate Design 27', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0147.jpg', title: 'Steel Gate Design 28', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0148.jpg', title: 'Steel Gate Design 29', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0149.jpg', title: 'Steel Gate Design 30', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0150.jpg', title: 'Steel Gate Design 31', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0151.jpg', title: 'Steel Gate Design 32', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0152.jpg', title: 'Steel Gate Design 33', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0153.jpg', title: 'Steel Gate Design 34', material: 'Solid Steel', filter: 'Steel Gates' },
-            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0154.jpg', title: 'Steel Gate Design 35', material: 'Solid Steel', filter: 'Steel Gates' },
-
-            // Metal Safety Doors
-            { img: '/gallery/Metal Safety Doors/1-13.jpg', title: 'Safety Door Design 01', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/7x3-5-feet-18-3-kilograms-paint-coated-mild-steel-safety-doors-466.jpg', title: 'Safety Door Design 02', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/Stainless-Steel-Thickened-Smart-Lock-Armored-Main-Gate-Meta-Home-Entrance-Front-Entry-Doors-Exterior-Door-Safety-Steel-Door.png_300x300.avif', title: 'Safety Door Design 03', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/download (1).jpg', title: 'Safety Door Design 04', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/download (2).jpg', title: 'Safety Door Design 05', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/download.jpg', title: 'Safety Door Design 06', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_10.jpg', title: 'Rg Tech Catelog Vol 01 Page 10', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_100.jpg', title: 'Rg Tech Catelog Vol 01 Page 100', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_101.jpg', title: 'Rg Tech Catelog Vol 01 Page 101', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_102.jpg', title: 'Rg Tech Catelog Vol 01 Page 102', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_103.jpg', title: 'Rg Tech Catelog Vol 01 Page 103', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_104.jpg', title: 'Rg Tech Catelog Vol 01 Page 104', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_105.jpg', title: 'Rg Tech Catelog Vol 01 Page 105', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_106.jpg', title: 'Rg Tech Catelog Vol 01 Page 106', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_107.jpg', title: 'Rg Tech Catelog Vol 01 Page 107', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_108.jpg', title: 'Rg Tech Catelog Vol 01 Page 108', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_109.jpg', title: 'Rg Tech Catelog Vol 01 Page 109', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_11.jpg', title: 'Rg Tech Catelog Vol 01 Page 11', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_110.jpg', title: 'Rg Tech Catelog Vol 01 Page 110', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_111.jpg', title: 'Rg Tech Catelog Vol 01 Page 111', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_112.jpg', title: 'Rg Tech Catelog Vol 01 Page 112', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_113.jpg', title: 'Rg Tech Catelog Vol 01 Page 113', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_114.jpg', title: 'Rg Tech Catelog Vol 01 Page 114', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_115.jpg', title: 'Rg Tech Catelog Vol 01 Page 115', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_116.jpg', title: 'Rg Tech Catelog Vol 01 Page 116', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_117.jpg', title: 'Rg Tech Catelog Vol 01 Page 117', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_118.jpg', title: 'Rg Tech Catelog Vol 01 Page 118', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_119.jpg', title: 'Rg Tech Catelog Vol 01 Page 119', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_12.jpg', title: 'Rg Tech Catelog Vol 01 Page 12', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_120.jpg', title: 'Rg Tech Catelog Vol 01 Page 120', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_121.jpg', title: 'Rg Tech Catelog Vol 01 Page 121', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_122.jpg', title: 'Rg Tech Catelog Vol 01 Page 122', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_123.jpg', title: 'Rg Tech Catelog Vol 01 Page 123', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_124.jpg', title: 'Rg Tech Catelog Vol 01 Page 124', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_125.jpg', title: 'Rg Tech Catelog Vol 01 Page 125', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_126.jpg', title: 'Rg Tech Catelog Vol 01 Page 126', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_127.jpg', title: 'Rg Tech Catelog Vol 01 Page 127', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_128.jpg', title: 'Rg Tech Catelog Vol 01 Page 128', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_129.jpg', title: 'Rg Tech Catelog Vol 01 Page 129', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_13.jpg', title: 'Rg Tech Catelog Vol 01 Page 13', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_130.jpg', title: 'Rg Tech Catelog Vol 01 Page 130', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_131.jpg', title: 'Rg Tech Catelog Vol 01 Page 131', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_132.jpg', title: 'Rg Tech Catelog Vol 01 Page 132', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_133.jpg', title: 'Rg Tech Catelog Vol 01 Page 133', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_134.jpg', title: 'Rg Tech Catelog Vol 01 Page 134', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_135.jpg', title: 'Rg Tech Catelog Vol 01 Page 135', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_136.jpg', title: 'Rg Tech Catelog Vol 01 Page 136', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_137.jpg', title: 'Rg Tech Catelog Vol 01 Page 137', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_138.jpg', title: 'Rg Tech Catelog Vol 01 Page 138', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_139.jpg', title: 'Rg Tech Catelog Vol 01 Page 139', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_14.jpg', title: 'Rg Tech Catelog Vol 01 Page 14', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_140.jpg', title: 'Rg Tech Catelog Vol 01 Page 140', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_141.jpg', title: 'Rg Tech Catelog Vol 01 Page 141', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_142.jpg', title: 'Rg Tech Catelog Vol 01 Page 142', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_143.jpg', title: 'Rg Tech Catelog Vol 01 Page 143', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_144.jpg', title: 'Rg Tech Catelog Vol 01 Page 144', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_145.jpg', title: 'Rg Tech Catelog Vol 01 Page 145', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_146.jpg', title: 'Rg Tech Catelog Vol 01 Page 146', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_147.jpg', title: 'Rg Tech Catelog Vol 01 Page 147', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_148.jpg', title: 'Rg Tech Catelog Vol 01 Page 148', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_149.jpg', title: 'Rg Tech Catelog Vol 01 Page 149', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_15.jpg', title: 'Rg Tech Catelog Vol 01 Page 15', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_150.jpg', title: 'Rg Tech Catelog Vol 01 Page 150', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_151.jpg', title: 'Rg Tech Catelog Vol 01 Page 151', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_152.jpg', title: 'Rg Tech Catelog Vol 01 Page 152', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_153.jpg', title: 'Rg Tech Catelog Vol 01 Page 153', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_154.jpg', title: 'Rg Tech Catelog Vol 01 Page 154', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_155.jpg', title: 'Rg Tech Catelog Vol 01 Page 155', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_156.jpg', title: 'Rg Tech Catelog Vol 01 Page 156', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_157.jpg', title: 'Rg Tech Catelog Vol 01 Page 157', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_158.jpg', title: 'Rg Tech Catelog Vol 01 Page 158', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_159.jpg', title: 'Rg Tech Catelog Vol 01 Page 159', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_16.jpg', title: 'Rg Tech Catelog Vol 01 Page 16', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_160.jpg', title: 'Rg Tech Catelog Vol 01 Page 160', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_161.jpg', title: 'Rg Tech Catelog Vol 01 Page 161', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_162.jpg', title: 'Rg Tech Catelog Vol 01 Page 162', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_163.jpg', title: 'Rg Tech Catelog Vol 01 Page 163', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_164.jpg', title: 'Rg Tech Catelog Vol 01 Page 164', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_165.jpg', title: 'Rg Tech Catelog Vol 01 Page 165', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_166.jpg', title: 'Rg Tech Catelog Vol 01 Page 166', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_167.jpg', title: 'Rg Tech Catelog Vol 01 Page 167', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_168.jpg', title: 'Rg Tech Catelog Vol 01 Page 168', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_169.jpg', title: 'Rg Tech Catelog Vol 01 Page 169', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_17.jpg', title: 'Rg Tech Catelog Vol 01 Page 17', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_170.jpg', title: 'Rg Tech Catelog Vol 01 Page 170', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_171.jpg', title: 'Rg Tech Catelog Vol 01 Page 171', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_172.jpg', title: 'Rg Tech Catelog Vol 01 Page 172', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_173.jpg', title: 'Rg Tech Catelog Vol 01 Page 173', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_174.jpg', title: 'Rg Tech Catelog Vol 01 Page 174', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_175.jpg', title: 'Rg Tech Catelog Vol 01 Page 175', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_176.jpg', title: 'Rg Tech Catelog Vol 01 Page 176', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_177.jpg', title: 'Rg Tech Catelog Vol 01 Page 177', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_178.jpg', title: 'Rg Tech Catelog Vol 01 Page 178', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_179.jpg', title: 'Rg Tech Catelog Vol 01 Page 179', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_18.jpg', title: 'Rg Tech Catelog Vol 01 Page 18', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_180.jpg', title: 'Rg Tech Catelog Vol 01 Page 180', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_181.jpg', title: 'Rg Tech Catelog Vol 01 Page 181', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_182.jpg', title: 'Rg Tech Catelog Vol 01 Page 182', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_183.jpg', title: 'Rg Tech Catelog Vol 01 Page 183', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_184.jpg', title: 'Rg Tech Catelog Vol 01 Page 184', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_185.jpg', title: 'Rg Tech Catelog Vol 01 Page 185', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_186.jpg', title: 'Rg Tech Catelog Vol 01 Page 186', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_187.jpg', title: 'Rg Tech Catelog Vol 01 Page 187', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_188.jpg', title: 'Rg Tech Catelog Vol 01 Page 188', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_189.jpg', title: 'Rg Tech Catelog Vol 01 Page 189', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_19.jpg', title: 'Rg Tech Catelog Vol 01 Page 19', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_190.jpg', title: 'Rg Tech Catelog Vol 01 Page 190', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_191.jpg', title: 'Rg Tech Catelog Vol 01 Page 191', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_192.jpg', title: 'Rg Tech Catelog Vol 01 Page 192', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_193.jpg', title: 'Rg Tech Catelog Vol 01 Page 193', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_194.jpg', title: 'Rg Tech Catelog Vol 01 Page 194', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_195.jpg', title: 'Rg Tech Catelog Vol 01 Page 195', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_196.jpg', title: 'Rg Tech Catelog Vol 01 Page 196', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_197.jpg', title: 'Rg Tech Catelog Vol 01 Page 197', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_198.jpg', title: 'Rg Tech Catelog Vol 01 Page 198', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_199.jpg', title: 'Rg Tech Catelog Vol 01 Page 199', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_2.jpg', title: 'Rg Tech Catelog Vol 01 Page 2', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_20.jpg', title: 'Rg Tech Catelog Vol 01 Page 20', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_200.jpg', title: 'Rg Tech Catelog Vol 01 Page 200', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_201.jpg', title: 'Rg Tech Catelog Vol 01 Page 201', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_202.jpg', title: 'Rg Tech Catelog Vol 01 Page 202', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_203.jpg', title: 'Rg Tech Catelog Vol 01 Page 203', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_204.jpg', title: 'Rg Tech Catelog Vol 01 Page 204', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_205.jpg', title: 'Rg Tech Catelog Vol 01 Page 205', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_206.jpg', title: 'Rg Tech Catelog Vol 01 Page 206', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_207.jpg', title: 'Rg Tech Catelog Vol 01 Page 207', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_208.jpg', title: 'Rg Tech Catelog Vol 01 Page 208', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_209.jpg', title: 'Rg Tech Catelog Vol 01 Page 209', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_21.jpg', title: 'Rg Tech Catelog Vol 01 Page 21', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_210.jpg', title: 'Rg Tech Catelog Vol 01 Page 210', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_211.jpg', title: 'Rg Tech Catelog Vol 01 Page 211', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_212.jpg', title: 'Rg Tech Catelog Vol 01 Page 212', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_213.jpg', title: 'Rg Tech Catelog Vol 01 Page 213', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_214.jpg', title: 'Rg Tech Catelog Vol 01 Page 214', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_215.jpg', title: 'Rg Tech Catelog Vol 01 Page 215', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_216.jpg', title: 'Rg Tech Catelog Vol 01 Page 216', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_217.jpg', title: 'Rg Tech Catelog Vol 01 Page 217', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_218.jpg', title: 'Rg Tech Catelog Vol 01 Page 218', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_219.jpg', title: 'Rg Tech Catelog Vol 01 Page 219', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_22.jpg', title: 'Rg Tech Catelog Vol 01 Page 22', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_220.jpg', title: 'Rg Tech Catelog Vol 01 Page 220', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_221.jpg', title: 'Rg Tech Catelog Vol 01 Page 221', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_222.jpg', title: 'Rg Tech Catelog Vol 01 Page 222', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_223.jpg', title: 'Rg Tech Catelog Vol 01 Page 223', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_224.jpg', title: 'Rg Tech Catelog Vol 01 Page 224', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_225.jpg', title: 'Rg Tech Catelog Vol 01 Page 225', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_226.jpg', title: 'Rg Tech Catelog Vol 01 Page 226', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_227.jpg', title: 'Rg Tech Catelog Vol 01 Page 227', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_228.jpg', title: 'Rg Tech Catelog Vol 01 Page 228', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_229.jpg', title: 'Rg Tech Catelog Vol 01 Page 229', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_23.jpg', title: 'Rg Tech Catelog Vol 01 Page 23', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_230.jpg', title: 'Rg Tech Catelog Vol 01 Page 230', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_231.jpg', title: 'Rg Tech Catelog Vol 01 Page 231', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_232.jpg', title: 'Rg Tech Catelog Vol 01 Page 232', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_233.jpg', title: 'Rg Tech Catelog Vol 01 Page 233', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_234.jpg', title: 'Rg Tech Catelog Vol 01 Page 234', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_235.jpg', title: 'Rg Tech Catelog Vol 01 Page 235', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_236.jpg', title: 'Rg Tech Catelog Vol 01 Page 236', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_237.jpg', title: 'Rg Tech Catelog Vol 01 Page 237', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_238.jpg', title: 'Rg Tech Catelog Vol 01 Page 238', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_239.jpg', title: 'Rg Tech Catelog Vol 01 Page 239', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_24.jpg', title: 'Rg Tech Catelog Vol 01 Page 24', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_240.jpg', title: 'Rg Tech Catelog Vol 01 Page 240', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_241.jpg', title: 'Rg Tech Catelog Vol 01 Page 241', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_242.jpg', title: 'Rg Tech Catelog Vol 01 Page 242', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_243.jpg', title: 'Rg Tech Catelog Vol 01 Page 243', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_244.jpg', title: 'Rg Tech Catelog Vol 01 Page 244', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_245.jpg', title: 'Rg Tech Catelog Vol 01 Page 245', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_25.jpg', title: 'Rg Tech Catelog Vol 01 Page 25', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_26.jpg', title: 'Rg Tech Catelog Vol 01 Page 26', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_27.jpg', title: 'Rg Tech Catelog Vol 01 Page 27', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_28.jpg', title: 'Rg Tech Catelog Vol 01 Page 28', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_29.jpg', title: 'Rg Tech Catelog Vol 01 Page 29', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_3.jpg', title: 'Rg Tech Catelog Vol 01 Page 3', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_30.jpg', title: 'Rg Tech Catelog Vol 01 Page 30', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_31.jpg', title: 'Rg Tech Catelog Vol 01 Page 31', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_32.jpg', title: 'Rg Tech Catelog Vol 01 Page 32', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_33.jpg', title: 'Rg Tech Catelog Vol 01 Page 33', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_34.jpg', title: 'Rg Tech Catelog Vol 01 Page 34', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_35.jpg', title: 'Rg Tech Catelog Vol 01 Page 35', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_36.jpg', title: 'Rg Tech Catelog Vol 01 Page 36', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_37.jpg', title: 'Rg Tech Catelog Vol 01 Page 37', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_38.jpg', title: 'Rg Tech Catelog Vol 01 Page 38', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_39.jpg', title: 'Rg Tech Catelog Vol 01 Page 39', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_4.jpg', title: 'Rg Tech Catelog Vol 01 Page 4', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_40.jpg', title: 'Rg Tech Catelog Vol 01 Page 40', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_41.jpg', title: 'Rg Tech Catelog Vol 01 Page 41', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_42.jpg', title: 'Rg Tech Catelog Vol 01 Page 42', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_43.jpg', title: 'Rg Tech Catelog Vol 01 Page 43', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_44.jpg', title: 'Rg Tech Catelog Vol 01 Page 44', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_45.jpg', title: 'Rg Tech Catelog Vol 01 Page 45', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_46.jpg', title: 'Rg Tech Catelog Vol 01 Page 46', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_47.jpg', title: 'Rg Tech Catelog Vol 01 Page 47', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_48.jpg', title: 'Rg Tech Catelog Vol 01 Page 48', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_49.jpg', title: 'Rg Tech Catelog Vol 01 Page 49', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_5.jpg', title: 'Rg Tech Catelog Vol 01 Page 5', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_50.jpg', title: 'Rg Tech Catelog Vol 01 Page 50', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_51.jpg', title: 'Rg Tech Catelog Vol 01 Page 51', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_52.jpg', title: 'Rg Tech Catelog Vol 01 Page 52', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_53.jpg', title: 'Rg Tech Catelog Vol 01 Page 53', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_54.jpg', title: 'Rg Tech Catelog Vol 01 Page 54', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_55.jpg', title: 'Rg Tech Catelog Vol 01 Page 55', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_56.jpg', title: 'Rg Tech Catelog Vol 01 Page 56', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_57.jpg', title: 'Rg Tech Catelog Vol 01 Page 57', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_58.jpg', title: 'Rg Tech Catelog Vol 01 Page 58', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_59.jpg', title: 'Rg Tech Catelog Vol 01 Page 59', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_6.jpg', title: 'Rg Tech Catelog Vol 01 Page 6', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_60.jpg', title: 'Rg Tech Catelog Vol 01 Page 60', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_61.jpg', title: 'Rg Tech Catelog Vol 01 Page 61', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_62.jpg', title: 'Rg Tech Catelog Vol 01 Page 62', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_63.jpg', title: 'Rg Tech Catelog Vol 01 Page 63', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_64.jpg', title: 'Rg Tech Catelog Vol 01 Page 64', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_65.jpg', title: 'Rg Tech Catelog Vol 01 Page 65', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_66.jpg', title: 'Rg Tech Catelog Vol 01 Page 66', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_67.jpg', title: 'Rg Tech Catelog Vol 01 Page 67', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_68.jpg', title: 'Rg Tech Catelog Vol 01 Page 68', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_69.jpg', title: 'Rg Tech Catelog Vol 01 Page 69', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_7.jpg', title: 'Rg Tech Catelog Vol 01 Page 7', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_70.jpg', title: 'Rg Tech Catelog Vol 01 Page 70', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_71.jpg', title: 'Rg Tech Catelog Vol 01 Page 71', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_72.jpg', title: 'Rg Tech Catelog Vol 01 Page 72', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_73.jpg', title: 'Rg Tech Catelog Vol 01 Page 73', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_74.jpg', title: 'Rg Tech Catelog Vol 01 Page 74', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_75.jpg', title: 'Rg Tech Catelog Vol 01 Page 75', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_76.jpg', title: 'Rg Tech Catelog Vol 01 Page 76', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_77.jpg', title: 'Rg Tech Catelog Vol 01 Page 77', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_78.jpg', title: 'Rg Tech Catelog Vol 01 Page 78', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_79.jpg', title: 'Rg Tech Catelog Vol 01 Page 79', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_8.jpg', title: 'Rg Tech Catelog Vol 01 Page 8', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_80.jpg', title: 'Rg Tech Catelog Vol 01 Page 80', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_81.jpg', title: 'Rg Tech Catelog Vol 01 Page 81', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_82.jpg', title: 'Rg Tech Catelog Vol 01 Page 82', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_83.jpg', title: 'Rg Tech Catelog Vol 01 Page 83', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_84.jpg', title: 'Rg Tech Catelog Vol 01 Page 84', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_85.jpg', title: 'Rg Tech Catelog Vol 01 Page 85', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_86.jpg', title: 'Rg Tech Catelog Vol 01 Page 86', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_87.jpg', title: 'Rg Tech Catelog Vol 01 Page 87', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_88.jpg', title: 'Rg Tech Catelog Vol 01 Page 88', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_89.jpg', title: 'Rg Tech Catelog Vol 01 Page 89', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_9.jpg', title: 'Rg Tech Catelog Vol 01 Page 9', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_90.jpg', title: 'Rg Tech Catelog Vol 01 Page 90', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_91.jpg', title: 'Rg Tech Catelog Vol 01 Page 91', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_92.jpg', title: 'Rg Tech Catelog Vol 01 Page 92', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_93.jpg', title: 'Rg Tech Catelog Vol 01 Page 93', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_94.jpg', title: 'Rg Tech Catelog Vol 01 Page 94', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_95.jpg', title: 'Rg Tech Catelog Vol 01 Page 95', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_96.jpg', title: 'Rg Tech Catelog Vol 01 Page 96', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_97.jpg', title: 'Rg Tech Catelog Vol 01 Page 97', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_98.jpg', title: 'Rg Tech Catelog Vol 01 Page 98', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-01_page_99.jpg', title: 'Rg Tech Catelog Vol 01 Page 99', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_1.jpg', title: 'Rg Tech Catelog Vol 02 Page 1', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_10.jpg', title: 'Rg Tech Catelog Vol 02 Page 10', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_100.jpg', title: 'Rg Tech Catelog Vol 02 Page 100', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_101.jpg', title: 'Rg Tech Catelog Vol 02 Page 101', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_102.jpg', title: 'Rg Tech Catelog Vol 02 Page 102', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_103.jpg', title: 'Rg Tech Catelog Vol 02 Page 103', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_104.jpg', title: 'Rg Tech Catelog Vol 02 Page 104', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_105.jpg', title: 'Rg Tech Catelog Vol 02 Page 105', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_106.jpg', title: 'Rg Tech Catelog Vol 02 Page 106', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_107.jpg', title: 'Rg Tech Catelog Vol 02 Page 107', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_108.jpg', title: 'Rg Tech Catelog Vol 02 Page 108', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_109.jpg', title: 'Rg Tech Catelog Vol 02 Page 109', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_11.jpg', title: 'Rg Tech Catelog Vol 02 Page 11', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_110.jpg', title: 'Rg Tech Catelog Vol 02 Page 110', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_111.jpg', title: 'Rg Tech Catelog Vol 02 Page 111', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_112.jpg', title: 'Rg Tech Catelog Vol 02 Page 112', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_113.jpg', title: 'Rg Tech Catelog Vol 02 Page 113', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_114.jpg', title: 'Rg Tech Catelog Vol 02 Page 114', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_115.jpg', title: 'Rg Tech Catelog Vol 02 Page 115', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_116.jpg', title: 'Rg Tech Catelog Vol 02 Page 116', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_117.jpg', title: 'Rg Tech Catelog Vol 02 Page 117', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_118.jpg', title: 'Rg Tech Catelog Vol 02 Page 118', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_119.jpg', title: 'Rg Tech Catelog Vol 02 Page 119', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_12.jpg', title: 'Rg Tech Catelog Vol 02 Page 12', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_120.jpg', title: 'Rg Tech Catelog Vol 02 Page 120', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_121.jpg', title: 'Rg Tech Catelog Vol 02 Page 121', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_122.jpg', title: 'Rg Tech Catelog Vol 02 Page 122', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_123.jpg', title: 'Rg Tech Catelog Vol 02 Page 123', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_124.jpg', title: 'Rg Tech Catelog Vol 02 Page 124', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_125.jpg', title: 'Rg Tech Catelog Vol 02 Page 125', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_126.jpg', title: 'Rg Tech Catelog Vol 02 Page 126', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_127.jpg', title: 'Rg Tech Catelog Vol 02 Page 127', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_128.jpg', title: 'Rg Tech Catelog Vol 02 Page 128', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_129.jpg', title: 'Rg Tech Catelog Vol 02 Page 129', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_13.jpg', title: 'Rg Tech Catelog Vol 02 Page 13', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_130.jpg', title: 'Rg Tech Catelog Vol 02 Page 130', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_131.jpg', title: 'Rg Tech Catelog Vol 02 Page 131', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_132.jpg', title: 'Rg Tech Catelog Vol 02 Page 132', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_133.jpg', title: 'Rg Tech Catelog Vol 02 Page 133', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_134.jpg', title: 'Rg Tech Catelog Vol 02 Page 134', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_135.jpg', title: 'Rg Tech Catelog Vol 02 Page 135', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_136.jpg', title: 'Rg Tech Catelog Vol 02 Page 136', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_137.jpg', title: 'Rg Tech Catelog Vol 02 Page 137', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_138.jpg', title: 'Rg Tech Catelog Vol 02 Page 138', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_139.jpg', title: 'Rg Tech Catelog Vol 02 Page 139', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_14.jpg', title: 'Rg Tech Catelog Vol 02 Page 14', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_140.jpg', title: 'Rg Tech Catelog Vol 02 Page 140', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_141.jpg', title: 'Rg Tech Catelog Vol 02 Page 141', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_142.jpg', title: 'Rg Tech Catelog Vol 02 Page 142', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_143.jpg', title: 'Rg Tech Catelog Vol 02 Page 143', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_144.jpg', title: 'Rg Tech Catelog Vol 02 Page 144', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_145.jpg', title: 'Rg Tech Catelog Vol 02 Page 145', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_146.jpg', title: 'Rg Tech Catelog Vol 02 Page 146', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_147.jpg', title: 'Rg Tech Catelog Vol 02 Page 147', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_148.jpg', title: 'Rg Tech Catelog Vol 02 Page 148', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_149.jpg', title: 'Rg Tech Catelog Vol 02 Page 149', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_15.jpg', title: 'Rg Tech Catelog Vol 02 Page 15', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_150.jpg', title: 'Rg Tech Catelog Vol 02 Page 150', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_151.jpg', title: 'Rg Tech Catelog Vol 02 Page 151', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_152.jpg', title: 'Rg Tech Catelog Vol 02 Page 152', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_153.jpg', title: 'Rg Tech Catelog Vol 02 Page 153', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_154.jpg', title: 'Rg Tech Catelog Vol 02 Page 154', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_155.jpg', title: 'Rg Tech Catelog Vol 02 Page 155', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_156.jpg', title: 'Rg Tech Catelog Vol 02 Page 156', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_157.jpg', title: 'Rg Tech Catelog Vol 02 Page 157', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_158.jpg', title: 'Rg Tech Catelog Vol 02 Page 158', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_159.jpg', title: 'Rg Tech Catelog Vol 02 Page 159', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_16.jpg', title: 'Rg Tech Catelog Vol 02 Page 16', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_160.jpg', title: 'Rg Tech Catelog Vol 02 Page 160', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_161.jpg', title: 'Rg Tech Catelog Vol 02 Page 161', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_162.jpg', title: 'Rg Tech Catelog Vol 02 Page 162', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_163.jpg', title: 'Rg Tech Catelog Vol 02 Page 163', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_164.jpg', title: 'Rg Tech Catelog Vol 02 Page 164', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_165.jpg', title: 'Rg Tech Catelog Vol 02 Page 165', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_166.jpg', title: 'Rg Tech Catelog Vol 02 Page 166', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_167.jpg', title: 'Rg Tech Catelog Vol 02 Page 167', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_168.jpg', title: 'Rg Tech Catelog Vol 02 Page 168', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_169.jpg', title: 'Rg Tech Catelog Vol 02 Page 169', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_17.jpg', title: 'Rg Tech Catelog Vol 02 Page 17', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_170.jpg', title: 'Rg Tech Catelog Vol 02 Page 170', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_171.jpg', title: 'Rg Tech Catelog Vol 02 Page 171', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_172.jpg', title: 'Rg Tech Catelog Vol 02 Page 172', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_173.jpg', title: 'Rg Tech Catelog Vol 02 Page 173', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_174.jpg', title: 'Rg Tech Catelog Vol 02 Page 174', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_175.jpg', title: 'Rg Tech Catelog Vol 02 Page 175', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_176.jpg', title: 'Rg Tech Catelog Vol 02 Page 176', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_177.jpg', title: 'Rg Tech Catelog Vol 02 Page 177', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_178.jpg', title: 'Rg Tech Catelog Vol 02 Page 178', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_179.jpg', title: 'Rg Tech Catelog Vol 02 Page 179', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_18.jpg', title: 'Rg Tech Catelog Vol 02 Page 18', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_180.jpg', title: 'Rg Tech Catelog Vol 02 Page 180', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_181.jpg', title: 'Rg Tech Catelog Vol 02 Page 181', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_182.jpg', title: 'Rg Tech Catelog Vol 02 Page 182', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_183.jpg', title: 'Rg Tech Catelog Vol 02 Page 183', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_184.jpg', title: 'Rg Tech Catelog Vol 02 Page 184', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_185.jpg', title: 'Rg Tech Catelog Vol 02 Page 185', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_186.jpg', title: 'Rg Tech Catelog Vol 02 Page 186', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_187.jpg', title: 'Rg Tech Catelog Vol 02 Page 187', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_188.jpg', title: 'Rg Tech Catelog Vol 02 Page 188', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_189.jpg', title: 'Rg Tech Catelog Vol 02 Page 189', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_19.jpg', title: 'Rg Tech Catelog Vol 02 Page 19', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_190.jpg', title: 'Rg Tech Catelog Vol 02 Page 190', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_191.jpg', title: 'Rg Tech Catelog Vol 02 Page 191', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_192.jpg', title: 'Rg Tech Catelog Vol 02 Page 192', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_193.jpg', title: 'Rg Tech Catelog Vol 02 Page 193', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_194.jpg', title: 'Rg Tech Catelog Vol 02 Page 194', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_195.jpg', title: 'Rg Tech Catelog Vol 02 Page 195', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_196.jpg', title: 'Rg Tech Catelog Vol 02 Page 196', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_197.jpg', title: 'Rg Tech Catelog Vol 02 Page 197', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_198.jpg', title: 'Rg Tech Catelog Vol 02 Page 198', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_199.jpg', title: 'Rg Tech Catelog Vol 02 Page 199', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_2.jpg', title: 'Rg Tech Catelog Vol 02 Page 2', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_20.jpg', title: 'Rg Tech Catelog Vol 02 Page 20', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_200.jpg', title: 'Rg Tech Catelog Vol 02 Page 200', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_201.jpg', title: 'Rg Tech Catelog Vol 02 Page 201', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_202.jpg', title: 'Rg Tech Catelog Vol 02 Page 202', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_203.jpg', title: 'Rg Tech Catelog Vol 02 Page 203', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_204.jpg', title: 'Rg Tech Catelog Vol 02 Page 204', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_205.jpg', title: 'Rg Tech Catelog Vol 02 Page 205', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_206.jpg', title: 'Rg Tech Catelog Vol 02 Page 206', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_207.jpg', title: 'Rg Tech Catelog Vol 02 Page 207', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_208.jpg', title: 'Rg Tech Catelog Vol 02 Page 208', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_209.jpg', title: 'Rg Tech Catelog Vol 02 Page 209', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_21.jpg', title: 'Rg Tech Catelog Vol 02 Page 21', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_210.jpg', title: 'Rg Tech Catelog Vol 02 Page 210', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_211.jpg', title: 'Rg Tech Catelog Vol 02 Page 211', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_212.jpg', title: 'Rg Tech Catelog Vol 02 Page 212', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_213.jpg', title: 'Rg Tech Catelog Vol 02 Page 213', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_214.jpg', title: 'Rg Tech Catelog Vol 02 Page 214', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_215.jpg', title: 'Rg Tech Catelog Vol 02 Page 215', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_22.jpg', title: 'Rg Tech Catelog Vol 02 Page 22', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_23.jpg', title: 'Rg Tech Catelog Vol 02 Page 23', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_24.jpg', title: 'Rg Tech Catelog Vol 02 Page 24', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_25.jpg', title: 'Rg Tech Catelog Vol 02 Page 25', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_26.jpg', title: 'Rg Tech Catelog Vol 02 Page 26', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_27.jpg', title: 'Rg Tech Catelog Vol 02 Page 27', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_28.jpg', title: 'Rg Tech Catelog Vol 02 Page 28', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_29.jpg', title: 'Rg Tech Catelog Vol 02 Page 29', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_3.png', title: 'Rg Tech Catelog Vol 02 Page 3', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_30.jpg', title: 'Rg Tech Catelog Vol 02 Page 30', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_31.jpg', title: 'Rg Tech Catelog Vol 02 Page 31', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_32.jpg', title: 'Rg Tech Catelog Vol 02 Page 32', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_33.jpg', title: 'Rg Tech Catelog Vol 02 Page 33', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_34.jpg', title: 'Rg Tech Catelog Vol 02 Page 34', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_35.jpg', title: 'Rg Tech Catelog Vol 02 Page 35', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_36.jpg', title: 'Rg Tech Catelog Vol 02 Page 36', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_37.jpg', title: 'Rg Tech Catelog Vol 02 Page 37', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_38.jpg', title: 'Rg Tech Catelog Vol 02 Page 38', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_39.jpg', title: 'Rg Tech Catelog Vol 02 Page 39', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_4.jpg', title: 'Rg Tech Catelog Vol 02 Page 4', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_40.jpg', title: 'Rg Tech Catelog Vol 02 Page 40', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_41.jpg', title: 'Rg Tech Catelog Vol 02 Page 41', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_42.jpg', title: 'Rg Tech Catelog Vol 02 Page 42', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_43.jpg', title: 'Rg Tech Catelog Vol 02 Page 43', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_44.jpg', title: 'Rg Tech Catelog Vol 02 Page 44', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_45.jpg', title: 'Rg Tech Catelog Vol 02 Page 45', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_46.jpg', title: 'Rg Tech Catelog Vol 02 Page 46', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_47.jpg', title: 'Rg Tech Catelog Vol 02 Page 47', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_48.jpg', title: 'Rg Tech Catelog Vol 02 Page 48', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_49.jpg', title: 'Rg Tech Catelog Vol 02 Page 49', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_5.jpg', title: 'Rg Tech Catelog Vol 02 Page 5', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_50.jpg', title: 'Rg Tech Catelog Vol 02 Page 50', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_51.jpg', title: 'Rg Tech Catelog Vol 02 Page 51', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_52.jpg', title: 'Rg Tech Catelog Vol 02 Page 52', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_53.jpg', title: 'Rg Tech Catelog Vol 02 Page 53', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_54.jpg', title: 'Rg Tech Catelog Vol 02 Page 54', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_55.jpg', title: 'Rg Tech Catelog Vol 02 Page 55', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_56.jpg', title: 'Rg Tech Catelog Vol 02 Page 56', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_57.jpg', title: 'Rg Tech Catelog Vol 02 Page 57', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_58.jpg', title: 'Rg Tech Catelog Vol 02 Page 58', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_59.jpg', title: 'Rg Tech Catelog Vol 02 Page 59', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_6.jpg', title: 'Rg Tech Catelog Vol 02 Page 6', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_60.jpg', title: 'Rg Tech Catelog Vol 02 Page 60', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_61.jpg', title: 'Rg Tech Catelog Vol 02 Page 61', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_62.jpg', title: 'Rg Tech Catelog Vol 02 Page 62', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_63.jpg', title: 'Rg Tech Catelog Vol 02 Page 63', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_64.jpg', title: 'Rg Tech Catelog Vol 02 Page 64', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_65.jpg', title: 'Rg Tech Catelog Vol 02 Page 65', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_66.jpg', title: 'Rg Tech Catelog Vol 02 Page 66', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_67.jpg', title: 'Rg Tech Catelog Vol 02 Page 67', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_68.jpg', title: 'Rg Tech Catelog Vol 02 Page 68', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_69.jpg', title: 'Rg Tech Catelog Vol 02 Page 69', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_7.jpg', title: 'Rg Tech Catelog Vol 02 Page 7', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_70.jpg', title: 'Rg Tech Catelog Vol 02 Page 70', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_71.jpg', title: 'Rg Tech Catelog Vol 02 Page 71', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_72.jpg', title: 'Rg Tech Catelog Vol 02 Page 72', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_73.jpg', title: 'Rg Tech Catelog Vol 02 Page 73', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_74.jpg', title: 'Rg Tech Catelog Vol 02 Page 74', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_75.jpg', title: 'Rg Tech Catelog Vol 02 Page 75', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_76.jpg', title: 'Rg Tech Catelog Vol 02 Page 76', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_77.jpg', title: 'Rg Tech Catelog Vol 02 Page 77', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_78.jpg', title: 'Rg Tech Catelog Vol 02 Page 78', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_79.jpg', title: 'Rg Tech Catelog Vol 02 Page 79', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_8.jpg', title: 'Rg Tech Catelog Vol 02 Page 8', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_80.jpg', title: 'Rg Tech Catelog Vol 02 Page 80', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_81.jpg', title: 'Rg Tech Catelog Vol 02 Page 81', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_82.jpg', title: 'Rg Tech Catelog Vol 02 Page 82', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_83.jpg', title: 'Rg Tech Catelog Vol 02 Page 83', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_84.jpg', title: 'Rg Tech Catelog Vol 02 Page 84', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_85.jpg', title: 'Rg Tech Catelog Vol 02 Page 85', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_86.jpg', title: 'Rg Tech Catelog Vol 02 Page 86', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_87.jpg', title: 'Rg Tech Catelog Vol 02 Page 87', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_88.jpg', title: 'Rg Tech Catelog Vol 02 Page 88', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_89.jpg', title: 'Rg Tech Catelog Vol 02 Page 89', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_9.jpg', title: 'Rg Tech Catelog Vol 02 Page 9', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_90.jpg', title: 'Rg Tech Catelog Vol 02 Page 90', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_91.jpg', title: 'Rg Tech Catelog Vol 02 Page 91', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_92.jpg', title: 'Rg Tech Catelog Vol 02 Page 92', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_93.jpg', title: 'Rg Tech Catelog Vol 02 Page 93', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_94.jpg', title: 'Rg Tech Catelog Vol 02 Page 94', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_95.jpg', title: 'Rg Tech Catelog Vol 02 Page 95', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_96.jpg', title: 'Rg Tech Catelog Vol 02 Page 96', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_97.jpg', title: 'Rg Tech Catelog Vol 02 Page 97', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_98.jpg', title: 'Rg Tech Catelog Vol 02 Page 98', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/RG-Tech-Catelog-Vol-02_page_99.jpg', title: 'Rg Tech Catelog Vol 02 Page 99', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_aluminum_hd.png', title: 'Kw Aluminum Hd', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_brass_hd.png', title: 'Kw Brass Hd', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_cnc_machine_hd.png', title: 'Kw Cnc Machine Hd', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_copper_hd.png', title: 'Kw Copper Hd', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_fiber_hd.png', title: 'Kw Fiber Hd', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_laser_hd.png', title: 'Kw Laser Hd', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_unique_laser_cnc.png', title: 'Kw Unique Laser Cnc', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_unique_laser_fiber.png', title: 'Kw Unique Laser Fiber', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_unique_laser_ms_plate.png', title: 'Kw Unique Laser Ms Plate', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/kw_unique_laser_ss_mirror.png', title: 'Kw Unique Laser Ss Mirror', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_01.jpg', title: 'Lc 01', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_02.jpg', title: 'Lc 02', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_03.jpg', title: 'Lc 03', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_04.jpg', title: 'Lc 04', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_05.jpg', title: 'Lc 05', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_06.jpg', title: 'Lc 06', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_07.jpg', title: 'Lc 07', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_08.jpg', title: 'Lc 08', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_09.jpg', title: 'Lc 09', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_10.jpg', title: 'Lc 10', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_11.jpg', title: 'Lc 11', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_12.jpg', title: 'Lc 12', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_13.jpg', title: 'Lc 13', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_14.jpg', title: 'Lc 14', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_15.jpg', title: 'Lc 15', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_16.jpg', title: 'Lc 16', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_17.jpg', title: 'Lc 17', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_18.jpg', title: 'Lc 18', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_19.jpg', title: 'Lc 19', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_20.jpg', title: 'Lc 20', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_whatsapp_01.jpg', title: 'Lc Whatsapp 01', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_whatsapp_02.jpg', title: 'Lc Whatsapp 02', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_whatsapp_03.jpg', title: 'Lc Whatsapp 03', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Laser Cutting Services/lc_whatsapp_04.jpg', title: 'Lc Whatsapp 04', material: 'Premium Metal', filter: 'Laser Cutting Services' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.21 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.21 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.22 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.22 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.23 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.23 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.24 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.24 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.24 PM (3).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.24 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.25 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.25 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.25 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.26 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.26 PM (3).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.26 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.27 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.27 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.28 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.28 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.28 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.29 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.29 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.29 PM (3).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.29 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.30 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.30 PM (3).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.30 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.31 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.31 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.32 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.32 PM (3).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.32 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.33 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.33 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.33 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.34 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.34 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.34 PM (3).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.34 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.35 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.35 PM.jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.36 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.37 PM (1).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/WhatsApp Image 2026-02-11 at 5.32.37 PM (2).jpeg', title: 'Whatsapp Image 2026 02 11 At 5', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_01.jpg', title: 'Sm 01', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_02.jpg', title: 'Sm 02', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_03.jpg', title: 'Sm 03', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_04.jpg', title: 'Sm 04', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_05.jpg', title: 'Sm 05', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_06.jpg', title: 'Sm 06', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_07.jpg', title: 'Sm 07', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_08.jpg', title: 'Sm 08', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_09.jpg', title: 'Sm 09', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_10.jpg', title: 'Sm 10', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_11.jpg', title: 'Sm 11', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_12.jpg', title: 'Sm 12', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_13.jpg', title: 'Sm 13', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_14.jpg', title: 'Sm 14', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_15.jpg', title: 'Sm 15', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_16.jpg', title: 'Sm 16', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_17.jpg', title: 'Sm 17', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_18.jpg', title: 'Sm 18', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_19.jpg', title: 'Sm 19', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Sheet Metal Laser Cutting/sm_20.jpg', title: 'Sm 20', material: 'Premium Metal', filter: 'Sheet Metal Laser Cutting' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0008.jpg', title: 'Rg Tech Catelog Vol 4 Page 0008', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0009.jpg', title: 'Rg Tech Catelog Vol 4 Page 0009', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0010.jpg', title: 'Rg Tech Catelog Vol 4 Page 0010', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0011.jpg', title: 'Rg Tech Catelog Vol 4 Page 0011', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0012.jpg', title: 'Rg Tech Catelog Vol 4 Page 0012', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0013.jpg', title: 'Rg Tech Catelog Vol 4 Page 0013', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0015.jpg', title: 'Rg Tech Catelog Vol 4 Page 0015', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0016.jpg', title: 'Rg Tech Catelog Vol 4 Page 0016', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0017.jpg', title: 'Rg Tech Catelog Vol 4 Page 0017', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0018.jpg', title: 'Rg Tech Catelog Vol 4 Page 0018', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0019.jpg', title: 'Rg Tech Catelog Vol 4 Page 0019', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Fabrication Services/RG-Tech-Catelog-vol-4_page-0020.jpg', title: 'Rg Tech Catelog Vol 4 Page 0020', material: 'Industrial Steel', filter: 'Fabrication Services' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0120.jpg', title: 'Rg Tech Catelog Vol 4 Page 0120', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0121.jpg', title: 'Rg Tech Catelog Vol 4 Page 0121', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0122.jpg', title: 'Rg Tech Catelog Vol 4 Page 0122', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0123.jpg', title: 'Rg Tech Catelog Vol 4 Page 0123', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0124.jpg', title: 'Rg Tech Catelog Vol 4 Page 0124', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0125.jpg', title: 'Rg Tech Catelog Vol 4 Page 0125', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0126.jpg', title: 'Rg Tech Catelog Vol 4 Page 0126', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0127.jpg', title: 'Rg Tech Catelog Vol 4 Page 0127', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0128.jpg', title: 'Rg Tech Catelog Vol 4 Page 0128', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0129.jpg', title: 'Rg Tech Catelog Vol 4 Page 0129', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0130.jpg', title: 'Rg Tech Catelog Vol 4 Page 0130', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0131.jpg', title: 'Rg Tech Catelog Vol 4 Page 0131', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0132.jpg', title: 'Rg Tech Catelog Vol 4 Page 0132', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0133.jpg', title: 'Rg Tech Catelog Vol 4 Page 0133', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0134.jpg', title: 'Rg Tech Catelog Vol 4 Page 0134', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0135.jpg', title: 'Rg Tech Catelog Vol 4 Page 0135', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0136.jpg', title: 'Rg Tech Catelog Vol 4 Page 0136', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0137.jpg', title: 'Rg Tech Catelog Vol 4 Page 0137', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0138.jpg', title: 'Rg Tech Catelog Vol 4 Page 0138', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0139.jpg', title: 'Rg Tech Catelog Vol 4 Page 0139', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0140.jpg', title: 'Rg Tech Catelog Vol 4 Page 0140', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0141.jpg', title: 'Rg Tech Catelog Vol 4 Page 0141', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0142.jpg', title: 'Rg Tech Catelog Vol 4 Page 0142', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0143.jpg', title: 'Rg Tech Catelog Vol 4 Page 0143', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0144.jpg', title: 'Rg Tech Catelog Vol 4 Page 0144', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0145.jpg', title: 'Rg Tech Catelog Vol 4 Page 0145', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0146.jpg', title: 'Rg Tech Catelog Vol 4 Page 0146', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0147.jpg', title: 'Rg Tech Catelog Vol 4 Page 0147', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0148.jpg', title: 'Rg Tech Catelog Vol 4 Page 0148', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0149.jpg', title: 'Rg Tech Catelog Vol 4 Page 0149', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0150.jpg', title: 'Rg Tech Catelog Vol 4 Page 0150', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0151.jpg', title: 'Rg Tech Catelog Vol 4 Page 0151', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0152.jpg', title: 'Rg Tech Catelog Vol 4 Page 0152', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0153.jpg', title: 'Rg Tech Catelog Vol 4 Page 0153', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Steel Gates/RG-Tech-Catelog-vol-4_page-0154.jpg', title: 'Rg Tech Catelog Vol 4 Page 0154', material: 'Solid Steel', filter: 'Steel Gates' },
+            { img: '/gallery/Metal Safety Doors/1-13.jpg', title: '1 13', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/7x3-5-feet-18-3-kilograms-paint-coated-mild-steel-safety-doors-466.jpg', title: '7X3 5 Feet 18 3 Kilograms Paint Coated Mild Steel Safety Doors 466', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/Stainless-Steel-Thickened-Smart-Lock-Armored-Main-Gate-Meta-Home-Entrance-Front-Entry-Doors-Exterior-Door-Safety-Steel-Door.png_300x300.avif', title: 'Stainless Steel Thickened Smart Lock Armored Main Gate Meta Home Entrance Front Entry Doors Exterior Door Safety Steel Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/download (1).jpg', title: 'Download (1)', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/download (2).jpg', title: 'Download (2)', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/download.jpg', title: 'Download', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
             { img: '/gallery/Metal Safety Doors/flowert-safety-door.webp', title: 'Flowert Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/image5.jpg', title: 'Safety Door Design 08', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/images.jpg', title: 'Safety Door Design 09', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/metal-ms-safety-door-for-resi-20240524162939656.jpg', title: 'MS Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/mild-steel-hinged-safety-door.jpg', title: 'Hinged Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/mild-steel-safety-door-500x500.webp', title: 'Mild Steel Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/ms-safety-door-500x500.webp', title: 'MS Safety Solution', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/premium-quality-are-made-of-heavy-duty-stainless-steel-safety-doors--144.jpg', title: 'Premium Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/product-jpeg-500x500.webp', title: 'Safety Door Design 15', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/product-jpeg.jpg', title: 'Safety Door Design 16', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/safety-door-250x250.webp', title: 'Safety Door Design 17', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/safety-door-jali.jpg', title: 'Jali Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/stainless-steel-safety-door-2219578321-0ix6pmz1.avif', title: 'Stainless Steel Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-            { img: '/gallery/Metal Safety Doors/stainless-steel-silver-safety-door.jpeg', title: 'Silver Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/image5.jpg', title: 'Image5', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/images.jpg', title: 'Images', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/metal-ms-safety-door-for-resi-20240524162939656.jpg', title: 'Metal Ms Safety Door For Resi 20240524162939656', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/mild-steel-hinged-safety-door.jpg', title: 'Mild Steel Hinged Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/mild-steel-safety-door-500x500.webp', title: 'Mild Steel Safety Door 500X500', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/ms-safety-door-500x500.webp', title: 'Ms Safety Door 500X500', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/premium-quality-are-made-of-heavy-duty-stainless-steel-safety-doors--144.jpg', title: 'Premium Quality Are Made Of Heavy Duty Stainless Steel Safety Doors  144', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/product-jpeg-500x500.webp', title: 'Product Jpeg 500X500', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/product-jpeg.jpg', title: 'Product Jpeg', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/safety-door-250x250.webp', title: 'Safety Door 250X250', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/safety-door-jali.jpg', title: 'Safety Door Jali', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/stainless-steel-safety-door-2219578321-0ix6pmz1.avif', title: 'Stainless Steel Safety Door 2219578321 0Ix6Pmz1', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
+            { img: '/gallery/Metal Safety Doors/stainless-steel-silver-safety-door.jpeg', title: 'Stainless Steel Silver Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
             { img: '/gallery/Metal Safety Doors/steel-safety-door.jpg', title: 'Steel Safety Door', material: 'Reinforced Metal', filter: 'Metal Safety Doors' },
-
-            // Decorative Metal Panels
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0004.jpg', title: 'Decorative Panel 01', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0005.jpg', title: 'Decorative Panel 02', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0006.jpg', title: 'Decorative Panel 03', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0011.jpg', title: 'Decorative Panel 04', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0012.jpg', title: 'Decorative Panel 05', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0013.jpg', title: 'Decorative Panel 06', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0018.jpg', title: 'Decorative Panel 07', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0019.jpg', title: 'Decorative Panel 08', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0020.jpg', title: 'Decorative Panel 09', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0025.jpg', title: 'Decorative Panel 10', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0026.jpg', title: 'Decorative Panel 11', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0027.jpg', title: 'Decorative Panel 12', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0032.jpg', title: 'Decorative Panel 13', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0033.jpg', title: 'Decorative Panel 14', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0034.jpg', title: 'Decorative Panel 15', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0039.jpg', title: 'Decorative Panel 16', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0040.jpg', title: 'Decorative Panel 17', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0041.jpg', title: 'Decorative Panel 18', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0046.jpg', title: 'Decorative Panel 19', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0047.jpg', title: 'Decorative Panel 20', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0048.jpg', title: 'Decorative Panel 21', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0053.jpg', title: 'Decorative Panel 22', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0054.jpg', title: 'Decorative Panel 23', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0055.jpg', title: 'Decorative Panel 24', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0060.jpg', title: 'Decorative Panel 25', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0061.jpg', title: 'Decorative Panel 26', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
-            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0062.jpg', title: 'Decorative Panel 27', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' }
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0004.jpg', title: 'Rg Tech Catelog Vol 02 Page 0004', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0005.jpg', title: 'Rg Tech Catelog Vol 02 Page 0005', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0006.jpg', title: 'Rg Tech Catelog Vol 02 Page 0006', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0011.jpg', title: 'Rg Tech Catelog Vol 02 Page 0011', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0012.jpg', title: 'Rg Tech Catelog Vol 02 Page 0012', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0013.jpg', title: 'Rg Tech Catelog Vol 02 Page 0013', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0018.jpg', title: 'Rg Tech Catelog Vol 02 Page 0018', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0019.jpg', title: 'Rg Tech Catelog Vol 02 Page 0019', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0020.jpg', title: 'Rg Tech Catelog Vol 02 Page 0020', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0025.jpg', title: 'Rg Tech Catelog Vol 02 Page 0025', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0026.jpg', title: 'Rg Tech Catelog Vol 02 Page 0026', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0027.jpg', title: 'Rg Tech Catelog Vol 02 Page 0027', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0032.jpg', title: 'Rg Tech Catelog Vol 02 Page 0032', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0033.jpg', title: 'Rg Tech Catelog Vol 02 Page 0033', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0034.jpg', title: 'Rg Tech Catelog Vol 02 Page 0034', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0039.jpg', title: 'Rg Tech Catelog Vol 02 Page 0039', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0040.jpg', title: 'Rg Tech Catelog Vol 02 Page 0040', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0041.jpg', title: 'Rg Tech Catelog Vol 02 Page 0041', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0046.jpg', title: 'Rg Tech Catelog Vol 02 Page 0046', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0047.jpg', title: 'Rg Tech Catelog Vol 02 Page 0047', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0048.jpg', title: 'Rg Tech Catelog Vol 02 Page 0048', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0053.jpg', title: 'Rg Tech Catelog Vol 02 Page 0053', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0054.jpg', title: 'Rg Tech Catelog Vol 02 Page 0054', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0055.jpg', title: 'Rg Tech Catelog Vol 02 Page 0055', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0060.jpg', title: 'Rg Tech Catelog Vol 02 Page 0060', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0061.jpg', title: 'Rg Tech Catelog Vol 02 Page 0061', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
+            { img: '/gallery/Decorative Metal Panels/RG-Tech-Catelog-Vol-02_page-0062.jpg', title: 'Rg Tech Catelog Vol 02 Page 0062', material: 'Decorative Laser Cut', filter: 'Decorative Metal Panels' },
         ]
 
         const filtered = activeFilter === 'All' ? items : items.filter(i => i.filter === activeFilter)
@@ -1608,8 +2149,8 @@ function App() {
         return (
             <div className="bg-white min-h-screen">
                 <Helmet>
-                    <title>Design Gallery | RG Tech Engineering</title>
-                    <meta name="description" content="Explore our library of laser cutting and fabrication designs. From intricate jali patterns to heavy industrial components." />
+                    <title>Metal Design & Laser Cutting Portfolio | RG Tech Engineering</title>
+                    <meta name="description" content="Explore our library of laser cutting and metal fabrication projects in Chennai. Designs include industrial parts, CNC jali patterns, steel gates, and safety doors." />
                 </Helmet>
 
                 {/* Gallery Hero */}
@@ -1759,19 +2300,19 @@ function App() {
     const HomePage = () => (
         <div className="bg-white">
             <Helmet>
-                <title>RG Tech Engineering | Your Trusted Partner for CNC Laser Cutting & Fabrication</title>
-                <meta name="description" content="RG Tech Engineering Works - High-precision CNC Fiber Laser Cutting Services in Chennai. MS, SS, Aluminum, Copper & Brass cutting up to 45mm." />
+                <title>RG Tech Engineering | Best CNC Laser Cutting & Metal Fabrication Chennai</title>
+                <meta name="description" content="RG Tech Engineering Works: Leading CNC Fiber Laser Cutting Services in Chennai. Precision MS, SS, Aluminum, Copper & Brass cutting up to 45mm. Fast 24/7 support." />
             </Helmet>
 
             {/* Hero - Reverted to Dark Navy Industrial */}
-            <section id="home" className="bg-[#1C3D5A] text-white py-20 min-h-[600px] flex items-center relative overflow-hidden">
+            <section id="home" className="bg-primary text-white py-20 min-h-[600px] flex items-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 translate-x-1/2 pointer-events-none"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 w-full">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-6">
+                            <h2 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-6 text-balance">
                                 Your Trusted Partner for <br />
-                                <span className="text-[#E85A4F]">CNC Laser Cutting & Fabrication</span>
+                                <span className="text-accent">CNC Laser Cutting & Fabrication</span>
                             </h2>
                             <p className="text-lg text-white/70 mb-10 max-w-xl">
                                 High-Precision Metal Cutting up to 45mm – MS, SS, Aluminum, Copper & Brass
@@ -1780,35 +2321,35 @@ function App() {
                             <div className="grid grid-cols-2 gap-y-4 gap-x-8 mb-12">
                                 <div className="flex items-center gap-3">
                                     <div className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center">
-                                        <CheckCircle className="w-3.5 h-3.5 text-[#E85A4F]" />
+                                        <CheckCircle className="w-3.5 h-3.5 text-accent" />
                                     </div>
                                     <span className="text-sm font-medium">Precision up to 0.01mm</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center">
-                                        <CheckCircle className="w-3.5 h-3.5 text-[#E85A4F]" />
+                                        <CheckCircle className="w-3.5 h-3.5 text-accent" />
                                     </div>
                                     <span className="text-sm font-medium">Large bed: 8000x2500mm</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center">
-                                        <CheckCircle className="w-3.5 h-3.5 text-[#E85A4F]" />
+                                        <CheckCircle className="w-3.5 h-3.5 text-accent" />
                                     </div>
                                     <span className="text-sm font-medium">All metal types</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center">
-                                        <CheckCircle className="w-3.5 h-3.5 text-[#E85A4F]" />
+                                        <CheckCircle className="w-3.5 h-3.5 text-accent" />
                                     </div>
                                     <span className="text-sm font-medium">Quick turnaround</span>
                                 </div>
                             </div>
 
                             <div className="flex flex-wrap gap-5">
-                                <a href="#contact" className="bg-[#E85A4F] text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-[#D44E45] transition-colors shadow-lg shadow-black/20">
+                                <a href="#contact" className="bg-accent text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-accent-dark transition-colors shadow-lg shadow-black/20">
                                     Get a Quote <ArrowRight className="w-4 h-4" />
                                 </a>
-                                <a href="tel:+916380736439" className="bg-[#5A6C7D]/40 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 border border-white/10 hover:bg-[#5A6C7D]/60 transition-colors">
+                                <a href="tel:+916380736439" className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 border border-white/10 hover:bg-white/20 transition-colors">
                                     <Phone className="w-4 h-4" /> Call Now
                                 </a>
                             </div>
@@ -1827,12 +2368,12 @@ function App() {
                         </div>
 
                         <div className="relative">
-                            <div className="rounded-3xl overflow-hidden shadow-2xl relative">
-                                <img src="https://images.unsplash.com/photo-1764114235896-034c8772de01?q=80&w=1200" alt="CNC Laser Machine" className="w-full aspect-[4/3] object-cover" />
-                                <div className="absolute bottom-6 left-6 bg-white p-6 rounded-2xl shadow-xl max-w-[220px]">
-                                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Bed Sizes</p>
-                                    <p className="text-lg font-black text-[#1C3D5A]">8000 x 2500mm</p>
-                                    <p className="text-sm font-bold text-[#E85A4F]">3000 x 1500mm</p>
+                            <div className="rounded-3xl overflow-hidden shadow-2xl relative border-4 border-white/10">
+                                <img src="/gallery/Sheet Metal Laser Cutting/sm_12.jpg" alt="CNC Laser Machine" className="w-full aspect-[4/3] object-cover" />
+                                <div className="absolute bottom-6 left-6 bg-white p-6 rounded-2xl shadow-xl max-w-[220px] transition-transform hover:scale-105 duration-300">
+                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Bed Sizes</p>
+                                    <p className="text-lg font-black text-primary leading-none mb-1">8000 x 2500mm</p>
+                                    <p className="text-sm font-bold text-accent">Large Format Processing</p>
                                 </div>
                             </div>
                         </div>
@@ -1841,26 +2382,26 @@ function App() {
             </section>
 
             {/* Services Snippet */}
-            <section id="services" className="py-24 bg-[#F8F6F3]">
+            <section id="services" className="py-24 bg-slate-50">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                         <div>
-                            <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Our Capabilities</p>
-                            <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading">Industrial Services</h3>
+                            <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Our Capabilities</p>
+                            <h3 className="text-3xl md:text-4xl font-bold text-primary font-heading">Industrial Services</h3>
                         </div>
-                        <p className="text-[#5A6C7D] font-medium max-w-md">Precision engineering services delivered from our state-of-the-art facility in Chennai.</p>
+                        <p className="text-text-muted font-medium max-w-md">Precision engineering services delivered from our state-of-the-art facility in Chennai.</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {pillarServices.map((s, i) => (
                             <Link key={i} to={s.slug} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
-                                <div className="w-14 h-14 rounded-xl bg-[#E85A4F]/10 flex items-center justify-center mb-8 group-hover:bg-[#E85A4F] transition-colors">
-                                    <Zap className="w-6 h-6 text-[#E85A4F] group-hover:text-white" />
+                                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-8 group-hover:bg-accent transition-colors">
+                                    <s.mainIcon className="w-6 h-6 text-accent group-hover:text-white" />
                                 </div>
-                                <h4 className="text-xl font-bold text-[#1C3D5A] mb-4 font-heading">{s.name}</h4>
-                                <p className="text-[15px] text-[#5A6C7D] leading-relaxed mb-8 flex-grow">
+                                <h4 className="text-xl font-bold text-primary mb-4 font-heading">{s.name}</h4>
+                                <p className="text-[15px] text-primary/60 leading-relaxed mb-8 flex-grow">
                                     {s.metaDescription.split('. ')[0]}. Expert cutting and processing for all industrial grades.
                                 </p>
-                                <div className="pt-6 border-t border-gray-50 flex items-center justify-between text-[#E85A4F] font-bold text-[13px] group-hover:translate-x-1 transition-transform">
+                                <div className="pt-6 border-t border-gray-50 flex items-center justify-between text-accent font-bold text-[13px] group-hover:translate-x-1 transition-transform">
                                     Explore Service <ArrowRight className="w-4 h-4" />
                                 </div>
                             </Link>
@@ -1873,14 +2414,14 @@ function App() {
             <section id="industries" className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-16">
-                        <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Sectors Served</p>
-                        <h3 className="text-3xl md:text-5xl font-bold text-[#1C3D5A] font-heading">Industries We Empower</h3>
+                        <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Sectors Served</p>
+                        <h3 className="text-3xl md:text-5xl font-bold text-primary font-heading">Industries We Empower</h3>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
                         {industries.map((ind, i) => (
-                            <div key={i} className="bg-[#F8F6F3] p-6 rounded-2xl text-center hover:bg-[#E85A4F]/10 transition-colors group">
-                                <ind.icon className="w-8 h-8 text-[#1C3D5A] mx-auto mb-4 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all" />
-                                <p className="text-xs font-bold text-[#1C3D5A] uppercase tracking-wider">{ind.name}</p>
+                            <div key={i} className="bg-slate-50 p-6 rounded-2xl text-center hover:bg-accent-soft transition-all duration-300 group">
+                                <ind.icon className="w-8 h-8 text-primary mx-auto mb-4 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+                                <p className="text-[11px] font-black text-primary uppercase tracking-wider">{ind.name}</p>
                             </div>
                         ))}
                     </div>
@@ -1888,18 +2429,19 @@ function App() {
             </section>
 
             {/* Why RG Tech - Dark Section */}
-            <section id="about" className="py-24 bg-[#1C3D5A] text-white">
-                <div className="max-w-7xl mx-auto px-4">
+            <section id="about" className="py-24 bg-primary text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-[120px]"></div>
+                <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid md:grid-cols-3 gap-12">
                         <div className="md:col-span-1">
-                            <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-4">Why Choose Us</p>
+                            <p className="text-accent font-bold text-sm uppercase tracking-widest mb-4">Why Choose Us</p>
                             <h3 className="text-3xl md:text-4xl font-bold font-heading leading-tight">Expertise That Drives Precision</h3>
                         </div>
                         <div className="md:col-span-2 grid md:grid-cols-2 gap-8">
                             {differentiators.map((d, i) => (
-                                <div key={i} className="flex gap-6">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
-                                        <d.icon className="w-6 h-6 text-[#E85A4F]" />
+                                <div key={i} className="flex gap-6 group">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+                                        <d.icon className="w-6 h-6 text-accent group-hover:text-white" />
                                     </div>
                                     <div>
                                         <h4 className="text-xl font-bold mb-3 font-heading">{d.title}</h4>
@@ -1942,19 +2484,19 @@ function App() {
             <section className="py-24 bg-white">
                 <div className="max-w-3xl mx-auto px-4">
                     <div className="text-center mb-16">
-                        <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Support</p>
-                        <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading">Technical FAQs</h3>
+                        <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Support</p>
+                        <h3 className="text-3xl md:text-4xl font-bold text-primary font-heading">Technical FAQs</h3>
                     </div>
                     <div className="space-y-4">
                         {faqs.map((faq, i) => (
-                            <div key={i} className="border border-gray-200 rounded-xl overflow-hidden transition-all hover:bg-[#F8F6F3]">
+                            <div key={i} className="border border-slate-200 rounded-xl overflow-hidden transition-all hover:bg-slate-50">
                                 <button onClick={() => toggleFaq(i)} className="w-full flex justify-between items-center p-6 text-left group">
-                                    <span className="font-bold text-[#1C3D5A] text-[15px] pr-8">{faq.q}</span>
-                                    <ChevronDown className={`w-5 h-5 text-[#5A6C7D] transition-transform ${openFaq === i ? 'rotate-180 text-[#E85A4F]' : ''}`} />
+                                    <span className="font-bold text-primary text-[15px] pr-8">{faq.q}</span>
+                                    <ChevronDown className={`w-5 h-5 text-text-muted transition-transform ${openFaq === i ? 'rotate-180 text-accent' : ''}`} />
                                 </button>
                                 {openFaq === i && (
                                     <div className="px-6 pb-6 animate-in fade-in slide-in-from-top-2">
-                                        <p className="text-[14px] text-[#5A6C7D] leading-relaxed border-l-2 border-[#E85A4F]/30 pl-4">{faq.a}</p>
+                                        <p className="text-[14px] text-text-muted leading-relaxed border-l-2 border-accent/30 pl-4">{faq.a}</p>
                                     </div>
                                 )}
                             </div>
@@ -1964,19 +2506,19 @@ function App() {
             </section>
 
             {/* Quick Quote Form */}
-            <section id="contact" className="py-24 bg-[#1C3D5A] relative overflow-hidden">
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#E85A4F]/10 rounded-full blur-[100px]"></div>
+            <section id="contact" className="py-24 bg-primary relative overflow-hidden">
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px]"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
-                    <div className="bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row">
-                        <div className="lg:w-2/5 bg-[#F8F6F3] p-12">
-                            <h3 className="text-3xl font-bold text-[#1C3D5A] mb-6 font-heading">Start Your Project</h3>
-                            <p className="text-[#5A6C7D] mb-10 font-medium">Engineer-verified pricing and technical feasibility analysis within 24 business hours.</p>
+                    <div className="bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-white/20">
+                        <div className="lg:w-2/5 bg-slate-50 p-12">
+                            <h3 className="text-3xl font-bold text-primary mb-6 font-heading">Start Your Project</h3>
+                            <p className="text-text-muted mb-10 font-medium">Engineer-verified pricing and technical feasibility analysis within 24 business hours.</p>
 
                             <div className="space-y-8">
                                 <div className="flex items-start gap-4">
-                                    <Phone className="w-6 h-6 text-[#E85A4F] mt-1" />
+                                    <Phone className="w-6 h-6 text-accent mt-1" />
                                     <div>
-                                        <p className="font-bold text-[#1C3D5A]">Direct Line</p>
+                                        <p className="font-bold text-primary">Direct Line</p>
                                         <p className="text-[#5A6C7D]">+91 63807-36439</p>
                                     </div>
                                 </div>
@@ -1984,7 +2526,7 @@ function App() {
                                     <Mail className="w-6 h-6 text-[#E85A4F] mt-1" />
                                     <div>
                                         <p className="font-bold text-[#1C3D5A]">Technical Support</p>
-                                        <p className="text-[#5A6C7D]">rgtech97@gmail.com</p>
+                                        <p className="text-[#5A6C7D]">admin@rgtechengineeringworks.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
@@ -2035,8 +2577,10 @@ function App() {
             <Header
                 toggleMobileMenu={toggleMobileMenu}
                 mobileMenuOpen={mobileMenuOpen}
+                setMobileMenuOpen={setMobileMenuOpen}
                 toggleServicesDropdown={toggleServicesDropdown}
                 servicesDropdown={servicesDropdown}
+                setServicesDropdown={setServicesDropdown}
                 pillarServices={pillarServices}
                 setCatalogueModalOpen={setCatalogueModalOpen}
             />
@@ -2044,11 +2588,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/gallery" element={<GalleryPage />} />
-                {/* Generic city routes for all services */}
+                {/* Optimized routes for all services and city pages */}
+                <Route path="/chennai/:combinedSlug" element={<ServicePage services={pillarServices} />} />
                 <Route path="/chennai/:serviceSlug/:city" element={<ServicePage services={pillarServices} />} />
-                {pillarServices.map((s, i) => (
-                    <Route key={i} path={s.slug} element={<ServicePage services={pillarServices} />} />
-                ))}
             </Routes>
 
             <Footer pillarServices={pillarServices} />
