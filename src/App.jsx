@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, ChevronLeft, ArrowRight, Send, Upload, Star, MessageCircle, Menu, X, Shield, Target, Zap, Wrench, Building2, Paintbrush, Users, Factory, Cpu, Wind, CheckCircle, FileText, Package, Truck, Eye, Settings, DoorOpen, Layers, PanelTop, Scissors, Ruler, Sparkles, Plus, Minus, Home, Download } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, ChevronLeft, ArrowRight, Send, Upload, Star, MessageCircle, Menu, X, Shield, Target, Zap, Wrench, Building2, Paintbrush, Users, Factory, Cpu, Wind, CheckCircle, FileText, Package, Truck, Eye, Settings, DoorOpen, Layers, PanelTop, Scissors, Ruler, Sparkles, Plus, Minus, Home, Download, LayoutDashboard, Languages, FileEdit, Trash2, Globe, Search, Calendar, Tag } from 'lucide-react'
 
 // --- Constants ---
+
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbycIMpfSHcJ3gjpZJ-UMDCgFloRFLvZULBMWm5AHSkND0ZJtfa_eZBAMJNraImE_t1d/exec'
+const ADMIN_PASSWORD = 'RGTECH2026'
+const BASE_URL = 'https://www.rgtechengineeringworks.com'
+const DEFAULT_OG_IMAGE = `${BASE_URL}/gallery/Sheet%20Metal%20Laser%20Cutting/sm_12.jpg`
 
 const CHENNAI_LOCALITIES = [
     "Adyar", "Alandur", "Alwarpet", "Ambattur", "Aminjikarai", "Anna Nagar", "Arumbakkam",
@@ -170,6 +175,496 @@ const CatalogueModal = ({ isOpen, onClose }) => {
     )
 }
 
+// --- Blog Components ---
+
+const BlogPage = () => {
+    const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const res = await fetch(APPS_SCRIPT_URL)
+                const data = await res.json()
+                if (data.posts) setPosts(data.posts)
+                else setPosts([])
+            } catch (e) { console.error('Blog fetch failed', e) }
+            setLoading(false)
+        }
+        fetchPosts()
+    }, [])
+
+    return (
+        <div className="bg-slate-50 min-h-screen pt-32 pb-20">
+            <Helmet>
+                <title>Engineering Blog | RG Tech Engineering Works Chennai</title>
+                <meta name="description" content="Technical insights on fiber laser cutting, CNC processing, and metal fabrication from the experts at RG Tech Engineering Chennai." />
+                <link rel="canonical" href={`${BASE_URL}/blog`} />
+                <meta property="og:title" content="Engineering Blog | RG Tech Engineering Works Chennai" />
+                <meta property="og:description" content="Technical insights on fiber laser cutting, CNC processing, and metal fabrication from the experts at RG Tech Engineering Chennai." />
+                <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+                <meta property="og:url" content={`${BASE_URL}/blog`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="RG Tech Engineering Works" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Engineering Blog | RG Tech Engineering Works Chennai" />
+                <meta name="twitter:description" content="Technical insights on fiber laser cutting, CNC processing, and metal fabrication from the experts at RG Tech Engineering Chennai." />
+                <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+            </Helmet>
+            <div className="max-w-7xl mx-auto px-4">
+                <div className="text-center mb-16">
+                    <p className="text-accent font-black text-xs uppercase tracking-[0.3em] mb-4">Insights & News</p>
+                    <h1 className="text-4xl md:text-6xl font-black text-primary font-heading tracking-tight">Technical Mastery</h1>
+                </div>
+
+                {loading ? (
+                    <div className="flex flex-col items-center justify-center py-32">
+                        <div className="w-16 h-16 border-4 border-slate-100 border-t-accent rounded-full animate-spin"></div>
+                        <p className="mt-6 text-primary/40 font-bold uppercase tracking-widest text-xs">Accessing Knowledge Base...</p>
+                    </div>
+                ) : posts.length > 0 ? (
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {posts.map((post, i) => (
+                            <div key={i} className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group border border-slate-100">
+                                <div className="aspect-[16/10] relative overflow-hidden">
+                                    <img src={post.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-accent shadow-sm">{post.category}</div>
+                                </div>
+                                <div className="p-10">
+                                    <div className="flex items-center gap-3 text-primary/40 text-[11px] mb-6 font-bold uppercase tracking-wider">
+                                        <Calendar className="w-3.5 h-3.5" /> {post.date}
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-primary mb-6 font-heading leading-tight group-hover:text-accent transition-colors">{post.title}</h3>
+                                    <p className="text-primary/60 text-[15px] leading-relaxed line-clamp-3 mb-10">{post.summary}</p>
+                                    <Link to={`/blog/${post.slug}`} className="inline-flex items-center gap-3 bg-slate-50 text-primary px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-accent hover:text-white transition-all shadow-sm">
+                                        Read Analysis <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-24 bg-white rounded-[3rem] border border-slate-100 max-w-2xl mx-auto shadow-sm">
+                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
+                            <FileText className="w-10 h-10 text-slate-200" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-primary font-heading">Archiving Knowledge</h3>
+                        <p className="text-primary/40 mt-3 font-medium">New engineering case studies are being drafted. Check back soon.</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+const BlogPostPage = () => {
+    const { slug } = useParams()
+    const [post, setPost] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchPost = async () => {
+            try {
+                const res = await fetch(APPS_SCRIPT_URL)
+                const data = await res.json()
+                if (data.posts) {
+                    const found = data.posts.find(p => p.slug === slug)
+                    setPost(found)
+                }
+            } catch (e) { console.error('Post fetch failed', e) }
+            setLoading(false)
+        }
+        fetchPost()
+        window.scrollTo(0, 0)
+    }, [slug])
+
+    if (loading) return (
+        <div className="min-h-screen flex items-center justify-center bg-white">
+            <div className="w-12 h-12 border-4 border-slate-100 border-t-accent rounded-full animate-spin"></div>
+        </div>
+    )
+
+    if (!post) return (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-4">
+            <div className="bg-white p-12 rounded-[3rem] shadow-sm text-center max-w-md border border-slate-100">
+                <Search className="w-16 h-16 text-slate-100 mx-auto mb-8" />
+                <h2 className="text-2xl font-bold text-primary font-heading">Article Not Found</h2>
+                <p className="text-primary/50 mt-4 mb-8">The engineering insight you're looking for might have been moved or archived.</p>
+                <Link to="/blog" className="inline-flex items-center gap-3 bg-accent text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-accent-dark transition-all shadow-xl shadow-accent/20">
+                    Back to Blog <ArrowRight className="w-4 h-4" />
+                </Link>
+            </div>
+        </div>
+    )
+
+    const postTitle = post.metaTitle || post.title
+    const postDesc = post.metaDescription || post.summary
+    const postImage = post.image || DEFAULT_OG_IMAGE
+    const postCanonical = `${BASE_URL}/blog/${slug}`
+
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": postTitle,
+        "description": postDesc,
+        "image": postImage,
+        "datePublished": post.date,
+        "author": { "@type": "Organization", "name": "RG Tech Engineering Works", "url": BASE_URL },
+        "publisher": {
+            "@type": "Organization",
+            "name": "RG Tech Engineering Works",
+            "logo": { "@type": "ImageObject", "url": `${BASE_URL}/RG-Tech-Logo.png` }
+        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": postCanonical }
+    }
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": `${BASE_URL}/` },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${BASE_URL}/blog` },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": postCanonical }
+        ]
+    }
+
+    return (
+        <div className="bg-white min-h-screen pt-32 pb-32">
+            <Helmet>
+                <title>{postTitle} | RG Tech Blog</title>
+                <meta name="description" content={postDesc} />
+                <link rel="canonical" href={postCanonical} />
+                <meta property="og:title" content={`${postTitle} | RG Tech Blog`} />
+                <meta property="og:description" content={postDesc} />
+                <meta property="og:image" content={postImage} />
+                <meta property="og:url" content={postCanonical} />
+                <meta property="og:type" content="article" />
+                <meta property="og:site_name" content="RG Tech Engineering Works" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={`${postTitle} | RG Tech Blog`} />
+                <meta name="twitter:description" content={postDesc} />
+                <meta name="twitter:image" content={postImage} />
+                <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+                <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+            </Helmet>
+
+            <article className="max-w-4xl mx-auto px-4">
+                <div className="mb-12">
+                    <div className="flex items-center gap-4 mb-6">
+                        <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">{post.category}</span>
+                        <div className="flex items-center gap-2 text-primary/30 text-[11px] font-bold uppercase tracking-wider">
+                            <Calendar className="w-3.5 h-3.5" /> {post.date}
+                        </div>
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-black text-primary font-heading leading-tight mb-8 tracking-tight">{post.title}</h1>
+                    <div className="aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 border border-slate-100">
+                        <img src={post.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'} alt={post.title} className="w-full h-full object-cover" />
+                    </div>
+                </div>
+
+                <div className="prose prose-slate prose-lg max-w-none text-primary/80 leading-[1.8] font-medium 
+                    prose-headings:font-heading prose-headings:text-primary prose-headings:font-black prose-headings:tracking-tight
+                    prose-strong:text-primary prose-strong:font-bold
+                    prose-img:rounded-[2rem] prose-img:shadow-xl
+                    prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+                "
+                    dangerouslySetInnerHTML={{ __html: post.content }} />
+
+                <div className="mt-20 pt-16 border-t border-slate-100">
+                    <div className="bg-slate-50 p-12 rounded-[3rem] flex flex-col md:flex-row items-center justify-between gap-10 border border-slate-100/50">
+                        <div className="max-w-md">
+                            <h4 className="text-2xl font-black text-primary font-heading mb-3">Professional Engineering Consultation</h4>
+                            <p className="text-primary/60 text-sm font-medium">Need precision laser cutting for your next project? Get a tech-verified quote today.</p>
+                        </div>
+                        <a href="https://wa.me/916380736439" className="whitespace-nowrap bg-primary text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-accent transition-all shadow-xl shadow-primary/20">
+                            Start Project Hub
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    )
+}
+
+// --- Admin Component ---
+
+const AdminPage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [password, setPassword] = useState('')
+    const [tab, setTab] = useState('gallery') // 'gallery' | 'blog'
+    const [status, setStatus] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    // Form States
+    const [blogData, setBlogData] = useState({
+        title: '', category: 'Industry News', summary: '', content: '', image: '', slug: '',
+        metaTitle: '', metaDescription: '', date: new Date().toLocaleDateString('en-GB')
+    })
+    const [galleryData, setGalleryData] = useState({ image: '', title: '', material: '', category: 'Laser Cutting Services' })
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        if (isLoggedIn) fetchAdminData()
+    }, [isLoggedIn])
+
+    const fetchAdminData = async () => {
+        try {
+            const res = await fetch(APPS_SCRIPT_URL)
+            const data = await res.json()
+            if (data.posts) setPosts(data.posts)
+        } catch (e) { console.error('Admin fetch failed', e) }
+    }
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        if (password === ADMIN_PASSWORD) setIsLoggedIn(true)
+        else alert('Invalid Authorization')
+    }
+
+    const handleBlogSubmit = async (e) => {
+        e.preventDefault()
+        setStatus('publishing')
+        try {
+            await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Apps Script requires no-cors for simple redirects
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'blog', password: ADMIN_PASSWORD, ...blogData })
+            })
+            setStatus('success')
+            setBlogData({ title: '', category: 'Industry News', summary: '', content: '', image: '', slug: '', metaTitle: '', metaDescription: '', date: new Date().toLocaleDateString('en-GB') })
+            setTimeout(() => setStatus(''), 3000)
+            fetchAdminData()
+        } catch (e) { setStatus('error') }
+    }
+
+    const handleGallerySubmit = async (e) => {
+        e.preventDefault()
+        setStatus('publishing')
+        try {
+            await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'gallery', password: ADMIN_PASSWORD, ...galleryData })
+            })
+            setStatus('success')
+            setGalleryData({ image: '', title: '', material: '', category: 'Laser Cutting Services' })
+            setTimeout(() => setStatus(''), 3000)
+        } catch (e) { setStatus('error') }
+    }
+
+    const handleDeleteBlog = async (postSlug) => {
+        if (!confirm('Permanent deletion. Proceed?')) return
+        setStatus('deleting')
+        try {
+            await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'delete_blog', password: ADMIN_PASSWORD, slug: postSlug })
+            })
+            setStatus('success')
+            setTimeout(() => setStatus(''), 3000)
+            fetchAdminData()
+        } catch (e) { setStatus('error') }
+    }
+
+    if (!isLoggedIn) return (
+        <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+            <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3.5rem] w-full max-w-md border border-white/10 shadow-2xl">
+                <div className="text-center mb-10">
+                    <div className="w-20 h-20 bg-accent rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-accent/20">
+                        <Shield className="w-10 h-10 text-white" />
+                    </div>
+                    <h2 className="text-3xl font-black text-white font-heading tracking-tight">RG TECH <span className="text-accent">OS</span></h2>
+                    <p className="text-white/40 text-[11px] font-bold uppercase tracking-[0.3em] mt-2">Authorization Required</p>
+                </div>
+                <form onSubmit={handleLogin} className="space-y-6">
+                    <input
+                        type="password"
+                        placeholder="Security Token"
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-white outline-none focus:ring-2 focus:ring-accent/50 transition-all font-mono"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button type="submit" className="w-full bg-white text-slate-900 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-accent hover:text-white transition-all shadow-xl">
+                        Unlock System Console
+                    </button>
+                </form>
+            </div>
+        </div>
+    )
+
+    return (
+        <div className="min-h-screen bg-slate-50 flex">
+            {/* Sidebar */}
+            <aside className="w-72 bg-primary text-white p-8 flex flex-col fixed h-full shadow-2xl z-20">
+                <div className="flex items-center gap-3 mb-16">
+                    <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center">
+                        <Settings className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                        <h2 className="font-black text-sm tracking-widest uppercase">Console</h2>
+                        <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest leading-none">Management</p>
+                    </div>
+                </div>
+
+                <nav className="space-y-3 flex-grow">
+                    <button
+                        onClick={() => setTab('gallery')}
+                        className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${tab === 'gallery' ? 'bg-accent text-white shadow-xl shadow-accent/20' : 'text-white/40 hover:bg-white/5 hove:text-white'}`}
+                    >
+                        <Layers className="w-4 h-4" /> Gallery Hub
+                    </button>
+                    <button
+                        onClick={() => setTab('blog')}
+                        className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${tab === 'blog' ? 'bg-accent text-white shadow-xl shadow-accent/20' : 'text-white/40 hover:bg-white/5 hover:text-white'}`}
+                    >
+                        <FileEdit className="w-4 h-4" /> Content CMS
+                    </button>
+                </nav>
+
+                <div className="pt-8 border-t border-white/5 mt-auto">
+                    <button onClick={() => setIsLoggedIn(false)} className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest text-red-400 hover:bg-red-400/10 transition-all">
+                        <X className="w-4 h-4" /> System Lock
+                    </button>
+                </div>
+            </aside>
+
+            {/* Main Content */}
+            <main className="flex-grow ml-72 p-12">
+                <header className="flex justify-between items-center mb-16 px-4">
+                    <div>
+                        <h1 className="text-4xl font-black text-primary font-heading tracking-tight">
+                            {tab === 'gallery' ? 'Project Showroom' : 'Technical Insights'}
+                        </h1>
+                        <p className="text-primary/40 font-bold uppercase tracking-widest text-[10px] mt-2">Updating live site content...</p>
+                    </div>
+                    {status && (
+                        <div className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse ${status === 'publishing' || status === 'deleting' ? 'bg-amber-100 text-amber-600' : status === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                            {status === 'publishing' ? 'Transmitting Data...' : status === 'deleting' ? 'Purging Entry...' : status === 'success' ? 'Success: Cache Purged' : 'Critical Failure'}
+                        </div>
+                    )}
+                </header>
+
+                {tab === 'gallery' ? (
+                    <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm max-w-4xl">
+                        <form onSubmit={handleGallerySubmit} className="space-y-8">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Item Identification</label>
+                                    <input type="text" placeholder="Entry Title (e.g. Spiral Staircase)" className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-accent/20" value={galleryData.title} onChange={e => setGalleryData({ ...galleryData, title: e.target.value })} required />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Material Grade</label>
+                                    <input type="text" placeholder="Grade (e.g. SS 316, 20mm MS)" className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-accent/20" value={galleryData.material} onChange={e => setGalleryData({ ...galleryData, material: e.target.value })} required />
+                                </div>
+                            </div>
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Category Routing</label>
+                                    <select className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-accent/20" value={galleryData.category} onChange={e => setGalleryData({ ...galleryData, category: e.target.value })}>
+                                        <option>Laser Cutting Services</option>
+                                        <option>Sheet Metal Laser Cutting</option>
+                                        <option>Fabrication Services</option>
+                                        <option>Steel Gates</option>
+                                        <option>Metal Safety Doors</option>
+                                        <option>Decorative Metal Panels</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Object URL</label>
+                                    <input type="text" placeholder="Image URL (Direct link)" className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-accent/20" value={galleryData.image} onChange={e => setGalleryData({ ...galleryData, image: e.target.value })} required />
+                                </div>
+                            </div>
+                            <button type="submit" className="bg-primary text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-accent transition-all shadow-xl shadow-primary/10">Publish to Showroom</button>
+                        </form>
+                    </div>
+                ) : (
+                    <div className="grid lg:grid-cols-5 gap-12">
+                        <div className="lg:col-span-3">
+                            <div className="bg-white p-12 rounded-[3.5rem] border border-slate-100 shadow-sm">
+                                <form onSubmit={handleBlogSubmit} className="space-y-8">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Header Title</label>
+                                        <input type="text" placeholder="Article Headline" className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:ring-2 focus:ring-accent/20" value={blogData.title} onChange={e => setBlogData({ ...blogData, title: e.target.value })} required />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-8">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Segment</label>
+                                            <select className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-bold outline-none" value={blogData.category} onChange={e => setBlogData({ ...blogData, category: e.target.value })}>
+                                                <option>Industry News</option>
+                                                <option>Technical Guides</option>
+                                                <option>Material Science</option>
+                                                <option>Case Studies</option>
+                                            </select>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">System Slug</label>
+                                            <input type="text" placeholder="url-friendly-slug" className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-mono outline-none" value={blogData.slug} onChange={e => setBlogData({ ...blogData, slug: e.target.value })} required />
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Abstract Summary</label>
+                                        <textarea rows={3} placeholder="Brief summary for card preview..." className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-6 py-4 text-sm font-medium outline-none" value={blogData.summary} onChange={e => setBlogData({ ...blogData, summary: e.target.value })} required />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Full Manuscript (HTML)</label>
+                                        <textarea rows={10} placeholder="Full article body in HTML..." className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-6 py-4 text-sm font-mono outline-none" value={blogData.content} onChange={e => setBlogData({ ...blogData, content: e.target.value })} required />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-primary/40 uppercase tracking-widest ml-4">Cover Asset URL</label>
+                                        <input type="text" placeholder="High-res image URL" className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm font-medium outline-none" value={blogData.image} onChange={e => setBlogData({ ...blogData, image: e.target.value })} required />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-8 bg-slate-50/50 p-8 rounded-3xl border border-dashed border-slate-200">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black text-accent uppercase tracking-widest ml-2">SEO Title</label>
+                                            <input type="text" className="w-full bg-white border border-slate-100 rounded-xl px-4 py-3 text-xs" value={blogData.metaTitle} onChange={e => setBlogData({ ...blogData, metaTitle: e.target.value })} />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black text-accent uppercase tracking-widest ml-2">SEO Desc</label>
+                                            <input type="text" className="w-full bg-white border border-slate-100 rounded-xl px-4 py-3 text-xs" value={blogData.metaDescription} onChange={e => setBlogData({ ...blogData, metaDescription: e.target.value })} />
+                                        </div>
+                                    </div>
+                                    <button type="submit" className="bg-primary text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-accent transition-all shadow-xl">Deploy Manuscript</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div className="lg:col-span-2 space-y-8">
+                            <h4 className="text-xl font-black text-primary font-heading px-4">Live Articles</h4>
+                            <div className="space-y-4">
+                                {posts.length > 0 ? posts.map((p, i) => (
+                                    <div key={i} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between group hover:border-accent/10 transition-all">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-inner">
+                                                <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-primary text-sm line-clamp-1">{p.title}</p>
+                                                <p className="text-[10px] text-primary/40 font-bold uppercase tracking-widest mt-1">{p.category}</p>
+                                            </div>
+                                        </div>
+                                        <button onClick={() => handleDeleteBlog(p.slug)} className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-300 hover:bg-red-50 hover:text-red-500 transition-all opacity-0 group-hover:opacity-100">
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                )) : (
+                                    <div className="bg-slate-100/50 p-12 rounded-[2rem] text-center border-2 border-dashed border-slate-200">
+                                        <Globe className="w-10 h-10 text-slate-200 mx-auto mb-4" />
+                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">No articles found</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </main>
+        </div>
+    )
+}
+
 const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, setMobileMenuOpen, servicesDropdown, setServicesDropdown, pillarServices, setCatalogueModalOpen }) => {
     return (
         <>
@@ -282,6 +777,7 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen, toggleServicesDropdown, setM
 
                             <a href="/#industries" className="text-primary/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">Industries</a>
                             <Link to="/gallery" className="text-primary hover:text-accent transition-all font-bold text-[14px] hover:translate-y-[-1px] border-b-2 border-accent/0 hover:border-accent pb-1">Gallery</Link>
+                            <Link to="/blog" className="text-primary hover:text-accent transition-all font-bold text-[14px] hover:translate-y-[-1px] border-b-2 border-accent/0 hover:border-accent pb-1">Blog</Link>
                             <a href="/#about" className="text-primary/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">About</a>
                             <a href="/#contact" className="text-primary/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">Contact</a>
                         </nav>
@@ -379,6 +875,7 @@ const Footer = ({ pillarServices }) => {
                             <li><a href="/#about" className="text-white/60 hover:text-white transition-colors text-[14px] font-medium">About Us</a></li>
                             <li><a href="/#industries" className="text-white/60 hover:text-white transition-colors text-[14px] font-medium">Industries</a></li>
                             <li><Link to="/gallery" className="text-white/60 hover:text-white transition-colors text-[14px] font-medium">Project Gallery</Link></li>
+                            <li><Link to="/blog" className="text-white/60 hover:text-white transition-colors text-[14px] font-medium">Technical Blog</Link></li>
                             <li><a href="/#contact" className="text-white/60 hover:text-white transition-colors text-[14px] font-medium">Contact</a></li>
                             <li><a href="https://wa.me/916380736439" className="text-white/60 hover:text-white transition-colors text-[14px] font-medium">WhatsApp Support</a></li>
                         </ul>
@@ -586,13 +1083,47 @@ const ServicePage = ({ services }) => {
         }))
     }
 
+    const serviceCanonical = `${BASE_URL}${location.pathname}`
+    const serviceOgImage = `${BASE_URL}${displayHeroImage.replace(/ /g, '%20')}`
+
+    const breadcrumbItems = [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": `${BASE_URL}/` },
+        { "@type": "ListItem", "position": 2, "name": content.name, "item": `${BASE_URL}${content.slug}` }
+    ]
+    if (cityName) {
+        breadcrumbItems.push({
+            "@type": "ListItem",
+            "position": 3,
+            "name": `${content.name} in ${cityName}`,
+            "item": serviceCanonical
+        })
+    }
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbItems
+    }
+
     return (
         <div className="bg-white selection:bg-accent/20">
             <Helmet>
                 <title>{displayMetaTitle}</title>
                 <meta name="description" content={displayMetaDesc} />
+                <link rel="canonical" href={serviceCanonical} />
+                <meta property="og:title" content={displayMetaTitle} />
+                <meta property="og:description" content={displayMetaDesc} />
+                <meta property="og:image" content={serviceOgImage} />
+                <meta property="og:url" content={serviceCanonical} />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="RG Tech Engineering Works" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={displayMetaTitle} />
+                <meta name="twitter:description" content={displayMetaDesc} />
+                <meta name="twitter:image" content={serviceOgImage} />
                 <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
                 <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
+                <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
             </Helmet>
 
             {/* Breadcrumb - Sleeker */}
@@ -2151,6 +2682,17 @@ function App() {
                 <Helmet>
                     <title>Metal Design & Laser Cutting Portfolio | RG Tech Engineering</title>
                     <meta name="description" content="Explore our library of laser cutting and metal fabrication projects in Chennai. Designs include industrial parts, CNC jali patterns, steel gates, and safety doors." />
+                    <link rel="canonical" href={`${BASE_URL}/gallery`} />
+                    <meta property="og:title" content="Metal Design & Laser Cutting Portfolio | RG Tech Engineering" />
+                    <meta property="og:description" content="Explore our library of laser cutting and metal fabrication projects in Chennai. Designs include industrial parts, CNC jali patterns, steel gates, and safety doors." />
+                    <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+                    <meta property="og:url" content={`${BASE_URL}/gallery`} />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:site_name" content="RG Tech Engineering Works" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content="Metal Design & Laser Cutting Portfolio | RG Tech Engineering" />
+                    <meta name="twitter:description" content="Explore our library of laser cutting and metal fabrication projects in Chennai. Designs include industrial parts, CNC jali patterns, steel gates, and safety doors." />
+                    <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
                 </Helmet>
 
                 {/* Gallery Hero */}
@@ -2297,11 +2839,64 @@ function App() {
         )
     }
 
-    const HomePage = () => (
+    const HomePage = () => {
+        const homeTitle = 'RG Tech Engineering | Best CNC Laser Cutting & Metal Fabrication Chennai'
+        const homeDesc = 'RG Tech Engineering Works: Leading CNC Fiber Laser Cutting Services in Chennai. Precision MS, SS, Aluminum, Copper & Brass cutting up to 45mm. Fast 24/7 support.'
+
+        const orgSchema = {
+            "@context": "https://schema.org",
+            "@type": ["Organization", "LocalBusiness"],
+            "name": "RG Tech Engineering Works",
+            "url": BASE_URL,
+            "logo": `${BASE_URL}/RG-Tech-Logo.png`,
+            "image": DEFAULT_OG_IMAGE,
+            "description": homeDesc,
+            "telephone": "+916380736439",
+            "email": "admin@rgtechengineeringworks.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Ayanambakkam",
+                "addressLocality": "Chennai",
+                "addressRegion": "Tamil Nadu",
+                "postalCode": "600095",
+                "addressCountry": "IN"
+            },
+            "openingHoursSpecification": [{
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+                "opens": "09:00",
+                "closes": "19:00"
+            }],
+            "priceRange": "$$",
+            "currenciesAccepted": "INR",
+            "paymentAccepted": "Cash, Bank Transfer, UPI"
+        }
+
+        const websiteSchema = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "RG Tech Engineering Works",
+            "url": BASE_URL
+        }
+
+        return (
         <div className="bg-white">
             <Helmet>
-                <title>RG Tech Engineering | Best CNC Laser Cutting & Metal Fabrication Chennai</title>
-                <meta name="description" content="RG Tech Engineering Works: Leading CNC Fiber Laser Cutting Services in Chennai. Precision MS, SS, Aluminum, Copper & Brass cutting up to 45mm. Fast 24/7 support." />
+                <title>{homeTitle}</title>
+                <meta name="description" content={homeDesc} />
+                <link rel="canonical" href={`${BASE_URL}/`} />
+                <meta property="og:title" content={homeTitle} />
+                <meta property="og:description" content={homeDesc} />
+                <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+                <meta property="og:url" content={`${BASE_URL}/`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="RG Tech Engineering Works" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={homeTitle} />
+                <meta name="twitter:description" content={homeDesc} />
+                <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+                <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+                <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
             </Helmet>
 
             {/* Hero - Reverted to Dark Navy Industrial */}
@@ -2569,7 +3164,8 @@ function App() {
                 </div>
             </section>
         </div>
-    )
+        )
+    }
 
     return (
         <div className="min-h-screen bg-white font-sans selection:bg-[#7FB3D5]/30">
@@ -2588,6 +3184,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/admin" element={<AdminPage />} />
                 {/* Optimized routes for all services and city pages */}
                 <Route path="/chennai/:combinedSlug" element={<ServicePage services={pillarServices} />} />
                 <Route path="/chennai/:serviceSlug/:city" element={<ServicePage services={pillarServices} />} />
