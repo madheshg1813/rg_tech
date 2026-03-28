@@ -2845,10 +2845,15 @@ function App() {
 
         const orgSchema = {
             "@context": "https://schema.org",
-            "@type": ["Organization", "LocalBusiness"],
+            "@type": "Organization",
             "name": "RG Tech Engineering Works",
             "url": BASE_URL,
-            "logo": `${BASE_URL}/RG-Tech-Logo.png`,
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${BASE_URL}/RG-Tech-Logo.png`,
+                "width": 200,
+                "height": 200
+            },
             "image": DEFAULT_OG_IMAGE,
             "description": homeDesc,
             "telephone": "+916380736439",
@@ -2861,6 +2866,45 @@ function App() {
                 "postalCode": "600095",
                 "addressCountry": "IN"
             },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+916380736439",
+                "contactType": "sales",
+                "availableLanguage": ["English", "Tamil"],
+                "areaServed": "IN"
+            }
+        }
+
+        const localBusinessSchema = {
+            "@context": "https://schema.org",
+            "@type": ["LocalBusiness", "ProfessionalService"],
+            "name": "RG Tech Engineering Works",
+            "alternateName": "RG Tech Engineering",
+            "description": "High-precision CNC Fiber Laser Cutting and Metal Fabrication services in Chennai. Cutting MS, SS, Aluminum, Copper and Brass up to 45mm with 0.01mm accuracy.",
+            "url": BASE_URL,
+            "telephone": "+916380736439",
+            "email": "admin@rgtechengineeringworks.com",
+            "image": [
+                DEFAULT_OG_IMAGE,
+                `${BASE_URL}/RG-Tech-Logo.png`
+            ],
+            "logo": `${BASE_URL}/RG-Tech-Logo.png`,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Ayanambakkam",
+                "addressLocality": "Chennai",
+                "addressRegion": "Tamil Nadu",
+                "postalCode": "600095",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 13.0740,
+                "longitude": 80.1660
+            },
+            "openingHours": [
+                "Mo-Sa 09:00-19:00"
+            ],
             "openingHoursSpecification": [{
                 "@type": "OpeningHoursSpecification",
                 "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -2869,7 +2913,28 @@ function App() {
             }],
             "priceRange": "$$",
             "currenciesAccepted": "INR",
-            "paymentAccepted": "Cash, Bank Transfer, UPI"
+            "paymentAccepted": "Cash, Bank Transfer, UPI",
+            "areaServed": [
+                { "@type": "City", "name": "Chennai" },
+                { "@type": "State", "name": "Tamil Nadu" }
+            ],
+            "hasMap": "https://maps.google.com/?q=Ayanambakkam+Chennai+Tamil+Nadu+600095",
+            "knowsAbout": [
+                "CNC Fiber Laser Cutting",
+                "Sheet Metal Laser Cutting",
+                "Metal Fabrication",
+                "Steel Gates",
+                "Metal Safety Doors",
+                "Decorative Metal Panels"
+            ],
+            "makesOffer": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CNC Fiber Laser Cutting Services", "url": `${BASE_URL}/chennai/laser-cutting-services` } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sheet Metal Laser Cutting", "url": `${BASE_URL}/chennai/sheet-metal-laser-cutting-services` } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Metal Fabrication Services", "url": `${BASE_URL}/chennai/fabrication-services` } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Steel Gates", "url": `${BASE_URL}/chennai/steel-gates` } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Metal Safety Doors", "url": `${BASE_URL}/chennai/metal-safety-doors` } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Decorative Metal Panels", "url": `${BASE_URL}/chennai/decorative-metal-panels` } }
+            ]
         }
 
         const websiteSchema = {
@@ -2896,6 +2961,7 @@ function App() {
                 <meta name="twitter:description" content={homeDesc} />
                 <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
                 <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+                <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
                 <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
             </Helmet>
 
