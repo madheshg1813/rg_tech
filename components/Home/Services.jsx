@@ -15,7 +15,7 @@ const Services = () => {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
                         <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Our Capabilities</p>
-                        <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading">Industrial Services</h3>
+                        <h3 className="text-3xl md:text-4xl font-black text-[#1C3D5A] font-heading italic tracking-tight">Industrial Services</h3>
                     </div>
                     <p className="text-slate-500 font-medium max-w-md">Precision engineering services delivered from our state-of-the-art facility in Chennai.</p>
                 </div>

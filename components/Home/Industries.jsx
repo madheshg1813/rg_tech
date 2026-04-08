@@ -13,7 +13,7 @@ const Industries = () => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-16">
                     <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Sectors Served</p>
-                    <h3 className="text-3xl md:text-5xl font-bold text-[#1C3D5A] font-heading">Industries We Empower</h3>
+                    <h3 className="text-3xl md:text-5xl font-black text-[#1C3D5A] font-heading italic tracking-tight">Industries We Empower</h3>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     {industries.map((ind, i) => {

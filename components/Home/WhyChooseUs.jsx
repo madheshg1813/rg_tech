@@ -15,7 +15,7 @@ const WhyChooseUs = () => {
                 <div className="grid md:grid-cols-3 gap-12">
                     <div className="md:col-span-1">
                         <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-4">Why Choose Us</p>
-                        <h3 className="text-3xl md:text-4xl font-bold font-heading leading-tight italic">Expertise That <br /><span className="text-[#E85A4F]">Drives Precision</span></h3>
+                        <h3 className="text-3xl md:text-4xl font-black font-heading leading-tight italic tracking-tight">Expertise That <br /><span className="text-[#E85A4F]">Drives Precision</span></h3>
                     </div>
                     <div className="md:col-span-2 grid md:grid-cols-2 gap-8">
                         {differentiators.map((d, i) => {
