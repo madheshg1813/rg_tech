@@ -7,7 +7,7 @@ const Hero = () => {
             <div className="max-w-7xl mx-auto px-4 relative z-10 w-full">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 className="text-4xl md:text-6xl font-black font-heading italic tracking-tight leading-tight mb-6 text-balance">
+                        <h2 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-6 text-balance">
                             Your Trusted Partner for <br />
                             <span className="text-[#E85A4F]">CNC Laser Cutting & Fabrication</span>
                         </h2>

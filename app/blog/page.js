@@ -36,7 +36,7 @@ export default async function BlogPage() {
                 <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
                     <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4 text-balance">Technical Deep Dives</p>
-                    <h1 className="text-4xl md:text-6xl font-black font-heading mb-6 tracking-tight italic">Engineering <span className="text-[#E85A4F]">Insights</span></h1>
+                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6">Engineering <span className="text-[#E85A4F]">Insights</span></h1>
                     <p className="text-white/60 max-w-2xl mx-auto text-lg font-medium leading-relaxed italic">
                         Expert perspectives on laser technology, industrial fabrication, and manufacturing optimization.
                     </p>
@@ -72,7 +72,7 @@ export default async function BlogPage() {
                                                 {post.readTime || '5 min read'}
                                             </div>
                                         </div>
-                                        <h3 className="text-2xl font-black text-[#1C3D5A] leading-tight mb-6 group-hover:text-[#E85A4F] transition-colors font-heading tracking-tight italic">
+                                        <h3 className="text-2xl font-bold text-[#1C3D5A] leading-tight mb-6 group-hover:text-[#E85A4F] transition-colors font-heading">
                                             {post.title}
                                         </h3>
                                         <p className="text-slate-500 text-[15px] leading-relaxed mb-8 line-clamp-3 font-medium opacity-80">
@@ -92,7 +92,7 @@ export default async function BlogPage() {
                              <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                                 <FileText className="w-8 h-8 text-[#E85A4F] animate-pulse" />
                             </div>
-                            <h3 className="text-2xl font-black font-heading text-[#1C3D5A] italic mb-4">Awaiting New Engineering <span className="text-[#E85A4F]">Insights</span></h3>
+                            <h3 className="text-2xl font-bold font-heading text-[#1C3D5A] mb-4">Awaiting New Engineering <span className="text-[#E85A4F]">Insights</span></h3>
                             <p className="text-slate-500 font-medium max-w-sm mx-auto">
                                 Our technical experts are documenting new case studies. Check back soon for the latest manufacturing analysis.
                             </p>

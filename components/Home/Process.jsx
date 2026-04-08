@@ -14,7 +14,7 @@ const Process = () => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-20">
                     <p className="text-[#E85A4F] font-bold text-sm uppercase tracking-widest mb-2">Workflow</p>
-                    <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading tracking-tight italic">Execution <span className="text-[#E85A4F]">Workflow</span></h3>
+                    <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading">Execution <span className="text-[#E85A4F]">Workflow</span></h3>
                     <p className="text-slate-500 mt-4 font-medium">Precision and discipline from blueprint to finished part.</p>
                 </div>
                 <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-10">

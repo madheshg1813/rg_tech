@@ -50,7 +50,7 @@ const GalleryClient = () => {
                 <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20 pointer-events-none"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
                     <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4">Visual Portfolio</p>
-                    <h2 className="text-4xl md:text-6xl font-black font-heading mb-6 italic tracking-tight">Design <span className="text-[#E85A4F]">Library</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-bold font-heading mb-6">Design <span className="text-[#E85A4F]">Library</span></h2>
                     <p className="text-white/60 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
                         A comprehensive collection of our precision laser cutting, fabrication job work, and architectural metal designs.
                     </p>
@@ -98,7 +98,7 @@ const GalleryClient = () => {
                             <div className="w-24 h-24 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-slate-100">
                                 <Plus className="w-10 h-10 text-[#E85A4F] animate-pulse" />
                             </div>
-                            <h3 className="text-3xl font-black font-heading text-[#1C3D5A] mb-6 italic">Incoming <span className="text-[#E85A4F]">Portfolio</span></h3>
+                            <h3 className="text-3xl font-bold font-heading text-[#1C3D5A] mb-6">Incoming <span className="text-[#E85A4F]">Portfolio</span></h3>
                             <p className="text-lg text-slate-500 font-medium mb-10 leading-relaxed">
                                 Our latest project samples and high-precision fabrication designs are currently being updated in our digital library. Check back soon for our newest architectural and industrial works.
                             </p>
@@ -142,7 +142,7 @@ const GalleryClient = () => {
                                         <div className="inline-block px-4 py-1.5 bg-[#E85A4F]/20 border border-[#E85A4F]/20 rounded-full">
                                             <p className="text-[#E85A4F] font-black text-[10px] uppercase tracking-widest">{displayed[lightboxIndex].filter}</p>
                                         </div>
-                                        <h3 className="text-3xl md:text-5xl font-black font-heading leading-tight tracking-tight italic">{displayed[lightboxIndex].title}</h3>
+                                        <h3 className="text-3xl md:text-5xl font-bold font-heading leading-tight">{displayed[lightboxIndex].title}</h3>
                                     </div>
 
                                     <div className="p-8 bg-white/5 rounded-[2rem] border border-white/10 space-y-6 backdrop-blur-md">

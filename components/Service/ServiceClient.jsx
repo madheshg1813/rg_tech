@@ -46,7 +46,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                                 <span className="w-2 h-2 rounded-full bg-[#E85A4F] animate-pulse"></span>
                                 <span className="text-[11px] font-black text-[#E85A4F] uppercase tracking-[0.2em]">Certified Industrial Hub</span>
                             </div>
-                            <h1 className="text-4xl md:text-6xl font-black font-heading leading-tight mb-8 italic tracking-tight">
+                            <h1 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-8">
                                 {displayTitle.split(' in ')[0]} <br />
                                 <span className="text-[#E85A4F]">{displayTitle.includes(' in ') ? `in ${displayTitle.split(' in ')[1]}` : ''}</span>
                             </h1>
@@ -104,7 +104,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div className="order-2 lg:order-1">
-                            <h2 className="text-3xl md:text-5xl font-black text-[#1C3D5A] font-heading mb-8 italic tracking-tight leading-tight">
+                            <h2 className="text-3xl md:text-5xl font-bold text-[#1C3D5A] font-heading mb-8 leading-tight">
                                 Industrial Grade <br /><span className="text-[#E85A4F]">Precision & Excellence</span>
                             </h2>
                             <div className="prose prose-slate max-w-none mb-12">
@@ -146,7 +146,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
                                 <div>
                                     <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4">Technical Benchmarks</p>
-                                    <h3 className="text-3xl md:text-5xl font-black text-white font-heading italic tracking-tight">Machine <span className="text-[#E85A4F]">Capabilities</span></h3>
+                                    <h3 className="text-3xl md:text-5xl font-bold text-white font-heading">Machine <span className="text-[#E85A4F]">Capabilities</span></h3>
                                 </div>
                                 <p className="text-white/50 font-medium max-w-sm leading-relaxed">{localizeText(content.capabilityDesc, cityName, cityIndex)}</p>
                             </div>
@@ -171,7 +171,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-20">
                         <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4">Quality Assurance</p>
-                        <h3 className="text-3xl md:text-4xl font-black text-[#1C3D5A] font-heading tracking-tight italic">Execution <span className="text-[#E85A4F]">Workflow</span></h3>
+                        <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading">Execution <span className="text-[#E85A4F]">Workflow</span></h3>
                         <p className="text-slate-500 mt-4 font-medium italic opacity-80">Precision and discipline from blueprint to finished part.</p>
                     </div>
                     <div className={`grid md:grid-cols-2 lg:grid-cols-${(content.processSteps.length === 4 || content.processSteps.length === 8) ? '4' : '3'} gap-10`}>
@@ -193,7 +193,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                 <div className="max-w-3xl mx-auto px-4">
                     <div className="text-center mb-16">
                         <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4">Support & FAQ</p>
-                        <h3 className="text-3xl md:text-4xl font-black text-[#1C3D5A] font-heading italic tracking-tight">Service <span className="text-[#E85A4F]">Queries</span></h3>
+                        <h3 className="text-3xl md:text-4xl font-bold text-[#1C3D5A] font-heading">Service <span className="text-[#E85A4F]">Queries</span></h3>
                     </div>
                     <div className="space-y-4">
                         {displayFaqs.map((faq, i) => (
@@ -219,7 +219,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
             <section className="py-24 bg-[#1C3D5A] relative overflow-hidden">
                 <div className="absolute inset-0 bg-[#E85A4F]/10 skew-y-3 translate-y-32"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
-                    <h3 className="text-3xl md:text-5xl font-black text-white font-heading mb-10 italic tracking-tight">
+                    <h3 className="text-3xl md:text-5xl font-bold text-white font-heading mb-10">
                         Ready to Start Your <span className="text-[#E85A4F]">Industrial Project?</span>
                     </h3>
                     <p className="text-white/60 text-lg mb-12 max-w-2xl mx-auto font-medium">

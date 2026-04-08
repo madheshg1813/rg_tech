@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }) {
                         </div>
                     </div>
                     
-                    <h1 className="text-4xl md:text-6xl font-black font-heading leading-tight italic tracking-tight mb-10 text-balance animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <h1 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-10 text-balance animate-in fade-in slide-in-from-bottom-4 duration-700">
                         {post.title}
                     </h1>
 
@@ -154,7 +154,7 @@ export default async function BlogPostPage({ params }) {
                         {/* Newsletter/CTA */}
                         <div className="bg-[#1C3D5A] p-10 rounded-[2.5rem] text-white relative overflow-hidden shadow-2xl">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-[#E85A4F]/10 rounded-full blur-2xl"></div>
-                            <h4 className="text-2xl font-black font-heading italic tracking-tight mb-6">Technical Consultation</h4>
+                            <h4 className="text-2xl font-bold font-heading mb-6">Technical Consultation</h4>
                             <p className="text-white/60 mb-10 text-[15px] leading-relaxed font-medium">Need specific engineering analysis for your aerospace or industrial project?</p>
                             <a href="https://wa.me/916380736439?text=I read your blog and need a technical consultation." target="_blank" rel="noopener noreferrer" className="w-full py-5 bg-[#E85A4F] text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-black/20">
                                 <MessageCircle className="w-5 h-5" /> Consult Engineer
@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }) {
 
                         {/* Recent Analysis Sidebar */}
                         <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                            <h4 className="text-xl font-black text-[#1C3D5A] font-heading italic tracking-tight mb-8">Related Analysis</h4>
+                            <h4 className="text-xl font-bold text-[#1C3D5A] font-heading mb-8">Related Analysis</h4>
                             <div className="space-y-8">
                                 {posts.filter(p => p.slug !== slug).slice(0, 4).map((rp, i) => (
                                     <Link key={i} href={`/blog/${rp.slug}`} className="group block">
