@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calendar, Tag, ArrowRight, Clock } from 'lucide-react'
+import { Calendar, Tag, ArrowRight, Clock, FileText } from 'lucide-react'
 import { APPS_SCRIPT_URL, BASE_URL } from '@/lib/data'
 
 export const metadata = {
