@@ -168,9 +168,9 @@ export default async function BlogPostPage({ params }) {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </aside>
                 </div>
             </div>
-        </div>
+        </article>
     )
 }
