@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = ".next"
 
 # Force redirect: non-www → www
 [[redirects]]
@@ -8,9 +8,3 @@
   to = "https://www.rgtechengineeringworks.com/:splat"
   status = 301
   force = true
-
-# SPA fallback: all routes → index.html
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
