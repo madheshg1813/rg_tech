@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar, Tag, ChevronLeft, ArrowRight, Clock, Star, Share2, Printer, Mail, MessageCircle } from 'lucide-react'
 import { APPS_SCRIPT_URL, BASE_URL, DEFAULT_OG_IMAGE } from '@/lib/data'
 
 export async function generateMetadata({ params }) {
-    const slug = await params.slug
+    const { slug } = await params
     const posts = await getPosts()
     const post = posts.find(p => p.slug === slug)
 
@@ -38,7 +39,7 @@ async function getPosts() {
 }
 
 export default async function BlogPostPage({ params }) {
-    const slug = await params.slug
+    const { slug } = await params
     const posts = await getPosts()
     const post = posts.find(p => p.slug === slug)
 
@@ -63,6 +64,10 @@ export default async function BlogPostPage({ params }) {
             
             {/* Post Header */}
             <header className="bg-[#1C3D5A] text-white py-24 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                    <img src="/hero-laser.png" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-10 object-center" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#1C3D5A]/60 to-[#1C3D5A]"></div>
+                </div>
                 <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20"></div>
                 <div className="max-w-4xl mx-auto px-4 relative z-10">
                     <Link href="/blog" className="inline-flex items-center gap-3 text-[#E85A4F] font-black text-[11px] uppercase tracking-widest mb-10 group bg-white/5 px-6 py-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors">
@@ -107,9 +112,12 @@ export default async function BlogPostPage({ params }) {
                         <div className="bg-white rounded-[3rem] p-8 md:p-16 border border-slate-100 shadow-2xl relative">
                             {post.image && (
                                 <div className="mb-16 -mt-12 md:-mt-20 group relative overflow-hidden rounded-[2rem] shadow-premium ring-4 ring-white">
-                                    <img 
-                                        src={post.image} 
-                                        alt={post.title} 
+                                    <Image
+                                        src={post.image}
+                                        alt={post.title}
+                                        width={1200}
+                                        height={675}
+                                        unoptimized
                                         className="w-full h-auto object-cover transition-transform duration-[2s] group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>

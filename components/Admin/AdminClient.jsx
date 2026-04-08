@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { 
     LayoutDashboard, FileEdit, Trash2, Globe, Tag, 
@@ -195,8 +196,8 @@ const AdminClient = () => {
                                 {posts.map((post, i) => (
                                     <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 flex items-center justify-between group hover:shadow-xl transition-all">
                                         <div className="flex items-center gap-6">
-                                            <div className="w-12 h-12 rounded-xl bg-slate-50 overflow-hidden border border-slate-100">
-                                                <img src={post.image} className="w-full h-full object-cover" />
+                                            <div className="w-12 h-12 rounded-xl bg-slate-50 overflow-hidden border border-slate-100 relative">
+                                                <Image src={post.image} alt={post.title} fill unoptimized className="object-cover" />
                                             </div>
                                             <div>
                                                 <p className="font-black text-[#1C3D5A] text-sm group-hover:text-[#E85A4F] transition-colors italic">{post.title}</p>

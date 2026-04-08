@@ -26,11 +26,6 @@ yarn-error.log*
 !.vscode/extensions.json
 .history
 
-# TEMPORARY: Allow Fabrication & Laser Cutting
-public/gallery/Decorative Metal Panels/
-public/gallery/Metal Safety Doors/
-public/gallery/Sheet Metal Laser Cutting/
-public/gallery/Steel Gates/
 
 # Local Netlify folder
 .netlify

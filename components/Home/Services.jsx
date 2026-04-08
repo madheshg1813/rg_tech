@@ -1,6 +1,12 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { 
+    ArrowRight, Scissors, PanelTop, Wrench, Home, DoorOpen, Sparkles, Settings 
+} from 'lucide-react'
 import { pillarServices } from '@/lib/data'
+
+const IconMap = {
+    Scissors, PanelTop, Wrench, Home, DoorOpen, Sparkles, Settings
+}
 
 const Services = () => {
     return (
@@ -17,7 +23,10 @@ const Services = () => {
                     {pillarServices.map((s, i) => (
                         <Link key={i} href={s.slug} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
                             <div className="w-14 h-14 rounded-xl bg-[#E85A4F]/10 flex items-center justify-center mb-8 group-hover:bg-[#E85A4F] transition-colors">
-                                <s.mainIcon className="w-6 h-6 text-[#E85A4F] group-hover:text-white" />
+                                {(() => {
+                                    const Icon = IconMap[s.mainIcon] || Settings
+                                    return <Icon className="w-6 h-6 text-[#E85A4F] group-hover:text-white" />
+                                })()}
                             </div>
                             <h4 className="text-xl font-bold text-[#1C3D5A] mb-4 font-heading">{s.name}</h4>
                             <p className="text-[15px] text-[#1C3D5A]/60 leading-relaxed mb-8 flex-grow">

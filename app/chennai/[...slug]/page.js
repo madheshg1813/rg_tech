@@ -4,7 +4,7 @@ import { pillarServices } from '@/lib/data'
 import { getRotationIndex, localizeText } from '@/lib/utils'
 
 export async function generateMetadata({ params }) {
-    const slug = await params.slug
+    const { slug } = await params
     const { content, cityName } = resolveService(slug)
 
     if (!content) return {}
@@ -57,7 +57,7 @@ function resolveService(slugArray) {
 }
 
 export default async function Page({ params }) {
-    const slug = await params.slug
+    const { slug } = await params
     const { content, cityName } = resolveService(slug)
 
     if (!content) {

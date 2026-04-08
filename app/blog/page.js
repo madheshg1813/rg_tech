@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar, Tag, ArrowRight, Clock, FileText } from 'lucide-react'
 import { APPS_SCRIPT_URL, BASE_URL } from '@/lib/data'
 
@@ -28,6 +29,10 @@ export default async function BlogPage() {
         <div className="bg-white min-h-screen">
             {/* Blog Hero */}
             <section className="bg-[#1C3D5A] text-white py-24 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                    <img src="/hero-laser.png" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-10 object-center" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#1C3D5A]/60 to-[#1C3D5A]"></div>
+                </div>
                 <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
                     <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4 text-balance">Technical Deep Dives</p>
@@ -49,7 +54,7 @@ export default async function BlogPage() {
                                     className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500"
                                 >
                                     <div className="aspect-[16/10] overflow-hidden relative">
-                                        <img src={post.image || '/gallery/Sheet Metal Laser Cutting/sm_12.jpg'} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <Image src={post.image || '/gallery/Sheet%20Metal%20Laser%20Cutting/sm_12.jpg'} alt={post.title} fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-110" />
                                         <div className="absolute top-6 left-6 flex gap-2">
                                             <span className="px-4 py-1.5 bg-[#1C3D5A] text-[#E85A4F] text-[10px] font-black uppercase tracking-widest rounded-full border border-white/10 backdrop-blur-md">
                                                 {post.category || 'Tech Guide'}

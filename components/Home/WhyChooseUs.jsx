@@ -1,4 +1,11 @@
+import { 
+    CheckCircle, Wrench, FileText, Layers, Sparkles, Package, HelpCircle 
+} from 'lucide-react'
 import { differentiators } from '@/lib/data'
+
+const IconMap = {
+    CheckCircle, Wrench, FileText, Layers, Sparkles, Package, HelpCircle
+}
 
 const WhyChooseUs = () => {
     return (
@@ -11,17 +18,20 @@ const WhyChooseUs = () => {
                         <h3 className="text-3xl md:text-4xl font-bold font-heading leading-tight italic">Expertise That <br /><span className="text-[#E85A4F]">Drives Precision</span></h3>
                     </div>
                     <div className="md:col-span-2 grid md:grid-cols-2 gap-8">
-                        {differentiators.map((d, i) => (
-                            <div key={i} className="flex gap-6 group">
-                                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-[#E85A4F] transition-colors duration-300">
-                                    <d.icon className="w-6 h-6 text-[#E85A4F] group-hover:text-white" />
+                        {differentiators.map((d, i) => {
+                            const Icon = IconMap[d.icon] || HelpCircle
+                            return (
+                                <div key={i} className="flex gap-6 group">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-[#E85A4F] transition-colors duration-300">
+                                        <Icon className="w-6 h-6 text-[#E85A4F] group-hover:text-white" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-xl font-bold mb-3 font-heading">{d.title}</h4>
+                                        <p className="text-white/60 text-[15px] leading-relaxed italic">"{d.desc}"</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 className="text-xl font-bold mb-3 font-heading">{d.title}</h4>
-                                    <p className="text-white/60 text-[15px] leading-relaxed italic">"{d.desc}"</p>
-                                </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 </div>
             </div>

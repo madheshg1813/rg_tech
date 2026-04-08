@@ -3,12 +3,21 @@ import Link from 'next/link'
 import { 
     Phone, Mail, MapPin, Clock, ArrowRight, Shield, Target, Zap, 
     Wrench, CheckCircle, FileText, Package, Eye, Layers, Ruler, 
-    Sparkles, Plus, MessageCircle, Wind
+    Sparkles, Plus, MessageCircle, Wind, Scissors, PanelTop, Home, DoorOpen, Settings,
+    Factory, Cpu, Building2, Paintbrush, Truck, Send
 } from 'lucide-react'
 import { SERVICE_IMAGE_POOLS } from '@/lib/data'
 import { getRotationIndex, localizeText } from '@/lib/utils'
 
+const IconMap = {
+    Phone, Mail, MapPin, Clock, ArrowRight, Shield, Target, Zap, 
+    Wrench, CheckCircle, FileText, Package, Eye, Layers, Ruler, 
+    Sparkles, Plus, MessageCircle, Wind, Scissors, PanelTop, Home, DoorOpen, Settings,
+    Factory, Cpu, Building2, Paintbrush, Truck, Send
+}
+
 const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
+    const Icon = IconMap[content.mainIcon] || Settings;
     const serviceKey = content.slug.split('/').pop()
     const pool = SERVICE_IMAGE_POOLS[serviceKey] || SERVICE_IMAGE_POOLS['laser-cutting-services']
 
@@ -25,6 +34,10 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
         <div className="bg-white">
             {/* Service Hero */}
             <section className="bg-[#1C3D5A] text-white py-24 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                    <img src="/hero-laser.png" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-10 object-center" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#1C3D5A] via-[#1C3D5A]/80 to-[#1C3D5A]/40"></div>
+                </div>
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 -skew-x-12 translate-x-1/4 pointer-events-none"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -71,7 +84,10 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                         {content.trustStrip.map((item, i) => (
                             <div key={i} className="py-10 px-8 flex items-center gap-5 group hover:bg-slate-50 transition-colors">
                                 <div className="w-12 h-12 rounded-xl bg-[#E85A4F]/5 flex items-center justify-center text-[#E85A4F] group-hover:bg-[#E85A4F] group-hover:text-white transition-all">
-                                    <item.icon className="w-6 h-6" />
+                                    {(() => {
+                                        const TIcon = IconMap[item.icon] || Settings
+                                        return <TIcon className="w-6 h-6" />
+                                    })()}
                                 </div>
                                 <div>
                                     <p className="font-black text-[#1C3D5A] text-[13px] uppercase tracking-wider">{item.label}</p>
@@ -95,13 +111,16 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                                 <p className="text-lg text-slate-600 font-medium leading-relaxed italic" dangerouslySetInnerHTML={{ __html: displaySeoParagraph }} />
                             </div>
                             <div className="grid sm:grid-cols-2 gap-8">
-                                {content.whyCards.slice(0, 2).map((card, i) => (
-                                    <div key={i} className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
-                                        <card.icon className="w-8 h-8 text-[#E85A4F] mb-6" />
-                                        <h4 className="font-black text-[#1C3D5A] mb-3 text-lg">{card.title}</h4>
-                                        <p className="text-sm text-slate-500 font-medium leading-relaxed">{localizeText(card.desc, cityName, cityIndex)}</p>
-                                    </div>
-                                ))}
+                                {content.whyCards.slice(0, 2).map((card, i) => {
+                                    const WIcon = IconMap[card.icon] || Settings
+                                    return (
+                                        <div key={i} className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
+                                            <WIcon className="w-8 h-8 text-[#E85A4F] mb-6" />
+                                            <h4 className="font-black text-[#1C3D5A] mb-3 text-lg">{card.title}</h4>
+                                            <p className="text-sm text-slate-500 font-medium leading-relaxed">{localizeText(card.desc, cityName, cityIndex)}</p>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                         <div className="order-1 lg:order-2 relative">

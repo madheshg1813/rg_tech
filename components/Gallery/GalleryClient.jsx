@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle, X, ChevronLeft, ChevronRight, Plus, MessageCircle } from 'lucide-react'
@@ -42,6 +43,10 @@ const GalleryClient = () => {
         <div className="bg-white min-h-screen">
             {/* Gallery Hero */}
             <section className="bg-[#1C3D5A] text-white py-24 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                    <img src="/hero-laser.png" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-10 object-center" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#1C3D5A]/60 to-[#1C3D5A]"></div>
+                </div>
                 <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20 pointer-events-none"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
                     <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4">Visual Portfolio</p>
@@ -74,7 +79,7 @@ const GalleryClient = () => {
                                     onClick={() => openLightbox(i)}
                                     className="break-inside-avoid group relative rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-sm transition-all hover:shadow-2xl cursor-zoom-in hover:-translate-y-1"
                                 >
-                                    <img src={item.img} alt={item.title} className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110" />
+                                    <Image src={item.img} alt={item.title} width={600} height={400} className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#1C3D5A] via-[#1C3D5A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 p-8 flex flex-col justify-end">
                                         <p className="text-[#E85A4F] text-[10px] font-black uppercase tracking-[0.2em] mb-2">{item.filter}</p>
                                         <h4 className="text-white font-bold text-lg font-heading leading-tight mb-3">{item.title}</h4>
@@ -123,9 +128,11 @@ const GalleryClient = () => {
 
                             <div className="max-w-6xl w-full flex flex-col lg:flex-row gap-12 items-center px-4">
                                 <div className="flex-1 relative group bg-black/20 rounded-[2.5rem] p-4 border border-white/5 shadow-2xl">
-                                    <img
+                                    <Image
                                         src={displayed[lightboxIndex].img}
                                         alt={displayed[lightboxIndex].title}
+                                        width={1200}
+                                        height={900}
                                         className="w-full max-h-[65vh] object-contain rounded-[2rem]"
                                     />
                                 </div>

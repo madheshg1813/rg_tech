@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { 
-    Phone, Mail, MapPin, ChevronRight, MessageCircle, 
-    Facebook, Instagram, Linkedin, Twitter 
+import Image from 'next/image'
+import {
+    Phone, Mail, MapPin, ChevronRight, MessageCircle,
+    Facebook, Instagram, Linkedin, Twitter
 } from 'lucide-react'
 import { pillarServices } from '@/lib/data'
 

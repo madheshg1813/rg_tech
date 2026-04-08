@@ -55,7 +55,7 @@ const Hero = () => {
 
                     <div className="relative">
                         <div className="rounded-3xl overflow-hidden shadow-2xl relative border-4 border-white/10">
-                            <img src="/gallery/Sheet%20Metal%20Laser%20Cutting/sm_12.jpg" alt="CNC Laser Machine" className="w-full aspect-[4/3] object-cover" />
+                            <img src="/hero-laser.png" alt="CNC Laser Machine" className="w-full aspect-[4/3] object-cover" />
                             <div className="absolute bottom-6 left-6 bg-white p-6 rounded-2xl shadow-xl max-w-[220px] transition-transform hover:scale-105 duration-300">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Bed Sizes</p>
                                 <p className="text-lg font-black text-[#1C3D5A] leading-none mb-1">8000 x 2500mm</p>
