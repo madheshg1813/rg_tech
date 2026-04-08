@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import GalleryClient from '@/components/Gallery/GalleryClient'
 
 export const metadata = {
@@ -15,5 +16,9 @@ export const metadata = {
 }
 
 export default function GalleryPage() {
-    return <GalleryClient />
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-white" />}>
+            <GalleryClient />
+        </Suspense>
+    )
 }
