@@ -126,7 +126,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName }) => {
                         <div className="order-1 lg:order-2 relative">
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#E85A4F]/5 rounded-full blur-[120px] pointer-events-none"></div>
                             <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
-                                <img src={displaySecondaryImage} alt="Precision Work" className="w-full aspect-square object-cover" />
+                                <img src={displaySecondaryImage} alt={`${content.name} — precision fabrication by RG Tech Engineering`} className="w-full aspect-square object-cover" />
                             </div>
                             <div className="absolute -bottom-6 -right-6 bg-[#E85A4F] text-white p-8 rounded-3xl shadow-xl z-20 hidden md:block border-4 border-white">
                                 <p className="text-4xl font-black font-heading leading-none">24</p>

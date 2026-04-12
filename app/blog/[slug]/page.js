@@ -11,6 +11,10 @@ export async function generateMetadata({ params }) {
 
     if (!post) return {}
 
+    const ogImage = post.image
+        ? { url: post.image, width: 1200, height: 630, alt: post.title }
+        : { url: `${BASE_URL}/og?title=${encodeURIComponent(post.title)}&sub=Engineering+Insights`, width: 1200, height: 630, alt: post.title }
+
     return {
         title: post.metaTitle || post.title,
         description: post.metaDescription || post.summary,
@@ -20,10 +24,17 @@ export async function generateMetadata({ params }) {
         openGraph: {
             title: post.title,
             description: post.summary,
-            images: [post.image || DEFAULT_OG_IMAGE],
-            url: `/blog/${slug}`,
+            images: [ogImage],
+            url: `${BASE_URL}/blog/${slug}`,
             type: 'article',
-        }
+            siteName: 'RG Tech Engineering Works',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.metaTitle || post.title,
+            description: post.metaDescription || post.summary,
+            images: [ogImage.url],
+        },
     }
 }
 
@@ -53,9 +64,20 @@ export default async function BlogPostPage({ params }) {
         "headline": post.title,
         "description": post.summary,
         "image": post.image || DEFAULT_OG_IMAGE,
-        "author": { "@type": "Organization", "name": "RG Tech Engineering" },
+        "url": `${BASE_URL}/blog/${slug}`,
         "datePublished": post.date,
-        "publisher": { "@type": "Organization", "name": "RG Tech Engineering" }
+        "author": {
+            "@type": "Organization",
+            "name": "RG Tech Engineering Works",
+            "url": BASE_URL,
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "RG Tech Engineering Works",
+            "url": BASE_URL,
+            "logo": { "@type": "ImageObject", "url": `${BASE_URL}/RG-Tech-Logo.png` },
+        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": `${BASE_URL}/blog/${slug}` },
     }
 
     return (

@@ -3,12 +3,34 @@ import Image from 'next/image'
 import { Calendar, Tag, ArrowRight, Clock, FileText } from 'lucide-react'
 import { APPS_SCRIPT_URL, BASE_URL } from '@/lib/data'
 
+const BASE = "https://www.rgtechengineeringworks.com"
+
 export const metadata = {
     title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
-    description: 'Explore technical insights and deep dives into industrial laser cutting, fiber technology, and precision metal fabrication from our experts at RG Tech Chennai.',
+    description: 'Technical insights and deep dives into industrial laser cutting, fiber technology, and precision metal fabrication from RG Tech Engineering experts in Chennai.',
     alternates: {
         canonical: '/blog',
-    }
+    },
+    openGraph: {
+        title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
+        description: 'Expert perspectives on laser technology, industrial fabrication, and manufacturing optimization from RG Tech Engineering, Chennai.',
+        url: `${BASE}/blog`,
+        type: 'website',
+        images: [
+            {
+                url: `${BASE}/og?title=Engineering+Insights+Blog&sub=CNC+Laser+Cutting+%26+Metal+Fabrication+Expertise`,
+                width: 1200,
+                height: 630,
+                alt: 'RG Tech Engineering — Technical Blog',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
+        description: 'Expert perspectives on laser technology and precision metal fabrication from RG Tech Engineering.',
+        images: [`${BASE}/og?title=Engineering+Insights+Blog&sub=CNC+Laser+Cutting+%26+Metal+Fabrication+Expertise`],
+    },
 }
 
 async function getPosts() {

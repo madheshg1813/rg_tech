@@ -56,7 +56,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                 <div className="max-w-7xl mx-auto px-4 py-4">
                     <div className="flex justify-between items-center">
                         <Link href="/" className="flex items-center gap-3.5 group">
-                            <img src="/RG-Tech-Logo.png" alt="RG Tech Logo" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
+                            <img src="/RG-Tech-Logo.png" alt="RG Tech Engineering logo" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
                             <div className="transition-all hidden sm:block">
                                 <h1 className="text-xl font-bold text-[#1C3D5A] leading-none tracking-tight font-heading">
                                     RG Tech <span className="text-[#E85A4F]">Engineering</span>

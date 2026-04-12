@@ -14,7 +14,7 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="space-y-8">
                         <Link href="/" className="flex items-center gap-3">
-                            <img src="/RG-Tech-Logo.png" alt="RG Tech Logo" className="h-12 w-auto brightness-0 invert" />
+                            <img src="/RG-Tech-Logo.png" alt="RG Tech Engineering logo" className="h-12 w-auto brightness-0 invert" />
                             <h2 className="text-2xl font-bold font-heading">RG Tech</h2>
                         </Link>
                         <p className="text-white/60 leading-relaxed font-medium">
