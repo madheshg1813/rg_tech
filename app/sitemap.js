@@ -37,7 +37,7 @@ export default async function sitemap() {
             const citySlug = city.toLowerCase().replace(/\s+/g, '-')
             const serviceSlug = s.slug.split('/').pop()
             return {
-                url: `${BASE_URL}/chennai/${serviceSlug}/${citySlug}`,
+                url: `${BASE_URL}/chennai/${serviceSlug}-in-${citySlug}`,
                 lastModified: today,
                 changeFrequency: 'monthly',
                 priority: 0.6,
