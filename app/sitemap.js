@@ -31,13 +31,13 @@ export default async function sitemap() {
     }))
 
     // 6 services × 99 localities = locality-specific service pages
-    // URL format matches website: /chennai/{service-slug}-in-{city-slug}
+    // URL format: /chennai/{service-slug}/{city-slug}
     const localityPages = pillarServices.flatMap(s =>
         CHENNAI_LOCALITIES.map(city => {
             const citySlug = city.toLowerCase().replace(/\s+/g, '-')
             const serviceSlug = s.slug.split('/').pop()
             return {
-                url: `${BASE_URL}/chennai/${serviceSlug}-in-${citySlug}`,
+                url: `${BASE_URL}/chennai/${serviceSlug}/${citySlug}`,
                 lastModified: today,
                 changeFrequency: 'monthly',
                 priority: 0.6,
