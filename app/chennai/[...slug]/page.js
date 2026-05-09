@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import ServiceClient from '@/components/Service/ServiceClient'
 import { pillarServices, BASE_URL, SERVICE_IMAGE_POOLS } from '@/lib/data'
 import { getRotationIndex, localizeText } from '@/lib/utils'
@@ -76,6 +76,12 @@ function resolveService(slugArray) {
 
 export default async function Page({ params }) {
     const { slug } = await params
+
+    // 301 redirect: /chennai/{service}/{city} → /chennai/{service}-in-{city}
+    if (slug.length === 2) {
+        redirect(`/chennai/${slug[0]}-in-${slug[1]}`)
+    }
+
     const { content, cityName } = resolveService(slug)
 
     if (!content) notFound()
