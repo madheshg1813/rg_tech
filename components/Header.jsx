@@ -8,7 +8,8 @@ import {
     Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, MessageCircle, 
     Menu, X, FileText 
 } from 'lucide-react'
-import { pillarServices, CHENNAI_LOCALITIES } from '@/lib/data'
+import { pillarServices } from '@/lib/data'
+import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
 const Header = ({ setCatalogueModalOpen }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -92,51 +93,45 @@ const Header = ({ setCatalogueModalOpen }) => {
                                     Services <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesDropdown ? 'rotate-180' : ''}`} />
                                 </button>
                                 {servicesDropdown && (
+                                    /*
+                                     * Three city columns instead of the old single
+                                     * list with a locality fly-out. With three cities
+                                     * that pattern needs a two-deep hover chain, which
+                                     * is fiddly with a mouse and impossible on touch.
+                                     * Localities stay discoverable through the
+                                     * "Serving All Areas" grid on every page.
+                                     */
                                     <div
                                         onMouseLeave={() => setServicesDropdown(false)}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[1200px] z-50 overflow-visible animate-in fade-in slide-in-from-top-2"
+                                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
                                     >
-                                        <div className="bg-white rounded-3xl shadow-2xl border border-line py-4 w-[420px] mx-auto relative">
-                                            <div className="px-6 py-2 mb-2">
-                                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest">Our Expertise</p>
-                                            </div>
-                                            {pillarServices.map((s, i) => (
-                                                <div key={i} className="px-2 relative group/service">
-                                                    <Link
-                                                        href={s.slug}
-                                                        onClick={() => setServicesDropdown(false)}
-                                                        className="flex justify-between items-center gap-3 px-4 py-3 rounded-2xl hover:bg-surface-2 transition-all group/link"
-                                                    >
-                                                        <div className="flex items-center gap-4">
-                                                            <div className="w-8 h-8 rounded-lg bg-surface-3 flex items-center justify-center group-hover/link:bg-[#F59E0B]/10 transition-colors">
-                                                                <ChevronRight className="w-4 h-4 text-[#0F2A44] group-hover/link:text-accent" />
-                                                            </div>
-                                                            <span className="text-[15px] font-medium text-[#0F2A44]/80 group-hover/link:text-[#0F2A44] transition-colors">{s.name}</span>
-                                                        </div>
-                                                    </Link>
-
-                                                    <div className="absolute left-full top-0 w-12 h-full z-10 bg-transparent" />
-
-                                                    <div className="invisible group-hover/service:visible absolute left-full top-[-16px] pl-6 w-[300px] z-50 animate-in fade-in slide-in-from-left-2 pointer-events-auto">
-                                                        <div className="bg-white rounded-3xl shadow-2xl border border-line p-6">
-                                                            <div className="mb-4">
-                                                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1">Serving Across Chennai</p>
-                                                                <h4 className="text-lg font-bold text-[#0F2A44] font-heading">Our Localities</h4>
-                                                            </div>
-                                                            <div className="flex flex-col gap-y-1 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                                                                {CHENNAI_LOCALITIES.map((city, idx) => (
-                                                                    <Link
-                                                                        key={idx}
-                                                                        href={`${s.slug}-in-${city.toLowerCase().replace(/\s+/g, '-')}`}
-                                                                        onClick={() => setServicesDropdown(false)}
-                                                                        className="text-[13px] text-fg-muted hover:text-accent py-1.5 transition-all font-medium border-b border-transparent hover:border-[#F59E0B]/10 whitespace-nowrap"
-                                                                    >
-                                                                        {city}
-                                                                    </Link>
-                                                                ))}
-                                                            </div>
-                                                        </div>
+                                        <div className="bg-white rounded-3xl shadow-2xl border border-line p-6 w-[860px] grid grid-cols-3 gap-5">
+                                            {Object.values(CITIES).map((city) => (
+                                                <div key={city.slug}>
+                                                    <div className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line">
+                                                        <MapPin className="w-3.5 h-3.5 text-accent" />
+                                                        <p className="text-[11px] font-black text-fg uppercase tracking-widest">
+                                                            {city.name}
+                                                        </p>
+                                                        {!city.isPrimary && (
+                                                            <span className="ml-auto text-[9px] font-bold text-accent bg-[#F59E0B]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                                                                New
+                                                            </span>
+                                                        )}
                                                     </div>
+                                                    {pillarServices.map((svc, i) => (
+                                                        <Link
+                                                            key={i}
+                                                            href={serviceUrl(city.slug, serviceKeyOf(svc))}
+                                                            onClick={() => setServicesDropdown(false)}
+                                                            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-surface-2 transition-colors group/link"
+                                                        >
+                                                            <ChevronRight className="w-3.5 h-3.5 text-fg-subtle group-hover/link:text-accent flex-shrink-0" />
+                                                            <span className="text-[13.5px] font-medium text-fg-muted group-hover/link:text-fg leading-snug">
+                                                                {svc.name}
+                                                            </span>
+                                                        </Link>
+                                                    ))}
                                                 </div>
                                             ))}
                                         </div>
@@ -177,50 +172,47 @@ const Header = ({ setCatalogueModalOpen }) => {
                             <div className="flex flex-col gap-2">
                                 <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 pl-1">Services</p>
 
-                                {pillarServices.map((s, i) => {
+                                {Object.values(CITIES).map((city, i) => {
                                     const open = openMobileService === i
+                                    const areas = publishedLocalities(city.slug)
                                     return (
-                                        <div key={i} className="rounded-2xl border border-line overflow-hidden">
-                                            <div className="flex items-stretch">
-                                                {/* Tapping the name navigates; the chevron expands. */}
-                                                <Link
-                                                    href={s.slug}
-                                                    onClick={() => setMobileMenuOpen(false)}
-                                                    className="flex-1 text-fg font-bold text-[15px] py-4 px-4 hover:bg-surface-2 transition-colors"
-                                                >
-                                                    {s.name}
-                                                </Link>
-                                                <button
-                                                    onClick={() => setOpenMobileService(open ? null : i)}
-                                                    aria-expanded={open}
-                                                    aria-label={`${open ? 'Hide' : 'Show'} locations for ${s.name}`}
-                                                    className="px-4 border-l border-line text-fg-subtle hover:bg-surface-2 transition-colors"
-                                                >
-                                                    <ChevronDown
-                                                        className={`w-5 h-5 transition-transform ${open ? 'rotate-180 text-accent' : ''}`}
-                                                    />
-                                                </button>
-                                            </div>
+                                        <div key={city.slug} className="rounded-2xl border border-line overflow-hidden">
+                                            <button
+                                                onClick={() => setOpenMobileService(open ? null : i)}
+                                                aria-expanded={open}
+                                                className="w-full flex items-center justify-between gap-3 py-4 px-4 hover:bg-surface-2 transition-colors"
+                                            >
+                                                <span className="flex items-center gap-2 font-bold text-[15px] text-fg">
+                                                    <MapPin className="w-4 h-4 text-accent" />
+                                                    {city.name}
+                                                    {!city.isPrimary && (
+                                                        <span className="text-[9px] font-bold text-accent bg-[#F59E0B]/10 px-2 py-0.5 rounded-full uppercase">
+                                                            New
+                                                        </span>
+                                                    )}
+                                                </span>
+                                                <ChevronDown
+                                                    className={`w-5 h-5 text-fg-subtle transition-transform ${open ? 'rotate-180 text-accent' : ''}`}
+                                                />
+                                            </button>
 
                                             {open && (
                                                 <div className="bg-surface-2 border-t border-line px-2 py-2">
-                                                    {CHENNAI_LOCALITIES.slice(0, 8).map((city, idx) => (
+                                                    {pillarServices.map((svc, j) => (
                                                         <Link
-                                                            key={idx}
-                                                            href={`${s.slug}-in-${city.toLowerCase().replace(/\s+/g, '-')}`}
+                                                            key={j}
+                                                            href={serviceUrl(city.slug, serviceKeyOf(svc))}
                                                             onClick={() => setMobileMenuOpen(false)}
-                                                            className="block text-[14px] text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
+                                                            className="block text-[14px] font-medium text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
                                                         >
-                                                            {city}
+                                                            {svc.name}
                                                         </Link>
                                                     ))}
-                                                    <Link
-                                                        href={s.slug}
-                                                        onClick={() => setMobileMenuOpen(false)}
-                                                        className="block text-center text-[13px] font-bold text-accent py-3"
-                                                    >
-                                                        View all areas →
-                                                    </Link>
+                                                    {areas.length > 0 && (
+                                                        <p className="text-[11px] text-fg-subtle px-3 pt-2 pb-1">
+                                                            {areas.length} area{areas.length === 1 ? '' : 's'} covered in {city.name}
+                                                        </p>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>

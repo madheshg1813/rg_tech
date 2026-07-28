@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { MapPin } from 'lucide-react'
-import { serviceUrl, localitySlug } from '@/lib/cities'
+import { serviceUrl, publishedLocalities } from '@/lib/cities'
 
 /**
  * "Serving All Areas in {city.name}" — the locality mesh for a service.
@@ -25,6 +25,11 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
     const current = cityName ? cityName.toLowerCase() : null
     const pillarHref = serviceUrl(city.slug, serviceKey)
 
+    // Only areas with a live page. Linking to an unreleased locality would send
+    // users and crawlers to a 404.
+    const areas = publishedLocalities(city.slug)
+    if (!areas.length) return null
+
     return (
         <section className="py-20 bg-white border-t border-line">
             <div className="max-w-6xl mx-auto px-4">
@@ -42,7 +47,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                 </div>
 
                 <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                    {city.localities.map((locality) => {
+                    {areas.map((locality) => {
                         const isCurrent = current === locality.toLowerCase()
 
                         if (isCurrent) {

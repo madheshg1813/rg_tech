@@ -1,5 +1,5 @@
 import { pillarServices, BASE_URL } from '@/lib/data'
-import { CITIES, serviceUrl, serviceKeyOf } from '@/lib/cities'
+import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 import { getPosts } from '@/lib/sanity'
 
 export const revalidate = 3600
@@ -25,7 +25,7 @@ export default async function sitemap() {
                 changeFrequency: 'monthly',
                 priority: city.isPrimary ? 0.8 : 0.7,
             }
-            const localities = city.localities.map(locality => ({
+            const localities = publishedLocalities(city.slug).map(locality => ({
                 url: `${BASE_URL}${serviceUrl(city.slug, key, locality)}`,
                 lastModified: today,
                 changeFrequency: 'monthly',
