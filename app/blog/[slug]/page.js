@@ -124,10 +124,16 @@ export default async function BlogPostPage({ params }) {
         <article className="bg-white min-h-screen">
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
-            <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
-                <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+            {/*
+             * max-w-7xl matches the header and footer gutters so the article
+             * lines up with the rest of the site. The sidebar is a fixed 320px
+             * rather than a 12-column fraction — on a 4/12 split it grew with
+             * the viewport and squeezed the prose down to ~700px.
+             */}
+            <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
+                <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-12 lg:gap-16">
                     {/* ── Article column ─────────────────────────────────────── */}
-                    <div className="lg:col-span-8 min-w-0">
+                    <div className="min-w-0">
                         {/* flex (not inline-flex) so the category pill starts a new line */}
                         <Link
                             href="/blog"
@@ -263,7 +269,7 @@ export default async function BlogPostPage({ params }) {
                     </div>
 
                     {/* ── Sidebar ────────────────────────────────────────────── */}
-                    <div className="lg:col-span-4">
+                    <div className="min-w-0">
                         <ArticleSidebar headings={headings} url={postUrl} title={post.title} />
                     </div>
                 </div>
