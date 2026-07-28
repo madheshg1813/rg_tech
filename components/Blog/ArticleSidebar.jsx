@@ -182,7 +182,7 @@ export default function ArticleSidebar({ headings = [], url, title }) {
                 <p className="text-[13.5px] text-fg-muted mt-2.5 leading-relaxed">
                     CNC fiber laser cutting for MS, SS, aluminium, copper and brass — up to 45&nbsp;mm.
                 </p>
-                <Link href="/#contact" className="btn btn-primary w-full mt-5">
+                <Link href="/contact" className="btn btn-primary w-full mt-5">
                     Get a Free Quote <ArrowRight className="w-4 h-4" />
                 </Link>
             </div>

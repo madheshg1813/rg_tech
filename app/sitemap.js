@@ -10,6 +10,7 @@ export default async function sitemap() {
         { url: BASE_URL,                  lastModified: today, changeFrequency: 'daily',   priority: 1.0 },
         { url: `${BASE_URL}/gallery`,     lastModified: today, changeFrequency: 'weekly',  priority: 0.8 },
         { url: `${BASE_URL}/blog`,        lastModified: today, changeFrequency: 'weekly',  priority: 0.8 },
+        { url: `${BASE_URL}/contact`,     lastModified: today, changeFrequency: 'monthly', priority: 0.9 },
     ]
 
     // 6 service base pages

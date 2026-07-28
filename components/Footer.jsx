@@ -57,9 +57,14 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-bold mb-8 font-heading text-accent">Resources</h4>
                         <ul className="space-y-4">
-                            {['Gallery', 'Blog', 'About Us', 'Contact', 'Privacy Policy'].map((link, i) => (
+                            {[
+                                { label: 'Gallery', href: '/gallery' },
+                                { label: 'Blog', href: '/blog' },
+                                { label: 'Contact', href: '/contact' },
+                                { label: 'About Us', href: '/#about' },
+                            ].map(({ label: link, href }, i) => (
                                 <li key={i}>
-                                    <Link href={link === 'Gallery' ? '/gallery' : link === 'Blog' ? '/blog' : `/#${link.toLowerCase().replace(' ', '-')}`} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">
+                                    <Link href={href} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">
                                         <ChevronRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
                                         {link}
                                     </Link>

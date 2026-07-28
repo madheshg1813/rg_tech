@@ -52,7 +52,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                                 {localizeText(content.heroDesc, cityName, cityIndex)}
                             </p>
                             <div className="flex flex-wrap gap-5">
-                                <a href="#contact" className="btn btn-primary">
+                                <a href="/contact" className="btn btn-primary">
                                     Get Technical Quote <ArrowRight className="w-4 h-4" />
                                 </a>
                                 <a href="https://wa.me/916380736439" className="btn btn-secondary-dark">
@@ -258,7 +258,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                         Engineer-verified quotes and DFM analysis available within 24 business hours.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                        <Link href="/#contact" className="btn btn-primary btn-lg">
+                        <Link href="/contact" className="btn btn-primary btn-lg">
                             Get Quote Now
                         </Link>
                         <a href="tel:+916380736439" className="btn btn-secondary-dark btn-lg">

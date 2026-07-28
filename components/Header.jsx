@@ -146,7 +146,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                             <Link href="/gallery" className="text-[#0F2A44] hover:text-accent transition-all font-bold text-[14px] hover:translate-y-[-1px] border-b-2 border-transparent hover:border-[#F59E0B] pb-1">Gallery</Link>
                             <Link href="/blog" className="text-[#0F2A44] hover:text-accent transition-all font-bold text-[14px] hover:translate-y-[-1px] border-b-2 border-transparent hover:border-[#F59E0B] pb-1">Blog</Link>
                             <a href="/#about" className="text-[#0F2A44]/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">About</a>
-                            <a href="/#contact" className="text-[#0F2A44]/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">Contact</a>
+                            <a href="/contact" className="text-[#0F2A44]/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">Contact</a>
                         </nav>
 
                         <div className="hidden lg:flex items-center gap-4">
@@ -194,13 +194,13 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 <a href="/#industries" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Industries</a>
                                 <Link href="/gallery" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Gallery</Link>
                                 <a href="/#about" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">About Us</a>
-                                <a href="/#contact" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Contact</a>
+                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Contact</a>
                             </div>
                             <div className="grid grid-cols-2 gap-3 mt-4">
                                 <a href="https://wa.me/916380736439" className="btn btn-secondary-light">
                                     <MessageCircle className="w-4 h-4" /> WhatsApp
                                 </a>
-                                <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary">Get Quote</a>
+                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary">Get Quote</a>
                             </div>
                         </nav>
                     )}
