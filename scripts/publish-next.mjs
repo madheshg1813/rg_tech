@@ -129,7 +129,7 @@ async function main() {
     writeFileSync(
         join(ROOT, 'publish-summary.json'),
         JSON.stringify(
-            [{ title: post.title, url: `https://www.rgtechengineeringworks.com/blog/${post.slug.current}` }],
+            [{ title: post.sheetTitle || post.title, url: `https://www.rgtechengineeringworks.com/blog/${post.slug.current}` }],
             null,
             2
         )

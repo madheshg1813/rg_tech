@@ -186,6 +186,7 @@ const post = {
     _id: POST_ID,
     _type: 'post',
     title: 'What Is CNC Fiber Laser Cutting? A Complete Guide',
+    sheetTitle: 'What Is CNC Fiber Laser Cutting?',
     slug: { _type: 'slug', current: 'what-is-cnc-fiber-laser-cutting' },
     summary:
         'A plain-English guide to CNC fiber laser cutting — how the process works, what thicknesses and tolerances are realistic, how it compares with plasma and waterjet, and how to prepare files so your job is quoted quickly.',
@@ -205,7 +206,7 @@ const post = {
     bannerBadge: 'ISO 9013 EDGE QUALITY',
     metaTitle: 'What Is CNC Fiber Laser Cutting? Process, Materials & Tolerances',
     metaDescription:
-        'CNC fiber laser cutting explained: how the process works, materials and thicknesses, realistic tolerances, assist gas, cost drivers, and how it compares to plasma and waterjet.',
+        'CNC fiber laser cutting explained: how it works, materials and thicknesses, realistic tolerances, cost drivers, and how it compares to plasma and waterjet.',
     keywords: [
         'cnc fiber laser cutting',
         'what is fiber laser cutting',

@@ -20,6 +20,29 @@ export const queue = [
         slug: 'what-is-cnc-fiber-laser-cutting',
         load: async () => (await import('../what-is-cnc-fiber-laser-cutting.mjs')).post,
     },
+    // Order is deliberate: every internal /blog/ link in an article points at a
+    // slug published earlier in this list, so no article ever ships with a link
+    // to a post that is not live yet.
+    {
+        slug: 'how-cnc-laser-cutting-works',
+        load: async () => (await import('./how-cnc-laser-cutting-works.mjs')).post,
+    },
+    {
+        slug: 'materials-that-can-be-laser-cut',
+        load: async () => (await import('./materials-that-can-be-laser-cut.mjs')).post,
+    },
+    {
+        slug: 'laser-cutting-tolerances-explained',
+        load: async () => (await import('./laser-cutting-tolerances-explained.mjs')).post,
+    },
+    {
+        slug: 'laser-cutting-vs-plasma-cutting',
+        load: async () => (await import('./laser-cutting-vs-plasma-cutting.mjs')).post,
+    },
+    {
+        slug: 'laser-cutting-vs-waterjet-cutting',
+        load: async () => (await import('./laser-cutting-vs-waterjet-cutting.mjs')).post,
+    },
     // ── Remaining articles are appended here as they are drafted ──
 ]
 

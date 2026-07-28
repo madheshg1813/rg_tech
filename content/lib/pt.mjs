@@ -96,7 +96,7 @@ export const CATEGORY_ID = 'category.laser-cutting-guides'
  * date reflects when a post actually went live rather than when it was written.
  */
 export function makePost({
-    slug, title, summary, tldr, readTime,
+    slug, title, sheetTitle, summary, tldr, readTime,
     mainImageUrl, mainImageAlt,
     bannerEyebrow, bannerHeading, bannerSubheading, bannerBadge,
     metaTitle, metaDescription, keywords,
@@ -106,6 +106,11 @@ export function makePost({
         _id: `post.${slug}`,
         _type: 'post',
         title,
+        // Exact "Cluster Page" wording from the tracking sheet. Page titles are
+        // written for search and rarely match the sheet verbatim, so the
+        // publisher reports this instead — otherwise the row silently never
+        // gets marked Published.
+        sheetTitle: sheetTitle || title,
         slug: { _type: 'slug', current: slug },
         summary,
         tldr,
