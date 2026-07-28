@@ -107,7 +107,7 @@ export default function ContactPage() {
                         <a
                             key={label}
                             href={href}
-                            className="group bg-white rounded-2xl border border-line p-8 hover:border-[#F59E0B] hover:shadow-xl transition-all"
+                            className="group min-w-0 bg-white rounded-2xl border border-line p-6 sm:p-8 hover:border-[#F59E0B] hover:shadow-xl transition-all"
                         >
                             <span className="w-12 h-12 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center mb-5">
                                 <Icon className="w-5 h-5 text-accent" />
@@ -115,7 +115,12 @@ export default function ContactPage() {
                             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-fg-subtle">
                                 {label}
                             </p>
-                            <p className="font-bold text-fg mt-2 break-words group-hover:text-[#B45309] transition-colors">
+                            {/*
+                             * The email address is one unbreakable token; on a 375px
+                             * screen it pushed the card 4px past the viewport.
+                             * overflow-wrap:anywhere lets it break mid-word.
+                             */}
+                            <p className="font-bold text-fg mt-2 [overflow-wrap:anywhere] group-hover:text-[#B45309] transition-colors">
                                 {value}
                             </p>
                             <p className="text-[13px] text-fg-muted mt-1">{note}</p>

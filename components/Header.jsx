@@ -13,6 +13,7 @@ import { pillarServices, CHENNAI_LOCALITIES } from '@/lib/data'
 const Header = ({ setCatalogueModalOpen }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [servicesDropdown, setServicesDropdown] = useState(false)
+    const [openMobileService, setOpenMobileService] = useState(null)
     const pathname = usePathname()
 
     const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev)
@@ -21,6 +22,7 @@ const Header = ({ setCatalogueModalOpen }) => {
     useEffect(() => {
         setMobileMenuOpen(false)
         setServicesDropdown(false)
+        setOpenMobileService(null)
     }, [pathname])
 
     return (
@@ -165,42 +167,94 @@ const Header = ({ setCatalogueModalOpen }) => {
                     </div>
 
                     {mobileMenuOpen && (
-                        <nav className="lg:hidden mt-6 pb-6 flex flex-col gap-4 animate-in fade-in slide-in-from-top-4">
+                        /*
+                         * Services collapse by default. Previously all six rendered
+                         * their eight localities at once — about 60 rows the user had
+                         * to scroll past to reach Gallery or Contact.
+                         * Capped height keeps the sticky header usable on short screens.
+                         */
+                        <nav className="lg:hidden mt-5 pb-6 flex flex-col gap-4 max-h-[calc(100vh-9rem)] overflow-y-auto overscroll-contain custom-scrollbar animate-in fade-in slide-in-from-top-4">
                             <div className="flex flex-col gap-2">
-                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-2 pl-1">Services</p>
-                                {pillarServices.map((s, i) => (
-                                    <div key={i} className="flex flex-col">
-                                        <Link href={s.slug} onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 bg-surface-2/30 border border-line/50 mb-2 transition-all">{s.name}</Link>
-                                        <div className="flex flex-col gap-2 p-4 mb-4 bg-surface-2/30 rounded-2xl border border-line/50">
-                                            <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 opacity-70">Popular Locations</p>
-                                            {CHENNAI_LOCALITIES.slice(0, 8).map((city, idx) => (
+                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 pl-1">Services</p>
+
+                                {pillarServices.map((s, i) => {
+                                    const open = openMobileService === i
+                                    return (
+                                        <div key={i} className="rounded-2xl border border-line overflow-hidden">
+                                            <div className="flex items-stretch">
+                                                {/* Tapping the name navigates; the chevron expands. */}
                                                 <Link
-                                                    key={idx}
-                                                    href={`${s.slug}-in-${city.toLowerCase().replace(/\s+/g, '-')}`}
+                                                    href={s.slug}
                                                     onClick={() => setMobileMenuOpen(false)}
-                                                    className="text-[14px] text-fg-muted py-2 px-1 hover:text-accent transition-all font-medium border-b border-line/50 last:border-0"
+                                                    className="flex-1 text-fg font-bold text-[15px] py-4 px-4 hover:bg-surface-2 transition-colors"
                                                 >
-                                                    {city}
+                                                    {s.name}
                                                 </Link>
-                                            ))}
-                                            <Link href={s.slug} onClick={() => setMobileMenuOpen(false)} className="text-center text-[13px] font-bold text-accent pt-4">Main Service Details</Link>
+                                                <button
+                                                    onClick={() => setOpenMobileService(open ? null : i)}
+                                                    aria-expanded={open}
+                                                    aria-label={`${open ? 'Hide' : 'Show'} locations for ${s.name}`}
+                                                    className="px-4 border-l border-line text-fg-subtle hover:bg-surface-2 transition-colors"
+                                                >
+                                                    <ChevronDown
+                                                        className={`w-5 h-5 transition-transform ${open ? 'rotate-180 text-accent' : ''}`}
+                                                    />
+                                                </button>
+                                            </div>
+
+                                            {open && (
+                                                <div className="bg-surface-2 border-t border-line px-2 py-2">
+                                                    {CHENNAI_LOCALITIES.slice(0, 8).map((city, idx) => (
+                                                        <Link
+                                                            key={idx}
+                                                            href={`${s.slug}-in-${city.toLowerCase().replace(/\s+/g, '-')}`}
+                                                            onClick={() => setMobileMenuOpen(false)}
+                                                            className="block text-[14px] text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
+                                                        >
+                                                            {city}
+                                                        </Link>
+                                                    ))}
+                                                    <Link
+                                                        href={s.slug}
+                                                        onClick={() => setMobileMenuOpen(false)}
+                                                        className="block text-center text-[13px] font-bold text-accent py-3"
+                                                    >
+                                                        View all areas →
+                                                    </Link>
+                                                </div>
+                                            )}
                                         </div>
-                                    </div>
+                                    )
+                                })}
+                            </div>
+
+                            <div className="flex flex-col gap-1 pt-3 border-t border-line">
+                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 pl-1">Navigation</p>
+                                {[
+                                    { label: 'Gallery', href: '/gallery' },
+                                    { label: 'Blog', href: '/blog' },
+                                    { label: 'Industries', href: '/#industries' },
+                                    { label: 'About Us', href: '/#about' },
+                                    { label: 'Contact', href: '/contact' },
+                                ].map(({ label, href }) => (
+                                    <Link
+                                        key={label}
+                                        href={href}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="text-fg font-bold text-[15px] py-3 px-4 rounded-xl hover:bg-surface-2 transition-colors"
+                                    >
+                                        {label}
+                                    </Link>
                                 ))}
                             </div>
 
-                            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-line">
-                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-2 pl-1">Navigation</p>
-                                <a href="/#industries" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Industries</a>
-                                <Link href="/gallery" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Gallery</Link>
-                                <a href="/#about" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">About Us</a>
-                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="text-[#0F2A44] font-bold text-base py-3 px-4 rounded-2xl hover:bg-surface-2 transition-all">Contact</a>
-                            </div>
-                            <div className="grid grid-cols-2 gap-3 mt-4">
+                            <div className="grid grid-cols-2 gap-3 pt-2">
                                 <a href="https://wa.me/916380736439" className="btn btn-secondary-light">
                                     <MessageCircle className="w-4 h-4" /> WhatsApp
                                 </a>
-                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary">Get Quote</a>
+                                <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary">
+                                    Get Quote
+                                </Link>
                             </div>
                         </nav>
                     )}
