@@ -1,0 +1,64 @@
+name: Publish scheduled blog post
+
+# Runs every day, but scripts/publish-next.mjs only publishes when the
+# configured interval has elapsed since the previous post.
+#
+# Why daily rather than a `*/3` cron: cron day-of-month resets each month, so
+# `*/3` fires on the 31st and again on the 1st — one day apart, not three. A
+# daily run plus an elapsed-time check gives even spacing all year, and a failed
+# or delayed run is picked up the next day instead of silently skipping a post.
+on:
+  schedule:
+    - cron: '30 3 * * *' # 09:00 IST daily
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Publish now, ignoring the interval'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Show what would publish without writing'
+        type: boolean
+        default: false
+
+# Never let two runs publish at once.
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish next article
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
+          PUBLISH_INTERVAL_DAYS: '3'
+        run: |
+          ARGS=""
+          if [ "${{ inputs.force }}" = "true" ];   then ARGS="$ARGS --force";   fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          node scripts/publish-next.mjs $ARGS
+
+      # Sanity is the source of truth for the blog, and /blog revalidates hourly,
+      # so a rebuild is not required for the post to appear. This just makes it
+      # show up immediately and refreshes the statically generated article page.
+      - name: Trigger Netlify rebuild
+        if: ${{ inputs.dry_run != true && env.NETLIFY_BUILD_HOOK != '' }}
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: curl -fsS -X POST -d '{}' "$NETLIFY_BUILD_HOOK"

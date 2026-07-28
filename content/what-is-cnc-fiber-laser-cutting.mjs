@@ -6,74 +6,18 @@
  * code. Exports the author, category and post documents.
  */
 
-const IMG = 'https://res.cloudinary.com/o1ytbfuz/image/upload'
-const HERO = `${IMG}/v1785177077/rg-tech/hero-laser`
-const IMG_FIBER = `${IMG}/v1785177058/rg-tech/gallery/laser-cutting-services/kw_fiber_hd`
-const IMG_MACHINE = `${IMG}/v1785177058/rg-tech/gallery/laser-cutting-services/kw_cnc_machine_hd`
-const IMG_SHEET = `${IMG}/v1785177070/rg-tech/gallery/sheet-metal-laser-cutting/sm_01`
-const IMG_PANEL = `${IMG}/v1785176986/rg-tech/gallery/decorative-metal-panels/rg-tech-catelog-vol-02_page-0054`
+import { createBuilder, IMAGES, AUTHOR_ID, CATEGORY_ID } from './lib/pt.mjs'
 
-/* ---------------------------------------------------- portable text helpers */
+const { p, h2, h3, li, nli, rich, image, table, callout, key } = createBuilder('cnc')
 
-let k = 0
-const key = () => `k${++k}`
-
-const span = (text, marks = []) => ({ _type: 'span', _key: key(), text, marks })
-
-const block = (style, children, extra = {}) => ({
-    _type: 'block',
-    _key: key(),
-    style,
-    markDefs: extra.markDefs || [],
-    children,
-    ...(extra.listItem ? { listItem: extra.listItem, level: 1 } : {}),
-})
-
-const p = (text) => block('normal', [span(text)])
-const h2 = (text) => block('h2', [span(text)])
-const h3 = (text) => block('h3', [span(text)])
-const li = (text) => block('normal', [span(text)], { listItem: 'bullet' })
-const nli = (text) => block('normal', [span(text)], { listItem: 'number' })
-
-/** Paragraph with inline links: rich('Text ', ['anchor', '/url', external?], ' more') */
-const rich = (...parts) => {
-    const markDefs = []
-    const children = []
-    for (const part of parts) {
-        if (typeof part === 'string') {
-            children.push(span(part))
-        } else {
-            const [text, href, external = false] = part
-            const _key = key()
-            markDefs.push({ _type: 'link', _key, href, external })
-            children.push(span(text, [_key]))
-        }
-    }
-    return block('normal', children, { markDefs })
-}
-
-const image = (url, alt, caption) => ({
-    _type: 'contentImage',
-    _key: key(),
-    externalUrl: url,
-    alt,
-    ...(caption ? { caption } : {}),
-})
-
-const table = (caption, headers, rows) => ({
-    _type: 'contentTable',
-    _key: key(),
-    caption,
-    headers,
-    rows: rows.map((cells) => ({ _type: 'tableRow', _key: key(), cells })),
-})
-
-const callout = (tone, text) => ({ _type: 'callout', _key: key(), tone, text })
+const HERO = IMAGES.hero
+const IMG_FIBER = IMAGES.fiber
+const IMG_MACHINE = IMAGES.machine
+const IMG_SHEET = IMAGES.sheet
+const IMG_PANEL = IMAGES.panel
 
 /* --------------------------------------------------------------- documents */
 
-const AUTHOR_ID = 'author.madhesh-g'
-const CATEGORY_ID = 'category.laser-cutting-guides'
 const POST_ID = 'post.what-is-cnc-fiber-laser-cutting'
 
 const author = {

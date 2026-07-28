@@ -15,7 +15,11 @@
     "cloudinary:migrate": "npm run cloudinary:upload && npm run cloudinary:rewrite",
     "sanity:check": "node scripts/publish-cnc-article.mjs --check",
     "sanity:publish": "node scripts/publish-cnc-article.mjs",
-    "sanity:publish:draft": "node scripts/publish-cnc-article.mjs --draft"
+    "sanity:publish:draft": "node scripts/publish-cnc-article.mjs --draft",
+    "blog:status": "node scripts/publish-next.mjs --status",
+    "blog:dry": "node scripts/publish-next.mjs --dry-run",
+    "blog:publish": "node scripts/publish-next.mjs",
+    "blog:force": "node scripts/publish-next.mjs --force"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
