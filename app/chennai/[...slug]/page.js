@@ -1,7 +1,25 @@
 import { notFound, permanentRedirect } from 'next/navigation'
 import ServiceClient from '@/components/Service/ServiceClient'
 import { pillarServices, BASE_URL, SERVICE_IMAGE_POOLS } from '@/lib/data'
-import { getRotationIndex, localizeText } from '@/lib/utils'
+import { getRotationIndex, toAbsoluteUrl, resolveFaqs } from '@/lib/utils'
+import {
+    ORG_ID,
+    faqPageSchema,
+    breadcrumbSchema,
+    jsonLdGraph,
+    jsonLdScript,
+} from '@/lib/schema'
+
+/**
+ * Single source of truth for the page's meta title. Used both for <title> and,
+ * via ServiceClient, as the keyword source for image alt text — so the two can
+ * never drift apart.
+ */
+function buildMetaTitle(content, cityName) {
+    return cityName
+        ? `Top-Rated ${content.name} in ${cityName} | RG Tech Engineering`
+        : content.metaTitle
+}
 
 export async function generateMetadata({ params }) {
     const { slug } = await params
@@ -9,9 +27,7 @@ export async function generateMetadata({ params }) {
 
     if (!content) return {}
 
-    const displayMetaTitle = cityName
-        ? `Top-Rated ${content.name} in ${cityName} | RG Tech Engineering`
-        : content.metaTitle
+    const displayMetaTitle = buildMetaTitle(content, cityName)
 
     const displayMetaDesc = cityName
         ? `Looking for high-precision ${content.name.toLowerCase()} in ${cityName}, Chennai? RG Tech Engineering provides premium industrial metal solutions with fast 24h response. Get a free quote today.`
@@ -20,8 +36,11 @@ export async function generateMetadata({ params }) {
     const serviceSlug = content.slug.split('/').pop()
     const pool = SERVICE_IMAGE_POOLS[serviceSlug] || []
     const heroImg = pool[0] || content.heroImage
+    // heroImg is an absolute Cloudinary URL post-migration, but may still be a
+    // local /public path. Only prefix the origin when it is actually relative —
+    // prefixing an absolute URL yields "https://…comhttps://res.cloudinary…".
     const ogImageUrl = heroImg
-        ? `${BASE_URL}${heroImg}`
+        ? toAbsoluteUrl(heroImg)
         : `${BASE_URL}/og?title=${encodeURIComponent(displayMetaTitle)}&sub=CNC+Laser+Cutting+%26+Metal+Fabrication`
 
     return {
@@ -93,58 +112,53 @@ export default async function Page({ params }) {
     const pageUrl = `${BASE_URL}${pathName}`
     const displayTitle = cityName ? `${content.name} in ${cityName}` : content.title
 
+    // Computed here, then passed to ServiceClient, so the FAQ markup and the FAQ
+    // the visitor actually sees are guaranteed to be the same text. Google treats
+    // FAQPage markup that does not match visible content as a violation.
+    const displayFaqs = resolveFaqs(content, cityName, cityIndex)
+
     const serviceSchema = {
-        "@context": "https://schema.org",
         "@type": "Service",
+        "@id": `${pageUrl}#service`,
         "name": displayTitle,
+        "serviceType": content.name,
         "description": cityName
             ? `High-precision ${content.name.toLowerCase()} in ${cityName}, Chennai by RG Tech Engineering.`
             : content.metaDescription,
-        "provider": {
-            "@type": "LocalBusiness",
-            "@id": `${BASE_URL}/#organization`,
-            "name": "RG Tech Engineering Works",
-            "url": BASE_URL,
-        },
+        "provider": { "@id": ORG_ID },
         "areaServed": {
-            "@type": "City",
+            "@type": cityName ? "Place" : "City",
             "name": cityName ? `${cityName}, Chennai` : "Chennai",
         },
         "url": pageUrl,
     }
 
-    const breadcrumbSchema = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home",     "item": BASE_URL },
-            { "@type": "ListItem", "position": 2, "name": content.name, "item": `${BASE_URL}${content.slug}` },
-            ...(cityName ? [{ "@type": "ListItem", "position": 3, "name": cityName, "item": pageUrl }] : []),
-        ],
-    }
-
-    const faqSchema = content.faqs?.length ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": content.faqs.map(faq => ({
-            "@type": "Question",
-            "name": faq.q,
-            "acceptedAnswer": { "@type": "Answer", "text": faq.a },
-        })),
-    } : null
+    const graph = jsonLdGraph(
+        serviceSchema,
+        breadcrumbSchema(
+            [
+                { name: "Home", url: BASE_URL },
+                { name: content.name, url: `${BASE_URL}${content.slug}` },
+                ...(cityName ? [{ name: cityName, url: pageUrl }] : []),
+            ],
+            pageUrl
+        ),
+        faqPageSchema(displayFaqs, pageUrl)
+    )
 
     return (
         <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-            {faqSchema && (
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-            )}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={jsonLdScript(graph)}
+            />
             <ServiceClient
                 content={content}
                 cityName={cityName}
                 cityIndex={cityIndex}
                 pathName={pathName}
+                metaTitle={buildMetaTitle(content, cityName)}
+                faqs={displayFaqs}
             />
         </>
     )

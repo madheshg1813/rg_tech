@@ -1,9 +1,21 @@
-import { Inter, Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import {
+    organizationSchema,
+    webSiteSchema,
+    jsonLdGraph,
+    jsonLdScript,
+} from "@/lib/schema";
 
-const inter = Inter({ variable: "--font-sans", subsets: ["latin"] });
-const outfit = Outfit({ variable: "--font-heading", subsets: ["latin"] });
+// Single self-hosted family for the whole site. next/font inlines the @font-face
+// rules at build time, so there is no render-blocking request to Google Fonts.
+const inter = Inter({
+    variable: "--font-inter",
+    subsets: ["latin"],
+    display: "swap",
+    weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 const BASE = "https://www.rgtechengineeringworks.com"
 
@@ -46,76 +58,20 @@ export const metadata = {
     },
 }
 
-// LocalBusiness + WebSite schemas injected globally
-const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${BASE}/#organization`,
-    "name": "RG Tech Engineering Works",
-    "url": BASE,
-    "logo": `${BASE}/RG-Tech-Logo.png`,
-    "image": `${BASE}/gallery/Sheet%20Metal%20Laser%20Cutting/sm_12.jpg`,
-    "description": "CNC Fiber Laser Cutting, Sheet Metal Fabrication, Steel Gates, Safety Doors and Decorative Metal Panels in Chennai.",
-    "telephone": "+916380736439",
-    "email": "rgtechengineeringworks@gmail.com",
-    "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Chennai",
-        "addressRegion": "Tamil Nadu",
-        "addressCountry": "IN"
-    },
-    "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 13.0827,
-        "longitude": 80.2707
-    },
-    "openingHoursSpecification": [
-        {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-            "opens": "09:00",
-            "closes": "18:00"
-        }
-    ],
-    "sameAs": [
-        "https://www.rgtechengineeringworks.com"
-    ],
-    "priceRange": "$$",
-    "areaServed": {
-        "@type": "City",
-        "name": "Chennai"
-    }
-}
-
-const webSiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "RG Tech Engineering Works",
-    "url": BASE,
-    "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${BASE}/chennai/{search_term_string}`
-        },
-        "query-input": "required name=search_term_string"
-    }
-}
+// Organization + LocalBusiness + WebSite, emitted site-wide as one linked graph.
+// Definitions live in lib/schema.js so every page references the same entity.
+const siteGraph = jsonLdGraph(organizationSchema, webSiteSchema)
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className={`${inter.variable} scroll-smooth`}>
             <head>
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-                />
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+                    dangerouslySetInnerHTML={jsonLdScript(siteGraph)}
                 />
             </head>
-            <body className={`${inter.variable} ${outfit.variable} antialiased`}>
+            <body className="antialiased">
                 <LayoutWrapper>{children}</LayoutWrapper>
             </body>
         </html>

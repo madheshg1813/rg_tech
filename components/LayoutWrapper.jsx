@@ -1,19 +1,25 @@
 "use client";
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import Header from './Header'
 import Footer from './Footer'
-import CatalogueModal from './CatalogueModal'
+
+// The modal is only ever shown after a click, so keep it out of the initial
+// bundle on every page load.
+const CatalogueModal = dynamic(() => import('./CatalogueModal'), { ssr: false })
 
 export default function LayoutWrapper({ children }) {
     const [catalogueModalOpen, setCatalogueModalOpen] = useState(false)
 
     return (
-        <div className="bg-white selection:bg-[#E85A4F]/20">
+        <div className="bg-white selection:bg-[#F59E0B]/20">
             <Header setCatalogueModalOpen={setCatalogueModalOpen} />
             <main>{children}</main>
             <Footer />
-            <CatalogueModal isOpen={catalogueModalOpen} onClose={() => setCatalogueModalOpen(false)} />
+            {catalogueModalOpen && (
+                <CatalogueModal isOpen onClose={() => setCatalogueModalOpen(false)} />
+            )}
         </div>
     )
 }

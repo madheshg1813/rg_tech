@@ -1,204 +1,271 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Tag, ChevronLeft, ArrowRight, Clock, Star, Share2, Printer, Mail, MessageCircle } from 'lucide-react'
-import { APPS_SCRIPT_URL, BASE_URL, DEFAULT_OG_IMAGE } from '@/lib/data'
+import { ChevronLeft, Calendar, Clock, Plus } from 'lucide-react'
+import { BASE_URL, DEFAULT_OG_IMAGE } from '@/lib/data'
+import { getPosts, getPostBySlug, getPostSlugs, resolveImage } from '@/lib/sanity'
+import { extractHeadings, estimateReadTime } from '@/lib/portableText'
+import { buildAlt } from '@/lib/utils'
+import {
+    ORG_ID,
+    WEBSITE_ID,
+    personSchema,
+    breadcrumbSchema,
+    faqPageSchema,
+    jsonLdGraph,
+    jsonLdScript,
+} from '@/lib/schema'
+import PortableBody from '@/components/Blog/PortableBody'
+import ArticleBanner from '@/components/Blog/ArticleBanner'
+import ArticleSidebar from '@/components/Blog/ArticleSidebar'
+
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+    const slugs = await getPostSlugs()
+    return slugs.map((slug) => ({ slug }))
+}
+
+function formatDate(value) {
+    if (!value) return ''
+    const d = new Date(value)
+    if (Number.isNaN(d.getTime())) return String(value)
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+}
 
 export async function generateMetadata({ params }) {
     const { slug } = await params
-    const posts = await getPosts()
-    const post = posts.find(p => p.slug === slug)
-
+    const post = await getPostBySlug(slug)
     if (!post) return {}
 
-    const ogImage = post.image
-        ? { url: post.image, width: 1200, height: 630, alt: post.title }
-        : { url: `${BASE_URL}/og?title=${encodeURIComponent(post.title)}&sub=Engineering+Insights`, width: 1200, height: 630, alt: post.title }
+    const image = resolveImage(post, 'mainImageUrl', 'mainImage', 1200) || DEFAULT_OG_IMAGE
+    const title = post.metaTitle || post.title
+    const description = post.metaDescription || post.summary
 
     return {
-        title: post.metaTitle || post.title,
-        description: post.metaDescription || post.summary,
-        alternates: {
-            canonical: `/blog/${slug}`,
-        },
+        title,
+        description,
+        keywords: post.keywords,
+        alternates: { canonical: `/blog/${slug}` },
+        authors: post.author?.name ? [{ name: post.author.name }] : undefined,
         openGraph: {
             title: post.title,
-            description: post.summary,
-            images: [ogImage],
+            description,
             url: `${BASE_URL}/blog/${slug}`,
             type: 'article',
             siteName: 'RG Tech Engineering Works',
+            publishedTime: post.publishedAt,
+            modifiedTime: post.updatedAt || post.publishedAt,
+            authors: post.author?.name ? [post.author.name] : undefined,
+            images: [{ url: image, width: 1200, height: 630, alt: post.mainImageAlt || post.title }],
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.metaTitle || post.title,
-            description: post.metaDescription || post.summary,
-            images: [ogImage.url],
+            title,
+            description,
+            images: [image],
         },
-    }
-}
-
-async function getPosts() {
-    try {
-        const res = await fetch(APPS_SCRIPT_URL, { next: { revalidate: 3600 } })
-        if (!res.ok) return []
-        const data = await res.json()
-        return data.posts || []
-    } catch (e) {
-        return []
     }
 }
 
 export default async function BlogPostPage({ params }) {
     const { slug } = await params
-    const posts = await getPosts()
-    const post = posts.find(p => p.slug === slug)
+    const post = await getPostBySlug(slug)
+    if (!post) notFound()
 
-    if (!post) {
-        notFound()
-    }
+    const allPosts = await getPosts()
+    const related = allPosts.filter((p) => p.slug !== slug).slice(0, 4)
 
-    const jsonLd = {
-        "@context": "https://schema.org",
+    const postUrl = `${BASE_URL}/blog/${slug}`
+    const headings = extractHeadings(post.body)
+    const readTime = post.readTime || estimateReadTime(post.body)
+    const heroImage = resolveImage(post, 'mainImageUrl', 'mainImage', 1200)
+    const authorImage = resolveImage(post.author, 'imageUrl', 'image', 160)
+    const updated = post.updatedAt || post.publishedAt
+
+    const article = {
         "@type": "BlogPosting",
+        "@id": `${postUrl}#post`,
         "headline": post.title,
-        "description": post.summary,
-        "image": post.image || DEFAULT_OG_IMAGE,
-        "url": `${BASE_URL}/blog/${slug}`,
-        "datePublished": post.date,
-        "author": {
-            "@type": "Organization",
-            "name": "RG Tech Engineering Works",
-            "url": BASE_URL,
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "RG Tech Engineering Works",
-            "url": BASE_URL,
-            "logo": { "@type": "ImageObject", "url": `${BASE_URL}/RG-Tech-Logo.png` },
-        },
-        "mainEntityOfPage": { "@type": "WebPage", "@id": `${BASE_URL}/blog/${slug}` },
+        "description": post.metaDescription || post.summary,
+        "image": heroImage || DEFAULT_OG_IMAGE,
+        "url": postUrl,
+        "datePublished": post.publishedAt,
+        "dateModified": updated,
+        "wordCount": undefined,
+        "keywords": post.keywords?.join(', '),
+        "articleSection": post.category?.title,
+        "inLanguage": "en-IN",
+        // Author is a Person; the business remains the publisher.
+        "author": post.author ? { "@id": `${BASE_URL}/#author-${post.author.slug || 'madhesh-g'}` } : { "@id": ORG_ID },
+        "publisher": { "@id": ORG_ID },
+        "isPartOf": { "@id": WEBSITE_ID },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": postUrl },
     }
+
+    const graph = jsonLdGraph(
+        article,
+        post.author ? personSchema(post.author) : null,
+        breadcrumbSchema(
+            [
+                { name: 'Home', url: BASE_URL },
+                { name: 'Blog', url: `${BASE_URL}/blog` },
+                { name: post.title, url: postUrl },
+            ],
+            postUrl
+        ),
+        faqPageSchema(
+            (post.faqs || []).map((f) => ({ q: f.question, a: f.answer })),
+            postUrl
+        )
+    )
 
     return (
-        <article className="bg-[#FAFBFC] min-h-screen">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            
-            {/* Post Header */}
-            <header className="bg-[#1C3D5A] text-white py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none">
-                    <img src="/hero-laser.png" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-10 object-center" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#1C3D5A]/60 to-[#1C3D5A]"></div>
-                </div>
-                <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20"></div>
-                <div className="max-w-4xl mx-auto px-4 relative z-10">
-                    <Link href="/blog" className="inline-flex items-center gap-3 text-[#E85A4F] font-black text-[11px] uppercase tracking-widest mb-10 group bg-white/5 px-6 py-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors">
-                        <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Analysis
-                    </Link>
-                    
-                    <div className="flex flex-wrap items-center gap-8 text-[11px] font-black text-white/50 uppercase tracking-widest mb-8">
-                        <div className="flex items-center gap-3">
-                            <Calendar className="w-4 h-4 text-[#E85A4F]" />
-                            {post.date}
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <Clock className="w-4 h-4 text-[#E85A4F]" />
-                            {post.readTime || '5 min read'}
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <Tag className="w-4 h-4 text-[#E85A4F]" />
-                            {post.category || 'Tech Guide'}
-                        </div>
-                    </div>
-                    
-                    <h1 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-10 text-balance animate-in fade-in slide-in-from-bottom-4 duration-700">
-                        {post.title}
-                    </h1>
+        <article className="bg-white min-h-screen">
+            <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
-                    <div className="flex flex-wrap gap-4 pt-10 border-t border-white/10">
-                        <div className="flex items-center gap-4 py-3 px-6 bg-white/5 rounded-2xl border border-white/10">
-                            <div className="w-10 h-10 rounded-full bg-[#E85A4F] flex items-center justify-center font-black text-xs">RG</div>
-                            <div>
-                                <p className="text-[11px] font-black uppercase tracking-widest">Technical Board</p>
-                                <p className="text-[14px] text-white/60 font-medium">Engineering Verified</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
+                <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+                    {/* ── Article column ─────────────────────────────────────── */}
+                    <div className="lg:col-span-8 min-w-0">
+                        {/* flex (not inline-flex) so the category pill starts a new line */}
+                        <Link
+                            href="/blog"
+                            className="flex w-fit items-center gap-2 text-[15px] font-medium text-fg-muted hover:text-fg transition-colors mb-8"
+                        >
+                            <ChevronLeft className="w-4 h-4" /> Blog
+                        </Link>
 
-            <div className="max-w-7xl mx-auto px-4 py-24">
-                <div className="grid lg:grid-cols-12 gap-16">
-                    {/* Content Column */}
-                    <div className="lg:col-span-8">
-                        <div className="bg-white rounded-[3rem] p-8 md:p-16 border border-slate-100 shadow-2xl relative">
-                            {post.image && (
-                                <div className="mb-16 -mt-12 md:-mt-20 group relative overflow-hidden rounded-[2rem] shadow-premium ring-4 ring-white">
+                        {post.category?.title && (
+                            <span className="inline-block rounded-full bg-[#F59E0B]/12 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#B45309]">
+                                {post.category.title}
+                            </span>
+                        )}
+
+                        <h1 className="mt-6 text-4xl md:text-[3.25rem] font-bold text-fg leading-[1.08] tracking-tight text-balance">
+                            {post.title}
+                        </h1>
+
+                        {/* Author byline */}
+                        {post.author && (
+                            <div className="mt-8 flex items-center gap-4">
+                                {authorImage ? (
                                     <Image
-                                        src={post.image}
-                                        alt={post.title}
-                                        width={1200}
-                                        height={675}
-                                        unoptimized
-                                        className="w-full h-auto object-cover transition-transform duration-[2s] group-hover:scale-105"
+                                        src={authorImage}
+                                        alt={`${post.author.name}, ${post.author.role || 'author'} at RG Tech Engineering`}
+                                        width={48}
+                                        height={48}
+                                        sizes="48px"
+                                        className="w-12 h-12 rounded-full object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                ) : (
+                                    <span
+                                        aria-hidden="true"
+                                        className="w-12 h-12 rounded-full bg-ink-2 text-white flex items-center justify-center font-bold text-sm"
+                                    >
+                                        {post.author.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
+                                    </span>
+                                )}
+                                <div>
+                                    <p className="font-bold text-fg text-[15px]">{post.author.name}</p>
+                                    <p className="text-[14px] text-fg-subtle">
+                                        {post.author.role || 'Content Writer'} · Updated on {formatDate(updated)}
+                                    </p>
                                 </div>
-                            )}
+                            </div>
+                        )}
 
-                            <div 
-                                className="blog-content prose prose-lg prose-slate max-w-none prose-headings:font-black prose-headings:font-heading prose-headings:italic prose-headings:tracking-tight prose-p:text-slate-600 prose-p:leading-relaxed prose-strong:text-[#1C3D5A] prose-a:text-[#E85A4F] prose-img:rounded-3xl prose-img:shadow-xl"
-                                dangerouslySetInnerHTML={{ __html: post.content }} 
+                        {/* Banner */}
+                        <div className="mt-10">
+                            <ArticleBanner
+                                eyebrow={post.bannerEyebrow}
+                                heading={post.bannerHeading || post.title}
+                                subheading={post.bannerSubheading}
+                                badge={post.bannerBadge}
+                                imageUrl={heroImage}
+                                imageAlt={
+                                    post.mainImageAlt ||
+                                    buildAlt({ metaTitle: post.metaTitle || post.title, subject: post.title })
+                                }
                             />
+                        </div>
 
-                            <div className="mt-20 pt-10 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-8">
-                                <div className="flex items-center gap-6">
-                                    <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Analysis Share</p>
-                                    <div className="flex gap-3">
-                                        {[Share2, Printer, Mail].map((Icon, idx) => (
-                                            <button key={idx} className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:bg-[#E85A4F] hover:text-white transition-all">
-                                                <Icon className="w-5 h-5" />
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap gap-2">
-                                    {['Engineering', 'Manufacturing', 'Technology'].map(t => (
-                                        <span key={t} className="px-4 py-1.5 bg-slate-50 text-slate-500 text-[10px] font-black uppercase tracking-widest rounded-lg border border-slate-100 italic">#{t}</span>
+                        {/* TL;DR */}
+                        {post.tldr && (
+                            <div className="mt-10 rounded-2xl border border-line bg-surface-2 p-6">
+                                <p className="text-[16px] leading-relaxed text-fg-muted m-0">
+                                    <span className="font-black text-fg">TL;DR:</span> {post.tldr}
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="mt-6 flex flex-wrap items-center gap-6 text-[13px] text-fg-subtle">
+                            <span className="inline-flex items-center gap-2">
+                                <Calendar className="w-4 h-4" /> {formatDate(post.publishedAt)}
+                            </span>
+                            <span className="inline-flex items-center gap-2">
+                                <Clock className="w-4 h-4" /> {readTime}
+                            </span>
+                        </div>
+
+                        {/* Body */}
+                        <div className="mt-4">
+                            <PortableBody value={post.body} />
+                        </div>
+
+                        {/* FAQs */}
+                        {post.faqs?.length > 0 && (
+                            <section className="mt-20" id="faqs">
+                                <h2 className="scroll-mt-28 text-3xl md:text-4xl font-bold text-fg mb-8">
+                                    Frequently Asked Questions
+                                </h2>
+                                <div className="space-y-3">
+                                    {post.faqs.map((f, i) => (
+                                        <details
+                                            key={i}
+                                            className="group rounded-2xl border border-line bg-white overflow-hidden"
+                                        >
+                                            <summary className="flex items-center justify-between gap-6 p-6 cursor-pointer list-none">
+                                                <span className="font-bold text-fg text-[16px]">{f.question}</span>
+                                                <Plus className="w-5 h-5 flex-shrink-0 text-accent group-open:rotate-45 transition-transform" />
+                                            </summary>
+                                            <div className="px-6 pb-6">
+                                                <p className="text-[15.5px] leading-relaxed text-fg-muted border-l-2 border-[#F59E0B]/40 pl-5">
+                                                    {f.answer}
+                                                </p>
+                                            </div>
+                                        </details>
                                     ))}
                                 </div>
-                            </div>
-                        </div>
+                            </section>
+                        )}
+
+                        {/* Related */}
+                        {related.length > 0 && (
+                            <section className="mt-20 pt-12 border-t border-line">
+                                <h2 className="text-2xl font-bold text-fg mb-8">Related reading</h2>
+                                <div className="grid sm:grid-cols-2 gap-5">
+                                    {related.map((rp) => (
+                                        <Link
+                                            key={rp.slug}
+                                            href={`/blog/${rp.slug}`}
+                                            className="group rounded-2xl border border-line p-6 hover:border-[#F59E0B] transition-colors"
+                                        >
+                                            <p className="font-bold text-fg leading-snug group-hover:text-[#B45309] transition-colors">
+                                                {rp.title}
+                                            </p>
+                                            <p className="mt-2 text-[14px] text-fg-muted line-clamp-2">{rp.summary}</p>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
                     </div>
 
-                    {/* Sidebar Column */}
-                    <aside className="lg:col-span-4 space-y-8">
-                        {/* Newsletter/CTA */}
-                        <div className="bg-[#1C3D5A] p-10 rounded-[2.5rem] text-white relative overflow-hidden shadow-2xl">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-[#E85A4F]/10 rounded-full blur-2xl"></div>
-                            <h4 className="text-2xl font-bold font-heading mb-6">Technical Consultation</h4>
-                            <p className="text-white/60 mb-10 text-[15px] leading-relaxed font-medium">Need specific engineering analysis for your aerospace or industrial project?</p>
-                            <a href="https://wa.me/916380736439?text=I read your blog and need a technical consultation." target="_blank" rel="noopener noreferrer" className="w-full py-5 bg-[#E85A4F] text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-black/20">
-                                <MessageCircle className="w-5 h-5" /> Consult Engineer
-                            </a>
-                        </div>
-
-                        {/* Recent Analysis Sidebar */}
-                        <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                            <h4 className="text-xl font-bold text-[#1C3D5A] font-heading mb-8">Related Analysis</h4>
-                            <div className="space-y-8">
-                                {posts.filter(p => p.slug !== slug).slice(0, 4).map((rp, i) => (
-                                    <Link key={i} href={`/blog/${rp.slug}`} className="group block">
-                                        <p className="text-[10px] font-black text-[#E85A4F] uppercase tracking-widest mb-3">{rp.date}</p>
-                                        <h5 className="text-[15px] font-bold text-[#1C3D5A] leading-tight group-hover:text-[#E85A4F] transition-colors line-clamp-2 italic tracking-tight mb-4">{rp.title}</h5>
-                                        <div className="flex items-center gap-2 text-[#E85A4F] font-black text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
-                                            Read Analysis <ArrowRight className="w-3 h-3" />
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </aside>
+                    {/* ── Sidebar ────────────────────────────────────────────── */}
+                    <div className="lg:col-span-4">
+                        <ArticleSidebar headings={headings} url={postUrl} title={post.title} />
+                    </div>
                 </div>
             </div>
         </article>

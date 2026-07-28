@@ -18,7 +18,7 @@ export async function GET(request) {
                     alignItems: 'flex-start',
                     justifyContent: 'flex-end',
                     padding: '80px 80px 72px 96px',
-                    background: 'linear-gradient(135deg, #1C3D5A 0%, #0d2236 100%)',
+                    background: 'linear-gradient(135deg, #0F2A44 0%, #0d2236 100%)',
                     position: 'relative',
                     fontFamily: 'sans-serif',
                 }}
@@ -31,7 +31,7 @@ export async function GET(request) {
                         left: 0,
                         width: '10px',
                         height: '100%',
-                        background: '#E85A4F',
+                        background: '#F59E0B',
                     }}
                 />
 
@@ -54,7 +54,7 @@ export async function GET(request) {
                         display: 'flex',
                         alignItems: 'center',
                         marginBottom: '36px',
-                        color: '#E85A4F',
+                        color: '#F59E0B',
                         fontSize: '16px',
                         fontWeight: 700,
                         letterSpacing: '0.25em',

@@ -1,19 +1,24 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Tag, ArrowRight, Clock, FileText } from 'lucide-react'
-import { APPS_SCRIPT_URL, BASE_URL } from '@/lib/data'
+import { Calendar, ArrowRight, Clock, FileText } from 'lucide-react'
+import { BASE_URL } from '@/lib/data'
+import { getPosts, resolveImage } from '@/lib/sanity'
+import { buildAlt } from '@/lib/utils'
+import { breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 
-const BASE = "https://www.rgtechengineeringworks.com"
+const BASE = BASE_URL
+
+export const revalidate = 3600
 
 export const metadata = {
     title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
-    description: 'Technical insights and deep dives into industrial laser cutting, fiber technology, and precision metal fabrication from RG Tech Engineering experts in Chennai.',
-    alternates: {
-        canonical: '/blog',
-    },
+    description:
+        'Technical insights and deep dives into industrial laser cutting, fiber technology, and precision metal fabrication from RG Tech Engineering experts in Chennai.',
+    alternates: { canonical: '/blog' },
     openGraph: {
         title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
-        description: 'Expert perspectives on laser technology, industrial fabrication, and manufacturing optimization from RG Tech Engineering, Chennai.',
+        description:
+            'Expert perspectives on laser technology, industrial fabrication, and manufacturing optimization from RG Tech Engineering, Chennai.',
         url: `${BASE}/blog`,
         type: 'website',
         images: [
@@ -28,39 +33,49 @@ export const metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
-        description: 'Expert perspectives on laser technology and precision metal fabrication from RG Tech Engineering.',
+        description:
+            'Expert perspectives on laser technology and precision metal fabrication from RG Tech Engineering.',
         images: [`${BASE}/og?title=Engineering+Insights+Blog&sub=CNC+Laser+Cutting+%26+Metal+Fabrication+Expertise`],
     },
 }
 
-async function getPosts() {
-    try {
-        const res = await fetch(APPS_SCRIPT_URL, { next: { revalidate: 3600 } })
-        if (!res.ok) return []
-        const data = await res.json()
-        return data.posts || []
-    } catch (e) {
-        return []
-    }
+function formatDate(value) {
+    if (!value) return ''
+    const d = new Date(value)
+    if (Number.isNaN(d.getTime())) return String(value)
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
 export default async function BlogPage() {
     const posts = await getPosts()
 
+    const graph = jsonLdGraph(
+        breadcrumbSchema(
+            [
+                { name: 'Home', url: BASE },
+                { name: 'Blog', url: `${BASE}/blog` },
+            ],
+            `${BASE}/blog`
+        )
+    )
+
     return (
         <div className="bg-white min-h-screen">
+            <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
+
             {/* Blog Hero */}
-            <section className="bg-[#1C3D5A] text-white py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none">
-                    <img src="/hero-laser.png" alt="" aria-hidden="true" className="w-full h-full object-cover opacity-10 object-center" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#1C3D5A]/60 to-[#1C3D5A]"></div>
-                </div>
-                <div className="absolute inset-0 bg-[#E85A4F]/5 skew-y-3 translate-y-20"></div>
+            <section className="on-dark hero-gradient text-white py-24 relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none hero-texture"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
-                    <p className="text-[#E85A4F] font-black text-xs uppercase tracking-[0.4em] mb-4 text-balance">Technical Deep Dives</p>
-                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6">Engineering <span className="text-[#E85A4F]">Insights</span></h1>
-                    <p className="text-white/60 max-w-2xl mx-auto text-lg font-medium leading-relaxed italic">
-                        Expert perspectives on laser technology, industrial fabrication, and manufacturing optimization.
+                    <p className="text-accent font-black text-xs uppercase tracking-[0.4em] mb-4">
+                        Technical Deep Dives
+                    </p>
+                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6">
+                        Engineering <span className="text-accent">Insights</span>
+                    </h1>
+                    <p className="text-white/60 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+                        Expert perspectives on laser technology, industrial fabrication, and manufacturing
+                        optimization.
                     </p>
                 </div>
             </section>
@@ -69,54 +84,72 @@ export default async function BlogPage() {
                 <div className="max-w-7xl mx-auto px-4">
                     {posts.length > 0 ? (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {posts.map((post, i) => (
-                                <Link 
-                                    key={i} 
-                                    href={`/blog/${post.slug}`}
-                                    className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500"
-                                >
-                                    <div className="aspect-[16/10] overflow-hidden relative">
-                                        <Image src={post.image || '/gallery/Sheet%20Metal%20Laser%20Cutting/sm_12.jpg'} alt={post.title} fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                                        <div className="absolute top-6 left-6 flex gap-2">
-                                            <span className="px-4 py-1.5 bg-[#1C3D5A] text-[#E85A4F] text-[10px] font-black uppercase tracking-widest rounded-full border border-white/10 backdrop-blur-md">
-                                                {post.category || 'Tech Guide'}
-                                            </span>
+                            {posts.map((post) => {
+                                const img = resolveImage(post, 'mainImageUrl', 'mainImage', 800)
+                                return (
+                                    <Link
+                                        key={post.slug}
+                                        href={`/blog/${post.slug}`}
+                                        className="group bg-white rounded-[2rem] overflow-hidden border border-line shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col"
+                                    >
+                                        <div className="aspect-[16/10] overflow-hidden relative bg-surface-2">
+                                            {img && (
+                                                <Image
+                                                    src={img}
+                                                    alt={
+                                                        post.mainImageAlt ||
+                                                        buildAlt({
+                                                            metaTitle: 'CNC Laser Cutting & Metal Fabrication',
+                                                            subject: post.title,
+                                                        })
+                                                    }
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                />
+                                            )}
+                                            {post.category?.title && (
+                                                <span className="absolute top-6 left-6 px-4 py-1.5 bg-ink-2 text-accent text-[10px] font-black uppercase tracking-widest rounded-full border border-white/10 backdrop-blur-md">
+                                                    {post.category.title}
+                                                </span>
+                                            )}
                                         </div>
-                                    </div>
-                                    <div className="p-10">
-                                        <div className="flex items-center gap-6 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">
-                                            <div className="flex items-center gap-2">
-                                                <Calendar className="w-3.5 h-3.5 text-[#E85A4F]" />
-                                                {post.date}
+                                        <div className="p-8 flex flex-col flex-1">
+                                            <div className="flex items-center gap-6 text-[10px] font-black text-fg-subtle uppercase tracking-widest mb-5">
+                                                <span className="flex items-center gap-2">
+                                                    <Calendar className="w-3.5 h-3.5 text-accent" />
+                                                    {formatDate(post.publishedAt)}
+                                                </span>
+                                                <span className="flex items-center gap-2">
+                                                    <Clock className="w-3.5 h-3.5 text-accent" />
+                                                    {post.readTime || '5 min read'}
+                                                </span>
                                             </div>
-                                            <div className="flex items-center gap-2">
-                                                <Clock className="w-3.5 h-3.5 text-[#E85A4F]" />
-                                                {post.readTime || '5 min read'}
-                                            </div>
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-[#1C3D5A] leading-tight mb-6 group-hover:text-[#E85A4F] transition-colors font-heading">
-                                            {post.title}
-                                        </h3>
-                                        <p className="text-slate-500 text-[15px] leading-relaxed mb-8 line-clamp-3 font-medium opacity-80">
-                                            {post.summary}
-                                        </p>
-                                        <div className="pt-8 border-t border-slate-50 flex items-center justify-between">
-                                            <span className="text-[#E85A4F] font-black text-xs uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                                            <h2 className="text-xl font-bold text-fg leading-snug mb-4 group-hover:text-[#B45309] transition-colors">
+                                                {post.title}
+                                            </h2>
+                                            <p className="text-fg-muted text-[15px] leading-relaxed mb-8 line-clamp-3">
+                                                {post.summary}
+                                            </p>
+                                            <span className="mt-auto text-accent font-black text-xs uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-1 transition-transform">
                                                 Read Analysis <ArrowRight className="w-3.5 h-3.5" />
                                             </span>
                                         </div>
-                                    </div>
-                                </Link>
-                            ))}
+                                    </Link>
+                                )
+                            })}
                         </div>
                     ) : (
-                        <div className="text-center py-24 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
-                             <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
-                                <FileText className="w-8 h-8 text-[#E85A4F] animate-pulse" />
+                        <div className="text-center py-24 bg-surface-2 rounded-[3rem] border-2 border-dashed border-line-strong">
+                            <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
+                                <FileText className="w-8 h-8 text-accent" />
                             </div>
-                            <h3 className="text-2xl font-bold font-heading text-[#1C3D5A] mb-4">Awaiting New Engineering <span className="text-[#E85A4F]">Insights</span></h3>
-                            <p className="text-slate-500 font-medium max-w-sm mx-auto">
-                                Our technical experts are documenting new case studies. Check back soon for the latest manufacturing analysis.
+                            <h2 className="text-2xl font-bold font-heading text-fg mb-4">
+                                Awaiting New Engineering <span className="text-accent">Insights</span>
+                            </h2>
+                            <p className="text-fg-muted font-medium max-w-sm mx-auto">
+                                Our technical experts are documenting new case studies. Check back soon for the
+                                latest manufacturing analysis.
                             </p>
                         </div>
                     )}

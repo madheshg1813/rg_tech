@@ -22,15 +22,15 @@ const RollingLogos = () => {
             <div className="flex animate-scroll whitespace-nowrap">
                 {industrialIcons.map((item, i) => (
                     <div key={i} className="flex items-center gap-4 mx-10 opacity-30 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
-                        <item.icon className="w-8 h-8 text-[#2C3E50]" />
-                        <span className="font-bold text-[#2C3E50] text-xs tracking-widest uppercase">{item.name}</span>
+                        <item.icon className="w-8 h-8 text-[#0A1929]" />
+                        <span className="font-bold text-[#0A1929] text-xs tracking-widest uppercase">{item.name}</span>
                     </div>
                 ))}
                 {/* Duplicate for infinite loop */}
                 {industrialIcons.map((item, i) => (
                     <div key={`dup-${i}`} className="flex items-center gap-4 mx-10 opacity-30 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
-                        <item.icon className="w-8 h-8 text-[#2C3E50]" />
-                        <span className="font-bold text-[#2C3E50] text-xs tracking-widest uppercase">{item.name}</span>
+                        <item.icon className="w-8 h-8 text-[#0A1929]" />
+                        <span className="font-bold text-[#0A1929] text-xs tracking-widest uppercase">{item.name}</span>
                     </div>
                 ))}
             </div>

@@ -7,9 +7,20 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cloudinary:upload": "node scripts/upload-to-cloudinary.mjs",
+    "cloudinary:upload:dry": "node scripts/upload-to-cloudinary.mjs --dry-run",
+    "cloudinary:rewrite": "node scripts/rewrite-image-paths.mjs",
+    "cloudinary:rewrite:dry": "node scripts/rewrite-image-paths.mjs --dry-run",
+    "cloudinary:migrate": "npm run cloudinary:upload && npm run cloudinary:rewrite",
+    "sanity:check": "node scripts/publish-cnc-article.mjs --check",
+    "sanity:publish": "node scripts/publish-cnc-article.mjs",
+    "sanity:publish:draft": "node scripts/publish-cnc-article.mjs --draft"
   },
   "dependencies": {
+    "@portabletext/react": "^7.0.1",
+    "@sanity/client": "^7.25.0",
+    "@sanity/image-url": "^2.1.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.563.0",
@@ -25,6 +36,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "autoprefixer": "^10.4.24",
+    "cloudinary": "^2.10.0",
     "postcss": "^8.5.6",
     "tailwindcss": "latest"
   }

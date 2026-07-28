@@ -7,6 +7,8 @@ import Testimonials from '@/components/Home/Testimonials'
 import Process from '@/components/Home/Process'
 import FAQ from '@/components/Home/FAQ'
 import ContactForm from '@/components/Home/ContactForm'
+import { faqs } from '@/lib/data'
+import { faqPageSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 
 const BASE = "https://www.rgtechengineeringworks.com"
 
@@ -39,8 +41,17 @@ export const metadata = {
 }
 
 export default function Home() {
+    // The FAQ accordion below renders exactly these questions and answers, which
+    // is what FAQPage markup requires.
+    const homeGraph = jsonLdGraph(faqPageSchema(faqs, `${BASE}/`))
+
+    // LayoutWrapper already provides the <main> landmark.
     return (
-        <main>
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={jsonLdScript(homeGraph)}
+            />
             <Hero />
             <RollingLogos />
             <Services />
@@ -50,6 +61,6 @@ export default function Home() {
             <Testimonials />
             <FAQ />
             <ContactForm />
-        </main>
+        </>
     )
 }

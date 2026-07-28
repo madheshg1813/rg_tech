@@ -1,37 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+/*
+ * RG Tech design system
+ * ---------------------
+ * Light + dark mixed theme. Light is the page default; dark surfaces are used
+ * deliberately for hero, band and footer sections to create rhythm.
+ * Exactly ONE call-to-action colour is used site-wide: --color-cta (amber).
+ * Fonts are self-hosted by next/font (see app/layout.js) — never @import them
+ * here, a CSS @import is render-blocking.
+ */
+
 @theme {
-    /* Colors */
-    --color-primary: #1C3D5A;
-    /* Industrial Navy */
-    --color-primary-light: #2C3E50;
-    --color-accent: #E85A4F;
-    /* High-Vis Industrial Orange */
-    --color-accent-dark: #D44E45;
-    --color-accent-soft: rgba(232, 90, 79, 0.1);
-    --color-slate-50: #F8FAFC;
-    --color-slate-100: #F1F5F9;
-    --color-slate-200: #E2E8F0;
+    /* ---- Brand colours, sampled from RG-Tech-Logo.png ----
+     * green #00A050 (54% of the mark), indigo #382898 (28%), red #D82820 (18%).
+     * The hero gradient is built from these so the page furniture and the logo
+     * read as one identity. */
+    --color-brand-green: #00A050;
+    --color-brand-indigo: #382898;
+    --color-brand-red: #D82820;
 
-    /* Typography */
-    --font-heading: 'Outfit', sans-serif;
-    --font-sans: 'Inter', sans-serif;
+    /* ---- Dark surfaces (used for hero / bands / footer) ---- */
+    --color-ink: #0D0B2B;
+    /* deepest — top bar, footer base (darkened brand indigo) */
+    --color-ink-2: #16224F;
+    /* primary dark surface — mid stop of the hero gradient */
+    --color-ink-3: #222C63;
+    /* elevated dark — cards sitting on a dark surface */
 
-    /* Effects */
-    --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 5px 15px -5px rgba(0, 0, 0, 0.02);
-    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    /* ---- Light surfaces ---- */
+    --color-surface: #FFFFFF;
+    --color-surface-2: #F6F8FA;
+    /* subtle section tint */
+    --color-surface-3: #EDF1F5;
+    /* elevated / inset light */
+
+    /* ---- Foreground ---- */
+    --color-fg: #0F2A44;
+    /* body + headings on light */
+    --color-fg-muted: #54687C;
+    /* secondary text on light */
+    --color-fg-subtle: #8397AA;
+    /* captions, eyebrows on light */
+    --color-fg-invert: #F2F6FA;
+    /* body text on dark */
+    --color-fg-invert-muted: #9DB2C6;
+    /* secondary text on dark */
+
+    /* ---- Borders ---- */
+    --color-line: #E3E9EF;
+    --color-line-strong: #CBD6E0;
+    --color-line-invert: rgba(255, 255, 255, 0.12);
+
+    /* ---- The single CTA colour ---- */
+    --color-cta: #F59E0B;
+    --color-cta-hover: #D97706;
+    --color-cta-active: #B45309;
+    --color-cta-fg: #1A1206;
+    /* dark text on amber — amber + white fails contrast */
+    --color-cta-soft: rgba(245, 158, 11, 0.12);
+    --color-cta-ring: rgba(245, 158, 11, 0.35);
+    --color-cta-ink: #B45309;
+    /* amber TEXT on a light surface — #F59E0B on white is only 2.1:1 */
+
+    /* ---- Typography: one family, Inter ---- */
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-heading: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* ---- Effects ---- */
+    --shadow-premium: 0 10px 30px -5px rgba(15, 42, 68, 0.06),
+        0 5px 15px -5px rgba(15, 42, 68, 0.04);
+    --shadow-glass: 0 8px 32px 0 rgba(15, 42, 68, 0.08);
+    --shadow-cta: 0 10px 25px -8px rgba(245, 158, 11, 0.55);
 }
 
 @layer base {
     html {
         scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
     }
 
     body {
         font-family: var(--font-sans);
-        color: var(--color-primary);
-        background-color: #fff;
+        color: var(--color-fg);
+        background-color: var(--color-surface);
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 
     h1,
@@ -41,29 +95,224 @@
     h5,
     h6 {
         font-family: var(--font-heading);
+        letter-spacing: -0.02em;
+    }
+
+    /* Consistent focus ring in the CTA colour, on light and dark alike */
+    :where(a, button, summary, input, textarea, select):focus-visible {
+        outline: 2px solid var(--color-cta);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+}
+
+@layer components {
+
+    /*
+     * The site's CTA system. Every call to action uses one of these three,
+     * so the primary action is the same amber everywhere.
+     */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.625rem;
+        padding: 1rem 2rem;
+        border-radius: 0.875rem;
+        font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 1;
+        white-space: nowrap;
+        transition: background-color .2s ease, border-color .2s ease,
+            color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+
+    /* Primary — the one CTA colour, identical on light and dark backgrounds */
+    .btn-primary {
+        background-color: var(--color-cta);
+        color: var(--color-cta-fg);
+        box-shadow: var(--shadow-cta);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--color-cta-hover);
+        transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+        background-color: var(--color-cta-active);
+        transform: translateY(0);
+    }
+
+    /* Secondary on a dark surface */
+    .btn-secondary-dark {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: var(--color-fg-invert);
+        border: 1px solid var(--color-line-invert);
+        backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary-dark:hover {
+        background-color: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    /* Secondary on a light surface */
+    .btn-secondary-light {
+        background-color: var(--color-surface);
+        color: var(--color-fg);
+        border: 1px solid var(--color-line-strong);
+    }
+
+    .btn-secondary-light:hover {
+        border-color: var(--color-cta);
+        color: var(--color-cta-hover);
+    }
+
+    .btn-sm {
+        padding: 0.7rem 1.25rem;
+        font-size: 0.8125rem;
+        border-radius: 0.75rem;
+    }
+
+    .btn-lg {
+        padding: 1.15rem 2.5rem;
+        font-size: 0.9375rem;
+    }
+
+    /*
+     * Accent text. Because this is a mixed light/dark site the same accent has
+     * to be two different lightnesses to stay legible, so it is resolved from
+     * the nearest surface rather than hardcoded at each call site.
+     * Default = light surface. Wrap a dark section in `.on-dark`, and any white
+     * card nested inside that dark section in `.on-light`.
+     */
+    .text-accent {
+        color: var(--color-cta-ink);
+    }
+
+    .on-dark .text-accent {
+        color: var(--color-cta);
+    }
+
+    .on-light .text-accent {
+        color: var(--color-cta-ink);
+    }
+
+    /* Eyebrow label used above section headings */
+    .eyebrow {
+        font-size: 0.6875rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--color-cta-hover);
+    }
+
+    .eyebrow-on-dark {
+        color: var(--color-cta);
     }
 }
 
 @layer utilities {
     .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--color-line);
     }
 
     .text-balance {
         text-wrap: balance;
     }
 
-    @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+    /*
+     * Hero background, built from the three logo colours.
+     *
+     * Indigo (#382898) and green (#00A050) carry the gradient because together
+     * they are 82% of the mark; red (#D82820) appears only as a low-opacity
+     * glow, since a strong red field would fight the amber CTAs and read as a
+     * warning rather than as brand.
+     *
+     * All three stops are dark enough for white body text at AAA (11.9:1 worst
+     * case) and for the amber accent at AA (5.6:1 worst case) — verified, not
+     * assumed. Do not lighten the stops without re-checking those ratios.
+     */
+    .hero-gradient {
+        background-color: #16224F;
+        /* flat fallback */
+        background-image:
+            radial-gradient(58% 78% at 88% 6%,
+                rgba(216, 40, 32, .20), transparent 60%),
+            radial-gradient(72% 92% at 4% 100%,
+                rgba(0, 160, 80, .30), transparent 62%),
+            linear-gradient(135deg, #241C63 0%, #16224F 48%, #0A3F2E 100%);
     }
-    
+
+    /*
+     * Flatter variant for the non-hero dark bands (footer, contact, CTA strips)
+     * so they sit in the same hue family as the hero without competing with it.
+     */
+    .surface-dark {
+        background-color: #141B45;
+        background-image:
+            radial-gradient(60% 90% at 92% 0%,
+                rgba(0, 160, 80, .16), transparent 62%),
+            linear-gradient(160deg, #1B1750 0%, #141B45 60%, #10203C 100%);
+    }
+
+    /*
+     * Decorative texture laid over the hero gradient. This replaces a 872 KB
+     * hero-laser.png that was rendered at opacity-10 on five different page
+     * types purely as a background — same look, zero bytes, no request.
+     * Colour now comes from .hero-gradient, so this contributes only the etched
+     * line pattern and a soft sheen.
+     */
+    .hero-texture {
+        background-image:
+            radial-gradient(95% 85% at 8% 100%, rgba(255, 255, 255, .06), transparent 60%),
+            repeating-linear-gradient(115deg,
+                rgba(255, 255, 255, .035) 0 1px,
+                transparent 1px 14px);
+    }
+
+    /* Hairline divider that reads correctly on either surface */
+    .rule-dark {
+        border-color: var(--color-line-invert);
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
     .animate-scroll {
         display: flex;
         width: max-content;
         animation: scroll 40s linear infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .animate-scroll {
+            animation: none;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: var(--color-line-strong);
+        border-radius: 999px;
     }
 }
