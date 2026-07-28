@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
     Phone, Mail, MapPin, ChevronRight, MessageCircle,
-    Facebook, Instagram, Linkedin, Twitter
+    Facebook, Instagram, Linkedin, Twitter, Star, ExternalLink
 } from 'lucide-react'
-import { pillarServices } from '@/lib/data'
+import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL } from '@/lib/data'
 
 const Footer = () => {
     return (
@@ -62,14 +62,27 @@ const Footer = () => {
                                 { label: 'Blog', href: '/blog' },
                                 { label: 'Contact', href: '/contact' },
                                 { label: 'About Us', href: '/#about' },
-                            ].map(({ label: link, href }, i) => (
-                                <li key={i}>
-                                    <Link href={href} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">
+                                { label: 'Google Business Profile', href: GMB_URL, external: true },
+                            ].map(({ label: link, href, external }, i) => {
+                                const cls = "text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium"
+                                const inner = (
+                                    <>
                                         <ChevronRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
                                         {link}
-                                    </Link>
-                                </li>
-                            ))}
+                                    </>
+                                )
+                                return (
+                                    <li key={i}>
+                                        {external ? (
+                                            <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+                                                {inner}
+                                            </a>
+                                        ) : (
+                                            <Link href={href} className={cls}>{inner}</Link>
+                                        )}
+                                    </li>
+                                )
+                            })}
                         </ul>
                     </div>
 
@@ -81,11 +94,21 @@ const Footer = () => {
                                 <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
                                     <MapPin className="w-5 h-5 text-accent" />
                                 </div>
-                                <p className="text-white/60 text-sm leading-relaxed font-medium">
-                                    Door No. 63, B&amp;C Flat, Galaxy Company Salai,<br />
-                                    Ponniamman Nagar, Ayanambakkam,<br />
-                                    Chennai, Tamil Nadu 600095
-                                </p>
+                                <div>
+                                    <p className="text-white/60 text-sm leading-relaxed font-medium">
+                                        Door No. 63, B&amp;C Flat, Galaxy Company Salai,<br />
+                                        Ponniamman Nagar, Ayanambakkam,<br />
+                                        Chennai, Tamil Nadu 600095
+                                    </p>
+                                    <a
+                                        href={GMB_MAP_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 mt-2 text-accent text-[13px] font-bold hover:underline"
+                                    >
+                                        View on Google Maps <ExternalLink className="w-3.5 h-3.5" />
+                                    </a>
+                                </div>
                             </div>
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">

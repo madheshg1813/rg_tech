@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { SERVICE_IMAGE_POOLS } from '@/lib/data'
 import { getRotationIndex, localizeText, buildAlt, resolveFaqs } from '@/lib/utils'
+import GoogleBusinessCard from '@/components/GoogleBusinessCard'
 
 const IconMap = {
     Phone, Mail, MapPin, Clock, ArrowRight, Shield, Target, Zap, 
@@ -246,6 +247,9 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                     </div>
                 </div>
             </section>
+
+            {/* Google Business Profile */}
+            <GoogleBusinessCard cityName={cityName} />
 
             {/* Call to Action */}
             <section className="on-dark py-24 surface-dark relative overflow-hidden">

@@ -1,6 +1,7 @@
 import { Phone, MessageCircle, Mail, Clock, MapPin } from 'lucide-react'
 import ContactForm from '@/components/Home/ContactForm'
-import { BASE_URL } from '@/lib/data'
+import GoogleBusinessCard from '@/components/GoogleBusinessCard'
+import { BASE_URL, GMB_DIRECTIONS_URL } from '@/lib/data'
 import { ORG_ID, breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 
 export const metadata = {
@@ -131,6 +132,9 @@ export default function ContactPage() {
 
             {/* The form — same component the home page uses */}
             <ContactForm />
+
+            {/* Google Business Profile */}
+            <GoogleBusinessCard />
 
             {/* Visit us */}
             <section className="py-20 bg-white">
