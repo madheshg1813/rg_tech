@@ -19,7 +19,10 @@
     "blog:status": "node scripts/publish-next.mjs --status",
     "blog:dry": "node scripts/publish-next.mjs --dry-run",
     "blog:publish": "node scripts/publish-next.mjs",
-    "blog:force": "node scripts/publish-next.mjs --force"
+    "blog:force": "node scripts/publish-next.mjs --force",
+    "locations:status": "node scripts/release-locations.mjs --status",
+    "locations:dry": "node scripts/release-locations.mjs --dry-run",
+    "locations:release": "node scripts/release-locations.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
