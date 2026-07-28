@@ -54,6 +54,27 @@ jobs:
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           node scripts/publish-next.mjs $ARGS
 
+      # Best effort: marks the row in the Blogs tab. Matched on the post title
+      # because that tab has no slug column. A missing webhook is skipped rather
+      # than failing a publish that already succeeded.
+      - name: Update tracking sheet
+        if: ${{ inputs.dry_run != true }}
+        env:
+          SHEET_WEBHOOK_URL: ${{ secrets.SHEET_WEBHOOK_URL }}
+        run: |
+          if [ -z "$SHEET_WEBHOOK_URL" ] || [ ! -f publish-summary.json ]; then
+            echo "No webhook configured or nothing published - skipping."
+            exit 0
+          fi
+          curl -fsS -X POST "$SHEET_WEBHOOK_URL" \
+            -H 'Content-Type: text/plain;charset=utf-8' \
+            -d "$(node -e "
+              const r = require('./publish-summary.json');
+              console.log(JSON.stringify({ action: 'markPublished', rows: r.map(x => ({
+                title: x.title, url: x.url, status: 'Published'
+              })) }));
+            ")" || echo "Sheet update failed - publish still succeeded."
+
       # Sanity is the source of truth for the blog, and /blog revalidates hourly,
       # so a rebuild is not required for the post to appear. This just makes it
       # show up immediately and refreshes the statically generated article page.

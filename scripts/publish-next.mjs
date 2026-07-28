@@ -19,7 +19,7 @@
  *   node scripts/publish-next.mjs            # normal scheduled run
  */
 
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createClient } from '@sanity/client'
@@ -123,6 +123,17 @@ async function main() {
     }
 
     await client.createOrReplace(post)
+
+    // Handed to the workflow so it can mark the row in the tracking sheet.
+    // The Blogs tab has no slug column, so it is matched on the post title.
+    writeFileSync(
+        join(ROOT, 'publish-summary.json'),
+        JSON.stringify(
+            [{ title: post.title, url: `https://www.rgtechengineeringworks.com/blog/${post.slug.current}` }],
+            null,
+            2
+        )
+    )
 
     console.log(`✓ Published: ${post.title}`)
     console.log(`  /blog/${post.slug.current}`)

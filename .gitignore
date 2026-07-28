@@ -33,3 +33,4 @@ yarn-error.log*
 .netlify
 
 release-summary.json
+publish-summary.json
