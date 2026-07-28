@@ -76,7 +76,9 @@ function setupTrackingSheet() {
   // Add the header row if the first row looks like data rather than headers.
   var firstCell = String(rows[0][0] || '').toLowerCase();
   if (firstCell !== 'city') {
-    rows.unshift(CSV_HEADERS.concat(new Array(Math.max(0, width - CSV_HEADERS.length)).fill('')));
+    var pad = [];
+    for (var p = CSV_HEADERS.length; p < width; p++) pad.push('');
+    rows.unshift(CSV_HEADERS.concat(pad));
   }
 
   sheet.clearContents();
@@ -149,6 +151,11 @@ function doPost(e) {
 
 /**
  * Find a row by slug (or title) anywhere in the workbook and stamp it.
+ *
+ * Updates EVERY match, not just the first. The pillar slugs appear in both the
+ * Service Pages tab and the pasted Sheet5, and stopping at the first hit would
+ * leave the other tab permanently stale while still reporting success.
+ *
  * Returns what happened, so a mismatch shows up in the Action log instead of
  * failing silently.
  */
@@ -157,6 +164,7 @@ function markRow(row) {
   if (!needle) return { needle: '', updated: false, reason: 'empty key' };
 
   var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  var matches = [];
 
   for (var s = 0; s < sheets.length; s++) {
     var sheet = sheets[s];
@@ -179,9 +187,14 @@ function markRow(row) {
         sheet.getRange(r + 1, statusCol).setValue(row.status || 'Published');
         sheet.getRange(r + 1, urlCol).setValue(row.url || '');
 
-        return { needle: needle, updated: true, sheet: sheet.getName(), row: r + 1 };
+        matches.push(sheet.getName() + '!' + (r + 1));
+        break; // one match per row is enough
       }
     }
+  }
+
+  if (matches.length) {
+    return { needle: needle, updated: true, rows: matches };
   }
 
   return {
