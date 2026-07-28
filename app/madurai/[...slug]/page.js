@@ -2,7 +2,7 @@ import ServiceClient from '@/components/Service/ServiceClient'
 import { buildMetadata, buildServicePage } from '@/lib/servicePage'
 import { jsonLdScript } from '@/lib/schema'
 
-const CITY = 'chennai'
+const CITY = 'madurai'
 
 export async function generateMetadata({ params }) {
     return buildMetadata(CITY, params)

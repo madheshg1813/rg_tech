@@ -1,4 +1,5 @@
-import { pillarServices, CHENNAI_LOCALITIES, BASE_URL } from '@/lib/data'
+import { pillarServices, BASE_URL } from '@/lib/data'
+import { CITIES, serviceUrl, serviceKeyOf } from '@/lib/cities'
 import { getPosts } from '@/lib/sanity'
 
 export const revalidate = 3600
@@ -13,26 +14,24 @@ export default async function sitemap() {
         { url: `${BASE_URL}/contact`,     lastModified: today, changeFrequency: 'monthly', priority: 0.9 },
     ]
 
-    // 6 service base pages
-    const servicePages = pillarServices.map(s => ({
-        url: `${BASE_URL}${s.slug}`,
-        lastModified: today,
-        changeFrequency: 'monthly',
-        priority: 0.8,
-    }))
-
-    // 6 services × 99 localities = locality-specific service pages
-    // URL format: /chennai/{service-slug}/{city-slug}
-    const localityPages = pillarServices.flatMap(s =>
-        CHENNAI_LOCALITIES.map(city => {
-            const citySlug = city.toLowerCase().replace(/\s+/g, '-')
-            const serviceSlug = s.slug.split('/').pop()
-            return {
-                url: `${BASE_URL}/chennai/${serviceSlug}-in-${citySlug}`,
+    // Service pages for every city: the pillar plus one page per locality.
+    // Chennai is the primary market so its pages carry higher priority.
+    const cityPages = Object.values(CITIES).flatMap(city =>
+        pillarServices.flatMap(s => {
+            const key = serviceKeyOf(s)
+            const pillar = {
+                url: `${BASE_URL}${serviceUrl(city.slug, key)}`,
                 lastModified: today,
                 changeFrequency: 'monthly',
-                priority: 0.6,
+                priority: city.isPrimary ? 0.8 : 0.7,
             }
+            const localities = city.localities.map(locality => ({
+                url: `${BASE_URL}${serviceUrl(city.slug, key, locality)}`,
+                lastModified: today,
+                changeFrequency: 'monthly',
+                priority: city.isPrimary ? 0.6 : 0.5,
+            }))
+            return [pillar, ...localities]
         })
     )
 
@@ -45,5 +44,5 @@ export default async function sitemap() {
         priority: 0.7,
     }))
 
-    return [...staticPages, ...servicePages, ...localityPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...blogPages]
 }

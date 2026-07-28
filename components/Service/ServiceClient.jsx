@@ -19,19 +19,28 @@ const IconMap = {
     Factory, Cpu, Building2, Paintbrush, Truck, Send
 }
 
-const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs }) => {
+const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle, faqs }) => {
     const Icon = IconMap[content.mainIcon] || Settings;
     const serviceKey = content.slug.split('/').pop()
     const pool = SERVICE_IMAGE_POOLS[serviceKey] || SERVICE_IMAGE_POOLS['laser-cutting-services']
 
-    const displayHeroImage = cityName ? pool[cityIndex % pool.length] : content.heroImage
-    const displaySecondaryImage = cityName ? pool[(cityIndex + 1) % pool.length] : content.secondaryImage
-    const displayTitle = cityName ? `${content.name} in ${cityName}` : content.title
-    const displaySeoParagraph = cityName ? localizeText(content.seoParagraph, cityName, cityIndex) : content.seoParagraph
+    // On a locality page the locality is the place; on a non-Chennai pillar the
+    // city itself is. Chennai's pillar keeps its original hand-written copy so
+    // the existing indexed pages are unchanged.
+    const place = cityName || (city && !city.isPrimary ? city.name : null)
+
+    const displayHeroImage = place ? pool[cityIndex % pool.length] : content.heroImage
+    const displaySecondaryImage = place ? pool[(cityIndex + 1) % pool.length] : content.secondaryImage
+    const displayTitle = cityName
+        ? `${content.name} in ${cityName}`
+        : city && !city.isPrimary
+            ? `${content.name} in ${city.name}`
+            : content.title
+    const displaySeoParagraph = place ? localizeText(content.seoParagraph, place, cityIndex) : content.seoParagraph
     
     // Already rotated and localised on the server (see resolveFaqs) so that the
     // rendered text matches the FAQPage markup exactly.
-    const displayFaqs = faqs ?? resolveFaqs(content, cityName, cityIndex)
+    const displayFaqs = faqs ?? resolveFaqs(content, place, cityIndex)
 
     return (
         <div className="bg-white">
@@ -51,7 +60,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                                 <span className="text-accent">{displayTitle.includes(' in ') ? `in ${displayTitle.split(' in ')[1]}` : ''}</span>
                             </h1>
                             <p className="text-lg text-white/70 mb-12 max-w-xl leading-relaxed font-medium">
-                                {localizeText(content.heroDesc, cityName, cityIndex)}
+                                {localizeText(content.heroDesc, place, cityIndex)}
                             </p>
                             <div className="flex flex-wrap gap-5">
                                 <a href="/contact" className="btn btn-primary">
@@ -72,7 +81,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                                         // the subject describes the shot instead of repeating it.
                                         metaTitle,
                                         subject: 'CNC fiber laser cutting machine in operation',
-                                        location: cityName || 'Chennai',
+                                        location: place || 'Chennai',
                                     })}
                                     width={1000}
                                     height={750}
@@ -145,7 +154,7 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                                     alt={buildAlt({
                                         metaTitle,
                                         subject: 'Finished precision metal fabrication sample',
-                                        location: cityName || 'Chennai',
+                                        location: place || 'Chennai',
                                     })}
                                     width={900}
                                     height={900}
@@ -251,13 +260,14 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
 
             {/* Locality mesh — after the FAQs */}
             <ServiceAreas
-                serviceSlug={content.slug}
+                city={city}
                 serviceName={content.name}
+                serviceKey={content.slug.split('/').pop()}
                 cityName={cityName}
             />
 
             {/* Google Business Profile */}
-            <GoogleBusinessCard cityName={cityName} />
+            <GoogleBusinessCard cityName={place} />
 
             {/* Call to Action */}
             <section className="on-dark py-24 surface-dark relative overflow-hidden">
