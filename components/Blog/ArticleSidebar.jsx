@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
     List, ChevronDown, ArrowRight, Facebook, Linkedin,
     MessageCircle, Mail, Link2, Check,
@@ -86,11 +87,13 @@ function SummarizeWithAi({ url, title }) {
     const prompt = `Summarise this article for me: ${title} — ${url}`
     const q = encodeURIComponent(prompt)
 
+    // Logos are 32x32 PNGs in public/ai-logos, served as-is. They are UI chrome
+    // rather than content, and at ~1-2 KB each there is nothing to optimise.
     const targets = [
-        { name: 'ChatGPT', href: `https://chatgpt.com/?q=${q}` },
-        { name: 'Claude', href: `https://claude.ai/new?q=${q}` },
-        { name: 'Gemini', href: `https://gemini.google.com/app?q=${q}` },
-        { name: 'Perplexity', href: `https://www.perplexity.ai/search?q=${q}` },
+        { name: 'ChatGPT', logo: '/ai-logos/chatgpt.png', href: `https://chatgpt.com/?q=${q}` },
+        { name: 'Claude', logo: '/ai-logos/claude.png', href: `https://claude.ai/new?q=${q}` },
+        { name: 'Gemini', logo: '/ai-logos/gemini.png', href: `https://gemini.google.com/app?q=${q}` },
+        { name: 'Perplexity', logo: '/ai-logos/perplexity.png', href: `https://www.perplexity.ai/search?q=${q}` },
     ]
 
     return (
@@ -107,6 +110,14 @@ function SummarizeWithAi({ url, title }) {
                         rel="noopener noreferrer nofollow"
                         className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2.5 text-[13px] font-semibold text-fg hover:border-[#F59E0B] hover:text-[#B45309] transition-colors"
                     >
+                        <Image
+                            src={t.logo}
+                            alt=""
+                            aria-hidden="true"
+                            width={32}
+                            height={32}
+                            className="w-4 h-4 flex-shrink-0 object-contain"
+                        />
                         {t.name}
                     </a>
                 ))}
