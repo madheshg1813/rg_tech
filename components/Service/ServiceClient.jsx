@@ -10,6 +10,7 @@ import {
 import { SERVICE_IMAGE_POOLS } from '@/lib/data'
 import { getRotationIndex, localizeText, buildAlt, resolveFaqs } from '@/lib/utils'
 import GoogleBusinessCard from '@/components/GoogleBusinessCard'
+import ServiceAreas from '@/components/Service/ServiceAreas'
 
 const IconMap = {
     Phone, Mail, MapPin, Clock, ArrowRight, Shield, Target, Zap, 
@@ -247,6 +248,13 @@ const ServiceClient = ({ content, cityName, cityIndex, pathName, metaTitle, faqs
                     </div>
                 </div>
             </section>
+
+            {/* Locality mesh — after the FAQs */}
+            <ServiceAreas
+                serviceSlug={content.slug}
+                serviceName={content.name}
+                cityName={cityName}
+            />
 
             {/* Google Business Profile */}
             <GoogleBusinessCard cityName={cityName} />
