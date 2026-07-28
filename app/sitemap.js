@@ -1,17 +1,7 @@
-import { pillarServices, CHENNAI_LOCALITIES, APPS_SCRIPT_URL, BASE_URL } from '@/lib/data'
+import { pillarServices, CHENNAI_LOCALITIES, BASE_URL } from '@/lib/data'
+import { getPosts } from '@/lib/sanity'
 
 export const revalidate = 3600
-
-async function getBlogPosts() {
-    try {
-        const res = await fetch(APPS_SCRIPT_URL, { next: { revalidate: 3600 } })
-        if (!res.ok) return []
-        const data = await res.json()
-        return data.posts || []
-    } catch {
-        return []
-    }
-}
 
 export default async function sitemap() {
     const today = new Date().toISOString().split('T')[0]
@@ -45,13 +35,13 @@ export default async function sitemap() {
         })
     )
 
-    // Blog posts from live API
-    const posts = await getBlogPosts()
+    // Blog posts now come from Sanity, matching what /blog actually renders.
+    const posts = await getPosts()
     const blogPages = posts.map(p => ({
         url: `${BASE_URL}/blog/${p.slug}`,
-        lastModified: p.date || today,
+        lastModified: (p.updatedAt || p.publishedAt || today).split('T')[0],
         changeFrequency: 'monthly',
-        priority: 0.6,
+        priority: 0.7,
     }))
 
     return [...staticPages, ...servicePages, ...localityPages, ...blogPages]

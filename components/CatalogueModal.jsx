@@ -7,11 +7,36 @@ import { catalogues } from '@/lib/data'
 const CatalogueModal = ({ isOpen, onClose }) => {
     const [formData, setFormData] = useState({ name: '', phone: '' })
     const [submitted, setSubmitted] = useState(false)
+    const [sending, setSending] = useState(false)
+    const [error, setError] = useState('')
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (formData.name && formData.phone) {
+        if (!formData.name || !formData.phone) return
+
+        setSending(true)
+        setError('')
+        try {
+            const res = await fetch('/api/enquiry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...formData,
+                    service: 'Catalogue download',
+                    source: 'catalogue-modal',
+                    page: typeof window !== 'undefined' ? window.location.pathname : '',
+                }),
+            })
+            const data = await res.json().catch(() => ({}))
+            if (!res.ok || !data.ok) {
+                setError(data.error || 'Could not save your details. Please try again.')
+                return
+            }
             setSubmitted(true)
+        } catch {
+            setError('Network problem. Please try again.')
+        } finally {
+            setSending(false)
         }
     }
 
@@ -62,12 +87,15 @@ const CatalogueModal = ({ isOpen, onClose }) => {
                                     required
                                 />
                             </div>
-                            <button
-                                type="submit"
-                                className="btn btn-primary w-full"
-                            >
-                                Continue to Download <ArrowRight className="w-5 h-5" />
+                            <button type="submit" className="btn btn-primary w-full" disabled={sending}>
+                                {sending ? 'Saving…' : <>Continue to Download <ArrowRight className="w-5 h-5" /></>}
                             </button>
+
+                            {error && (
+                                <p role="alert" className="text-[13px] font-medium text-red-700 bg-red-50 border border-red-200 rounded-xl p-3">
+                                    {error}
+                                </p>
+                            )}
                         </form>
                     ) : (
                         <div className="space-y-4">

@@ -237,6 +237,46 @@ const post = {
     },
 }
 
-export const schemaTypes = [post, author, category, blockContent, contentImage, contentTable, callout, faq]
+/**
+ * A lead captured from the website — the contact form or the catalogue download.
+ * Stored here so enquiries are never dependent on an external script being
+ * configured correctly.
+ */
+const enquiry = {
+    name: 'enquiry',
+    title: 'Enquiry',
+    type: 'document',
+    fields: [
+        { name: 'name', title: 'Name', type: 'string' },
+        { name: 'phone', title: 'Phone', type: 'string' },
+        { name: 'email', title: 'Email', type: 'string' },
+        { name: 'service', title: 'Service', type: 'string' },
+        { name: 'material', title: 'Material', type: 'string' },
+        { name: 'message', title: 'Message', type: 'text', rows: 4 },
+        { name: 'fileName', title: 'Attachment name', type: 'string' },
+        {
+            name: 'source',
+            title: 'Source',
+            type: 'string',
+            description: 'contact-form or catalogue-modal',
+        },
+        { name: 'page', title: 'Submitted from page', type: 'string' },
+        { name: 'submittedAt', title: 'Submitted at', type: 'datetime' },
+        {
+            name: 'forwardedToSheet',
+            title: 'Forwarded to Google Sheet',
+            type: 'boolean',
+            description: 'False when the Apps Script was unreachable or not yet configured.',
+        },
+    ],
+    orderings: [
+        { title: 'Newest first', name: 'newest', by: [{ field: 'submittedAt', direction: 'desc' }] },
+    ],
+    preview: {
+        select: { title: 'name', subtitle: 'phone' },
+    },
+}
+
+export const schemaTypes = [post, author, category, enquiry, blockContent, contentImage, contentTable, callout, faq]
 
 export default schemaTypes

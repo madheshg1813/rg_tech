@@ -60,11 +60,15 @@ const Header = ({ setCatalogueModalOpen }) => {
                             <Image
                                 src="https://res.cloudinary.com/o1ytbfuz/image/upload/v1785177077/rg-tech/rg-tech-logo"
                                 alt="RG Tech Engineering Works — CNC fiber laser cutting specialist in Chennai"
-                                width={160}
-                                height={56}
+                                // Intrinsic ratio of the source file (2169x2362), scaled.
+                                // A mismatched ratio here makes next/image warn and can
+                                // reserve the wrong space before the image loads.
+                                width={220}
+                                height={240}
                                 priority
-                                sizes="160px"
+                                sizes="56px"
                                 className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                style={{ width: "auto", height: "auto" }}
                             />
                             <div className="transition-all hidden sm:block">
                                 <h1 className="text-xl font-bold text-[#0F2A44] leading-none tracking-tight font-heading">

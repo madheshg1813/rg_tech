@@ -17,11 +17,12 @@ const Footer = () => {
                             <Image
                                 src="https://res.cloudinary.com/o1ytbfuz/image/upload/v1785177077/rg-tech/rg-tech-logo"
                                 alt="RG Tech Engineering Works — CNC laser cutting and metal fabrication in Chennai"
-                                width={140}
-                                height={48}
+                                width={220}
+                                height={240}
                                 loading="lazy"
-                                sizes="140px"
+                                sizes="48px"
                                 className="h-12 w-auto brightness-0 invert"
+                                style={{ width: "auto", height: "auto" }}
                             />
                             <h2 className="text-2xl font-bold font-heading">RG Tech</h2>
                         </Link>
@@ -76,9 +77,9 @@ const Footer = () => {
                                     <MapPin className="w-5 h-5 text-accent" />
                                 </div>
                                 <p className="text-white/60 text-sm leading-relaxed font-medium">
-                                    No. 46, Thirumudivakkam Main Rd,<br />
-                                    Thirumudivakkam, Chennai,<br />
-                                    Tamil Nadu 600044
+                                    Door No. 63, B&amp;C Flat, Galaxy Company Salai,<br />
+                                    Ponniamman Nagar, Ayanambakkam,<br />
+                                    Chennai, Tamil Nadu 600095
                                 </p>
                             </div>
                             <div className="flex items-center gap-4">
