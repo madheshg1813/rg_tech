@@ -4,25 +4,45 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { 
-    Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, MessageCircle, 
-    Menu, X, FileText 
+import {
+    Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, MessageCircle,
+    Menu, X, FileText, Newspaper, Building2
 } from 'lucide-react'
 import { pillarServices } from '@/lib/data'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
+/* Everything under the Resources menu, shared by the desktop and mobile navs so
+ * the two cannot drift apart. */
+const RESOURCE_LINKS = [
+    {
+        label: 'Blog',
+        href: '/blog',
+        desc: 'Technical articles on cutting and fabrication',
+        Icon: Newspaper,
+    },
+    {
+        label: 'About Us',
+        href: '/about',
+        desc: 'The workshop, capacity and materials we cut',
+        Icon: Building2,
+    },
+]
+
 const Header = ({ setCatalogueModalOpen }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [servicesDropdown, setServicesDropdown] = useState(false)
+    const [resourcesDropdown, setResourcesDropdown] = useState(false)
     const [openMobileService, setOpenMobileService] = useState(null)
     const pathname = usePathname()
 
     const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev)
     const toggleServicesDropdown = () => setServicesDropdown(prev => !prev)
+    const toggleResourcesDropdown = () => setResourcesDropdown(prev => !prev)
 
     useEffect(() => {
         setMobileMenuOpen(false)
         setServicesDropdown(false)
+        setResourcesDropdown(false)
         setOpenMobileService(null)
     }, [pathname])
 
@@ -91,7 +111,8 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 <button
                                     onClick={toggleServicesDropdown}
                                     onMouseEnter={() => !servicesDropdown && setServicesDropdown(true)}
-                                    className="text-fg hover:text-accent transition-all font-semibold text-sm flex items-center gap-1.5 py-2"
+                                    aria-expanded={servicesDropdown}
+                                    className="nav-link flex items-center gap-1.5 py-2"
                                 >
                                     Services <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesDropdown ? 'rotate-180' : ''}`} />
                                 </button>
@@ -142,11 +163,52 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 )}
                             </div>
 
-                            <a href="/#industries" className="text-fg/70 hover:text-accent transition-all font-semibold text-sm hover:translate-y-[-1px]">Industries</a>
-                            <Link href="/gallery" className="text-fg hover:text-accent transition-all font-bold text-sm hover:translate-y-[-1px] border-b-2 border-transparent hover:border-cta pb-1">Gallery</Link>
-                            <Link href="/blog" className="text-fg hover:text-accent transition-all font-bold text-sm hover:translate-y-[-1px] border-b-2 border-transparent hover:border-cta pb-1">Blog</Link>
-                            <a href="/#about" className="text-fg/70 hover:text-accent transition-all font-semibold text-sm hover:translate-y-[-1px]">About</a>
-                            <a href="/contact" className="text-fg/70 hover:text-accent transition-all font-semibold text-sm hover:translate-y-[-1px]">Contact</a>
+                            <Link href="/gallery" className="nav-link">Gallery</Link>
+
+                            {/* Resources groups the reading material — Blog and About —
+                                so the bar stays at four items as pages get added. */}
+                            <div className="relative">
+                                <button
+                                    onClick={toggleResourcesDropdown}
+                                    onMouseEnter={() => !resourcesDropdown && setResourcesDropdown(true)}
+                                    aria-expanded={resourcesDropdown}
+                                    className="nav-link flex items-center gap-1.5 py-2"
+                                >
+                                    Resources
+                                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${resourcesDropdown ? 'rotate-180' : ''}`} />
+                                </button>
+                                {resourcesDropdown && (
+                                    <div
+                                        onMouseLeave={() => setResourcesDropdown(false)}
+                                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
+                                    >
+                                        <div className="bg-white rounded-2xl shadow-2xl border border-line p-2 w-64">
+                                            {RESOURCE_LINKS.map(({ label, href, desc, Icon }) => (
+                                                <Link
+                                                    key={href}
+                                                    href={href}
+                                                    onClick={() => setResourcesDropdown(false)}
+                                                    className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-surface-2 transition-colors group/link"
+                                                >
+                                                    <span className="w-8 h-8 rounded-lg bg-cta/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                        <Icon className="w-4 h-4 text-accent" />
+                                                    </span>
+                                                    <span className="min-w-0">
+                                                        <span className="block text-sm font-bold text-fg group-hover/link:text-accent transition-colors">
+                                                            {label}
+                                                        </span>
+                                                        <span className="block text-xs text-fg-muted leading-snug mt-0.5">
+                                                            {desc}
+                                                        </span>
+                                                    </span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <Link href="/contact" className="nav-link">Contact</Link>
                         </nav>
 
                         <div className="hidden lg:flex items-center gap-4">
@@ -227,9 +289,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 <p className="meta-label text-accent mb-1 pl-1">Navigation</p>
                                 {[
                                     { label: 'Gallery', href: '/gallery' },
-                                    { label: 'Blog', href: '/blog' },
-                                    { label: 'Industries', href: '/#industries' },
-                                    { label: 'About Us', href: '/#about' },
+                                    ...RESOURCE_LINKS.map(({ label, href }) => ({ label, href })),
                                     { label: 'Contact', href: '/contact' },
                                 ].map(({ label, href }) => (
                                     <Link

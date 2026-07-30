@@ -212,6 +212,27 @@
         color: var(--color-cta-hover);
     }
 
+    /*
+     * Primary nav item. One class for every top-level link and dropdown
+     * trigger, because the bar previously mixed two treatments: Gallery and Blog
+     * were font-bold at full --color-fg with a hover underline, while Services,
+     * Industries, About and Contact were font-semibold at 70% opacity with no
+     * underline. Side by side that read as two tiers of importance that did not
+     * exist.
+     */
+    .nav-link {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        line-height: 1;
+        color: var(--color-fg);
+        white-space: nowrap;
+        transition: color .2s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--color-cta-ink);
+    }
+
     .btn-sm {
         padding: 0.7rem 1.25rem;
         font-size: 0.8125rem;

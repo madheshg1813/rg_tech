@@ -61,7 +61,8 @@ const Footer = () => {
                                 { label: 'Gallery', href: '/gallery' },
                                 { label: 'Blog', href: '/blog' },
                                 { label: 'Contact', href: '/contact' },
-                                { label: 'About Us', href: '/#about' },
+                                { label: 'About Us', href: '/about' },
+                                { label: 'Terms & Conditions', href: '/terms' },
                                 { label: 'Google Business Profile', href: GMB_URL, external: true },
                             ].map(({ label: link, href, external }, i) => {
                                 const cls = "text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium"

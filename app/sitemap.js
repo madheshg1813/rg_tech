@@ -12,6 +12,8 @@ export default async function sitemap() {
         { url: `${BASE_URL}/gallery`,     lastModified: today, changeFrequency: 'weekly',  priority: 0.8 },
         { url: `${BASE_URL}/blog`,        lastModified: today, changeFrequency: 'weekly',  priority: 0.8 },
         { url: `${BASE_URL}/contact`,     lastModified: today, changeFrequency: 'monthly', priority: 0.9 },
+        { url: `${BASE_URL}/about`,       lastModified: today, changeFrequency: 'monthly', priority: 0.7 },
+        { url: `${BASE_URL}/terms`,       lastModified: today, changeFrequency: 'yearly',  priority: 0.3 },
     ]
 
     // Service pages for every city: the pillar plus one page per locality.

@@ -45,10 +45,9 @@ const GalleryClient = () => {
             {/* Gallery Hero */}
             <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none hero-texture"></div>
-                <div className="absolute inset-0 bg-cta/5 skew-y-3 translate-y-20 pointer-events-none"></div>
-                <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">Visual Portfolio</p>
-                    <h2 className="display-title text-fg mb-6">Design <span className="text-accent">Library</span></h2>
+                    <h1 className="display-title text-fg mb-6">Design <span className="text-accent">Library</span></h1>
                     <p className="section-lead max-w-2xl mx-auto">
                         A comprehensive collection of our precision laser cutting, fabrication job work, and architectural metal designs.
                     </p>
@@ -88,7 +87,7 @@ const GalleryClient = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 p-8 flex flex-col justify-end">
                                         <p className="eyebrow mb-2">{item.filter}</p>
-                                        <h4 className="text-white card-title mb-3">{item.title}</h4>
+                                        <h4 className="card-title text-white mb-3">{item.title}</h4>
                                         <div className="flex justify-between items-center">
                                             <p className="text-white/60 text-xs font-medium">{item.material}</p>
                                             <div className="w-10 h-10 rounded-xl bg-cta text-white flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
@@ -104,7 +103,7 @@ const GalleryClient = () => {
                             <div className="w-24 h-24 bg-surface-2 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-line">
                                 <Plus className="w-10 h-10 text-accent animate-pulse" />
                             </div>
-                            <h3 className="section-title text-fg mb-6">Incoming <span className="text-accent">Portfolio</span></h3>
+                            <h2 className="subsection-title text-fg mb-4">Incoming <span className="text-accent">Portfolio</span></h2>
                             <p className="section-lead mb-10">
                                 Our latest project samples and high-precision fabrication designs are currently being updated in our digital library. Check back soon for our newest architectural and industrial works.
                             </p>
