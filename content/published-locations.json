@@ -1,9 +1,11 @@
 {
   "_comment": "Locality pages that are LIVE. The cron appends one slug per city per day and commits, which triggers a rebuild. Chennai is not listed because its ~600 pages are already indexed and stay live unconditionally. Adding a slug here publishes that page; removing it 404s the page and drops it from the sitemap.",
   "madurai": [
-    "anna-nagar"
+    "anna-nagar",
+    "k-k-nagar"
   ],
   "coimbatore": [
-    "r-s-puram"
+    "r-s-puram",
+    "gandhipuram"
   ]
 }
