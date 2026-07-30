@@ -2,3 +2,18 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
+
+# Exceptions — stored as ordinary git blobs, NOT LFS pointers.
+#
+# A host that clones the repo without fetching LFS (Railway does not) sees a
+# ~130 byte pointer file instead of the image. For app/icon.png and
+# app/apple-icon.png that fails the build outright: Next's metadata image loader
+# reports "unsupported file type: undefined". The rest are small assets the
+# running site needs, which would otherwise be served as 130 bytes of pointer
+# text. Total here is ~240 KB, so keeping them out of LFS costs nothing.
+#
+# Large binaries (public/gallery, public/catalogues) deliberately stay in LFS.
+app/icon.png !filter !diff !merge
+app/apple-icon.png !filter !diff !merge
+public/RG-Tech-Logo.png !filter !diff !merge
+public/ai-logos/*.png !filter !diff !merge
