@@ -52,6 +52,22 @@ const nextConfig = {
                 destination: 'https://www.rgtechengineeringworks.com/:path*',
                 permanent: true,
             },
+            /*
+             * The catalogues moved out of /public into object storage. The old
+             * paths must not be left to the static handler: public/catalogues
+             * still contains the Git LFS pointer files, and a host that clones
+             * without fetching LFS serves those 132-byte text files with
+             * Content-Type: application/pdf — a bookmark or a cached link would
+             * download a corrupt PDF rather than fail.
+             *
+             * redirects() is evaluated before filesystem routes, so this wins
+             * over the pointer files.
+             */
+            {
+                source: '/catalogues/:file',
+                destination: '/api/catalogue/:file',
+                permanent: true,
+            },
         ]
     },
 }
