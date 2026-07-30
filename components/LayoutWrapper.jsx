@@ -13,7 +13,7 @@ export default function LayoutWrapper({ children }) {
     const [catalogueModalOpen, setCatalogueModalOpen] = useState(false)
 
     return (
-        <div className="bg-white selection:bg-[#F59E0B]/20">
+        <div className="bg-white selection:bg-cta/20">
             <Header setCatalogueModalOpen={setCatalogueModalOpen} />
             <main>{children}</main>
             <Footer />

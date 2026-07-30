@@ -29,7 +29,10 @@ const Header = ({ setCatalogueModalOpen }) => {
     return (
         <>
             {/* Top Info Bar */}
-            <div className="bg-ink text-white/90 text-[11px] font-medium tracking-wide uppercase border-b border-white/5">
+            {/* Running text, not a label — .meta-label's 0.18em tracking is for
+                two or three words, and pushes a phone number and an address off
+                the bar on narrow screens. */}
+            <div className="bg-ink text-white/90 text-xs font-medium tracking-wide uppercase border-b border-white/5">
                 <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
@@ -48,7 +51,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                             <span>+91 63807-36439</span>
                         </a>
                         <a href="mailto:admin@rgtechengineeringworks.com" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors lowercase tracking-normal">
-                            <Mail className="w-3 h-3 uppercase" />
+                            <Mail className="w-3 h-3" />
                             <span>admin@rgtechengineeringworks.com</span>
                         </a>
                     </div>
@@ -74,10 +77,10 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 style={{ width: "auto", height: "auto" }}
                             />
                             <div className="transition-all hidden sm:block">
-                                <h1 className="text-xl font-bold text-[#0F2A44] leading-none tracking-tight font-heading">
+                                <h1 className="card-title text-fg leading-none">
                                     RG Tech <span className="text-accent">Engineering</span>
                                 </h1>
-                                <p className="text-[10px] text-fg-muted font-bold uppercase tracking-[0.2em] mt-1 opacity-70">
+                                <p className="meta-label text-fg-muted mt-1 opacity-70">
                                     CNC Fiber Laser Specialist
                                 </p>
                             </div>
@@ -88,7 +91,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 <button
                                     onClick={toggleServicesDropdown}
                                     onMouseEnter={() => !servicesDropdown && setServicesDropdown(true)}
-                                    className="text-[#0F2A44] hover:text-accent transition-all font-semibold text-[14px] flex items-center gap-1.5 py-2"
+                                    className="text-fg hover:text-accent transition-all font-semibold text-sm flex items-center gap-1.5 py-2"
                                 >
                                     Services <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesDropdown ? 'rotate-180' : ''}`} />
                                 </button>
@@ -110,11 +113,11 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                 <div key={city.slug}>
                                                     <div className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line">
                                                         <MapPin className="w-3.5 h-3.5 text-accent" />
-                                                        <p className="text-[11px] font-black text-fg uppercase tracking-widest">
+                                                        <p className="meta-label text-fg">
                                                             {city.name}
                                                         </p>
                                                         {!city.isPrimary && (
-                                                            <span className="ml-auto text-[9px] font-bold text-accent bg-[#F59E0B]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                                                            <span className="ml-auto meta-label text-accent bg-cta/10 px-2 py-0.5 rounded-full">
                                                                 New
                                                             </span>
                                                         )}
@@ -127,7 +130,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                             className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-surface-2 transition-colors group/link"
                                                         >
                                                             <ChevronRight className="w-3.5 h-3.5 text-fg-subtle group-hover/link:text-accent flex-shrink-0" />
-                                                            <span className="text-[13.5px] font-medium text-fg-muted group-hover/link:text-fg leading-snug">
+                                                            <span className="text-sm font-medium text-fg-muted group-hover/link:text-fg leading-snug">
                                                                 {svc.name}
                                                             </span>
                                                         </Link>
@@ -139,11 +142,11 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 )}
                             </div>
 
-                            <a href="/#industries" className="text-[#0F2A44]/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">Industries</a>
-                            <Link href="/gallery" className="text-[#0F2A44] hover:text-accent transition-all font-bold text-[14px] hover:translate-y-[-1px] border-b-2 border-transparent hover:border-[#F59E0B] pb-1">Gallery</Link>
-                            <Link href="/blog" className="text-[#0F2A44] hover:text-accent transition-all font-bold text-[14px] hover:translate-y-[-1px] border-b-2 border-transparent hover:border-[#F59E0B] pb-1">Blog</Link>
-                            <a href="/#about" className="text-[#0F2A44]/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">About</a>
-                            <a href="/contact" className="text-[#0F2A44]/70 hover:text-accent transition-all font-semibold text-[14px] hover:translate-y-[-1px]">Contact</a>
+                            <a href="/#industries" className="text-fg/70 hover:text-accent transition-all font-semibold text-sm hover:translate-y-[-1px]">Industries</a>
+                            <Link href="/gallery" className="text-fg hover:text-accent transition-all font-bold text-sm hover:translate-y-[-1px] border-b-2 border-transparent hover:border-cta pb-1">Gallery</Link>
+                            <Link href="/blog" className="text-fg hover:text-accent transition-all font-bold text-sm hover:translate-y-[-1px] border-b-2 border-transparent hover:border-cta pb-1">Blog</Link>
+                            <a href="/#about" className="text-fg/70 hover:text-accent transition-all font-semibold text-sm hover:translate-y-[-1px]">About</a>
+                            <a href="/contact" className="text-fg/70 hover:text-accent transition-all font-semibold text-sm hover:translate-y-[-1px]">Contact</a>
                         </nav>
 
                         <div className="hidden lg:flex items-center gap-4">
@@ -156,7 +159,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                             </button>
                         </div>
 
-                        <button onClick={toggleMobileMenu} className="lg:hidden p-3 rounded-2xl bg-surface-2 text-[#0F2A44] hover:bg-[#F59E0B]/10 hover:text-accent transition-all">
+                        <button onClick={toggleMobileMenu} className="lg:hidden p-3 rounded-2xl bg-surface-2 text-fg hover:bg-cta/10 hover:text-accent transition-all">
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
@@ -170,7 +173,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                          */
                         <nav className="lg:hidden mt-5 pb-6 flex flex-col gap-4 max-h-[calc(100vh-9rem)] overflow-y-auto overscroll-contain custom-scrollbar animate-in fade-in slide-in-from-top-4">
                             <div className="flex flex-col gap-2">
-                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 pl-1">Services</p>
+                                <p className="meta-label text-accent mb-1 pl-1">Services</p>
 
                                 {Object.values(CITIES).map((city, i) => {
                                     const open = openMobileService === i
@@ -182,11 +185,11 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                 aria-expanded={open}
                                                 className="w-full flex items-center justify-between gap-3 py-4 px-4 hover:bg-surface-2 transition-colors"
                                             >
-                                                <span className="flex items-center gap-2 font-bold text-[15px] text-fg">
+                                                <span className="flex items-center gap-2 font-bold text-base text-fg">
                                                     <MapPin className="w-4 h-4 text-accent" />
                                                     {city.name}
                                                     {!city.isPrimary && (
-                                                        <span className="text-[9px] font-bold text-accent bg-[#F59E0B]/10 px-2 py-0.5 rounded-full uppercase">
+                                                        <span className="meta-label text-accent bg-cta/10 px-2 py-0.5 rounded-full">
                                                             New
                                                         </span>
                                                     )}
@@ -203,13 +206,13 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                             key={j}
                                                             href={serviceUrl(city.slug, serviceKeyOf(svc))}
                                                             onClick={() => setMobileMenuOpen(false)}
-                                                            className="block text-[14px] font-medium text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
+                                                            className="block text-sm font-medium text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
                                                         >
                                                             {svc.name}
                                                         </Link>
                                                     ))}
                                                     {areas.length > 0 && (
-                                                        <p className="text-[11px] text-fg-subtle px-3 pt-2 pb-1">
+                                                        <p className="text-xs text-fg-subtle px-3 pt-2 pb-1">
                                                             {areas.length} area{areas.length === 1 ? '' : 's'} covered in {city.name}
                                                         </p>
                                                     )}
@@ -221,7 +224,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                             </div>
 
                             <div className="flex flex-col gap-1 pt-3 border-t border-line">
-                                <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 pl-1">Navigation</p>
+                                <p className="meta-label text-accent mb-1 pl-1">Navigation</p>
                                 {[
                                     { label: 'Gallery', href: '/gallery' },
                                     { label: 'Blog', href: '/blog' },
@@ -233,7 +236,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                         key={label}
                                         href={href}
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="text-fg font-bold text-[15px] py-3 px-4 rounded-xl hover:bg-surface-2 transition-colors"
+                                        className="text-fg font-bold text-base py-3 px-4 rounded-xl hover:bg-surface-2 transition-colors"
                                     >
                                         {label}
                                     </Link>

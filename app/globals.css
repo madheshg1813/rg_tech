@@ -59,14 +59,46 @@
     /* dark text on amber — amber + white fails contrast */
     --color-cta-soft: rgba(245, 158, 11, 0.12);
     --color-cta-ring: rgba(245, 158, 11, 0.35);
-    --color-cta-ink: #B45309;
-    /* amber TEXT on a light surface — #F59E0B on white is only 2.1:1 */
+    --color-cta-ink: #92400E;
+    /* Amber TEXT on a light surface — #F59E0B on white is only 2.1:1.
+     * This was #B45309, which cleared AA on flat white (5.0:1) but fell to
+     * 3.6:1 over the tinted corners of the light .hero-gradient, where the
+     * eyebrow and small accent text now sit. #92400E holds 5.1:1 at the worst
+     * point of the gradient and 7.1:1 on white. The bright --color-cta is
+     * unchanged: it is a button fill, never small text on light. */
 
-    /* ---- Typography: one family, Inter ---- */
-    --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    /* ---- Typography: one family, Inter ----
+     * --font-heading is an alias, not a second family. It exists so a heading
+     * can be marked as such at the call site; it must always resolve to the
+     * same stack as --font-sans. Two families on a technical site like this
+     * read as inconsistent, not as hierarchy. */
+    --font-sans: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system,
         "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-heading: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    --font-heading: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system,
         "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* ---- Type scale ----
+     * Four steps only: 12 / 14 / 16 / 18. Hierarchy above 18px comes from the
+     * .display-title and .section-title classes, which are fluid.
+     * Line heights are set here so body copy is evenly leaded everywhere
+     * without each call site guessing at a leading- utility.
+     *
+     * Never write text-[13.5px] or similar at a call site. A dozen one-off
+     * sizes between 9px and 17px is what made the pages look unfinished. */
+    --text-xs: 0.75rem;
+    --text-xs--line-height: 1.45;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: 1.6;
+    --text-base: 1rem;
+    --text-base--line-height: 1.7;
+    --text-lg: 1.125rem;
+    --text-lg--line-height: 1.6;
+
+    /* ---- Tracking ----
+     * One value for uppercase labels, one for large headings. Previously the
+     * same eyebrow appeared with 11 different letter-spacings. */
+    --tracking-label: 0.18em;
+    --tracking-title: -0.022em;
 
     /* ---- Effects ---- */
     --shadow-premium: 0 10px 30px -5px rgba(15, 42, 68, 0.06),
@@ -85,7 +117,6 @@
         font-family: var(--font-sans);
         color: var(--color-fg);
         background-color: var(--color-surface);
-        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 
     h1,
@@ -199,17 +230,228 @@
         color: var(--color-cta-ink);
     }
 
-    /* Eyebrow label used above section headings */
-    .eyebrow {
-        font-size: 0.6875rem;
+    /*
+     * ---- Type roles ----
+     * Every piece of text on the site is one of these roles or a plain scale
+     * step. Weights are fixed per role so the same kind of text is never 700
+     * in one section and 900 in the next:
+     *
+     *   800  display (hero h1 only)
+     *   700  headings, card titles, uppercase labels, buttons
+     *   500  emphasised body
+     *   400  body
+     *
+     * Weight 900 is deliberately absent. Inter Black at 12-15px reads as a
+     * smudge rather than as emphasis, and it was applied to roughly a third of
+     * the labels on the site.
+     */
+
+    /* Hero headline. Fluid, so it never needs md:/lg: size variants. */
+    .display-title {
+        font-family: var(--font-heading);
+        font-size: clamp(2.25rem, 5vw, 3.75rem);
         font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        color: var(--color-cta-hover);
+        line-height: 1.08;
+        letter-spacing: -0.028em;
     }
 
+    /*
+     * The heading that opens a section. One size for all of them: the site
+     * previously mixed text-3xl/md:text-4xl and text-3xl/md:text-5xl for the
+     * same role, so two sections in a row could open at different sizes.
+     */
+    .section-title {
+        font-family: var(--font-heading);
+        font-size: clamp(1.875rem, 3.4vw, 2.5rem);
+        font-weight: 700;
+        line-height: 1.18;
+        letter-spacing: var(--tracking-title);
+    }
+
+    /* Heading one level below a section: band headings, modal titles, the
+     * heading of a large feature card. */
+    .subsection-title {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.018em;
+    }
+
+    /* Standfirst under a section title. */
+    .section-lead {
+        font-size: 1.0625rem;
+        font-weight: 400;
+        line-height: 1.7;
+        color: var(--color-fg-muted);
+    }
+
+    .on-dark .section-lead {
+        color: var(--color-fg-invert-muted);
+    }
+
+    /* Heading inside a card or list item. */
+    .card-title {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: -0.014em;
+    }
+
+    /* Eyebrow label above a section heading.
+     * Colour is --color-cta-ink, not --color-cta-hover: at 12px an eyebrow is
+     * normal-sized text for contrast purposes, and #D97706 on white is 3.2:1,
+     * under the 4.5:1 minimum. #B45309 is 5.0:1. */
+    .eyebrow {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-label);
+        color: var(--color-cta-ink);
+    }
+
+    .on-dark .eyebrow,
     .eyebrow-on-dark {
         color: var(--color-cta);
+    }
+
+    /* Uppercase micro-label that is not an eyebrow: stat captions, badges,
+     * table headers. Same metrics as .eyebrow but inherits its colour. */
+    .meta-label {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-label);
+    }
+
+    /*
+     * ---- FAQ accordion ----
+     * Shared by the home page and every service page so the two are not two
+     * different accordions. Built on <details> so the answers are in the DOM
+     * for crawlers and the thing works without JavaScript.
+     *
+     * Layout note: the answers must NOT be laid out by grid rows. A two column
+     * grid with explicit `grid-rows-4` gives every row the height of the
+     * tallest cell in it, so opening one answer left four card-sized holes down
+     * both columns. Each column is now its own flex stack — see .faq-columns —
+     * so an open answer only ever moves the cards below it.
+     */
+    .faq-columns {
+        display: grid;
+        gap: 1rem;
+        align-items: start;
+    }
+
+    @media (min-width: 768px) {
+        .faq-columns {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 1.5rem;
+        }
+    }
+
+    .faq-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-content: start;
+    }
+
+    .faq-card {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-line);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-premium);
+        transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .faq-card:hover {
+        border-color: var(--color-line-strong);
+    }
+
+    .faq-card[open] {
+        border-color: var(--color-cta-ring);
+        box-shadow: var(--shadow-glass);
+    }
+
+    .faq-q {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        cursor: pointer;
+        list-style: none;
+        font-size: var(--text-base);
+        font-weight: 700;
+        line-height: 1.45;
+        letter-spacing: -0.011em;
+        color: var(--color-fg);
+    }
+
+    /* Safari still paints its own disclosure triangle without this. */
+    .faq-q::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-q:hover {
+        color: var(--color-cta-ink);
+    }
+
+    /* The +/x icon. Rotating a plus 45deg is the close affordance. */
+    .faq-icon {
+        flex-shrink: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+        margin-top: 0.1875rem;
+        color: var(--color-cta-ink);
+        transition: transform .25s ease;
+    }
+
+    .faq-card[open] .faq-icon {
+        transform: rotate(45deg);
+    }
+
+    /* Indented to start under the question text, with the amber rule marking
+     * the answer. margin-left matches .faq-q's horizontal padding. */
+    .faq-a {
+        margin: 0 1.5rem 1.375rem;
+        padding-left: 1rem;
+        border-left: 2px solid var(--color-cta);
+        font-size: var(--text-sm);
+        line-height: 1.75;
+        color: var(--color-fg-muted);
+    }
+
+    /* <details> cannot transition its own height, so the answer fades in
+     * instead of the panel snapping open. */
+    .faq-card[open] .faq-a {
+        animation: faq-reveal .24s ease-out;
+    }
+
+    @keyframes faq-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(-0.25rem);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .faq-card[open] .faq-a {
+            animation: none;
+        }
+
+        .faq-icon {
+            transition: none;
+        }
     }
 }
 
@@ -226,26 +468,29 @@
     }
 
     /*
-     * Hero background, built from the three logo colours.
+     * Hero background — light, built from the three logo colours.
      *
-     * Indigo (#382898) and green (#00A050) carry the gradient because together
-     * they are 82% of the mark; red (#D82820) appears only as a low-opacity
-     * glow, since a strong red field would fight the amber CTAs and read as a
-     * warning rather than as brand.
+     * The base is a near-white indigo tint that resolves to pure white at the
+     * bottom, so the hero melts into the page instead of ending on a hard band.
+     * Indigo (#382898) and green (#00A050) carry the wash because together they
+     * are 82% of the mark; red (#D82820) is left out entirely — at the low
+     * opacities a light hero needs, red turns pink and reads as an error state.
      *
-     * All three stops are dark enough for white body text at AAA (11.9:1 worst
-     * case) and for the amber accent at AA (5.6:1 worst case) — verified, not
-     * assumed. Do not lighten the stops without re-checking those ratios.
+     * Tints are capped at 12% so text stays on an effectively white field.
+     * Measured at the worst point of the gradient (the indigo corner, which
+     * composites to #D7D9F3): --color-fg is 10.5:1 and --color-cta-ink is
+     * 5.1:1, both AA. Deepening either radial past 12% breaks the accent first
+     * — re-check it before touching these stops.
      */
     .hero-gradient {
-        background-color: #16224F;
+        background-color: #F4F7FF;
         /* flat fallback */
         background-image:
-            radial-gradient(58% 78% at 88% 6%,
-                rgba(216, 40, 32, .20), transparent 60%),
-            radial-gradient(72% 92% at 4% 100%,
-                rgba(0, 160, 80, .30), transparent 62%),
-            linear-gradient(135deg, #241C63 0%, #16224F 48%, #0A3F2E 100%);
+            radial-gradient(62% 70% at 86% 2%,
+                rgba(0, 160, 80, .12), transparent 62%),
+            radial-gradient(68% 78% at 2% 92%,
+                rgba(56, 40, 152, .12), transparent 60%),
+            linear-gradient(180deg, #EDF1FF 0%, #F5F8FF 46%, #FFFFFF 100%);
     }
 
     /*
@@ -264,15 +509,16 @@
      * Decorative texture laid over the hero gradient. This replaces a 872 KB
      * hero-laser.png that was rendered at opacity-10 on five different page
      * types purely as a background — same look, zero bytes, no request.
-     * Colour now comes from .hero-gradient, so this contributes only the etched
-     * line pattern and a soft sheen.
+     *
+     * The etched lines are indigo, not white: on the light hero a white line
+     * pattern is invisible. Kept at 3.5% so it reads as paper texture rather
+     * than as stripes behind the headline.
      */
     .hero-texture {
         background-image:
-            radial-gradient(95% 85% at 8% 100%, rgba(255, 255, 255, .06), transparent 60%),
             repeating-linear-gradient(115deg,
-                rgba(255, 255, 255, .035) 0 1px,
-                transparent 1px 14px);
+                rgba(56, 40, 152, .035) 0 1px,
+                transparent 1px 15px);
     }
 
     /* Hairline divider that reads correctly on either surface */

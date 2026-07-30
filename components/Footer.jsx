@@ -24,14 +24,14 @@ const Footer = () => {
                                 className="h-12 w-auto brightness-0 invert"
                                 style={{ width: "auto", height: "auto" }}
                             />
-                            <h2 className="text-2xl font-bold font-heading">RG Tech</h2>
+                            <h2 className="subsection-title">RG Tech</h2>
                         </Link>
                         <p className="text-white/60 leading-relaxed font-medium">
                             Tamil Nadu's premier CNC Fiber Laser Cutting & Metal Fabrication partner. Delivering industrial precision with zero-defect commitment since inception.
                         </p>
                         <div className="flex gap-4">
                             {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
-                                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-[#F59E0B] hover:scale-110 transition-all duration-300">
+                                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-cta hover:scale-110 transition-all duration-300">
                                     <Icon className="w-5 h-5" />
                                 </a>
                             ))}
@@ -40,7 +40,7 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-lg font-bold mb-8 font-heading text-accent">Core Services</h4>
+                        <h4 className="card-title mb-8 text-accent">Core Services</h4>
                         <ul className="space-y-4">
                             {pillarServices.map((s, i) => (
                                 <li key={i}>
@@ -55,7 +55,7 @@ const Footer = () => {
 
                     {/* Important Pages */}
                     <div>
-                        <h4 className="text-lg font-bold mb-8 font-heading text-accent">Resources</h4>
+                        <h4 className="card-title mb-8 text-accent">Resources</h4>
                         <ul className="space-y-4">
                             {[
                                 { label: 'Gallery', href: '/gallery' },
@@ -88,10 +88,10 @@ const Footer = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="text-lg font-bold mb-8 font-heading text-accent">Reach Us</h4>
+                        <h4 className="card-title mb-8 text-accent">Reach Us</h4>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
+                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
                                     <MapPin className="w-5 h-5 text-accent" />
                                 </div>
                                 <div>
@@ -104,21 +104,21 @@ const Footer = () => {
                                         href={GMB_MAP_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 mt-2 text-accent text-[13px] font-bold hover:underline"
+                                        className="inline-flex items-center gap-1.5 mt-2 text-accent text-sm font-bold hover:underline"
                                     >
                                         View on Google Maps <ExternalLink className="w-3.5 h-3.5" />
                                     </a>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
+                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
                                     <Phone className="w-5 h-5 text-accent" />
                                 </div>
                                 <a href="tel:+916380736439" className="text-white hidden sm:block font-bold">+91 63807 36439</a>
                                 <a href="tel:+916380736439" className="text-white sm:hidden font-bold">+91 63807-36439</a>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
+                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
                                     <Mail className="w-5 h-5 text-accent" />
                                 </div>
                                 <a href="mailto:admin@rgtechengineeringworks.com" className="text-white/80 hover:text-white transition-colors text-sm font-medium truncate">admin@rgtechengineeringworks.com</a>
@@ -140,7 +140,7 @@ const Footer = () => {
             </div>
 
             {/* Background elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-cta/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
         </footer>
     )

@@ -14,25 +14,25 @@ const Services = () => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
-                        <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Our Capabilities</p>
-                        <h3 className="text-3xl md:text-4xl font-bold text-[#0F2A44] font-heading">Industrial Services</h3>
+                        <p className="eyebrow mb-2">Our Capabilities</p>
+                        <h3 className="section-title text-fg">Industrial Services</h3>
                     </div>
-                    <p className="text-fg-muted font-medium max-w-md">Precision engineering services delivered from our state-of-the-art facility in Chennai.</p>
+                    <p className="section-lead max-w-md">Precision engineering services delivered from our state-of-the-art facility in Chennai.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pillarServices.map((s, i) => (
-                        <Link key={i} href={s.slug} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100">
-                            <div className="w-14 h-14 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center mb-8 group-hover:bg-[#F59E0B] transition-colors">
+                        <Link key={i} href={s.slug} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-line">
+                            <div className="w-14 h-14 rounded-xl bg-cta/10 flex items-center justify-center mb-8 group-hover:bg-cta transition-colors">
                                 {(() => {
                                     const Icon = IconMap[s.mainIcon] || Settings
                                     return <Icon className="w-6 h-6 text-accent group-hover:text-white" />
                                 })()}
                             </div>
-                            <h4 className="text-xl font-bold text-[#0F2A44] mb-4 font-heading">{s.name}</h4>
-                            <p className="text-[15px] text-[#0F2A44]/60 leading-relaxed mb-8 flex-grow">
+                            <h4 className="card-title text-fg mb-4">{s.name}</h4>
+                            <p className="text-base text-fg/60 leading-relaxed mb-8 flex-grow">
                                 {s.metaDescription.split('. ')[0]}. Expert cutting and processing for all industrial grades.
                             </p>
-                            <div className="pt-6 border-t border-gray-50 flex items-center justify-between text-accent font-bold text-[13px] group-hover:translate-x-1 transition-transform">
+                            <div className="pt-6 border-t border-line flex items-center justify-between text-accent font-bold text-sm group-hover:translate-x-1 transition-transform">
                                 Explore Service <ArrowRight className="w-4 h-4" />
                             </div>
                         </Link>

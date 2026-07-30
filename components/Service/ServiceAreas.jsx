@@ -34,13 +34,13 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
         <section className="py-20 bg-white border-t border-line">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="text-center mb-12">
-                    <p className="text-accent font-black text-[11px] uppercase tracking-[0.3em] mb-3">
+                    <p className="eyebrow mb-3">
                         Areas We Cover
                     </p>
-                    <h2 className="text-3xl md:text-4xl font-bold text-fg font-heading">
+                    <h2 className="section-title text-fg">
                         Serving All Areas in {city.name}
                     </h2>
-                    <p className="text-[15px] text-fg-muted mt-4 max-w-2xl mx-auto leading-relaxed">
+                    <p className="section-lead mt-4 max-w-2xl mx-auto">
                         {serviceName} delivered across {city.name} and the surrounding industrial belt.
                         Pick your locality for details and local turnaround times.
                     </p>
@@ -55,7 +55,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                                 <li key={locality}>
                                     <span
                                         aria-current="page"
-                                        className="flex items-center justify-center gap-1.5 text-center rounded-xl border-2 border-[#F59E0B] bg-[#F59E0B]/10 px-4 py-3 text-[14px] font-bold text-fg"
+                                        className="flex items-center justify-center gap-1.5 text-center rounded-xl border-2 border-cta bg-cta/10 px-4 py-3 text-sm font-bold text-fg"
                                     >
                                         <MapPin className="w-3.5 h-3.5 text-accent flex-shrink-0" />
                                         {locality}
@@ -68,7 +68,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                             <li key={locality}>
                                 <Link
                                     href={serviceUrl(city.slug, serviceKey, locality)}
-                                    className="block text-center rounded-xl border border-line bg-surface-2 px-4 py-3 text-[14px] font-medium text-fg-muted hover:bg-white hover:border-[#F59E0B] hover:text-fg transition-colors"
+                                    className="block text-center rounded-xl border border-line bg-surface-2 px-4 py-3 text-sm font-medium text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
                                 >
                                     {locality}
                                 </Link>
@@ -81,7 +81,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                     <div className="text-center mt-10">
                         <Link
                             href={pillarHref}
-                            className="text-accent font-bold text-[14px] hover:underline"
+                            className="text-accent font-bold text-sm hover:underline"
                         >
                             ← Back to {serviceName} in {city.name}
                         </Link>

@@ -47,7 +47,7 @@ function TableOfContents({ headings }) {
                 aria-expanded={open}
                 className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left"
             >
-                <span className="flex items-center gap-2.5 font-bold text-fg text-[15px]">
+                <span className="flex items-center gap-2.5 font-bold text-fg text-base">
                     <List className="w-4 h-4 text-fg-subtle" />
                     In this page
                 </span>
@@ -63,9 +63,9 @@ function TableOfContents({ headings }) {
                             <a
                                 href={`#${h.id}`}
                                 aria-current={activeId === h.id ? 'true' : undefined}
-                                className={`block rounded-lg px-3 py-2 text-[13.5px] leading-snug transition-colors ${h.level === 3 ? 'pl-7' : ''
+                                className={`block rounded-lg px-3 py-2 text-sm leading-snug transition-colors ${h.level === 3 ? 'pl-7' : ''
                                     } ${activeId === h.id
-                                        ? 'bg-[#F59E0B]/10 text-[#B45309] font-bold'
+                                        ? 'bg-cta/10 text-accent font-bold'
                                         : 'text-fg-muted hover:text-fg hover:bg-surface-2'
                                     }`}
                             >
@@ -98,7 +98,7 @@ function SummarizeWithAi({ url, title }) {
 
     return (
         <div>
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-fg-subtle mb-3">
+            <p className="meta-label text-fg-subtle mb-3">
                 Summarize with AI
             </p>
             <div className="grid grid-cols-2 gap-2.5">
@@ -108,7 +108,7 @@ function SummarizeWithAi({ url, title }) {
                         href={t.href}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2.5 text-[13px] font-semibold text-fg hover:border-[#F59E0B] hover:text-[#B45309] transition-colors"
+                        className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2.5 text-sm font-semibold text-fg hover:border-cta hover:text-accent transition-colors"
                     >
                         <Image
                             src={t.logo}
@@ -150,7 +150,7 @@ function ShareRail({ url, title }) {
 
     return (
         <div>
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-fg-subtle mb-3">Share</p>
+            <p className="meta-label text-fg-subtle mb-3">Share</p>
             <div className="flex flex-wrap gap-2.5">
                 {links.map(({ name, Icon, href }) => (
                     <a
@@ -160,7 +160,7 @@ function ShareRail({ url, title }) {
                         rel="noopener noreferrer nofollow"
                         aria-label={`Share on ${name}`}
                         title={`Share on ${name}`}
-                        className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-[#F59E0B] hover:text-[#B45309] transition-colors"
+                        className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-cta hover:text-accent transition-colors"
                     >
                         <Icon className="w-4 h-4" />
                     </a>
@@ -169,7 +169,7 @@ function ShareRail({ url, title }) {
                     onClick={copy}
                     aria-label="Copy link"
                     title={copied ? 'Link copied' : 'Copy link'}
-                    className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-[#F59E0B] hover:text-[#B45309] transition-colors"
+                    className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-cta hover:text-accent transition-colors"
                 >
                     {copied ? <Check className="w-4 h-4 text-green-600" /> : <Link2 className="w-4 h-4" />}
                 </button>
@@ -184,13 +184,13 @@ export default function ArticleSidebar({ headings = [], url, title }) {
             <TableOfContents headings={headings} />
 
             {/* Conversion card — mirrors the reference layout's sidebar CTA slot */}
-            <div className="rounded-2xl bg-[#F59E0B]/10 border border-[#F59E0B]/25 p-6 text-center">
-                <p className="font-bold text-fg text-[17px] leading-snug">
+            <div className="rounded-2xl bg-cta/10 border border-cta/25 p-6 text-center">
+                <p className="font-bold text-fg text-lg leading-snug">
                     Skip the guesswork.
                     <br />
                     Send us your drawing.
                 </p>
-                <p className="text-[13.5px] text-fg-muted mt-2.5 leading-relaxed">
+                <p className="text-sm text-fg-muted mt-2.5 leading-relaxed">
                     CNC fiber laser cutting for MS, SS, aluminium, copper and brass — up to 45&nbsp;mm.
                 </p>
                 <Link href="/contact" className="btn btn-primary w-full mt-5">

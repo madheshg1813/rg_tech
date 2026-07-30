@@ -40,31 +40,31 @@ export default function GodPage({ god, city }) {
     return (
         <div className="bg-white">
             {/* ── Hero ─────────────────────────────────────────────────────── */}
-            <section className="on-dark hero-gradient text-white py-24 relative overflow-hidden">
+            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none hero-texture" />
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <div className="inline-flex items-center gap-3 px-4 py-2 bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded-xl mb-8">
+                            <div className="inline-flex items-center gap-3 px-4 py-2 bg-cta/10 border border-cta/20 rounded-xl mb-8">
                                 <Sparkles className="w-3.5 h-3.5 text-accent" />
-                                <span className="text-[11px] font-black text-accent uppercase tracking-[0.2em]">
+                                <span className="meta-label text-accent">
                                     Custom Design Work
                                 </span>
                             </div>
 
-                            <h1 className="text-4xl md:text-6xl font-bold font-heading leading-tight mb-6">
+                            <h1 className="display-title text-fg mb-6">
                                 {god.name} Laser Cutting
                                 <br />
                                 <span className="text-accent">Design in {city.name}</span>
                             </h1>
 
                             {god.alsoKnownAs && (
-                                <p className="text-white/50 text-sm font-medium mb-6">
+                                <p className="text-fg-subtle text-sm font-medium mb-6">
                                     Also known as {god.alsoKnownAs}
                                 </p>
                             )}
 
-                            <p className="text-lg text-white/70 mb-10 max-w-xl leading-relaxed font-medium">
+                            <p className="section-lead mb-10 max-w-xl">
                                 Precision CNC laser cut {god.name} panels in mild steel, stainless steel and
                                 brass — cut from your reference or ours, finished and delivered across{' '}
                                 {city.name}.
@@ -82,18 +82,18 @@ export default function GodPage({ god, city }) {
                                     <MessageCircle className="w-5 h-5" />
                                     Get Design on WhatsApp
                                 </a>
-                                <a href={`tel:+${WA}`} className="btn btn-secondary-dark btn-lg">
+                                <a href={`tel:+${WA}`} className="btn btn-secondary-light btn-lg">
                                     <Phone className="w-4 h-4" /> +91 63807 36439
                                 </a>
                             </div>
 
-                            <p className="text-white/45 text-[13px] mt-5">
+                            <p className="text-fg-subtle text-sm mt-5">
                                 Send a photo or sketch — we reply with sizes and pricing the same day.
                             </p>
                         </div>
 
                         <div className="relative">
-                            <div className="rounded-[2.5rem] overflow-hidden border-8 border-white/5 shadow-2xl">
+                            <div className="rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-line bg-white shadow-premium">
                                 <Image
                                     src={IMAGES.panel}
                                     alt={`Laser cut ${god.name} decorative metal panel design by RG Tech Engineering in ${city.name}`}
@@ -112,17 +112,17 @@ export default function GodPage({ god, city }) {
             {/* ── Specs ────────────────────────────────────────────────────── */}
             <section className="bg-white border-b border-line">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-x-0 lg:divide-y-0 lg:divide-x divide-line">
                         {SPECS.map(({ Icon, label, value }) => (
-                            <div key={label} className="py-10 px-6 flex items-start gap-4">
-                                <span className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
+                            <div key={label} className="py-8 px-6 flex items-start gap-4">
+                                <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
                                     <Icon className="w-5 h-5 text-accent" />
                                 </span>
                                 <div>
-                                    <p className="font-black text-fg text-[12px] uppercase tracking-wider">
+                                    <p className="meta-label text-fg">
                                         {label}
                                     </p>
-                                    <p className="text-[13.5px] text-fg-muted mt-1 leading-snug">{value}</p>
+                                    <p className="text-sm text-fg-muted mt-1 leading-snug">{value}</p>
                                 </div>
                             </div>
                         ))}
@@ -134,28 +134,28 @@ export default function GodPage({ god, city }) {
             <section className="py-24">
                 <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-start">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-fg font-heading mb-6 leading-tight">
+                        <h2 className="section-title text-fg mb-6">
                             Custom {god.name} Panels,
                             <br />
                             <span className="text-accent">Cut to Your Size</span>
                         </h2>
-                        <p className="text-[17px] text-fg-muted leading-relaxed mb-6">
+                        <p className="text-lg text-fg-muted leading-relaxed mb-6">
                             Every {god.name} design is cut on our CNC fiber laser from a vector drawing, so
                             the detail stays crisp at any scale — fine ornamental line work on a pooja room
                             screen, or a bold silhouette across a full gate panel.
                         </p>
-                        <p className="text-[17px] text-fg-muted leading-relaxed mb-8">
+                        <p className="text-lg text-fg-muted leading-relaxed mb-8">
                             Bring a photograph, a temple reference or a rough sketch. We convert it to a
                             cutting file, check the design holds together structurally once material is
                             removed, and confirm the sizes with you before anything is cut.
                         </p>
 
-                        <h3 className="text-xl font-bold text-fg mb-4">Where these are used</h3>
+                        <h3 className="card-title text-fg mb-4">Where these are used</h3>
                         <ul className="space-y-3">
                             {USES.map((u) => (
                                 <li
                                     key={u}
-                                    className="relative pl-7 text-[16px] text-fg-muted leading-relaxed before:absolute before:left-0 before:top-[0.6em] before:w-2 before:h-2 before:rounded-full before:bg-[#F59E0B]"
+                                    className="relative pl-7 text-base text-fg-muted leading-relaxed before:absolute before:left-0 before:top-[0.6em] before:w-2 before:h-2 before:rounded-full before:bg-cta"
                                 >
                                     {u}
                                 </li>
@@ -169,10 +169,10 @@ export default function GodPage({ god, city }) {
                             <span className="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center mb-5">
                                 <MessageCircle className="w-6 h-6 text-[#128C4A]" />
                             </span>
-                            <h3 className="text-2xl font-bold text-fg leading-snug">
+                            <h3 className="subsection-title text-fg">
                                 Send us your {god.name} reference
                             </h3>
-                            <p className="text-[15px] text-fg-muted mt-3 leading-relaxed">
+                            <p className="text-base text-fg-muted mt-3 leading-relaxed">
                                 Share a photo, temple image or sketch on WhatsApp. We come back with
                                 achievable sizes, material options, finish and a price — usually the same
                                 day.
@@ -190,14 +190,14 @@ export default function GodPage({ god, city }) {
                                 Request a Quote <ArrowRight className="w-4 h-4" />
                             </Link>
 
-                            <div className="mt-6 pt-6 border-t border-line grid grid-cols-2 gap-4">
+                            <div className="mt-6 pt-6 border-t border-line grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="flex items-center gap-2.5">
                                     <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0" />
-                                    <span className="text-[13px] text-fg-muted">Design check included</span>
+                                    <span className="text-sm text-fg-muted">Design check included</span>
                                 </div>
                                 <div className="flex items-center gap-2.5">
                                     <Clock className="w-4 h-4 text-accent flex-shrink-0" />
-                                    <span className="text-[13px] text-fg-muted">Same-day reply</span>
+                                    <span className="text-sm text-fg-muted">Same-day reply</span>
                                 </div>
                             </div>
                         </div>
@@ -209,10 +209,10 @@ export default function GodPage({ god, city }) {
             <section className="py-20 bg-surface-2 border-t border-line">
                 <div className="max-w-6xl mx-auto px-4">
                     <div className="text-center mb-10">
-                        <p className="text-accent font-black text-[11px] uppercase tracking-[0.3em] mb-3">
+                        <p className="eyebrow mb-3">
                             More Designs
                         </p>
-                        <h2 className="text-3xl font-bold text-fg font-heading">
+                        <h2 className="section-title text-fg">
                             Related laser cut designs
                         </h2>
                     </div>
@@ -221,19 +221,19 @@ export default function GodPage({ god, city }) {
                             <Link
                                 key={g.key}
                                 href={godUrl(city.slug, g.key)}
-                                className="group rounded-2xl border border-line bg-white px-6 py-5 hover:border-[#F59E0B] transition-colors"
+                                className="group rounded-2xl border border-line bg-white px-6 py-5 hover:border-cta transition-colors"
                             >
-                                <p className="font-bold text-fg group-hover:text-[#B45309] transition-colors">
+                                <p className="font-bold text-fg group-hover:text-accent transition-colors">
                                     {g.name}
                                 </p>
-                                <p className="text-[13px] text-fg-subtle mt-1">
+                                <p className="text-sm text-fg-subtle mt-1">
                                     Laser cutting design in {city.name}
                                 </p>
                             </Link>
                         ))}
                     </div>
                     <div className="text-center mt-10">
-                        <Link href={`/${city.slug}/designs`} className="text-accent font-bold text-[14px] hover:underline">
+                        <Link href={`/${city.slug}/designs`} className="text-accent font-bold text-sm hover:underline">
                             View all {GODS.length} designs →
                         </Link>
                     </div>
@@ -244,12 +244,12 @@ export default function GodPage({ god, city }) {
 
             {/* ── Closing CTA ──────────────────────────────────────────────── */}
             <section className="on-dark py-24 surface-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#F59E0B]/10 skew-y-3 translate-y-32" />
+                <div className="absolute inset-0 bg-cta/10 skew-y-3 translate-y-32" />
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white font-heading mb-6">
+                    <h2 className="section-title text-white mb-6">
                         Ready to make your <span className="text-accent">{god.name} design?</span>
                     </h2>
-                    <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">
+                    <p className="section-lead text-white/60 mb-10 max-w-2xl mx-auto">
                         Send your reference on WhatsApp and get sizes, material options and pricing back the
                         same day.
                     </p>
@@ -257,7 +257,7 @@ export default function GodPage({ god, city }) {
                         <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                             <MessageCircle className="w-5 h-5" /> WhatsApp Us Now
                         </a>
-                        <a href={`tel:+${WA}`} className="btn btn-secondary-dark btn-lg">
+                        <a href={`tel:+${WA}`} className="btn btn-secondary-light btn-lg">
                             <Phone className="w-4 h-4" /> +91 63807 36439
                         </a>
                     </div>

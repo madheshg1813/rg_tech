@@ -64,16 +64,16 @@ export default async function BlogPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
             {/* Blog Hero */}
-            <section className="on-dark hero-gradient text-white py-24 relative overflow-hidden">
+            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none hero-texture"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
-                    <p className="text-accent font-black text-xs uppercase tracking-[0.4em] mb-4">
+                    <p className="eyebrow mb-4">
                         Technical Deep Dives
                     </p>
-                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6">
+                    <h1 className="display-title text-fg mb-6">
                         Engineering <span className="text-accent">Insights</span>
                     </h1>
-                    <p className="text-white/60 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+                    <p className="section-lead max-w-2xl mx-auto">
                         Expert perspectives on laser technology, industrial fabrication, and manufacturing
                         optimization.
                     </p>
@@ -109,13 +109,13 @@ export default async function BlogPage() {
                                                 />
                                             )}
                                             {post.category?.title && (
-                                                <span className="absolute top-6 left-6 px-4 py-1.5 bg-ink-2 text-accent text-[10px] font-black uppercase tracking-widest rounded-full border border-white/10 backdrop-blur-md">
+                                                <span className="absolute top-6 left-6 px-4 py-1.5 bg-ink-2 text-accent meta-label rounded-full border border-white/10 backdrop-blur-md">
                                                     {post.category.title}
                                                 </span>
                                             )}
                                         </div>
                                         <div className="p-8 flex flex-col flex-1">
-                                            <div className="flex items-center gap-6 text-[10px] font-black text-fg-subtle uppercase tracking-widest mb-5">
+                                            <div className="flex items-center gap-6 meta-label text-fg-subtle mb-5">
                                                 <span className="flex items-center gap-2">
                                                     <Calendar className="w-3.5 h-3.5 text-accent" />
                                                     {formatDate(post.publishedAt)}
@@ -125,13 +125,13 @@ export default async function BlogPage() {
                                                     {post.readTime || '5 min read'}
                                                 </span>
                                             </div>
-                                            <h2 className="text-xl font-bold text-fg leading-snug mb-4 group-hover:text-[#B45309] transition-colors">
+                                            <h2 className="card-title text-fg mb-4 group-hover:text-accent transition-colors">
                                                 {post.title}
                                             </h2>
-                                            <p className="text-fg-muted text-[15px] leading-relaxed mb-8 line-clamp-3">
+                                            <p className="text-fg-muted text-base leading-relaxed mb-8 line-clamp-3">
                                                 {post.summary}
                                             </p>
-                                            <span className="mt-auto text-accent font-black text-xs uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                                            <span className="mt-auto text-accent meta-label flex items-center gap-2 group-hover:translate-x-1 transition-transform">
                                                 Read Analysis <ArrowRight className="w-3.5 h-3.5" />
                                             </span>
                                         </div>
@@ -140,11 +140,11 @@ export default async function BlogPage() {
                             })}
                         </div>
                     ) : (
-                        <div className="text-center py-24 bg-surface-2 rounded-[3rem] border-2 border-dashed border-line-strong">
+                        <div className="text-center py-16 sm:py-24 bg-surface-2 rounded-[1.5rem] sm:rounded-[3rem] border-2 border-dashed border-line-strong">
                             <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                                 <FileText className="w-8 h-8 text-accent" />
                             </div>
-                            <h2 className="text-2xl font-bold font-heading text-fg mb-4">
+                            <h2 className="subsection-title text-fg mb-4">
                                 Awaiting New Engineering <span className="text-accent">Insights</span>
                             </h2>
                             <p className="text-fg-muted font-medium max-w-sm mx-auto">

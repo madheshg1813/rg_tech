@@ -137,18 +137,18 @@ export default async function BlogPostPage({ params }) {
                         {/* flex (not inline-flex) so the category pill starts a new line */}
                         <Link
                             href="/blog"
-                            className="flex w-fit items-center gap-2 text-[15px] font-medium text-fg-muted hover:text-fg transition-colors mb-8"
+                            className="flex w-fit items-center gap-2 text-base font-medium text-fg-muted hover:text-fg transition-colors mb-8"
                         >
                             <ChevronLeft className="w-4 h-4" /> Blog
                         </Link>
 
                         {post.category?.title && (
-                            <span className="inline-block rounded-full bg-[#F59E0B]/12 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#B45309]">
+                            <span className="inline-block rounded-full bg-cta/12 px-4 py-1.5 meta-label text-accent">
                                 {post.category.title}
                             </span>
                         )}
 
-                        <h1 className="mt-6 text-4xl md:text-[3.25rem] font-bold text-fg leading-[1.08] tracking-tight text-balance">
+                        <h1 className="mt-6 display-title text-fg text-balance">
                             {post.title}
                         </h1>
 
@@ -173,8 +173,8 @@ export default async function BlogPostPage({ params }) {
                                     </span>
                                 )}
                                 <div>
-                                    <p className="font-bold text-fg text-[15px]">{post.author.name}</p>
-                                    <p className="text-[14px] text-fg-subtle">
+                                    <p className="font-bold text-fg text-base">{post.author.name}</p>
+                                    <p className="text-sm text-fg-subtle">
                                         {post.author.role || 'Content Writer'} · Updated on {formatDate(updated)}
                                     </p>
                                 </div>
@@ -199,13 +199,13 @@ export default async function BlogPostPage({ params }) {
                         {/* TL;DR */}
                         {post.tldr && (
                             <div className="mt-10 rounded-2xl border border-line bg-surface-2 p-6">
-                                <p className="text-[16px] leading-relaxed text-fg-muted m-0">
-                                    <span className="font-black text-fg">TL;DR:</span> {post.tldr}
+                                <p className="text-base leading-relaxed text-fg-muted m-0">
+                                    <span className="font-bold text-fg">TL;DR:</span> {post.tldr}
                                 </p>
                             </div>
                         )}
 
-                        <div className="mt-6 flex flex-wrap items-center gap-6 text-[13px] text-fg-subtle">
+                        <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-fg-subtle">
                             <span className="inline-flex items-center gap-2">
                                 <Calendar className="w-4 h-4" /> {formatDate(post.publishedAt)}
                             </span>
@@ -222,7 +222,7 @@ export default async function BlogPostPage({ params }) {
                         {/* FAQs */}
                         {post.faqs?.length > 0 && (
                             <section className="mt-20" id="faqs">
-                                <h2 className="scroll-mt-28 text-3xl md:text-4xl font-bold text-fg mb-8">
+                                <h2 className="scroll-mt-28 section-title text-fg mb-8">
                                     Frequently Asked Questions
                                 </h2>
                                 <div className="space-y-3">
@@ -232,11 +232,11 @@ export default async function BlogPostPage({ params }) {
                                             className="group rounded-2xl border border-line bg-white overflow-hidden"
                                         >
                                             <summary className="flex items-center justify-between gap-6 p-6 cursor-pointer list-none">
-                                                <span className="font-bold text-fg text-[16px]">{f.question}</span>
+                                                <span className="font-bold text-fg text-base">{f.question}</span>
                                                 <Plus className="w-5 h-5 flex-shrink-0 text-accent group-open:rotate-45 transition-transform" />
                                             </summary>
                                             <div className="px-6 pb-6">
-                                                <p className="text-[15.5px] leading-relaxed text-fg-muted border-l-2 border-[#F59E0B]/40 pl-5">
+                                                <p className="text-base leading-relaxed text-fg-muted border-l-2 border-cta/40 pl-5">
                                                     {f.answer}
                                                 </p>
                                             </div>
@@ -249,18 +249,18 @@ export default async function BlogPostPage({ params }) {
                         {/* Related */}
                         {related.length > 0 && (
                             <section className="mt-20 pt-12 border-t border-line">
-                                <h2 className="text-2xl font-bold text-fg mb-8">Related reading</h2>
+                                <h2 className="subsection-title text-fg mb-8">Related reading</h2>
                                 <div className="grid sm:grid-cols-2 gap-5">
                                     {related.map((rp) => (
                                         <Link
                                             key={rp.slug}
                                             href={`/blog/${rp.slug}`}
-                                            className="group rounded-2xl border border-line p-6 hover:border-[#F59E0B] transition-colors"
+                                            className="group rounded-2xl border border-line p-6 hover:border-cta transition-colors"
                                         >
-                                            <p className="font-bold text-fg leading-snug group-hover:text-[#B45309] transition-colors">
+                                            <p className="font-bold text-fg leading-snug group-hover:text-accent transition-colors">
                                                 {rp.title}
                                             </p>
-                                            <p className="mt-2 text-[14px] text-fg-muted line-clamp-2">{rp.summary}</p>
+                                            <p className="mt-2 text-sm text-fg-muted line-clamp-2">{rp.summary}</p>
                                         </Link>
                                     ))}
                                 </div>

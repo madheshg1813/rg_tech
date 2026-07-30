@@ -95,18 +95,18 @@ const ContactForm = () => {
 
     const sending = status.state === 'sending'
     const inputCls =
-        'w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-[#F59E0B] outline-none transition-all text-sm disabled:opacity-60'
+        'w-full px-5 py-4 rounded-xl border border-line bg-surface-2 focus:bg-white focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-cta outline-none transition-all text-sm disabled:opacity-60'
 
     return (
         <section id="contact" className="on-dark py-24 surface-dark relative overflow-hidden">
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#F59E0B]/10 rounded-full blur-[120px]"></div>
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-cta/10 rounded-full blur-[120px]"></div>
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 <div className="on-light bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-white/20">
-                    <div className="lg:w-2/5 bg-surface-2 p-12">
-                        <h2 className="text-3xl font-bold text-fg mb-6 font-heading">
+                    <div className="lg:w-2/5 bg-surface-2 p-6 sm:p-10">
+                        <h2 className="section-title text-fg mb-6">
                             Start Your <span className="text-accent">Project</span>
                         </h2>
-                        <p className="text-fg-muted mb-10 font-medium">
+                        <p className="section-lead mb-10">
                             Engineer-verified pricing and technical feasibility analysis within 24 business hours.
                         </p>
 
@@ -146,7 +146,7 @@ const ContactForm = () => {
                         </div>
                     </div>
 
-                    <div className="flex-grow p-12">
+                    <div className="flex-grow p-6 sm:p-10">
                         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                             <div className="grid md:grid-cols-2 gap-6">
                                 <input
@@ -207,7 +207,7 @@ const ContactForm = () => {
                                 disabled={sending}
                             />
                             {file ? (
-                                <div className="w-full py-4 px-5 border-2 border-[#F59E0B]/40 bg-[#F59E0B]/5 rounded-xl flex items-center justify-between gap-4">
+                                <div className="w-full py-4 px-5 border-2 border-cta/40 bg-cta/5 rounded-xl flex items-center justify-between gap-4">
                                     <span className="text-sm font-medium text-fg truncate">
                                         {file.name}{' '}
                                         <span className="text-fg-subtle">({(file.size / 1024).toFixed(0)} KB)</span>
@@ -223,7 +223,7 @@ const ContactForm = () => {
                             ) : (
                                 <label
                                     htmlFor="enquiry-file"
-                                    className="w-full py-6 border-2 border-dashed border-gray-200 rounded-xl text-fg-subtle font-bold text-xs uppercase tracking-widest hover:border-[#F59E0B] hover:text-accent transition-all flex items-center justify-center gap-3 cursor-pointer"
+                                    className="w-full py-6 border-2 border-dashed border-line rounded-xl text-fg-subtle meta-label hover:border-cta hover:text-accent transition-all flex items-center justify-center gap-3 cursor-pointer"
                                 >
                                     <Upload className="w-5 h-5" /> Attach CAD/DXF/STEP File
                                 </label>
@@ -242,12 +242,12 @@ const ContactForm = () => {
                             </button>
 
                             {status.state === 'success' && (
-                                <p role="status" className="flex items-start gap-3 text-[14px] font-medium text-green-700 bg-green-50 border border-green-200 rounded-xl p-4">
+                                <p role="status" className="flex items-start gap-3 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-xl p-4">
                                     <CheckCircle className="w-5 h-5 flex-shrink-0 mt-px" /> {status.message}
                                 </p>
                             )}
                             {status.state === 'error' && (
-                                <p role="alert" className="flex items-start gap-3 text-[14px] font-medium text-red-700 bg-red-50 border border-red-200 rounded-xl p-4">
+                                <p role="alert" className="flex items-start gap-3 text-sm font-medium text-red-700 bg-red-50 border border-red-200 rounded-xl p-4">
                                     <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-px" /> {status.message}
                                 </p>
                             )}

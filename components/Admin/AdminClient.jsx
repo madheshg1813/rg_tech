@@ -85,21 +85,21 @@ const AdminClient = () => {
 
     if (!isLoggedIn) {
         return (
-            <div className="on-dark min-h-screen surface-dark flex items-center justify-center p-6">
-                <div className="on-light w-full max-w-[440px] bg-white rounded-[2.5rem] shadow-2xl p-10 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#F59E0B]/5 rounded-full blur-2xl"></div>
+            <div className="on-dark min-h-screen surface-dark flex items-center justify-center p-4 sm:p-6">
+                <div className="on-light w-full max-w-[440px] bg-white rounded-[2.5rem] shadow-2xl p-6 sm:p-10 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-cta/5 rounded-full blur-2xl"></div>
                     <div className="text-center mb-10">
                         <div className="w-16 h-16 bg-ink-2 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-[#0F2A44]/20 transform -rotate-6">
                             <Shield className="w-8 h-8 text-accent" />
                         </div>
-                        <p className="text-accent font-black text-[10px] uppercase tracking-[0.4em] mb-4">Secure Gateway</p>
-                        <h2 className="text-3xl font-black text-[#0F2A44] font-heading italic">Admin <span className="text-accent">Access</span></h2>
+                        <p className="eyebrow mb-4">Secure Gateway</p>
+                        <h2 className="section-title text-fg">Admin <span className="text-accent">Access</span></h2>
                     </div>
                     <form onSubmit={handleLogin} className="space-y-6">
                         <input
                             type="password"
                             placeholder="Enter Industrial Authorization Key"
-                            className="w-full px-6 py-5 rounded-2xl bg-surface-2 border border-line focus:bg-white focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/10 transition-all outline-none text-center font-bold text-fg-muted"
+                            className="w-full px-6 py-5 rounded-2xl bg-surface-2 border border-line focus:bg-white focus:border-cta focus:ring-4 focus:ring-[#F59E0B]/10 transition-all outline-none text-center font-bold text-fg-muted"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -113,21 +113,21 @@ const AdminClient = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#FAFBFC]">
+        <div className="min-h-screen bg-surface-2">
             {/* Admin Nav */}
             <div className="bg-white border-b border-line px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-6 fixed top-0 w-full z-50">
                 <div className="flex items-center gap-6">
                     <div className="bg-ink-2 px-5 py-2.5 rounded-xl flex items-center gap-3">
                         <Shield className="w-5 h-5 text-accent" />
-                        <span className="text-white font-black text-[10px] uppercase tracking-[0.2em]">Engineering Control Panel</span>
+                        <span className="text-white meta-label">Engineering Control Panel</span>
                     </div>
                     <div className="flex gap-1 h-10 bg-surface-2 p-1 rounded-xl">
-                        <button onClick={() => setTab('gallery')} className={`px-6 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'gallery' ? 'bg-white text-accent shadow-sm' : 'text-fg-subtle hover:text-[#0F2A44]'}`}>Gallery</button>
-                        <button onClick={() => setTab('blog')} className={`px-6 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'blog' ? 'bg-white text-accent shadow-sm' : 'text-fg-subtle hover:text-[#0F2A44]'}`}>Technical Blog</button>
+                        <button onClick={() => setTab('gallery')} className={`px-6 rounded-lg meta-label transition-all ${tab === 'gallery' ? 'bg-white text-accent shadow-sm' : 'text-fg-subtle hover:text-fg'}`}>Gallery</button>
+                        <button onClick={() => setTab('blog')} className={`px-6 rounded-lg meta-label transition-all ${tab === 'blog' ? 'bg-white text-accent shadow-sm' : 'text-fg-subtle hover:text-fg'}`}>Technical Blog</button>
                     </div>
                 </div>
                 {status && (
-                    <div className="px-6 py-2.5 bg-[#F59E0B]/10 border border-[#F59E0B]/10 text-accent text-[10px] font-black uppercase tracking-widest rounded-full animate-pulse">
+                    <div className="px-6 py-2.5 bg-cta/10 border border-cta/10 text-accent meta-label rounded-full animate-pulse">
                         {status}
                     </div>
                 )}
@@ -138,7 +138,7 @@ const AdminClient = () => {
                     <div className="grid lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-5">
                             <div className="bg-white p-10 rounded-[2.5rem] border border-line shadow-premium sticky top-32">
-                                <h3 className="text-2xl font-black text-[#0F2A44] font-heading italic mb-8">Add to <span className="text-accent">Portfolio</span></h3>
+                                <h3 className="subsection-title text-fg mb-8">Add to <span className="text-accent">Portfolio</span></h3>
                                 <form onSubmit={handleGallerySubmit} className="space-y-5">
                                     <input type="text" placeholder="Design Title" className="w-full px-6 py-4 rounded-xl bg-surface-2 border border-line focus:bg-white outline-none transition-all text-sm font-bold" value={galleryData.title} onChange={(e) => setGalleryData({ ...galleryData, title: e.target.value })} required />
                                     <input type="url" placeholder="Image URL (Unsplash or Static)" className="w-full px-6 py-4 rounded-xl bg-surface-2 border border-line focus:bg-white outline-none transition-all text-sm font-bold" value={galleryData.image} onChange={(e) => setGalleryData({ ...galleryData, image: e.target.value })} required />
@@ -159,14 +159,14 @@ const AdminClient = () => {
                         </div>
                         <div className="lg:col-span-7">
                             <div className="bg-surface-2 p-10 rounded-[2.5rem] border border-line-strong border-dashed text-center">
-                                <p className="text-fg-subtle font-bold italic">Gallery list management currently syncs directly with data.js via the Apps Script backend.</p>
+                                <p className="text-fg-subtle font-medium">Gallery list management currently syncs directly with data.js via the Apps Script backend.</p>
                             </div>
                         </div>
                     </div>
                 ) : (
                     <div className="space-y-12">
-                        <div className="bg-white p-12 rounded-[3rem] border border-line shadow-premium">
-                            <h3 className="text-2xl font-black text-[#0F2A44] font-heading italic mb-10">Write New <span className="text-accent">Technical Analysis</span></h3>
+                        <div className="bg-white p-12 rounded-[1.5rem] sm:rounded-[3rem] border border-line shadow-premium">
+                            <h3 className="subsection-title text-fg mb-10">Write New <span className="text-accent">Technical Analysis</span></h3>
                             <form onSubmit={handleBlogSubmit} className="space-y-8">
                                 <div className="grid md:grid-cols-2 gap-8">
                                     <div className="space-y-6">
@@ -191,7 +191,7 @@ const AdminClient = () => {
                         </div>
 
                         <div className="space-y-6">
-                            <h4 className="text-xl font-black text-[#0F2A44] font-heading italic pl-2">Live Insights Control</h4>
+                            <h4 className="card-title text-fg pl-2">Live Insights Control</h4>
                             <div className="grid gap-4">
                                 {posts.map((post, i) => (
                                     <div key={i} className="bg-white p-6 rounded-2xl border border-line flex items-center justify-between group hover:shadow-xl transition-all">
@@ -200,11 +200,11 @@ const AdminClient = () => {
                                                 <Image src={post.image} alt={`Featured image thumbnail for blog post: ${post.title}`} fill sizes="48px" className="object-cover" />
                                             </div>
                                             <div>
-                                                <p className="font-black text-[#0F2A44] text-sm group-hover:text-accent transition-colors italic">{post.title}</p>
-                                                <p className="text-[10px] text-fg-subtle font-bold uppercase tracking-widest mt-1">{post.date} • {post.category}</p>
+                                                <p className="font-bold text-fg text-sm group-hover:text-accent transition-colors">{post.title}</p>
+                                                <p className="meta-label text-fg-subtle mt-1">{post.date} • {post.category}</p>
                                             </div>
                                         </div>
-                                        <button onClick={() => handleDeleteBlog(post.slug)} className="p-3 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all">
+                                        <button onClick={() => handleDeleteBlog(post.slug)} className="p-3 text-fg-subtle hover:text-red-500 hover:bg-red-50 rounded-xl transition-all">
                                             <Trash2 className="w-5 h-5" />
                                         </button>
                                     </div>

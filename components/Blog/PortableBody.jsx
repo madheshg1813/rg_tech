@@ -32,7 +32,7 @@ function makeHeading(Tag, className, counter) {
 const CALLOUT_STYLES = {
     tldr: {
         icon: Info,
-        wrap: 'bg-[#F59E0B]/10 border-[#F59E0B]/30',
+        wrap: 'bg-cta/10 border-cta/30',
         iconColor: 'text-accent',
         label: 'TL;DR',
     },
@@ -56,8 +56,8 @@ function Callout({ value }) {
     return (
         <div className={`my-10 rounded-2xl border p-6 flex gap-4 ${style.wrap}`}>
             <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${style.iconColor}`} />
-            <p className="text-[15px] leading-relaxed text-fg m-0">
-                <span className="font-black">{style.label}:</span> {value?.text}
+            <p className="text-base leading-relaxed text-fg m-0">
+                <span className="font-bold">{style.label}:</span> {value?.text}
             </p>
         </div>
     )
@@ -69,7 +69,7 @@ function ContentTable({ value }) {
         <figure className="my-12">
             {/* Wide tables scroll inside their own container so the page never does. */}
             <div className="overflow-x-auto rounded-2xl border border-line">
-                <table className="w-full border-collapse text-[15px] min-w-[520px]">
+                <table className="w-full border-collapse text-base min-w-[520px]">
                     {value.headers?.length > 0 && (
                         <thead>
                             <tr className="bg-surface-2">
@@ -77,7 +77,7 @@ function ContentTable({ value }) {
                                     <th
                                         key={i}
                                         scope="col"
-                                        className="text-left font-black text-fg px-6 py-4 border-b border-line"
+                                        className="text-left font-bold text-fg px-6 py-4 border-b border-line"
                                     >
                                         {h}
                                     </th>
@@ -102,7 +102,7 @@ function ContentTable({ value }) {
                 </table>
             </div>
             {value.caption && (
-                <figcaption className="text-center text-[13px] text-fg-subtle mt-4">{value.caption}</figcaption>
+                <figcaption className="text-center text-sm text-fg-subtle mt-4">{value.caption}</figcaption>
             )}
         </figure>
     )
@@ -124,7 +124,7 @@ function ContentImage({ value }) {
                 />
             </div>
             {value.caption && (
-                <figcaption className="text-center text-[13px] text-fg-subtle mt-4">{value.caption}</figcaption>
+                <figcaption className="text-center text-sm text-fg-subtle mt-4">{value.caption}</figcaption>
             )}
         </figure>
     )
@@ -144,7 +144,7 @@ function LinkMark({ value, children }) {
                 href={href}
                 target="_blank"
                 rel="nofollow noopener noreferrer"
-                className="text-accent font-semibold underline underline-offset-2 hover:text-[#B45309]"
+                className="text-accent font-semibold underline underline-offset-2 hover:text-accent"
             >
                 {children}
             </a>
@@ -153,7 +153,7 @@ function LinkMark({ value, children }) {
     return (
         <Link
             href={href}
-            className="text-accent font-semibold underline underline-offset-2 hover:text-[#B45309]"
+            className="text-accent font-semibold underline underline-offset-2 hover:text-accent"
         >
             {children}
         </Link>
@@ -168,12 +168,12 @@ export default function PortableBody({ value }) {
         block: {
             h2: makeHeading('h2', 'text-3xl md:text-4xl font-bold text-fg mt-16 mb-6 leading-tight', counter),
             h3: makeHeading('h3', 'text-2xl font-bold text-fg mt-12 mb-4 leading-snug', counter),
-            h4: ({ children }) => <h4 className="text-xl font-bold text-fg mt-10 mb-3">{children}</h4>,
+            h4: ({ children }) => <h4 className="card-title text-fg mt-10 mb-3">{children}</h4>,
             normal: ({ children }) => (
-                <p className="text-[17px] leading-[1.8] text-fg-muted mb-6">{children}</p>
+                <p className="text-lg leading-[1.8] text-fg-muted mb-6">{children}</p>
             ),
             blockquote: ({ children }) => (
-                <blockquote className="my-10 border-l-4 border-[#F59E0B] pl-6 italic text-[17px] text-fg-muted">
+                <blockquote className="my-10 border-l-4 border-cta pl-6 italic text-lg text-fg-muted">
                     {children}
                 </blockquote>
             ),
@@ -184,19 +184,19 @@ export default function PortableBody({ value }) {
         },
         listItem: {
             bullet: ({ children }) => (
-                <li className="relative pl-7 text-[17px] leading-[1.8] text-fg-muted before:absolute before:left-0 before:top-[0.7em] before:w-2 before:h-2 before:rounded-full before:bg-[#F59E0B]">
+                <li className="relative pl-7 text-lg leading-[1.8] text-fg-muted before:absolute before:left-0 before:top-[0.7em] before:w-2 before:h-2 before:rounded-full before:bg-cta">
                     {children}
                 </li>
             ),
             number: ({ children }) => (
-                <li className="text-[17px] leading-[1.8] text-fg-muted pl-2">{children}</li>
+                <li className="text-lg leading-[1.8] text-fg-muted pl-2">{children}</li>
             ),
         },
         marks: {
             strong: ({ children }) => <strong className="font-bold text-fg">{children}</strong>,
             em: ({ children }) => <em className="italic">{children}</em>,
             code: ({ children }) => (
-                <code className="px-1.5 py-0.5 rounded bg-surface-3 text-[15px] font-mono text-fg">{children}</code>
+                <code className="px-1.5 py-0.5 rounded bg-surface-3 text-base font-mono text-fg">{children}</code>
             ),
             link: LinkMark,
         },

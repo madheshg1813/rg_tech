@@ -19,17 +19,17 @@ export default function GoogleBusinessCard({ cityName }) {
             <div className="max-w-6xl mx-auto px-4">
                 <div className="rounded-[2rem] border border-line bg-white p-8 md:p-10 flex flex-col lg:flex-row lg:items-center gap-8">
                     <div className="flex-1 min-w-0">
-                        <p className="text-accent font-black text-[11px] uppercase tracking-[0.25em] mb-3">
+                        <p className="eyebrow mb-3">
                             Verified Business
                         </p>
-                        <h2 className="text-2xl md:text-3xl font-bold text-fg leading-snug">
+                        <h2 className="subsection-title text-fg">
                             Find RG Tech Engineering on Google
                         </h2>
-                        <p className="text-[15px] text-fg-muted mt-3 leading-relaxed">
+                        <p className="text-base text-fg-muted mt-3 leading-relaxed">
                             See our workshop location, opening hours, photos of recent work and
                             customer reviews on our Google Business Profile — serving {where}.
                         </p>
-                        <p className="text-[13px] text-fg-subtle mt-4 flex items-start gap-2">
+                        <p className="text-sm text-fg-subtle mt-4 flex items-start gap-2">
                             <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 text-accent" />
                             Door No. 63, B&amp;C Flat, Galaxy Company Salai, Ponniamman Nagar,
                             Ayanambakkam, Chennai 600095
@@ -57,7 +57,7 @@ export default function GoogleBusinessCard({ cityName }) {
                             href={GMB_REVIEW_URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 text-[13px] font-bold text-accent hover:underline py-1"
+                            className="inline-flex items-center justify-center gap-2 text-sm font-bold text-accent hover:underline py-1"
                         >
                             <Star className="w-4 h-4" /> Leave a review
                         </a>

@@ -85,16 +85,16 @@ export default function ContactPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
             {/* Hero */}
-            <section className="on-dark hero-gradient text-white py-24 relative overflow-hidden">
+            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none hero-texture"></div>
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-                    <p className="text-accent font-black text-xs uppercase tracking-[0.4em] mb-4">
+                    <p className="eyebrow mb-4">
                         Get In Touch
                     </p>
-                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 text-balance">
+                    <h1 className="display-title text-fg mb-6 text-balance">
                         Request a <span className="text-accent">Technical Quote</span>
                     </h1>
-                    <p className="text-white/70 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+                    <p className="section-lead max-w-2xl mx-auto">
                         Send your drawing with material, thickness and quantity. You get engineer-verified
                         pricing and a DFM review within 24 business hours.
                     </p>
@@ -108,12 +108,12 @@ export default function ContactPage() {
                         <a
                             key={label}
                             href={href}
-                            className="group min-w-0 bg-white rounded-2xl border border-line p-6 sm:p-8 hover:border-[#F59E0B] hover:shadow-xl transition-all"
+                            className="group min-w-0 bg-white rounded-2xl border border-line p-6 sm:p-8 hover:border-cta hover:shadow-xl transition-all"
                         >
-                            <span className="w-12 h-12 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center mb-5">
+                            <span className="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
                                 <Icon className="w-5 h-5 text-accent" />
                             </span>
-                            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-fg-subtle">
+                            <p className="meta-label text-fg-subtle">
                                 {label}
                             </p>
                             {/*
@@ -121,10 +121,10 @@ export default function ContactPage() {
                              * screen it pushed the card 4px past the viewport.
                              * overflow-wrap:anywhere lets it break mid-word.
                              */}
-                            <p className="font-bold text-fg mt-2 [overflow-wrap:anywhere] group-hover:text-[#B45309] transition-colors">
+                            <p className="font-bold text-fg mt-2 [overflow-wrap:anywhere] group-hover:text-accent transition-colors">
                                 {value}
                             </p>
-                            <p className="text-[13px] text-fg-muted mt-1">{note}</p>
+                            <p className="text-sm text-fg-muted mt-1">{note}</p>
                         </a>
                     ))}
                 </div>
@@ -140,10 +140,10 @@ export default function ContactPage() {
             <section className="py-20 bg-white">
                 <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
                     <div className="rounded-2xl border border-line p-8">
-                        <span className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center mb-5">
+                        <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
                             <MapPin className="w-5 h-5 text-accent" />
                         </span>
-                        <h2 className="text-xl font-bold text-fg mb-3">Visit the workshop</h2>
+                        <h2 className="card-title text-fg mb-3">Visit the workshop</h2>
                         <p className="text-fg-muted leading-relaxed">
                             Door No. 63, B&amp;C Flat, Galaxy Company Salai,
                             <br />
@@ -153,10 +153,10 @@ export default function ContactPage() {
                         </p>
                     </div>
                     <div className="rounded-2xl border border-line p-8">
-                        <span className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 flex items-center justify-center mb-5">
+                        <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
                             <Clock className="w-5 h-5 text-accent" />
                         </span>
-                        <h2 className="text-xl font-bold text-fg mb-3">Working hours</h2>
+                        <h2 className="card-title text-fg mb-3">Working hours</h2>
                         <p className="text-fg-muted leading-relaxed">
                             Monday to Saturday
                             <br />

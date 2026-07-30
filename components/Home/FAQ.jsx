@@ -1,31 +1,38 @@
-"use client"
-import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { faqs } from '@/lib/data'
 
+/*
+ * Uses the same .faq-card accordion as the service pages, and <details> rather
+ * than useState, so the answers are server-rendered into the markup and this is
+ * no longer a client component.
+ */
 const FAQ = () => {
-    const [openFaq, setOpenFaq] = useState(null)
-    const toggleFaq = (i) => setOpenFaq(prev => prev === i ? null : i)
+    const columns = [
+        faqs.slice(0, Math.ceil(faqs.length / 2)),
+        faqs.slice(Math.ceil(faqs.length / 2)),
+    ].filter((column) => column.length > 0)
 
     return (
         <section className="py-24 bg-white">
-            <div className="max-w-3xl mx-auto px-4">
-                <div className="text-center mb-16">
-                    <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Support</p>
-                    <h3 className="text-3xl md:text-4xl font-bold text-[#0F2A44] font-heading italic">Technical <span className="text-accent">FAQs</span></h3>
+            <div className="max-w-5xl mx-auto px-4">
+                <div className="text-center mb-12">
+                    <p className="eyebrow mb-3">Support</p>
+                    <h2 className="section-title text-fg">
+                        Technical <span className="text-accent">FAQs</span>
+                    </h2>
                 </div>
-                <div className="space-y-4">
-                    {faqs.map((faq, i) => (
-                        <div key={i} className="border border-line-strong rounded-xl overflow-hidden transition-all hover:bg-surface-2">
-                            <button onClick={() => toggleFaq(i)} className="w-full flex justify-between items-center p-6 text-left group">
-                                <span className="font-bold text-[#0F2A44] text-[15px] pr-8">{faq.q}</span>
-                                <ChevronDown className={`w-5 h-5 text-fg-subtle transition-transform ${openFaq === i ? 'rotate-180 text-accent' : ''}`} />
-                            </button>
-                            {openFaq === i && (
-                                <div className="px-6 pb-6 animate-in fade-in slide-in-from-top-2">
-                                    <p className="text-[14px] text-fg-muted leading-relaxed border-l-2 border-[#F59E0B]/30 pl-4">{faq.a}</p>
-                                </div>
-                            )}
+                <div className="faq-columns">
+                    {columns.map((column, col) => (
+                        <div key={col} className="faq-column">
+                            {column.map((faq, i) => (
+                                <details key={i} className="faq-card">
+                                    <summary className="faq-q">
+                                        <span>{faq.q}</span>
+                                        <Plus className="faq-icon" aria-hidden="true" />
+                                    </summary>
+                                    <div className="faq-a">{faq.a}</div>
+                                </details>
+                            ))}
                         </div>
                     ))}
                 </div>

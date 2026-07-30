@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import {
@@ -10,11 +10,15 @@ import {
 
 // Single self-hosted family for the whole site. next/font inlines the @font-face
 // rules at build time, so there is no render-blocking request to Google Fonts.
-const inter = Inter({
-    variable: "--font-inter",
+//
+// Plus Jakarta Sans rather than Inter: its wider apertures and geometric round
+// forms hold up at display sizes, which is what the headline-led layout needs.
+// 900 is not loaded — the type scale tops out at 800 (see globals.css).
+const jakarta = Plus_Jakarta_Sans({
+    variable: "--font-sans-brand",
     subsets: ["latin"],
     display: "swap",
-    weight: ["400", "500", "600", "700", "800", "900"],
+    weight: ["400", "500", "600", "700", "800"],
 });
 
 const BASE = "https://www.rgtechengineeringworks.com"
@@ -64,7 +68,7 @@ const siteGraph = jsonLdGraph(organizationSchema, webSiteSchema)
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${inter.variable} scroll-smooth`}>
+        <html lang="en" className={`${jakarta.variable} scroll-smooth`}>
             <head>
                 <script
                     type="application/ld+json"

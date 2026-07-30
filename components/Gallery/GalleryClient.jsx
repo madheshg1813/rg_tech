@@ -43,13 +43,13 @@ const GalleryClient = () => {
     return (
         <div className="bg-white min-h-screen">
             {/* Gallery Hero */}
-            <section className="on-dark hero-gradient text-white py-24 relative overflow-hidden">
+            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none hero-texture"></div>
-                <div className="absolute inset-0 bg-[#F59E0B]/5 skew-y-3 translate-y-20 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-cta/5 skew-y-3 translate-y-20 pointer-events-none"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
-                    <p className="text-accent font-black text-xs uppercase tracking-[0.4em] mb-4">Visual Portfolio</p>
-                    <h2 className="text-4xl md:text-6xl font-bold font-heading mb-6">Design <span className="text-accent">Library</span></h2>
-                    <p className="text-white/60 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+                    <p className="eyebrow mb-4">Visual Portfolio</p>
+                    <h2 className="display-title text-fg mb-6">Design <span className="text-accent">Library</span></h2>
+                    <p className="section-lead max-w-2xl mx-auto">
                         A comprehensive collection of our precision laser cutting, fabrication job work, and architectural metal designs.
                     </p>
                 </div>
@@ -62,7 +62,7 @@ const GalleryClient = () => {
                             <button
                                 key={f}
                                 onClick={() => handleFilterClick(f)}
-                                className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all border shadow-sm ${activeFilter === f ? 'bg-ink-2 text-white border-ink-2 shadow-xl shadow-ink-2/25 scale-105' : 'bg-white text-[#0F2A44]/60 border-line hover:border-[#F59E0B] hover:text-accent'}`}
+                                className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all border shadow-sm ${activeFilter === f ? 'bg-ink-2 text-white border-ink-2 shadow-xl shadow-ink-2/25 scale-105' : 'bg-white text-fg/60 border-line hover:border-cta hover:text-accent'}`}
                             >
                                 {f}
                             </button>
@@ -87,11 +87,11 @@ const GalleryClient = () => {
                                         className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 p-8 flex flex-col justify-end">
-                                        <p className="text-accent text-[10px] font-black uppercase tracking-[0.2em] mb-2">{item.filter}</p>
-                                        <h4 className="text-white font-bold text-lg font-heading leading-tight mb-3">{item.title}</h4>
+                                        <p className="eyebrow mb-2">{item.filter}</p>
+                                        <h4 className="text-white card-title mb-3">{item.title}</h4>
                                         <div className="flex justify-between items-center">
-                                            <p className="text-white/60 text-xs font-medium italic">{item.material}</p>
-                                            <div className="w-10 h-10 rounded-xl bg-[#F59E0B] text-[#0F2A44] flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+                                            <p className="text-white/60 text-xs font-medium">{item.material}</p>
+                                            <div className="w-10 h-10 rounded-xl bg-cta text-fg flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
                                                 <Plus className="w-5 h-5" />
                                             </div>
                                         </div>
@@ -100,12 +100,12 @@ const GalleryClient = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className="max-w-3xl mx-auto py-20 px-8 text-center bg-white border border-line rounded-[3rem] shadow-xl shadow-line-strong/50">
+                        <div className="max-w-3xl mx-auto py-14 px-6 sm:py-20 sm:px-8 text-center bg-white border border-line rounded-[1.5rem] sm:rounded-[3rem] shadow-xl shadow-line-strong/50">
                             <div className="w-24 h-24 bg-surface-2 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-line">
                                 <Plus className="w-10 h-10 text-accent animate-pulse" />
                             </div>
-                            <h3 className="text-3xl font-bold font-heading text-[#0F2A44] mb-6">Incoming <span className="text-accent">Portfolio</span></h3>
-                            <p className="text-lg text-fg-muted font-medium mb-10 leading-relaxed">
+                            <h3 className="section-title text-fg mb-6">Incoming <span className="text-accent">Portfolio</span></h3>
+                            <p className="section-lead mb-10">
                                 Our latest project samples and high-precision fabrication designs are currently being updated in our digital library. Check back soon for our newest architectural and industrial works.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -146,15 +146,15 @@ const GalleryClient = () => {
 
                                 <div className="w-full lg:w-[400px] text-white flex flex-col gap-8">
                                     <div className="space-y-4">
-                                        <div className="inline-block px-4 py-1.5 bg-[#F59E0B]/20 border border-[#F59E0B]/20 rounded-full">
-                                            <p className="text-accent font-black text-[10px] uppercase tracking-widest">{displayed[lightboxIndex].filter}</p>
+                                        <div className="inline-block px-4 py-1.5 bg-cta/20 border border-cta/20 rounded-full">
+                                            <p className="text-accent meta-label">{displayed[lightboxIndex].filter}</p>
                                         </div>
-                                        <h3 className="text-3xl md:text-5xl font-bold font-heading leading-tight">{displayed[lightboxIndex].title}</h3>
+                                        <h3 className="section-title">{displayed[lightboxIndex].title}</h3>
                                     </div>
 
                                     <div className="p-8 bg-white/5 rounded-[2rem] border border-white/10 space-y-6 backdrop-blur-md">
                                         <div className="flex justify-between items-center text-sm">
-                                            <span className="text-white/40 font-bold uppercase tracking-widest text-[10px]">Material Grade</span>
+                                            <span className="text-white/40 meta-label">Material Grade</span>
                                             <span className="font-bold text-accent">{displayed[lightboxIndex].material}</span>
                                         </div>
                                         <p className="text-white/60 text-sm leading-relaxed font-medium">
@@ -169,7 +169,7 @@ const GalleryClient = () => {
                                             >
                                                 <MessageCircle className="w-5 h-5" /> Enquire on WhatsApp
                                             </a>
-                                            <p className="text-center text-[10px] text-white/20 font-bold tracking-widest uppercase">REF: RG-LIB-{lightboxIndex + 5000}</p>
+                                            <p className="text-center meta-label text-white/20">REF: RG-LIB-{lightboxIndex + 5000}</p>
                                         </div>
                                     </div>
                                 </div>
