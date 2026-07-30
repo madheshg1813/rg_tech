@@ -1,0 +1,23 @@
+# Excluded from `railway up` uploads.
+#
+# Only affects CLI uploads — a GitHub-sourced deploy clones the repo as-is and
+# ignores this file. Kept because a full `railway up` of this directory is
+# ~248 MB, which Railway's upload endpoint rejects with a 413.
+
+.git
+node_modules
+.next
+
+# 157 MB of pre-Cloudinary originals. Every one of the 653 gallery entries in
+# lib/galleryData.js points at res.cloudinary.com, so nothing in the app reads
+# these any more. Not deleted from the repo here — that needs a history rewrite,
+# which is a separate job.
+public/gallery
+
+# Generated artefacts, not needed at runtime.
+sheet-rows.csv
+release-summary.json
+publish-summary.json
+
+# public/catalogues is deliberately NOT excluded: the four PDFs are served from
+# /public on purpose because Cloudinary blocks PDF delivery (see lib/data.js).

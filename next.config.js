@@ -28,6 +28,32 @@ const nextConfig = {
     experimental: {
         optimizePackageImports: ['lucide-react'],
     },
+
+    /*
+     * Canonical host: apex → www.
+     *
+     * Note this emits 308, not the 301 the netlify.toml rule used — `permanent:
+     * true` in Next means 308. Both are permanent redirects and Google treats
+     * them the same for canonicalisation, so link equity is unaffected.
+     *
+     * This lived in netlify.toml as a CDN-level force redirect. Platforms that
+     * run the app as a plain Node server (Railway) have no equivalent, so it has
+     * to happen in the app. Kept host-scoped rather than blanket, so
+     * localhost:3000 and any *.up.railway.app preview URL are untouched.
+     *
+     * Harmless while still on Netlify: the CDN rule fires first at the edge, so
+     * this never gets a chance to run there. Safe to keep after cutover.
+     */
+    async redirects() {
+        return [
+            {
+                source: '/:path*',
+                has: [{ type: 'host', value: 'rgtechengineeringworks.com' }],
+                destination: 'https://www.rgtechengineeringworks.com/:path*',
+                permanent: true,
+            },
+        ]
+    },
 }
 
 export default nextConfig
