@@ -19,5 +19,7 @@ sheet-rows.csv
 release-summary.json
 publish-summary.json
 
-# public/catalogues is deliberately NOT excluded: the four PDFs are served from
-# /public on purpose because Cloudinary blocks PDF delivery (see lib/data.js).
+# 108 MB of catalogue PDFs. No longer served from /public — they live in the
+# Railway bucket and are handed out by /api/catalogue/[file] as presigned URLs.
+# The copies here are kept only as the source for a re-upload.
+public/catalogues
