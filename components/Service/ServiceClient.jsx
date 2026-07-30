@@ -117,7 +117,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-x-0 lg:divide-y-0 lg:divide-x divide-line">
                         {content.trustStrip.map((item, i) => (
                             <div key={i} className="py-8 px-6 flex items-center gap-4 group hover:bg-surface-2 transition-colors">
-                                <div className="w-12 h-12 rounded-xl bg-cta/5 flex items-center justify-center text-accent group-hover:bg-cta group-hover:text-fg transition-all">
+                                <div className="w-12 h-12 rounded-xl bg-cta/5 flex items-center justify-center text-accent group-hover:bg-cta group-hover:text-white transition-all">
                                     {(() => {
                                         const TIcon = IconMap[item.icon] || Settings
                                         return <TIcon className="w-6 h-6" />
@@ -174,7 +174,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                     className="w-full aspect-square object-cover"
                                 />
                             </div>
-                            <div className="absolute -bottom-6 -right-6 bg-cta text-fg p-8 rounded-3xl shadow-xl z-20 hidden md:block border-4 border-white">
+                            <div className="absolute -bottom-6 -right-6 bg-cta text-white p-8 rounded-3xl shadow-xl z-20 hidden md:block border-4 border-white">
                                 <p className="text-4xl font-bold leading-none">24</p>
                                 <p className="meta-label mt-1 opacity-80">Hour Delivery</p>
                             </div>

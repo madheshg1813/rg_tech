@@ -91,7 +91,7 @@ const GalleryClient = () => {
                                         <h4 className="text-white card-title mb-3">{item.title}</h4>
                                         <div className="flex justify-between items-center">
                                             <p className="text-white/60 text-xs font-medium">{item.material}</p>
-                                            <div className="w-10 h-10 rounded-xl bg-cta text-fg flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+                                            <div className="w-10 h-10 rounded-xl bg-cta text-white flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
                                                 <Plus className="w-5 h-5" />
                                             </div>
                                         </div>

@@ -5,7 +5,8 @@
  * ---------------------
  * Light + dark mixed theme. Light is the page default; dark surfaces are used
  * deliberately for hero, band and footer sections to create rhythm.
- * Exactly ONE call-to-action colour is used site-wide: --color-cta (amber).
+ * Exactly ONE call-to-action colour is used site-wide: --color-cta (blue).
+ * Emphasis uses a separate accent (the logo green) so green never reads as a link.
  * Fonts are self-hosted by next/font (see app/layout.js) — never @import them
  * here, a CSS @import is render-blocking.
  */
@@ -51,23 +52,34 @@
     --color-line-strong: #CBD6E0;
     --color-line-invert: rgba(255, 255, 255, 0.12);
 
-    /* ---- The single CTA colour ---- */
-    --color-cta: #F59E0B;
-    --color-cta-hover: #D97706;
-    --color-cta-active: #B45309;
-    --color-cta-fg: #1A1206;
-    /* dark text on amber — amber + white fails contrast */
-    --color-cta-soft: rgba(245, 158, 11, 0.12);
-    --color-cta-ring: rgba(245, 158, 11, 0.35);
-    --color-cta-ink: #92400E;
-    /* Amber TEXT on a light surface — #F59E0B on white is only 2.1:1.
-     * This was #B45309, which cleared AA on flat white (5.0:1) but fell to
-     * 3.6:1 over the tinted corners of the light .hero-gradient, where the
-     * eyebrow and small accent text now sit. #92400E holds 5.1:1 at the worst
-     * point of the gradient and 7.1:1 on white. The bright --color-cta is
-     * unchanged: it is a button fill, never small text on light. */
+    /* ---- The single CTA colour: blue, white text ----
+     * Was amber with near-black text. Amber is too light to carry white text
+     * (2.1:1), which forced dark-on-amber buttons; blue takes white cleanly at
+     * 6.7:1, so the button reads as one solid shape instead of two tones. */
+    --color-cta: #1D4ED8;
+    --color-cta-hover: #1A44BC;
+    --color-cta-active: #16379B;
+    --color-cta-fg: #FFFFFF;
+    --color-cta-soft: rgba(29, 78, 216, 0.12);
+    --color-cta-ring: rgba(29, 78, 216, 0.35);
+    --color-cta-ink: #1D4ED8;
+    /* The CTA blue used as TEXT on light — 6.7:1 on white. Reserved for
+     * interactive affordances (link hover, the FAQ +/x). Decorative accents use
+     * the green below instead. */
 
-    /* ---- Typography: one family, Inter ----
+    /* ---- Accent: the logo green ----
+     * Two lightnesses because the site mixes light and dark surfaces.
+     *
+     * The raw logo green #00A050 is NOT usable as text: 3.4:1 on white and
+     * 2.5:1 over the tinted corner of the light hero, both under the 4.5
+     * minimum. --color-accent-ink is that same hue darkened until it passes —
+     * 6.7:1 on white, 5.9:1 on the light surfaces, 4.8:1 at the worst point of
+     * the hero gradient. On dark bands the green goes the other way, lighter:
+     * 7.1:1 on the footer surface. Verified, not assumed. */
+    --color-accent-ink: #046A38;
+    --color-accent-on-dark: #00C462;
+
+    /* ---- Typography: one family, Plus Jakarta Sans ----
      * --font-heading is an alias, not a second family. It exists so a heading
      * can be marked as such at the call site; it must always resolve to the
      * same stack as --font-sans. Two families on a technical site like this
@@ -104,7 +116,7 @@
     --shadow-premium: 0 10px 30px -5px rgba(15, 42, 68, 0.06),
         0 5px 15px -5px rgba(15, 42, 68, 0.04);
     --shadow-glass: 0 8px 32px 0 rgba(15, 42, 68, 0.08);
-    --shadow-cta: 0 10px 25px -8px rgba(245, 158, 11, 0.55);
+    --shadow-cta: 0 10px 25px -8px rgba(29, 78, 216, 0.45);
 }
 
 @layer base {
@@ -141,7 +153,7 @@
 
     /*
      * The site's CTA system. Every call to action uses one of these three,
-     * so the primary action is the same amber everywhere.
+     * so the primary action is the same blue everywhere.
      */
     .btn {
         display: inline-flex;
@@ -212,22 +224,27 @@
     }
 
     /*
-     * Accent text. Because this is a mixed light/dark site the same accent has
-     * to be two different lightnesses to stay legible, so it is resolved from
-     * the nearest surface rather than hardcoded at each call site.
+     * Accent text — the logo green. Because this is a mixed light/dark site the
+     * same accent has to be two different lightnesses to stay legible, so it is
+     * resolved from the nearest surface rather than hardcoded at each call site.
      * Default = light surface. Wrap a dark section in `.on-dark`, and any white
      * card nested inside that dark section in `.on-light`.
+     *
+     * This is deliberately NOT the CTA colour. The accent marks emphasis
+     * (highlighted words in a heading, eyebrows); the CTA blue marks something
+     * you can click. Keeping them separate stops a green heading from reading as
+     * a link.
      */
     .text-accent {
-        color: var(--color-cta-ink);
+        color: var(--color-accent-ink);
     }
 
     .on-dark .text-accent {
-        color: var(--color-cta);
+        color: var(--color-accent-on-dark);
     }
 
     .on-light .text-accent {
-        color: var(--color-cta-ink);
+        color: var(--color-accent-ink);
     }
 
     /*
@@ -299,22 +316,22 @@
         letter-spacing: -0.014em;
     }
 
-    /* Eyebrow label above a section heading.
-     * Colour is --color-cta-ink, not --color-cta-hover: at 12px an eyebrow is
-     * normal-sized text for contrast purposes, and #D97706 on white is 3.2:1,
-     * under the 4.5:1 minimum. #B45309 is 5.0:1. */
+    /* Eyebrow label above a section heading. Uses the accent green.
+     * At 12px an eyebrow counts as normal-sized text for contrast purposes, so
+     * it needs the full 4.5:1 — which is why this is --color-accent-ink and not
+     * the raw logo green (3.4:1 on white). */
     .eyebrow {
         font-size: var(--text-xs);
         font-weight: 700;
         line-height: 1.4;
         text-transform: uppercase;
         letter-spacing: var(--tracking-label);
-        color: var(--color-cta-ink);
+        color: var(--color-accent-ink);
     }
 
     .on-dark .eyebrow,
     .eyebrow-on-dark {
-        color: var(--color-cta);
+        color: var(--color-accent-on-dark);
     }
 
     /* Uppercase micro-label that is not an eyebrow: stat captions, badges,
@@ -478,7 +495,7 @@
      *
      * Tints are capped at 12% so text stays on an effectively white field.
      * Measured at the worst point of the gradient (the indigo corner, which
-     * composites to #D7D9F3): --color-fg is 10.5:1 and --color-cta-ink is
+     * composites to #D7D9F3): --color-fg is 10.5:1 and --color-accent-ink is
      * 5.1:1, both AA. Deepening either radial past 12% breaks the accent first
      * — re-check it before touching these stops.
      */
