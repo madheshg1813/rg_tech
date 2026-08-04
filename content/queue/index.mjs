@@ -43,6 +43,31 @@ export const queue = [
         slug: 'laser-cutting-vs-waterjet-cutting',
         load: async () => (await import('./laser-cutting-vs-waterjet-cutting.mjs')).post,
     },
+
+    // ── Second set ──
+    // Ordering is load-bearing, for the same reason as above: DXF preparation
+    // publishes before the cost guide because the cost guide links to it, and
+    // the jali guide publishes last because it links to three of the others.
+    {
+        slug: 'dxf-file-preparation-for-laser-cutting',
+        load: async () => (await import('./dxf-file-preparation-for-laser-cutting.mjs')).post,
+    },
+    {
+        slug: 'laser-cutting-cost-guide',
+        load: async () => (await import('./laser-cutting-cost-guide.mjs')).post,
+    },
+    {
+        slug: 'stainless-steel-grades-304-vs-316-vs-430',
+        load: async () => (await import('./stainless-steel-grades-304-vs-316-vs-430.mjs')).post,
+    },
+    {
+        slug: 'sheet-metal-bending-after-laser-cutting',
+        load: async () => (await import('./sheet-metal-bending-after-laser-cutting.mjs')).post,
+    },
+    {
+        slug: 'laser-cut-jali-design-guide',
+        load: async () => (await import('./laser-cut-jali-design-guide.mjs')).post,
+    },
     // ── Remaining articles are appended here as they are drafted ──
 ]
 
