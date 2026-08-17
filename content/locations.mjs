@@ -35,3 +35,28 @@ export const COIMBATORE_LOCALITIES = [
     'Chettipalayam', 'Malumichampatti',
 ]
 
+
+/*
+ * Salem. Ordered so the first releases are the areas with the most search
+ * volume and the most industrial activity — Fairlands, Hasthampatti and Ammapet
+ * first, the outlying district towns last. The cron releases from the top, so
+ * this ordering decides which pages exist first.
+ *
+ * Mixes corporation wards with Salem district towns (Attur, Omalur, Mettur and
+ * the rest), which is the same convention the Madurai and Coimbatore lists
+ * already use.
+ */
+export const SALEM_LOCALITIES = [
+    'Fairlands', 'Hasthampatti', 'Ammapet', 'Alagapuram', 'Suramangalam',
+    'Shevapet', 'Gugai', 'Kondalampatty', 'Astampatti', 'Maravaneri',
+    'Narasothipatti', 'Chinnathirupathi', 'Kannankurichi', 'Karuppur',
+    'Jagirammapalayam', 'Dadagapatti', 'Leigh Bazaar', 'Ponnammapet',
+    'Arisipalayam', 'Swarnapuri', 'Seelanaickenpatti', 'Erumapalayam',
+    'Kitchipalayam', 'New Fairlands', 'Ammapalayam', 'Sivathapuram',
+    'Reddiyur', 'Thathakapatti', 'Udayapatti', 'Muthunaickenpatti',
+    'Attur', 'Omalur', 'Mettur', 'Edappadi', 'Sankagiri',
+    'Vazhapadi', 'Valapady', 'Tharamangalam', 'Nangavalli', 'Magudanchavadi',
+    'Kolathur', 'Pethanaickenpalayam', 'Belur', 'Veerapandi', 'Elampillai',
+    'Ayothiyapattinam', 'Panamarathupatti', 'Yercaud', 'Gangavalli',
+    'Thammampatti',
+]

@@ -1,5 +1,6 @@
 import { pillarServices, BASE_URL } from '@/lib/data'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
+import { GODS, godUrl } from '@/lib/gods'
 import { getPosts } from '@/lib/sanity'
 
 export const revalidate = 3600
@@ -37,6 +38,19 @@ export default async function sitemap() {
         })
     )
 
+    // Deity and sacred-symbol design pages. These are live on every city route
+    // and were absent from the sitemap entirely — 200 indexable pages with no
+    // entry. They are ungated, unlike locality pages, so all of them belong
+    // here as soon as the city exists.
+    const designPages = Object.values(CITIES).flatMap(city =>
+        GODS.map(god => ({
+            url: `${BASE_URL}${godUrl(city.slug, god.key)}`,
+            lastModified: today,
+            changeFrequency: 'monthly',
+            priority: city.isPrimary ? 0.6 : 0.5,
+        }))
+    )
+
     // Blog posts now come from Sanity, matching what /blog actually renders.
     const posts = await getPosts()
     const blogPages = posts.map(p => ({
@@ -46,5 +60,5 @@ export default async function sitemap() {
         priority: 0.7,
     }))
 
-    return [...staticPages, ...cityPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...designPages, ...blogPages]
 }

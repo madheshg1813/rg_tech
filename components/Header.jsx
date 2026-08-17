@@ -129,7 +129,11 @@ const Header = ({ setCatalogueModalOpen }) => {
                                         onMouseLeave={() => setServicesDropdown(false)}
                                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
                                     >
-                                        <div className="bg-white rounded-3xl shadow-2xl border border-line p-6 w-[860px] grid grid-cols-3 gap-5">
+                                        {/* Two rows of two from the fourth city onward. A
+                                            fixed 3-column grid at 860px was sized for exactly
+                                            three cities and left a hole in the second row as
+                                            soon as a fourth was added. */}
+                                        <div className="bg-white rounded-3xl shadow-2xl border border-line p-6 w-[680px] grid grid-cols-2 xl:w-[880px] xl:grid-cols-4 gap-5">
                                             {Object.values(CITIES).map((city) => (
                                                 <div key={city.slug}>
                                                     <div className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line">

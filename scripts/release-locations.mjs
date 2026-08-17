@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { MADURAI_LOCALITIES, COIMBATORE_LOCALITIES } from '../content/locations.mjs'
+import { MADURAI_LOCALITIES, COIMBATORE_LOCALITIES, SALEM_LOCALITIES } from '../content/locations.mjs'
 
 /*
  * Deliberately self-contained rather than importing lib/cities.js: that module
@@ -43,6 +43,7 @@ const SERVICE_KEYS = [
 const RELEASE_CITIES_CONFIG = [
     { slug: 'madurai', name: 'Madurai', localities: MADURAI_LOCALITIES },
     { slug: 'coimbatore', name: 'Coimbatore', localities: COIMBATORE_LOCALITIES },
+    { slug: 'salem', name: 'Salem', localities: SALEM_LOCALITIES },
 ]
 
 const localitySlug = (l) => String(l).toLowerCase().replace(/\s+/g, '-')
