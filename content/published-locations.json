@@ -20,7 +20,8 @@
     "arappalayam",
     "chokkikulam",
     "narimedu",
-    "melur"
+    "melur",
+    "thiruparankundram"
   ],
   "coimbatore": [
     "r-s-puram",
@@ -42,7 +43,10 @@
     "race-course",
     "ukkadam",
     "sitra",
-    "kavundampalayam"
+    "kavundampalayam",
+    "koundampalayam"
   ],
-  "salem": []
+  "salem": [
+    "fairlands"
+  ]
 }
