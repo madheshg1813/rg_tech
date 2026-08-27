@@ -29,7 +29,8 @@
     "koodal-nagar",
     "yanaikkal",
     "nelpettai",
-    "east-gate"
+    "east-gate",
+    "south-gate"
   ],
   "coimbatore": [
     "r-s-puram",
@@ -60,7 +61,8 @@
     "kovaipudur",
     "thondamuthur",
     "maniyakarampalayam",
-    "avarampalayam"
+    "avarampalayam",
+    "selvapuram"
   ],
   "salem": [
     "fairlands",
@@ -71,6 +73,7 @@
     "shevapet",
     "gugai",
     "kondalampatty",
-    "astampatti"
+    "astampatti",
+    "maravaneri"
   ]
 }
