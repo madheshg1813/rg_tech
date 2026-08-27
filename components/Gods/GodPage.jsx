@@ -4,7 +4,7 @@ import {
     MessageCircle, ArrowRight, Ruler, Layers, Paintbrush, Wrench,
     ShieldCheck, Clock, Plus, Sparkles, Phone,
 } from 'lucide-react'
-import { GODS, relatedGods, godUrl } from '@/lib/gods'
+import { relatedGods, godUrl } from '@/lib/gods'
 import { IMAGES } from '@/content/lib/images.mjs'
 import GoogleBusinessCard from '@/components/GoogleBusinessCard'
 
@@ -41,7 +41,7 @@ export default function GodPage({ god, city }) {
         <div className="bg-white">
             {/* ── Hero ─────────────────────────────────────────────────────── */}
             <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none hero-texture" />
+                <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
@@ -93,7 +93,7 @@ export default function GodPage({ god, city }) {
                         </div>
 
                         <div className="relative">
-                            <div className="rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-line bg-white shadow-premium">
+                            <div className="framed">
                                 <Image
                                     src={IMAGES.panel}
                                     alt={`Laser cut ${god.name} decorative metal panel design by RG Tech Engineering in ${city.name}`}
@@ -232,11 +232,16 @@ export default function GodPage({ god, city }) {
                             </Link>
                         ))}
                     </div>
-                    <div className="text-center mt-10">
-                        <Link href={`/${city.slug}/designs`} className="text-accent font-bold text-sm hover:underline">
-                            View all {GODS.length} designs →
-                        </Link>
-                    </div>
+                    {/*
+                     * There was a "View all N designs" link to /{city}/designs
+                     * here. No such route exists — the city catch-all resolves
+                     * its slug against the service list, so it 404'd on all 50
+                     * deity pages in all four cities. Removed rather than
+                     * repointed: the national /designs catalogue is a different
+                     * thing (one design so far) and a city-level design index
+                     * has not been planned yet. The grid above already links
+                     * onward, so this is not a dead end.
+                     */}
                 </div>
             </section>
 

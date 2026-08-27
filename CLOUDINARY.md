@@ -85,6 +85,29 @@ That removes **157 MB** from the repo and from every future deploy. Keep
 I have **not** run this — deleting 157 MB of originals should be your decision,
 and it is worth confirming the deployed site looks right first.
 
+## Addendum — the "Our Works" photos (54 files)
+
+A zip of 59 phone photos of finished jobs was added later. They went through
+`scripts/compress-images.mjs` first (dedupe by hash, EXIF-rotate, bound to
+1400px, mozjpeg q78 — 8.95 MB down to 6.34 MB, 3 exact duplicates dropped), then
+into `public/works/` as `rg-work-01.jpg` … `rg-work-55.jpg`. Two of the 56 were
+phone screenshots with chat UI in frame rather than photos of work, so they were
+left out — the numbering has gaps at 16 and 56 as a result.
+
+`'works'` was added to `INCLUDE_DIRS` in `scripts/upload-to-cloudinary.mjs` and
+all 54 uploaded cleanly; the manifest is now 710 entries.
+
+They are consumed by `components/Home/OurWorks.jsx`, which resolves them through
+`cld()` at render time rather than baking URLs into source — unlike the gallery,
+that component is a server component, so the manifest never reaches the client.
+
+Delivery is doing real work here: `rg-work-20.jpg` is a 240 KB stored JPEG and
+comes back as a 54 KB WebP at `w_600`.
+
+```bash
+npm run images:compress -- <src-dir> <out-dir>
+```
+
 ## Re-running
 
 ```bash

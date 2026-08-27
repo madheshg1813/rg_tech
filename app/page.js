@@ -2,6 +2,7 @@ import Hero from '@/components/Home/Hero'
 import RollingLogos from '@/components/Home/RollingLogos'
 import Services from '@/components/Home/Services'
 import Industries from '@/components/Home/Industries'
+import OurWorks from '@/components/Home/OurWorks'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import Testimonials from '@/components/Home/Testimonials'
 import Process from '@/components/Home/Process'
@@ -53,6 +54,7 @@ export default function Home() {
                 dangerouslySetInnerHTML={jsonLdScript(homeGraph)}
             />
             <Hero />
+            <OurWorks />
             <RollingLogos />
             <Services />
             <Industries />

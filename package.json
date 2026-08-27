@@ -11,6 +11,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
+    "images:compress": "node scripts/compress-images.mjs",
     "cloudinary:upload": "node scripts/upload-to-cloudinary.mjs",
     "cloudinary:upload:dry": "node scripts/upload-to-cloudinary.mjs --dry-run",
     "cloudinary:rewrite": "node scripts/rewrite-image-paths.mjs",

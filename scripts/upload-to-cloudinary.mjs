@@ -78,7 +78,7 @@ const RAW_EXT = new Set(['.pdf'])
 // public/catalogues is deliberately NOT included: Cloudinary blocks PDF/ZIP
 // delivery by default and three of the four volumes exceed the 10 MB free-tier
 // upload limit, so the catalogues are still served from the origin.
-const INCLUDE_DIRS = ['gallery']
+const INCLUDE_DIRS = ['gallery', 'works']
 const INCLUDE_FILES = ['hero-laser.png', 'RG-Tech-Logo.png']
 
 function walk(dir, out = []) {

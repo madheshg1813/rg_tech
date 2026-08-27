@@ -99,7 +99,7 @@ export default function AboutPage() {
 
             {/* Hero */}
             <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none hero-texture"></div>
+                <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">About Us</p>
                     <h1 className="display-title text-fg mb-6 text-balance">

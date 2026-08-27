@@ -1,4 +1,9 @@
 import ServiceClient from '@/components/Service/ServiceClient'
+import OurWorks from '@/components/Home/OurWorks'
+import RecommendedArticles from '@/components/Service/RecommendedArticles'
+import { getPosts } from '@/lib/sanity'
+import { pickArticles } from '@/lib/recommendedArticles'
+import { serviceKeyOf } from '@/lib/cities'
 import GodPage from '@/components/Gods/GodPage'
 import { buildMetadata, buildServicePage, resolveGod } from '@/lib/servicePage'
 import { buildGodMetadata, buildGodPage } from '@/lib/godPage'
@@ -30,6 +35,21 @@ export default async function Page({ params }) {
     }
 
     const page = await buildServicePage(CITY, params)
+
+    // The works strip is for the six service pillars only. buildServicePage
+    // sets cityName only on a locality page (/{city}/{service}-in-{locality}),
+    // so its absence is what marks a pillar. Rendered here rather than inside
+    // ServiceClient, which is a client component — see the slot comment there.
+    const isPillar = !page.cityName
+
+    // Only the pillars fetch posts. getPosts() goes through safeFetch, so an
+    // unreachable Sanity returns [] and the section simply does not render
+    // rather than failing the page.
+    const articlePosts = isPillar ? await getPosts() : []
+    const recommended = isPillar
+        ? pickArticles(serviceKeyOf(page.content), articlePosts)
+        : []
+
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(page.graph)} />
@@ -41,6 +61,12 @@ export default async function Page({ params }) {
                 pathName={page.pathName}
                 metaTitle={page.metaTitle}
                 faqs={page.faqs}
+                works={isPillar ? <OurWorks /> : null}
+                articles={
+                    isPillar && recommended.length
+                        ? <RecommendedArticles posts={recommended} serviceName={page.content.name} />
+                        : null
+                }
             />
         </>
     )

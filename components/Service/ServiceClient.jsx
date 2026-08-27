@@ -5,12 +5,17 @@ import {
     Phone, Mail, MapPin, Clock, ArrowRight, Shield, Target, Zap, 
     Wrench, CheckCircle, FileText, Package, Eye, Layers, Ruler, 
     Sparkles, Plus, MessageCircle, Wind, Scissors, PanelTop, Home, DoorOpen, Settings,
-    Factory, Cpu, Building2, Paintbrush, Truck, Send
+    Factory, Cpu, Building2, Paintbrush, Truck, Send, ShieldCheck
 } from 'lucide-react'
 import { SERVICE_IMAGE_POOLS } from '@/lib/data'
 import { getRotationIndex, localizeText, buildAlt, resolveFaqs } from '@/lib/utils'
 import GoogleBusinessCard from '@/components/GoogleBusinessCard'
+import GoogleRating from '@/components/GoogleRating'
 import ServiceAreas from '@/components/Service/ServiceAreas'
+
+// Matches the home hero. "ISO Certified" is deliberately absent from both:
+// the Google rating beside it is verifiable, an unlinked badge is not.
+const HERO_CREDENTIALS = ['15+ Years', '1000+ Projects']
 
 const IconMap = {
     Phone, Mail, MapPin, Clock, ArrowRight, Shield, Target, Zap, 
@@ -19,7 +24,7 @@ const IconMap = {
     Factory, Cpu, Building2, Paintbrush, Truck, Send
 }
 
-const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle, faqs }) => {
+const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle, faqs, works, articles }) => {
     const Icon = IconMap[content.mainIcon] || Settings;
     const serviceKey = content.slug.split('/').pop()
     const pool = SERVICE_IMAGE_POOLS[serviceKey] || SERVICE_IMAGE_POOLS['laser-cutting-services']
@@ -56,23 +61,22 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
         <div className="bg-white">
             {/* Service Hero */}
             <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none hero-texture"></div>
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-indigo/5 -skew-x-12 translate-x-1/4 pointer-events-none hidden md:block"></div>
+                <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div>
-                            <div className="inline-flex items-center gap-3 px-4 py-2 bg-cta/10 border border-cta/20 rounded-xl mb-8">
-                                <span className="w-2 h-2 rounded-full bg-cta animate-pulse"></span>
-                                <span className="meta-label text-accent">Certified Industrial Hub</span>
-                            </div>
-                            <h1 className="display-title text-fg mb-8">
+                            <p className="stamp mb-6">
+                                <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+                                Certified Industrial Hub
+                            </p>
+                            <h1 className="display-title text-fg mb-6">
                                 {displayTitle.split(' in ')[0]} <br />
                                 <span className="text-accent">{displayTitle.includes(' in ') ? `in ${displayTitle.split(' in ')[1]}` : ''}</span>
                             </h1>
-                            <p className="section-lead mb-12 max-w-xl">
+                            <p className="section-lead mb-9 max-w-[50ch]">
                                 {localizeText(content.heroDesc, place, cityIndex)}
                             </p>
-                            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                            <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                                 <a href="/contact" className="btn btn-primary">
                                     Get Technical Quote <ArrowRight className="w-4 h-4" />
                                 </a>
@@ -80,12 +84,24 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                     <MessageCircle className="w-5 h-5" /> WhatsApp Support
                                 </a>
                             </div>
+
+                            {/* Same credibility line as the home hero. Sits under
+                                the CTAs so the rating is the last thing read
+                                before the decision, and it is a third-party claim
+                                the visitor can click through and check. */}
+                            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-9 pt-7 border-t border-line">
+                                <GoogleRating />
+                                <span className="hidden sm:block w-px h-8 bg-line" aria-hidden="true" />
+                                {HERO_CREDENTIALS.map((c) => (
+                                    <span key={c} className="meta-label text-fg-subtle">{c}</span>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="relative">
                             {/* skew-y removed: on a phone the tilt pushed a corner of
                                 the photo past the viewport edge. */}
-                            <div className="relative z-10 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-line bg-white shadow-premium">
+                            <div className="framed relative z-10">
                                 <Image
                                     src={displayHeroImage}
                                     alt={buildAlt({
@@ -102,9 +118,9 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                     className="w-full aspect-[4/3] object-cover"
                                 />
                             </div>
-                            <div className="absolute -bottom-8 -left-4 xl:-left-10 bg-white p-8 rounded-[2rem] shadow-xl z-20 hidden lg:block border border-line transition-transform hover:scale-105">
-                                <p className="meta-label text-fg-subtle mb-2">Technical Reach</p>
-                                <p className="subsection-title text-fg">Fast 24h <br /><span className="text-accent">Response</span></p>
+                            <div className="framed absolute -bottom-5 -left-4 xl:-left-8 px-5 py-4 z-20 hidden lg:block">
+                                <p className="meta-label text-fg-subtle mb-1">Technical Reach</p>
+                                <p className="subsection-title text-fg">Fast 24h <span className="text-accent">Response</span></p>
                             </div>
                         </div>
                     </div>
@@ -132,6 +148,21 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                     </div>
                 </div>
             </div>
+
+            {/*
+             * Photo proof, straight after the hero and its trust strip — the
+             * same position it holds on the home page. Delivered work is the
+             * strongest thing on the page, so it runs before the copy rather
+             * than after it.
+             *
+             * Rendered by the route rather than imported here: OurWorks resolves
+             * 54 Cloudinary URLs through the 710-entry manifest, and this file
+             * is a client component, so importing it would push that whole
+             * manifest into the browser bundle. Passed in as an already-rendered
+             * element it stays server-side. The route also decides who gets it —
+             * pillar pages only, not the locality pages.
+             */}
+            {works}
 
             {/* Content & SEO Grid */}
             <section className="py-24 bg-white overflow-hidden">
@@ -299,6 +330,12 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                     </div>
                 </div>
             </section>
+
+            {/* Recommended reading, last thing before the footer. Same slot
+                pattern as {works} above: built by the route so this client
+                component never pulls the Sanity client into the browser
+                bundle, and so the route decides who gets it — pillars only. */}
+            {articles}
         </div>
     )
 }

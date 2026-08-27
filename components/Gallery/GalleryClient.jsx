@@ -44,7 +44,7 @@ const GalleryClient = () => {
         <div className="bg-white min-h-screen">
             {/* Gallery Hero */}
             <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none hero-texture"></div>
+                <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">Visual Portfolio</p>
                     <h1 className="display-title text-fg mb-6">Design <span className="text-accent">Library</span></h1>
@@ -74,7 +74,7 @@ const GalleryClient = () => {
                                 <div
                                     key={i}
                                     onClick={() => openLightbox(i)}
-                                    className="break-inside-avoid group relative rounded-3xl overflow-hidden bg-white border border-line shadow-sm transition-all hover:shadow-2xl cursor-zoom-in hover:-translate-y-1"
+                                    className="framed-soft break-inside-avoid group relative shadow-sm transition-all hover:shadow-2xl cursor-zoom-in hover:-translate-y-1"
                                 >
                                     <Image
                                         src={item.img}

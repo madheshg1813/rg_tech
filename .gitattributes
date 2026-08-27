@@ -17,3 +17,7 @@ app/icon.png !filter !diff !merge
 app/apple-icon.png !filter !diff !merge
 public/RG-Tech-Logo.png !filter !diff !merge
 public/ai-logos/*.png !filter !diff !merge
+# The Google Business Profile QR. Served straight from public/ as a plain static
+# asset (marked unoptimized so nothing re-encodes a scannable bitmap), so an LFS
+# pointer here would render 130 bytes of text where the code should be. 14 KB.
+public/google-review-qr.png !filter !diff !merge

@@ -86,7 +86,7 @@ export default function ContactPage() {
 
             {/* Hero */}
             <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none hero-texture"></div>
+                <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
                     <p className="eyebrow mb-4">
                         Get In Touch

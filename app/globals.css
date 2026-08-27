@@ -3,10 +3,15 @@
 /*
  * RG Tech design system
  * ---------------------
- * Light + dark mixed theme. Light is the page default; dark surfaces are used
- * deliberately for hero, band and footer sections to create rhythm.
+ * Light + dark mixed theme. White is the page default — heroes included; dark
+ * surfaces are used deliberately for band, contact and footer sections to
+ * create rhythm.
  * Exactly ONE call-to-action colour is used site-wide: --color-cta (blue).
  * Emphasis uses a separate accent (the logo green) so green never reads as a link.
+ *
+ * Type: three families, one job each — Archivo (display), Public Sans (body),
+ * JetBrains Mono (uppercase micro-labels). See the --font-* tokens below.
+ * Corners: 2px on buttons, 3px on photo mounts. Sharp is the house style.
  * Fonts are self-hosted by next/font (see app/layout.js) — never @import them
  * here, a CSS @import is render-blocking.
  */
@@ -79,15 +84,25 @@
     --color-accent-ink: #046A38;
     --color-accent-on-dark: #00C462;
 
-    /* ---- Typography: one family, Plus Jakarta Sans ----
-     * --font-heading is an alias, not a second family. It exists so a heading
-     * can be marked as such at the call site; it must always resolve to the
-     * same stack as --font-sans. Two families on a technical site like this
-     * read as inconsistent, not as hierarchy. */
-    --font-sans: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system,
+    /* ---- Typography: three families, one job each ----
+     * Was a single family (Plus Jakarta Sans) aliased to both roles. Three
+     * families read as inconsistent only when they are all doing the same job;
+     * here each one is doing a different one, which is what gives the page its
+     * hierarchy without needing extra weight or size steps:
+     *
+     *   --font-heading  Archivo         headings, buttons, card titles
+     *   --font-sans     Public Sans     body copy, everything unstyled
+     *   --font-mono     JetBrains Mono  uppercase micro-labels only
+     *
+     * --font-mono is NOT for code. It is the label voice: eyebrows, stat
+     * captions, badges. Setting those in a monospace is what makes them read as
+     * stamped record headings instead of small headlines. */
+    --font-sans: var(--font-body-brand), ui-sans-serif, system-ui, -apple-system,
         "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-heading: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system,
+    --font-heading: var(--font-display-brand), ui-sans-serif, system-ui, -apple-system,
         "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: var(--font-mono-brand), ui-monospace, "SFMono-Regular", Menlo,
+        Consolas, monospace;
 
     /* ---- Type scale ----
      * Four steps only: 12 / 14 / 16 / 18. Hierarchy above 18px comes from the
@@ -109,8 +124,8 @@
     /* ---- Tracking ----
      * One value for uppercase labels, one for large headings. Previously the
      * same eyebrow appeared with 11 different letter-spacings. */
-    --tracking-label: 0.18em;
-    --tracking-title: -0.022em;
+    --tracking-label: 0.16em;
+    --tracking-title: -0.028em;
 
     /* ---- Effects ---- */
     --shadow-premium: 0 10px 30px -5px rgba(15, 42, 68, 0.06),
@@ -127,8 +142,13 @@
 
     body {
         font-family: var(--font-sans);
+        /* 17px, not 16. Public Sans runs a little small at 16 and the whole
+         * point of the wider measure is that body copy is comfortable. */
+        font-size: 17px;
+        line-height: 1.62;
         color: var(--color-fg);
         background-color: var(--color-surface);
+        -webkit-font-smoothing: antialiased;
     }
 
     h1,
@@ -138,7 +158,10 @@
     h5,
     h6 {
         font-family: var(--font-heading);
-        letter-spacing: -0.02em;
+        /* -0.024em, up from -0.02em: Archivo's even sidebearings hold at this
+         * tracking where the previous rounder family started to collide. */
+        letter-spacing: -0.024em;
+        text-wrap: balance;
     }
 
     /* Consistent focus ring in the CTA colour, on light and dark alike */
@@ -159,15 +182,28 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.625rem;
-        padding: 1rem 2rem;
-        border-radius: 0.875rem;
+        gap: 0.55rem;
+        padding: 0.95rem 1.6rem;
+        /*
+         * 2px, down from 14px. The rounded pill read as a soft consumer app;
+         * a near-square edge reads as industrial, and it is the single change
+         * that most changes the character of the page — every CTA on the site
+         * goes through this class.
+         *
+         * A border on the base class, not just on the outline variants, so the
+         * filled and outlined buttons are the same physical size and sit on the
+         * same baseline when they are side by side in a hero.
+         */
+        border-radius: 2px;
+        border: 1.5px solid transparent;
+        font-family: var(--font-heading);
         font-weight: 700;
-        font-size: 0.875rem;
+        font-size: 0.9rem;
+        letter-spacing: -0.01em;
         line-height: 1;
         white-space: nowrap;
-        transition: background-color .2s ease, border-color .2s ease,
-            color .2s ease, box-shadow .2s ease, transform .2s ease;
+        transition: background-color .16s ease, border-color .16s ease,
+            color .16s ease, box-shadow .16s ease, transform .16s ease;
     }
 
     /* Primary — the one CTA colour, identical on light and dark backgrounds */
@@ -287,10 +323,10 @@
     /* Hero headline. Fluid, so it never needs md:/lg: size variants. */
     .display-title {
         font-family: var(--font-heading);
-        font-size: clamp(2.25rem, 5vw, 3.75rem);
+        font-size: clamp(2.25rem, 5.6vw, 3.85rem);
         font-weight: 800;
-        line-height: 1.08;
-        letter-spacing: -0.028em;
+        line-height: 1.06;
+        letter-spacing: -0.035em;
     }
 
     /*
@@ -300,9 +336,9 @@
      */
     .section-title {
         font-family: var(--font-heading);
-        font-size: clamp(1.875rem, 3.4vw, 2.5rem);
-        font-weight: 700;
-        line-height: 1.18;
+        font-size: clamp(1.875rem, 4.2vw, 2.75rem);
+        font-weight: 800;
+        line-height: 1.1;
         letter-spacing: var(--tracking-title);
     }
 
@@ -342,7 +378,8 @@
      * it needs the full 4.5:1 — which is why this is --color-accent-ink and not
      * the raw logo green (3.4:1 on white). */
     .eyebrow {
-        font-size: var(--text-xs);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
         font-weight: 700;
         line-height: 1.4;
         text-transform: uppercase;
@@ -358,7 +395,8 @@
     /* Uppercase micro-label that is not an eyebrow: stat captions, badges,
      * table headers. Same metrics as .eyebrow but inherits its colour. */
     .meta-label {
-        font-size: var(--text-xs);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
         font-weight: 700;
         line-height: 1.4;
         text-transform: uppercase;
@@ -505,6 +543,17 @@
         text-wrap: balance;
     }
 
+    /* Horizontal scroller with no visible bar — used by the /designs category
+     * pill, which scrolls sideways on a phone rather than wrapping to two rows. */
+    .no-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
     /*
      * Hero background — light, built from the three logo colours.
      *
@@ -521,14 +570,95 @@
      * — re-check it before touching these stops.
      */
     .hero-gradient {
-        background-color: #F4F7FF;
-        /* flat fallback */
+        /*
+         * White, not a tinted gradient.
+         *
+         * This was a blue-white wash with green and indigo radials in the
+         * corners. It gave the top of every page a colour cast that fought the
+         * photography and made the whole site feel dimmer than it is. The
+         * ground is now plain white and the brand colour arrives only where it
+         * means something: the accent word in the headline, the CTA, the tick
+         * marks. Everything that reads as "premium" here is doing so through
+         * contrast and spacing rather than through a tint.
+         *
+         * The faint indigo remains, at a fraction of the strength, as the
+         * graph-paper rule below.
+         */
+        background-color: var(--color-surface);
+    }
+
+    /*
+     * Engineering graph paper behind the hero copy.
+     *
+     * A 46px grid of hairlines, masked to an ellipse so it fades out before it
+     * reaches the photograph and never runs under body text at full strength.
+     * It is drawn with gradients — no image request — and replaces both the old
+     * .hero-texture stripes and the skewed indigo wedge.
+     */
+    .hero-grid-paper {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
         background-image:
-            radial-gradient(62% 70% at 86% 2%,
-                rgba(0, 160, 80, .12), transparent 62%),
-            radial-gradient(68% 78% at 2% 92%,
-                rgba(56, 40, 152, .12), transparent 60%),
-            linear-gradient(180deg, #EDF1FF 0%, #F5F8FF 46%, #FFFFFF 100%);
+            linear-gradient(var(--color-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+        background-size: 46px 46px;
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 20% 25%, #000, transparent 70%);
+        mask-image: radial-gradient(ellipse 70% 60% at 20% 25%, #000, transparent 70%);
+        opacity: .6;
+    }
+
+    /*
+     * The photo mount.
+     *
+     * What makes the reference site's images look sharp is not the file — it is
+     * the mount: a 1.5px near-black rule hard against the image edge, a 3px
+     * radius rather than a soft one, and a shadow that sits under the frame
+     * instead of blurring around it. A 24px-radius card with a pale border does
+     * the opposite; it softens the photograph's own edges.
+     *
+     * Use on the wrapper, not the <img>, so the border is not scaled by any
+     * transform on the image inside.
+     */
+    .framed {
+        border: 1.5px solid var(--color-fg);
+        border-radius: 3px;
+        overflow: hidden;
+        background: var(--color-surface);
+        box-shadow:
+            0 1px 2px rgba(15, 42, 68, .05),
+            0 8px 24px -12px rgba(15, 42, 68, .18);
+    }
+
+    /* Lighter mount for images that repeat — grids, strips, cards — where a
+     * full-strength rule on every tile would read as a cage. */
+    .framed-soft {
+        border: 1px solid var(--color-line-strong);
+        border-radius: 3px;
+        overflow: hidden;
+        background: var(--color-surface);
+    }
+
+    /*
+     * Stamp: the hero's credential badge. Mono, boxed, in the brand green
+     * rather than the CTA blue — it is a statement of fact, not something to
+     * click, and it must not compete with the button below it.
+     */
+    .stamp {
+        display: inline-flex;
+        align-items: center;
+        gap: .55rem;
+        font-family: var(--font-mono);
+        font-size: .7rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--color-accent-ink);
+        background: rgba(0, 160, 80, .09);
+        border: 1px solid rgba(0, 160, 80, .35);
+        border-radius: 2px;
+        padding: .4rem .75rem;
     }
 
     /*
@@ -543,20 +673,207 @@
             linear-gradient(160deg, #1B1750 0%, #141B45 60%, #10203C 100%);
     }
 
+
     /*
-     * Decorative texture laid over the hero gradient. This replaces a 872 KB
-     * hero-laser.png that was rendered at opacity-10 on five different page
-     * types purely as a background — same look, zero bytes, no request.
+     * ---- Persistent contact: WhatsApp float + mobile call bar ----
+     * Markup in components/FloatingContact.jsx.
      *
-     * The etched lines are indigo, not white: on the light hero a white line
-     * pattern is invisible. Kept at 3.5% so it reads as paper texture rather
-     * than as stripes behind the headline.
+     * #25D366 is WhatsApp's own green and is used verbatim here. It is the one
+     * deliberate exception to "green means RG Tech" — on a channel badge the
+     * platform's colour is the recognition cue, and recolouring it to the brand
+     * green would make it read as decoration rather than as WhatsApp.
      */
-    .hero-texture {
-        background-image:
-            repeating-linear-gradient(115deg,
-                rgba(56, 40, 152, .035) 0 1px,
-                transparent 1px 15px);
+    .wa {
+        position: fixed;
+        right: 1.15rem;
+        bottom: 1.15rem;
+        z-index: 70;
+        display: inline-flex;
+        align-items: center;
+        gap: .72rem;
+        background: var(--color-surface);
+        border: 1.5px solid var(--color-line);
+        border-radius: 999px;
+        padding: .5rem 1.2rem .5rem .5rem;
+        text-decoration: none;
+        box-shadow:
+            0 10px 30px -12px rgba(15, 42, 68, .5),
+            0 2px 6px rgba(15, 42, 68, .09);
+        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .wa:hover {
+        transform: translateY(-2px);
+        border-color: #25D366;
+        box-shadow:
+            0 14px 34px -12px rgba(37, 211, 102, .55),
+            0 2px 6px rgba(15, 42, 68, .09);
+    }
+
+    .wa-ic {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #25D366;
+        display: grid;
+        place-items: center;
+        flex: none;
+        position: relative;
+    }
+
+    .wa-ic svg {
+        width: 23px;
+        height: 23px;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* One slow attention ring. Disabled under reduced-motion below. */
+    .wa-ic::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 2px solid #25D366;
+        animation: waPulse 2.6s ease-out infinite;
+    }
+
+    @keyframes waPulse {
+        0% { transform: scale(1); opacity: .7 }
+        70%, 100% { transform: scale(1.55); opacity: 0 }
+    }
+
+    .wa-tx {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .wa-tx b {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: .9rem;
+        letter-spacing: -.022em;
+        color: var(--color-fg);
+        white-space: nowrap;
+    }
+
+    .wa-tx > span {
+        font-family: var(--font-mono);
+        font-size: .6rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--color-fg-subtle);
+        margin-top: .16rem;
+    }
+
+    /* The bar is mobile-only; nothing renders on desktop. */
+    .mcall {
+        display: none;
+    }
+
+    @media (max-width: 760px) {
+        .mcall {
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 60;
+            align-items: stretch;
+            gap: .55rem;
+            padding: .6rem;
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-line);
+            box-shadow: 0 -6px 20px -10px rgba(15, 42, 68, .35);
+            /* Below the home indicator on iOS, not under it. */
+            padding-bottom: max(.6rem, env(safe-area-inset-bottom));
+        }
+
+        .mcall .btn {
+            flex: 1;
+            padding: .92rem 1rem;
+            font-size: .92rem;
+        }
+
+        .mcall-wa {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            flex: 1;
+            padding: .92rem 1rem;
+            background: #25D366;
+            color: #fff;
+            border-radius: 2px;
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: .92rem;
+            letter-spacing: -.01em;
+            transition: filter .16s ease;
+            animation: wa-glow 3.2s ease-in-out infinite;
+        }
+
+        .mcall-wa svg { flex: none }
+        .mcall-wa:hover, .mcall-wa:active { filter: brightness(1.07) }
+
+        /* Sheen: a band of light crossing the face in the first ~28% of the
+         * cycle, then waiting out the rest, so it glints occasionally rather
+         * than shimmering constantly. */
+        .mcall-wa::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 45%;
+            pointer-events: none;
+            background: linear-gradient(100deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, .42) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-160%) skewX(-18deg);
+            animation: wa-sheen 3.2s ease-in-out infinite;
+        }
+
+        /* The float collapses to its badge and lifts clear of the bar. */
+        .wa {
+            padding: 0;
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+            right: 1rem;
+            bottom: calc(5.35rem + env(safe-area-inset-bottom));
+        }
+
+        .wa-tx { display: none }
+
+        .wa-ic {
+            width: 52px;
+            height: 52px;
+            box-shadow:
+                0 8px 22px -6px rgba(37, 211, 102, .6),
+                0 2px 6px rgba(0, 0, 0, .2);
+        }
+
+        .wa-ic svg { width: 28px; height: 28px }
+
+        /* Clears the bar so the footer is never trapped underneath it. */
+        body { padding-bottom: 5.25rem }
+    }
+
+    @keyframes wa-glow {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0) }
+        45% { box-shadow: 0 0 14px 1px rgba(37, 211, 102, .55) }
+    }
+
+    @keyframes wa-sheen {
+        0% { transform: translateX(-160%) skewX(-18deg) }
+        28%, 100% { transform: translateX(320%) skewX(-18deg) }
     }
 
     /* Hairline divider that reads correctly on either surface */
@@ -580,10 +897,88 @@
         animation: scroll 40s linear infinite;
     }
 
+    /*
+     * "Our Works" photo strip. Same mechanic as .animate-scroll — the track is
+     * rendered twice and translated to -50%, so the seam lands on an identical
+     * frame — but slower, because these are photographs a visitor reads rather
+     * than logos they glance at.
+     *
+     * Duration is a variable so the two rows can run at slightly different
+     * speeds; identical speeds in opposite directions read as one rigid block.
+     */
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: scroll var(--marquee-duration, 70s) linear infinite;
+    }
+
+    .marquee-track-reverse {
+        animation-direction: reverse;
+    }
+
+    /* Pause while the pointer is over the strip, or while a card inside it has
+     * keyboard focus — otherwise a link can scroll out from under the cursor. */
+    .marquee-viewport:hover .marquee-track,
+    .marquee-viewport:focus-within .marquee-track {
+        animation-play-state: paused;
+    }
+
+    /* Soften both ends so photos enter and leave rather than being sliced off
+     * at the viewport edge. The mask is on the viewport, which is only as wide
+     * as the screen — never on the track, which is thousands of pixels wide. */
+    .marquee-viewport {
+        -webkit-mask-image: linear-gradient(to right,
+                transparent 0,
+                #000 2rem,
+                #000 calc(100% - 2rem),
+                transparent 100%);
+        mask-image: linear-gradient(to right,
+                transparent 0,
+                #000 2rem,
+                #000 calc(100% - 2rem),
+                transparent 100%);
+    }
+
+    @media (min-width: 768px) {
+        .marquee-viewport {
+            -webkit-mask-image: linear-gradient(to right,
+                    transparent 0,
+                    #000 6rem,
+                    #000 calc(100% - 6rem),
+                    transparent 100%);
+            mask-image: linear-gradient(to right,
+                    transparent 0,
+                    #000 6rem,
+                    #000 calc(100% - 6rem),
+                    transparent 100%);
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
         .animate-scroll {
             animation: none;
+        }
+
+        /* Removed outright, not slowed: a paused sheen would sit frozen
+         * halfway across the button face. */
+        .mcall-wa {
+            animation: none;
+        }
+
+        .mcall-wa::after,
+        .wa-ic::after {
+            display: none;
+        }
+
+        /* No animation means the track just overflows, so hand the row back to
+         * the user as an ordinary horizontal scroller. */
+        .marquee-track {
+            animation: none;
+        }
+
+        .marquee-viewport {
+            overflow-x: auto;
         }
 
         html {

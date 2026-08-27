@@ -153,7 +153,7 @@ export default function TermsPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
             <section className="hero-gradient py-16 md:py-20 relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none hero-texture"></div>
+                <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">Legal</p>
                     <h1 className="display-title text-fg mb-6">

@@ -5902,5 +5902,491 @@
     "height": 2362,
     "format": "png",
     "bytes": 160914
+  },
+  "/works/rg-work-01.jpg": {
+    "publicId": "rg-tech/works/rg-work-01",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 540,
+    "height": 720,
+    "format": "jpg",
+    "bytes": 41343
+  },
+  "/works/rg-work-02.jpg": {
+    "publicId": "rg-tech/works/rg-work-02",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 512,
+    "height": 371,
+    "format": "jpg",
+    "bytes": 21158
+  },
+  "/works/rg-work-03.jpg": {
+    "publicId": "rg-tech/works/rg-work-03",
+    "resourceType": "image",
+    "version": 1787764629,
+    "width": 266,
+    "height": 485,
+    "format": "jpg",
+    "bytes": 20589
+  },
+  "/works/rg-work-04.jpg": {
+    "publicId": "rg-tech/works/rg-work-04",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 720,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 63745
+  },
+  "/works/rg-work-05.jpg": {
+    "publicId": "rg-tech/works/rg-work-05",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 780,
+    "height": 1040,
+    "format": "jpg",
+    "bytes": 64658
+  },
+  "/works/rg-work-06.jpg": {
+    "publicId": "rg-tech/works/rg-work-06",
+    "resourceType": "image",
+    "version": 1787764629,
+    "width": 780,
+    "height": 1040,
+    "format": "jpg",
+    "bytes": 104889
+  },
+  "/works/rg-work-07.jpg": {
+    "publicId": "rg-tech/works/rg-work-07",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 780,
+    "height": 1040,
+    "format": "jpg",
+    "bytes": 77456
+  },
+  "/works/rg-work-08.jpg": {
+    "publicId": "rg-tech/works/rg-work-08",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 1280,
+    "height": 1189,
+    "format": "jpg",
+    "bytes": 210295
+  },
+  "/works/rg-work-09.jpg": {
+    "publicId": "rg-tech/works/rg-work-09",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 780,
+    "height": 1040,
+    "format": "jpg",
+    "bytes": 105002
+  },
+  "/works/rg-work-10.jpg": {
+    "publicId": "rg-tech/works/rg-work-10",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 780,
+    "height": 1040,
+    "format": "jpg",
+    "bytes": 81644
+  },
+  "/works/rg-work-11.jpg": {
+    "publicId": "rg-tech/works/rg-work-11",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 655,
+    "height": 507,
+    "format": "jpg",
+    "bytes": 27270
+  },
+  "/works/rg-work-12.jpg": {
+    "publicId": "rg-tech/works/rg-work-12",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 529,
+    "height": 580,
+    "format": "jpg",
+    "bytes": 21220
+  },
+  "/works/rg-work-13.jpg": {
+    "publicId": "rg-tech/works/rg-work-13",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 49014
+  },
+  "/works/rg-work-14.jpg": {
+    "publicId": "rg-tech/works/rg-work-14",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 554,
+    "height": 554,
+    "format": "jpg",
+    "bytes": 25591
+  },
+  "/works/rg-work-15.jpg": {
+    "publicId": "rg-tech/works/rg-work-15",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 488,
+    "height": 1040,
+    "format": "jpg",
+    "bytes": 28767
+  },
+  "/works/rg-work-17.jpg": {
+    "publicId": "rg-tech/works/rg-work-17",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 198497
+  },
+  "/works/rg-work-18.jpg": {
+    "publicId": "rg-tech/works/rg-work-18",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 500,
+    "height": 500,
+    "format": "jpg",
+    "bytes": 24510
+  },
+  "/works/rg-work-19.jpg": {
+    "publicId": "rg-tech/works/rg-work-19",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 644,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 103678
+  },
+  "/works/rg-work-20.jpg": {
+    "publicId": "rg-tech/works/rg-work-20",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 245370
+  },
+  "/works/rg-work-21.jpg": {
+    "publicId": "rg-tech/works/rg-work-21",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 179729
+  },
+  "/works/rg-work-22.jpg": {
+    "publicId": "rg-tech/works/rg-work-22",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 186896
+  },
+  "/works/rg-work-23.jpg": {
+    "publicId": "rg-tech/works/rg-work-23",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 161396
+  },
+  "/works/rg-work-24.jpg": {
+    "publicId": "rg-tech/works/rg-work-24",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 164425
+  },
+  "/works/rg-work-25.jpg": {
+    "publicId": "rg-tech/works/rg-work-25",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 181183
+  },
+  "/works/rg-work-26.jpg": {
+    "publicId": "rg-tech/works/rg-work-26",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 204280
+  },
+  "/works/rg-work-27.jpg": {
+    "publicId": "rg-tech/works/rg-work-27",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 166652
+  },
+  "/works/rg-work-28.jpg": {
+    "publicId": "rg-tech/works/rg-work-28",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 141261
+  },
+  "/works/rg-work-29.jpg": {
+    "publicId": "rg-tech/works/rg-work-29",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 227113
+  },
+  "/works/rg-work-30.jpg": {
+    "publicId": "rg-tech/works/rg-work-30",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 99044
+  },
+  "/works/rg-work-31.jpg": {
+    "publicId": "rg-tech/works/rg-work-31",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 126387
+  },
+  "/works/rg-work-32.jpg": {
+    "publicId": "rg-tech/works/rg-work-32",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 66793
+  },
+  "/works/rg-work-33.jpg": {
+    "publicId": "rg-tech/works/rg-work-33",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1152,
+    "height": 519,
+    "format": "jpg",
+    "bytes": 150473
+  },
+  "/works/rg-work-34.jpg": {
+    "publicId": "rg-tech/works/rg-work-34",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 960,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 215839
+  },
+  "/works/rg-work-35.jpg": {
+    "publicId": "rg-tech/works/rg-work-35",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 152686
+  },
+  "/works/rg-work-36.jpg": {
+    "publicId": "rg-tech/works/rg-work-36",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 960,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 247416
+  },
+  "/works/rg-work-37.jpg": {
+    "publicId": "rg-tech/works/rg-work-37",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 216736
+  },
+  "/works/rg-work-38.jpg": {
+    "publicId": "rg-tech/works/rg-work-38",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 243624
+  },
+  "/works/rg-work-39.jpg": {
+    "publicId": "rg-tech/works/rg-work-39",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 68992
+  },
+  "/works/rg-work-40.jpg": {
+    "publicId": "rg-tech/works/rg-work-40",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 774,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 98132
+  },
+  "/works/rg-work-41.jpg": {
+    "publicId": "rg-tech/works/rg-work-41",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 214928
+  },
+  "/works/rg-work-42.jpg": {
+    "publicId": "rg-tech/works/rg-work-42",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 55495
+  },
+  "/works/rg-work-43.jpg": {
+    "publicId": "rg-tech/works/rg-work-43",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 720,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 132610
+  },
+  "/works/rg-work-44.jpg": {
+    "publicId": "rg-tech/works/rg-work-44",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 61025
+  },
+  "/works/rg-work-45.jpg": {
+    "publicId": "rg-tech/works/rg-work-45",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 70620
+  },
+  "/works/rg-work-46.jpg": {
+    "publicId": "rg-tech/works/rg-work-46",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 787,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 107855
+  },
+  "/works/rg-work-47.jpg": {
+    "publicId": "rg-tech/works/rg-work-47",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 1400,
+    "height": 788,
+    "format": "jpg",
+    "bytes": 283647
+  },
+  "/works/rg-work-48.jpg": {
+    "publicId": "rg-tech/works/rg-work-48",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 630,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 107623
+  },
+  "/works/rg-work-49.jpg": {
+    "publicId": "rg-tech/works/rg-work-49",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 607,
+    "height": 1080,
+    "format": "jpg",
+    "bytes": 50031
+  },
+  "/works/rg-work-50.jpg": {
+    "publicId": "rg-tech/works/rg-work-50",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 402,
+    "height": 347,
+    "format": "jpg",
+    "bytes": 25606
+  },
+  "/works/rg-work-51.jpg": {
+    "publicId": "rg-tech/works/rg-work-51",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 596,
+    "height": 436,
+    "format": "jpg",
+    "bytes": 34212
+  },
+  "/works/rg-work-52.jpg": {
+    "publicId": "rg-tech/works/rg-work-52",
+    "resourceType": "image",
+    "version": 1787764636,
+    "width": 1400,
+    "height": 788,
+    "format": "jpg",
+    "bytes": 235984
+  },
+  "/works/rg-work-53.jpg": {
+    "publicId": "rg-tech/works/rg-work-53",
+    "resourceType": "image",
+    "version": 1787764636,
+    "width": 720,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 96414
+  },
+  "/works/rg-work-54.jpg": {
+    "publicId": "rg-tech/works/rg-work-54",
+    "resourceType": "image",
+    "version": 1787764636,
+    "width": 720,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 113860
+  },
+  "/works/rg-work-55.jpg": {
+    "publicId": "rg-tech/works/rg-work-55",
+    "resourceType": "image",
+    "version": 1787764636,
+    "width": 736,
+    "height": 981,
+    "format": "jpg",
+    "bytes": 133250
   }
 }

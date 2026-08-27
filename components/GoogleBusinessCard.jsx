@@ -1,13 +1,20 @@
+import Image from 'next/image'
 import { MapPin, Star, Navigation, ExternalLink } from 'lucide-react'
 import { GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, GMB_DIRECTIONS_URL } from '@/lib/data'
+import GoogleRating from '@/components/GoogleRating'
 
 /**
  * Google Business Profile block for landing pages.
  *
- * Links the page to the verified GBP listing. Deliberately shows no star rating
- * or review count — those change constantly, and hardcoding them would put a
- * stale number on the page and risk a fake-review-markup penalty. Google renders
- * the live rating on the listing itself.
+ * Links the page to the verified GBP listing.
+ *
+ * It now carries a rating badge and the profile QR. The original note here said
+ * no rating should be shown, for two reasons — a hardcoded number goes stale,
+ * and review markup risks a penalty. The second reason is fully respected:
+ * components/GoogleRating.jsx renders the figure visually and emits NO
+ * schema.org AggregateRating, which is the part Google actually penalises. The
+ * first is mitigated, not solved — the number lives in one constant in that
+ * file and has to be edited by hand if it moves.
  *
  * @param {string} [cityName] locality, used only to make the copy specific
  */
@@ -34,6 +41,30 @@ export default function GoogleBusinessCard({ cityName }) {
                             Door No. 63, B&amp;C Flat, Galaxy Company Salai, Ponniamman Nagar,
                             Ayanambakkam, Chennai 600095
                         </p>
+                        <div className="mt-5 pt-5 border-t border-line">
+                            <GoogleRating />
+                        </div>
+                    </div>
+
+                    {/* The QR is desktop-only: on a phone the reader is holding
+                        the device that would have to scan it. The buttons carry
+                        the same destination, so nothing needs the code. */}
+                    <div className="hidden lg:block flex-none">
+                        <div className="framed-soft bg-white p-2">
+                            <Image
+                                src="/google-review-qr.png"
+                                alt="QR code linking to the RG Tech Engineering Works Google Business Profile"
+                                width={1104}
+                                height={1104}
+                                // unoptimized on purpose. A QR is a bitmap of hard-edged
+                                // modules; any resample or lossy re-encode softens those
+                                // edges and costs scan reliability. It is also 14 KB, so
+                                // there is nothing to gain. This also stops Next emitting
+                                // an 11-entry srcset of the same URL.
+                                unoptimized
+                                className="w-[132px] h-[132px]"
+                            />
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-3 lg:w-[260px] flex-shrink-0">

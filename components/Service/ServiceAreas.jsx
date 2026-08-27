@@ -9,11 +9,18 @@ import { serviceUrl, publishedLocalities } from '@/lib/cities'
  * each cluster page links to its siblings and back to the pillar.
  *
  * The current page's own locality stays in the list rather than being removed:
- * dropping it would make the grid shift position from page to page, and a
+ * dropping it would make the mesh shift position from page to page, and a
  * visitor who lands on the Porur page should still see Porur and know they are
  * in the right place. It renders as a non-link marked aria-current, because a
  * link pointing at the page you are already on is noise for both users and
  * crawlers.
+ *
+ * Laid out as an inline wrapping mesh, not a fixed 4-column grid of padded
+ * cards. Chennai publishes 97 localities: as cards that was ~25 rows and over
+ * 1300px of chips, which pushed the rest of the page below it out of reach.
+ * Flowing them inline packs the same 97 links into roughly a third of the
+ * height. Every locality is still a real link — nothing is truncated, collapsed
+ * behind a toggle, or hidden from crawlers.
  *
  * @param {object}  city         city config from lib/cities
  * @param {string}  serviceName  e.g. 'Steel Gates'
@@ -31,22 +38,25 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
     if (!areas.length) return null
 
     return (
-        <section className="py-20 bg-white border-t border-line">
+        <section className="py-14 bg-white border-t border-line">
             <div className="max-w-6xl mx-auto px-4">
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <p className="eyebrow mb-3">
                         Areas We Cover
                     </p>
-                    <h2 className="section-title text-fg">
-                        Serving All Areas in {city.name}
+                    <h2 className="subsection-title text-fg">
+                        Serving all areas in {city.name}
                     </h2>
-                    <p className="section-lead mt-4 max-w-2xl mx-auto">
-                        {serviceName} delivered across {city.name} and the surrounding industrial belt.
-                        Pick your locality for details and local turnaround times.
+                    <p className="text-sm text-fg-muted mt-3 max-w-2xl mx-auto">
+                        {serviceName} delivered across {city.name} and the surrounding
+                        industrial belt — {areas.length} localities covered.
                     </p>
                 </div>
 
-                <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                {/* flex-wrap, not grid: names vary from "OMR" to "Gerugambakkam",
+                    and a fixed column width sizes every cell to the longest one.
+                    Letting them size to their own content is most of the saving. */}
+                <ul className="flex flex-wrap justify-center gap-2">
                     {areas.map((locality) => {
                         const isCurrent = current === locality.toLowerCase()
 
@@ -55,7 +65,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                                 <li key={locality}>
                                     <span
                                         aria-current="page"
-                                        className="flex items-center justify-center gap-1.5 text-center rounded-xl border-2 border-cta bg-cta/10 px-4 py-3 text-sm font-bold text-fg"
+                                        className="inline-flex items-center gap-1.5 rounded-sm border border-cta bg-cta/10 px-3 py-1.5 text-sm font-bold text-fg"
                                     >
                                         <MapPin className="w-3.5 h-3.5 text-accent flex-shrink-0" />
                                         {locality}
@@ -68,7 +78,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                             <li key={locality}>
                                 <Link
                                     href={serviceUrl(city.slug, serviceKey, locality)}
-                                    className="block text-center rounded-xl border border-line bg-surface-2 px-4 py-3 text-sm font-medium text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
+                                    className="inline-block rounded-sm border border-line bg-surface-2 px-3 py-1.5 text-sm text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
                                 >
                                     {locality}
                                 </Link>
@@ -78,7 +88,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                 </ul>
 
                 {cityName && (
-                    <div className="text-center mt-10">
+                    <div className="text-center mt-8">
                         <Link
                             href={pillarHref}
                             className="text-accent font-bold text-sm hover:underline"

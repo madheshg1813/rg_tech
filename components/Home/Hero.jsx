@@ -1,72 +1,101 @@
 import Image from 'next/image'
-import { Phone, CheckCircle, ArrowRight, Shield, Clock, Star } from 'lucide-react'
+import { Phone, Check, ArrowRight, ShieldCheck } from 'lucide-react'
+import GoogleRating from '@/components/GoogleRating'
+
+/*
+ * Hero.
+ *
+ * Restructured to the Sree E-Waste layout: white ground with graph-paper rule,
+ * a mono credential stamp above the headline, the accent word carried inside
+ * the H1 rather than on a separate line, a compact tick list, and a hard-framed
+ * photograph with a spec card breaking its bottom-left corner.
+ *
+ * The colour scheme is unchanged — RG Tech's green accent and blue CTA. What
+ * changed is how much of the page is white: the tinted gradient, the stripe
+ * texture and the skewed indigo wedge are all gone, so the only colour above
+ * the fold is in the three places that carry meaning.
+ */
+
+const POINTS = [
+    'Precision up to 0.01mm',
+    'Large bed: 8000x2500mm',
+    'All metal types',
+    'Quick turnaround',
+]
+
+// "ISO Certified" removed: the Google rating below is a verifiable, third-party
+// claim a visitor can click through and check, which is worth more here than an
+// unlinked certification badge.
+const CREDENTIALS = [
+    '15+ Years',
+    '1000+ Projects',
+]
 
 const Hero = () => {
     return (
         <section
             id="home"
-            className="hero-gradient py-16 md:py-24 md:min-h-[600px] flex items-center relative overflow-hidden"
+            className="hero-gradient relative overflow-hidden border-b border-line py-14 md:py-20"
         >
-            <div className="absolute inset-0 hero-texture pointer-events-none"></div>
-            {/* Soft indigo wedge, the light-theme stand-in for the old white/5 panel. */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-indigo/5 skew-x-12 translate-x-1/2 pointer-events-none hidden md:block"></div>
+            <div className="hero-grid-paper" aria-hidden="true" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div className="grid lg:grid-cols-[1.04fr_.96fr] gap-10 lg:gap-14 items-center">
                     <div>
-                        <p className="eyebrow mb-4">CNC Fiber Laser Specialist</p>
-                        <h2 className="display-title text-fg mb-6 text-balance">
-                            Your Trusted Partner for{' '}
-                            <span className="text-accent">CNC Laser Cutting &amp; Fabrication</span>
-                        </h2>
-                        <p className="section-lead mb-10 max-w-xl">
-                            High-Precision Metal Cutting up to 45mm – MS, SS, Aluminum, Copper &amp; Brass
+                        <p className="stamp mb-6">
+                            <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+                            CNC Fiber Laser Specialist
                         </p>
 
-                        {/* One column on a phone: "Large bed: 8000x2500mm" does not
-                            fit a half-width column at 360px without wrapping badly. */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 mb-12">
-                            {[
-                                "Precision up to 0.01mm",
-                                "Large bed: 8000x2500mm",
-                                "All metal types",
-                                "Quick turnaround"
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-center gap-3">
-                                    <div className="w-5 h-5 rounded-full bg-brand-green/10 flex items-center justify-center flex-shrink-0">
-                                        <CheckCircle className="w-3.5 h-3.5 text-brand-green" />
-                                    </div>
-                                    <span className="text-sm font-medium text-fg-muted">{item}</span>
-                                </div>
-                            ))}
-                        </div>
+                        {/* h2, not h1: components/Header.jsx already renders the
+                            brand lockup as the page's h1 on every route. Kept as
+                            it was — this restyle is not the place to change the
+                            heading structure. */}
+                        <h2 className="display-title text-fg text-balance">
+                            Your Trusted Partner for{' '}
+                            <span className="text-accent">CNC Laser Cutting</span>{' '}&amp; Fabrication
+                        </h2>
 
-                        <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                        <p className="section-lead mt-6 max-w-[50ch]">
+                            High-precision metal cutting up to 45mm — MS, SS, Aluminium, Copper
+                            and Brass, cut at our Chennai unit and delivered on schedule.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-9">
                             <a href="#contact" className="btn btn-primary">
                                 Get a Quote <ArrowRight className="w-4 h-4" />
                             </a>
                             <a href="tel:+916380736439" className="btn btn-secondary-light">
-                                <Phone className="w-4 h-4" /> Call Now
+                                <Phone className="w-4 h-4" /> Call 63807-36439
                             </a>
                         </div>
 
-                        {/* Wraps rather than scrolls: three labels do not fit one
-                            phone-width row. */}
-                        <div className="flex flex-wrap gap-x-6 gap-y-3 mt-12 pt-8 border-t border-line">
-                            <div className="flex items-center gap-2 text-fg-subtle meta-label">
-                                <Shield className="w-4 h-4" /> ISO Certified
-                            </div>
-                            <div className="flex items-center gap-2 text-fg-subtle meta-label">
-                                <Clock className="w-4 h-4" /> 15+ Years
-                            </div>
-                            <div className="flex items-center gap-2 text-fg-subtle meta-label">
-                                <Star className="w-4 h-4" /> 1000+ Projects
-                            </div>
+                        {/* Ticks run inline and wrap, rather than sitting in a
+                            two-column grid. At this size they are a list of
+                            claims, not a feature table. */}
+                        <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-9 p-0 list-none">
+                            {POINTS.map((item) => (
+                                <li key={item} className="flex items-center gap-2 text-sm font-medium text-fg-muted">
+                                    <Check className="w-4 h-4 flex-none text-accent" aria-hidden="true" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-9 pt-7 border-t border-line">
+                            <GoogleRating />
+                            <span className="hidden sm:block w-px h-8 bg-line" aria-hidden="true" />
+                            {CREDENTIALS.map((c) => (
+                                <span key={c} className="meta-label text-fg-subtle">{c}</span>
+                            ))}
                         </div>
                     </div>
 
+                    {/* The badge overlaps the frame's bottom-left corner and is
+                        allowed to hang outside it, so the photograph reads as a
+                        mounted print rather than as a card with a caption. */}
                     <div className="relative">
-                        <div className="rounded-3xl overflow-hidden shadow-premium relative border border-line bg-white">
+                        <div className="framed">
                             <Image
                                 src="https://res.cloudinary.com/o1ytbfuz/image/upload/v1785177077/rg-tech/hero-laser"
                                 alt="CNC fiber laser cutting machine at RG Tech Engineering, Chennai"
@@ -76,13 +105,17 @@ const Hero = () => {
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                                 className="w-full aspect-[4/3] object-cover"
                             />
-                            {/* Hidden on the narrowest screens, where a 220px card
-                                covers most of the photo it is meant to annotate. */}
-                            <div className="hidden sm:block absolute bottom-6 left-6 bg-white p-6 rounded-2xl shadow-xl max-w-[220px] border border-line transition-transform hover:scale-105 duration-300">
-                                <p className="meta-label text-fg-subtle mb-1">Bed Sizes</p>
-                                <p className="text-lg font-bold text-fg leading-none mb-1">8000 x 2500mm</p>
-                                <p className="text-sm font-bold text-accent">Large Format Processing</p>
-                            </div>
+                        </div>
+                        <div className="framed absolute -left-3 -bottom-4 sm:-left-4 sm:-bottom-5 max-w-[78%] px-4 py-3 flex items-center gap-3">
+                            <ShieldCheck className="w-6 h-6 flex-none text-accent" aria-hidden="true" />
+                            <span className="block">
+                                <b className="block font-heading font-extrabold text-[0.95rem] leading-tight tracking-[-0.02em] text-fg">
+                                    8000 x 2500mm
+                                </b>
+                                <span className="meta-label block text-fg-subtle mt-0.5">
+                                    Large Format Bed
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>

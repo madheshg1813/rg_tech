@@ -34,3 +34,10 @@ yarn-error.log*
 
 release-summary.json
 publish-summary.json
+
+# Local Claude Code config (dev-server launch profile)
+.claude/
+
+# Source drops that were processed into public/ — the compressed output is what
+# ships, not the original archives.
+*.zip
