@@ -98,9 +98,17 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                             </div>
                         </div>
 
-                        <div className="relative">
-                            {/* skew-y removed: on a phone the tilt pushed a corner of
-                                the photo past the viewport edge. */}
+                        {/* Desktop only. On a phone this stacked below the copy
+                            as a full-width block, pushing the CTAs and the
+                            rating down the page for a shot that says nothing the
+                            headline has not already said. Hidden at the same
+                            breakpoint the two-column grid activates, so it is
+                            shown exactly when there is a column to put it in.
+
+                            `priority` stays on the Image: at lg and up this is
+                            still the LCP element. Below lg the element is not
+                            rendered at all, so nothing is fetched. */}
+                        <div className="relative hidden lg:block">
                             <div className="framed relative z-10">
                                 <Image
                                     src={displayHeroImage}
@@ -114,7 +122,24 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                     width={1000}
                                     height={750}
                                     priority
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                    /*
+                                     * The 2px below is not a typo.
+                                     *
+                                     * display:none does NOT stop the browser
+                                     * fetching an <img>, and `priority` emits a
+                                     * <link rel=preload> that fires regardless
+                                     * of CSS — so without this a phone
+                                     * downloaded the full 828px hero, at high
+                                     * priority, for a column it never paints.
+                                     *
+                                     * Preload and srcset both honour `sizes`, so
+                                     * declaring a 2px slot below the lg
+                                     * breakpoint makes the browser pick the
+                                     * smallest candidate there (96w, a few KB)
+                                     * and the real one from lg up, where this is
+                                     * the LCP element and priority earns its keep.
+                                     */
+                                    sizes="(max-width: 1023px) 2px, 50vw"
                                     className="w-full aspect-[4/3] object-cover"
                                 />
                             </div>
@@ -127,27 +152,6 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                 </div>
             </section>
 
-            {/* Trust Strip */}
-            <div className="bg-white border-b border-line">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-x-0 lg:divide-y-0 lg:divide-x divide-line">
-                        {content.trustStrip.map((item, i) => (
-                            <div key={i} className="py-8 px-6 flex items-center gap-4 group hover:bg-surface-2 transition-colors">
-                                <div className="w-12 h-12 rounded-xl bg-cta/5 flex items-center justify-center text-accent group-hover:bg-cta group-hover:text-white transition-all">
-                                    {(() => {
-                                        const TIcon = IconMap[item.icon] || Settings
-                                        return <TIcon className="w-6 h-6" />
-                                    })()}
-                                </div>
-                                <div>
-                                    <p className="meta-label text-fg">{item.label}</p>
-                                    <p className="meta-label text-fg-subtle mt-0.5">{item.sub}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
 
             {/*
              * Photo proof, straight after the hero and its trust strip — the
