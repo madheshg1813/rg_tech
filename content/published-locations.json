@@ -31,7 +31,8 @@
     "nelpettai",
     "east-gate",
     "south-gate",
-    "bethaniapuram"
+    "bethaniapuram",
+    "thathaneri"
   ],
   "coimbatore": [
     "r-s-puram",
@@ -64,7 +65,8 @@
     "maniyakarampalayam",
     "avarampalayam",
     "selvapuram",
-    "kurichi"
+    "kurichi",
+    "chinniyampalayam"
   ],
   "salem": [
     "fairlands",
@@ -77,6 +79,7 @@
     "kondalampatty",
     "astampatti",
     "maravaneri",
-    "narasothipatti"
+    "narasothipatti",
+    "chinnathirupathi"
   ]
 }
