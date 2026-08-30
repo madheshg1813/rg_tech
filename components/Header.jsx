@@ -9,6 +9,7 @@ import {
     Menu, X, FileText, Newspaper, Building2
 } from 'lucide-react'
 import { pillarServices } from '@/lib/data'
+import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
 /* Everything under the Resources menu, shared by the desktop and mobile navs so
@@ -27,6 +28,28 @@ const RESOURCE_LINKS = [
         Icon: Building2,
     },
 ]
+
+/*
+ * What the Services menu lists for a city: the six pillarServices, plus the
+ * standalone aluminum pillar.
+ *
+ * Aluminum is deliberately absent from pillarServices — that array is what
+ * drives locality page generation, and this category is pillars-only. The menu
+ * is the one place the two need to look like a single list, so they are joined
+ * here rather than by widening pillarServices.
+ *
+ * Built once and used by both the desktop mega-menu and the mobile accordion,
+ * so the two cannot drift apart as categories are added.
+ */
+function cityServiceLinks(citySlug) {
+    return [
+        ...pillarServices.map((svc) => ({
+            name: svc.name,
+            href: serviceUrl(citySlug, serviceKeyOf(svc)),
+        })),
+        { name: ALUMINUM.name, href: aluminumUrl(citySlug) },
+    ]
+}
 
 const Header = ({ setCatalogueModalOpen }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -147,10 +170,10 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    {pillarServices.map((svc, i) => (
+                                                    {cityServiceLinks(city.slug).map((svc) => (
                                                         <Link
-                                                            key={i}
-                                                            href={serviceUrl(city.slug, serviceKeyOf(svc))}
+                                                            key={svc.href}
+                                                            href={svc.href}
                                                             onClick={() => setServicesDropdown(false)}
                                                             className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-surface-2 transition-colors group/link"
                                                         >
@@ -267,10 +290,10 @@ const Header = ({ setCatalogueModalOpen }) => {
 
                                             {open && (
                                                 <div className="bg-surface-2 border-t border-line px-2 py-2">
-                                                    {pillarServices.map((svc, j) => (
+                                                    {cityServiceLinks(city.slug).map((svc) => (
                                                         <Link
-                                                            key={j}
-                                                            href={serviceUrl(city.slug, serviceKeyOf(svc))}
+                                                            key={svc.href}
+                                                            href={svc.href}
                                                             onClick={() => setMobileMenuOpen(false)}
                                                             className="block text-sm font-medium text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
                                                         >

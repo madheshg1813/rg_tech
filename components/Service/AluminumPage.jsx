@@ -2,9 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
     Zap, Layers, Wind, Shield, Ruler, Clock, Send, FileText, Truck,
-    ArrowRight, MessageCircle, Phone, Check, Plus,
+    ArrowRight, MessageCircle, Phone, Check, Plus, MapPin,
 } from 'lucide-react'
-import { ALUMINUM, aluminumCopy } from '@/lib/aluminum'
+import { ALUMINUM, aluminumCopy, aluminumUrl } from '@/lib/aluminum'
+import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
 
 /*
@@ -23,6 +24,8 @@ import GoogleRating from '@/components/GoogleRating'
 const IconMap = { Zap, Layers, Wind, Shield, Ruler, Clock, Send, FileText, Truck }
 
 const HERO_CREDENTIALS = ['15+ Years', '1000+ Projects']
+
+const OTHER_CITIES = Object.values(CITIES)
 
 export default function AluminumPage({ city, works, articles }) {
     const copy = aluminumCopy(city)
@@ -236,6 +239,31 @@ export default function AluminumPage({ city, works, articles }) {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* ── Other cities ────────────────────────────────────────────
+                Without this the three non-Chennai pillars would have no inbound
+                link anywhere in the served HTML: this category has no locality
+                pages to link up from, the header mega-menu only renders while it
+                is open, and the footer carries the Chennai URL only. Four pages
+                that cross-link each other are reachable from any one of them. */}
+            <section className="py-14 bg-white border-t border-line">
+                <div className="max-w-5xl mx-auto px-4 text-center">
+                    <p className="eyebrow mb-4">Also Serving</p>
+                    <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
+                        {OTHER_CITIES.filter((c) => c.slug !== city.slug).map((c) => (
+                            <li key={c.slug}>
+                                <Link
+                                    href={aluminumUrl(c.slug)}
+                                    className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
+                                >
+                                    <MapPin className="w-3.5 h-3.5 text-accent" />
+                                    Aluminum laser cutting in {c.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </section>
 

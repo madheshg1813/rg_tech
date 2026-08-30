@@ -5,6 +5,7 @@ import {
     Instagram, Youtube, Star, ExternalLink
 } from 'lucide-react'
 import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, SOCIAL_LINKS } from '@/lib/data'
+import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 
 // Only the channels RG Tech actually has. Facebook, LinkedIn and Twitter were
 // dropped with the placeholder markup — see the note on SOCIAL_LINKS in
@@ -58,12 +59,26 @@ const Footer = () => {
                     {/* Quick Links */}
                     <div>
                         <h4 className="card-title mb-8 text-accent">Core Services</h4>
+                        {/*
+                         * This list, not the header mega-menu, is what actually
+                         * links the service pillars. The mega-menu renders only
+                         * while it is open, so its links are never in the served
+                         * HTML and no crawler sees them — anything that needs an
+                         * inbound link has to be here.
+                         *
+                         * Aluminum is appended rather than added to
+                         * pillarServices, which drives locality page generation
+                         * and would turn a pillars-only category into 800+ pages.
+                         */}
                         <ul className="space-y-4">
-                            {pillarServices.map((s, i) => (
-                                <li key={i}>
-                                    <Link href={s.slug} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">
+                            {[
+                                ...pillarServices.map((s) => ({ name: s.name, href: s.slug })),
+                                { name: ALUMINUM.name, href: aluminumUrl('chennai') },
+                            ].map(({ name, href }) => (
+                                <li key={href}>
+                                    <Link href={href} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">
                                         <ChevronRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
-                                        {s.name}
+                                        {name}
                                     </Link>
                                 </li>
                             ))}
