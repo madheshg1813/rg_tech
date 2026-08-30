@@ -34,7 +34,21 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
     // the existing indexed pages are unchanged.
     const place = cityName || (city && !city.isPrimary ? city.name : null)
 
-    const displayHeroImage = place ? pool[cityIndex % pool.length] : content.heroImage
+    /*
+     * Hero image: the category's own landing photograph, on the pillar AND on
+     * every locality page.
+     *
+     * It used to be `place ? pool[cityIndex % pool.length] : content.heroImage`
+     * — a gallery shot rotated by city, so Porur and Ambattur opened with
+     * different pictures of the same service for no reason a reader could see.
+     * One deliberate photograph per category is the stronger signal, and it is
+     * the same asset everywhere so it caches once across all 846 pages.
+     *
+     * Falls back to the old behaviour if a category has no landing asset yet.
+     */
+    const displayHeroImage =
+        content.landingImage || (place ? pool[cityIndex % pool.length] : content.heroImage)
+    const heroRatio = content.landingImage ? (content.landingRatio || 4 / 3) : 4 / 3
     const displaySecondaryImage = place ? pool[(cityIndex + 1) % pool.length] : content.secondaryImage
     const displayTitle = cityName
         ? `${content.name} in ${cityName}`
@@ -114,13 +128,16 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                     src={displayHeroImage}
                                     alt={buildAlt({
                                         // The service name already arrives via metaTitle keywords, so
-                                        // the subject describes the shot instead of repeating it.
+                                        // the subject describes what is actually in the frame instead
+                                        // of repeating the heading. Per-category, from lib/data.js.
                                         metaTitle,
-                                        subject: 'CNC fiber laser cutting machine in operation',
+                                        subject:
+                                            content.landingAlt ||
+                                            'CNC fiber laser cutting machine in operation',
                                         location: place || 'Chennai',
                                     })}
                                     width={1000}
-                                    height={750}
+                                    height={Math.round(1000 / heroRatio)}
                                     priority
                                     /*
                                      * The 2px below is not a typo.
@@ -140,7 +157,8 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                      * the LCP element and priority earns its keep.
                                      */
                                     sizes="(max-width: 1023px) 2px, 50vw"
-                                    className="w-full aspect-[4/3] object-cover"
+                                    style={{ aspectRatio: heroRatio }}
+                                    className="w-full object-cover"
                                 />
                             </div>
                             <div className="framed absolute -bottom-5 -left-4 xl:-left-8 px-5 py-4 z-20 hidden lg:block">

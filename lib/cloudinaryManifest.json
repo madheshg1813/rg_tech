@@ -5903,6 +5903,60 @@
     "format": "png",
     "bytes": 160914
   },
+  "/services/decorative-metal-panels.jpg": {
+    "publicId": "rg-tech/services/decorative-metal-panels",
+    "resourceType": "image",
+    "version": 1788066515,
+    "width": 1083,
+    "height": 1600,
+    "format": "jpg",
+    "bytes": 220585
+  },
+  "/services/fabrication-services.jpg": {
+    "publicId": "rg-tech/services/fabrication-services",
+    "resourceType": "image",
+    "version": 1788066515,
+    "width": 1600,
+    "height": 1366,
+    "format": "jpg",
+    "bytes": 484997
+  },
+  "/services/laser-cutting-services.jpg": {
+    "publicId": "rg-tech/services/laser-cutting-services",
+    "resourceType": "image",
+    "version": 1788066514,
+    "width": 1519,
+    "height": 1600,
+    "format": "jpg",
+    "bytes": 391847
+  },
+  "/services/metal-safety-doors.jpg": {
+    "publicId": "rg-tech/services/metal-safety-doors",
+    "resourceType": "image",
+    "version": 1788066515,
+    "width": 1600,
+    "height": 1199,
+    "format": "jpg",
+    "bytes": 279351
+  },
+  "/services/sheet-metal-laser-cutting-services.jpg": {
+    "publicId": "rg-tech/services/sheet-metal-laser-cutting-services",
+    "resourceType": "image",
+    "version": 1788066515,
+    "width": 1600,
+    "height": 873,
+    "format": "jpg",
+    "bytes": 200612
+  },
+  "/services/steel-gates.jpg": {
+    "publicId": "rg-tech/services/steel-gates",
+    "resourceType": "image",
+    "version": 1788066515,
+    "width": 1600,
+    "height": 1199,
+    "format": "jpg",
+    "bytes": 265242
+  },
   "/works/rg-work-01.jpg": {
     "publicId": "rg-tech/works/rg-work-01",
     "resourceType": "image",

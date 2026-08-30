@@ -2,9 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
     Phone, Mail, MapPin, ChevronRight, MessageCircle,
-    Facebook, Instagram, Linkedin, Twitter, Star, ExternalLink
+    Instagram, Youtube, Star, ExternalLink
 } from 'lucide-react'
-import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL } from '@/lib/data'
+import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, SOCIAL_LINKS } from '@/lib/data'
+
+// Only the channels RG Tech actually has. Facebook, LinkedIn and Twitter were
+// dropped with the placeholder markup — see the note on SOCIAL_LINKS in
+// lib/data.js. Add an entry there and it appears here automatically.
+const SocialIcon = { Instagram, Youtube }
 
 const Footer = () => {
     return (
@@ -30,11 +35,23 @@ const Footer = () => {
                             Tamil Nadu's premier CNC Fiber Laser Cutting & Metal Fabrication partner. Delivering industrial precision with zero-defect commitment since inception.
                         </p>
                         <div className="flex gap-4">
-                            {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
-                                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-cta hover:scale-110 transition-all duration-300">
-                                    <Icon className="w-5 h-5" />
-                                </a>
-                            ))}
+                            {SOCIAL_LINKS.map(({ name, icon, url }) => {
+                                const Icon = SocialIcon[icon]
+                                if (!Icon) return null
+                                return (
+                                    <a
+                                        key={name}
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`RG Tech Engineering on ${name}`}
+                                        data-analytics={`social-${name.toLowerCase()}`}
+                                        className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-cta hover:scale-110 transition-all duration-300"
+                                    >
+                                        <Icon className="w-5 h-5" />
+                                    </a>
+                                )
+                            })}
                         </div>
                     </div>
 
