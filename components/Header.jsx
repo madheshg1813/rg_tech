@@ -216,7 +216,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                         </nav>
 
                         <div className="hidden lg:flex items-center gap-4">
-                            <a href="https://wa.me/916380736439" className="btn btn-secondary-light btn-sm group">
+                            <a href="https://wa.me/916380736439" className="btn btn-whatsapp btn-sm group">
                                 <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                 WhatsApp
                             </a>
@@ -308,7 +308,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                             </div>
 
                             <div className="grid grid-cols-2 gap-3 pt-2">
-                                <a href="https://wa.me/916380736439" className="btn btn-secondary-light">
+                                <a href="https://wa.me/916380736439" className="btn btn-whatsapp">
                                     <MessageCircle className="w-4 h-4" /> WhatsApp
                                 </a>
                                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-primary">

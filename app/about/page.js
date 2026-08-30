@@ -333,7 +333,7 @@ export default function AboutPage() {
                                 href="https://wa.me/916380736439"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-secondary-light"
+                                className="btn btn-whatsapp"
                             >
                                 <MessageCircle className="w-5 h-5" /> WhatsApp Us
                             </a>

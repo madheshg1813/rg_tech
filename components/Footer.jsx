@@ -150,7 +150,7 @@ const Footer = () => {
                         © {new Date().getFullYear()} RG Tech Engineering Works. All Rights Reserved.
                     </p>
                     <div className="flex items-center gap-4">
-                        <a href="https://wa.me/916380736439" className="btn btn-primary btn-sm">
+                        <a href="https://wa.me/916380736439" className="btn btn-whatsapp btn-sm">
                             <MessageCircle className="w-4 h-4" /> Engineering Support
                         </a>
                     </div>

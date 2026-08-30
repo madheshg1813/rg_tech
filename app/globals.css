@@ -6,7 +6,10 @@
  * Light + dark mixed theme. White is the page default — heroes included; dark
  * surfaces are used deliberately for band, contact and footer sections to
  * create rhythm.
- * Exactly ONE call-to-action colour is used site-wide: --color-cta (blue).
+ * TWO call-to-action colours, and only two: --color-cta (blue) asks for a
+ * quote, --color-wa (WhatsApp green) opens the chat. Where they sit together
+ * the green is filled and the blue becomes the white outline, so a pair never
+ * shows two filled buttons competing.
  * Emphasis uses a separate accent (the logo green) so green never reads as a link.
  *
  * Type: three families, one job each — Archivo (display), Public Sans (body),
@@ -71,6 +74,18 @@
     /* The CTA blue used as TEXT on light — 6.7:1 on white. Reserved for
      * interactive affordances (link hover, the FAQ +/x). Decorative accents use
      * the green below instead. */
+
+    /* ---- WhatsApp green ----
+     * The channel CTA. WhatsApp's brand green is #25D366, but white text on it
+     * is 1.98:1 — a severe contrast failure, so it cannot carry a label.
+     * --color-wa keeps that green's exact hue (142deg) and saturation (0.82)
+     * and drops the value until white clears AA: 4.88:1. It still reads as
+     * WhatsApp; it is simply legible. The raw #25D366 stays for icon fills and
+     * badges, where no text sits on it. */
+    --color-wa: #17823F;
+    --color-wa-hover: #136B34;
+    --color-wa-fg: #FFFFFF;
+    --color-wa-brand: #25D366;
 
     /* ---- Accent: the logo green ----
      * Two lightnesses because the site mixes light and dark surfaces.
@@ -220,6 +235,31 @@
 
     .btn-primary:active {
         background-color: var(--color-cta-active);
+        transform: translateY(0);
+    }
+
+    /*
+     * WhatsApp — the primary action on the service and category pillars.
+     *
+     * This is the one place the site carries two CTA colours at once: blue
+     * asks for a quote, green opens the channel that actually gets answered.
+     * They are never both filled in the same pair — where they appear
+     * together, WhatsApp is filled and the quote button is the white outline.
+     */
+    .btn-whatsapp {
+        background-color: var(--color-wa);
+        color: var(--color-wa-fg);
+        border-color: var(--color-wa);
+        box-shadow: 0 10px 25px -8px rgba(23, 130, 63, 0.45);
+    }
+
+    .btn-whatsapp:hover {
+        background-color: var(--color-wa-hover);
+        border-color: var(--color-wa-hover);
+        transform: translateY(-1px);
+    }
+
+    .btn-whatsapp:active {
         transform: translateY(0);
     }
 
@@ -806,8 +846,8 @@
             gap: .5rem;
             flex: 1;
             padding: .92rem 1rem;
-            background: #25D366;
-            color: #fff;
+            background: var(--color-wa);
+            color: var(--color-wa-fg);
             border-radius: 2px;
             text-decoration: none;
             font-family: var(--font-heading);

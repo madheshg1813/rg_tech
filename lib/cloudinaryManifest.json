@@ -5903,6 +5903,15 @@
     "format": "png",
     "bytes": 160914
   },
+  "/services/aluminum-laser-cutting-services.jpg": {
+    "publicId": "rg-tech/services/aluminum-laser-cutting-services",
+    "resourceType": "image",
+    "version": 1788097920,
+    "width": 1600,
+    "height": 1395,
+    "format": "jpg",
+    "bytes": 239795
+  },
   "/services/decorative-metal-panels.jpg": {
     "publicId": "rg-tech/services/decorative-metal-panels",
     "resourceType": "image",

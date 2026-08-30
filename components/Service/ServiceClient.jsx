@@ -90,12 +90,16 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                             <p className="section-lead mb-9 max-w-[50ch]">
                                 {localizeText(content.heroDesc, place, cityIndex)}
                             </p>
+                            {/* WhatsApp leads: it is the channel that actually
+                                gets answered, so it is the filled button and it
+                                comes first. The quote link stays available as
+                                the white outline beside it. */}
                             <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                                <a href="/contact" className="btn btn-primary">
-                                    Get Technical Quote <ArrowRight className="w-4 h-4" />
+                                <a href="https://wa.me/916380736439" className="btn btn-whatsapp">
+                                    <MessageCircle className="w-5 h-5" /> WhatsApp Now
                                 </a>
-                                <a href="https://wa.me/916380736439" className="btn btn-secondary-light">
-                                    <MessageCircle className="w-5 h-5" /> WhatsApp Support
+                                <a href="/contact" className="btn btn-secondary-light">
+                                    Get Technical Quote <ArrowRight className="w-4 h-4" />
                                 </a>
                             </div>
 

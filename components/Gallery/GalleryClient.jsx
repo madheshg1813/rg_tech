@@ -112,7 +112,7 @@ const GalleryClient = () => {
                                     href="https://wa.me/916380736439?text=I would like to see recent project samples for laser cutting/fabrication."
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="btn btn-primary"
+                                    className="btn btn-whatsapp"
                                 >
                                     <MessageCircle className="w-5 h-5" /> Request Samples on WhatsApp
                                 </a>
@@ -164,7 +164,7 @@ const GalleryClient = () => {
                                                 href={`https://wa.me/916380736439?text=Enquiry: ${displayed[lightboxIndex].title} (${displayed[lightboxIndex].material})`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="btn btn-primary w-full"
+                                                className="btn btn-whatsapp w-full"
                                             >
                                                 <MessageCircle className="w-5 h-5" /> Enquire on WhatsApp
                                             </a>

@@ -5,6 +5,8 @@ import { getPosts } from '@/lib/sanity'
 import { pickArticles } from '@/lib/recommendedArticles'
 import { serviceKeyOf } from '@/lib/cities'
 import GodPage from '@/components/Gods/GodPage'
+import AluminumPage from '@/components/Service/AluminumPage'
+import { resolveAluminum, aluminumMetadata, aluminumGraph, ALUMINUM_SLUG } from '@/lib/aluminum'
 import { buildMetadata, buildServicePage, resolveGod } from '@/lib/servicePage'
 import { buildGodMetadata, buildGodPage } from '@/lib/godPage'
 import { jsonLdScript } from '@/lib/schema'
@@ -13,6 +15,7 @@ const CITY = 'madurai'
 
 export async function generateMetadata({ params }) {
     const { slug } = await params
+    if (resolveAluminum(CITY, slug).aluminum) return aluminumMetadata(CITY)
     const { god } = resolveGod(CITY, slug)
     if (god) return buildGodMetadata(CITY, god, slug)
     return buildMetadata(CITY, params)
@@ -20,6 +23,35 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
     const { slug } = await params
+
+    /*
+     * Aluminum laser cutting is its own pillar with its own layout, checked
+     * before the service resolver so its slug cannot be shadowed. It matches on
+     * the exact slug only, so there is no locality variant — by design, this
+     * category exists on the four city pillars and nowhere else.
+     */
+    const { city: alCity, aluminum } = resolveAluminum(CITY, slug)
+    if (aluminum) {
+        const posts = await getPosts()
+        const recommended = pickArticles('laser-cutting-services', posts)
+        return (
+            <>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={jsonLdScript(aluminumGraph(CITY))}
+                />
+                <AluminumPage
+                    city={alCity}
+                    works={<OurWorks />}
+                    articles={
+                        recommended.length
+                            ? <RecommendedArticles posts={recommended} serviceName="aluminum laser cutting" />
+                            : null
+                    }
+                />
+            </>
+        )
+    }
 
     // Deity design pages share this catch-all; checked first so a god key can
     // never be shadowed by the service resolver.

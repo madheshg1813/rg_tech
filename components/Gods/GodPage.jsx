@@ -77,7 +77,7 @@ export default function GodPage({ god, city }) {
                                     href={wa}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="btn btn-primary btn-lg"
+                                    className="btn btn-whatsapp btn-lg"
                                 >
                                     <MessageCircle className="w-5 h-5" />
                                     Get Design on WhatsApp
@@ -182,7 +182,7 @@ export default function GodPage({ god, city }) {
                                 href={wa}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-primary w-full mt-6"
+                                className="btn btn-whatsapp w-full mt-6"
                             >
                                 <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
                             </a>
@@ -259,7 +259,7 @@ export default function GodPage({ god, city }) {
                         same day.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+                        <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-lg">
                             <MessageCircle className="w-5 h-5" /> WhatsApp Us Now
                         </a>
                         <a href={`tel:+${WA}`} className="btn btn-secondary-light btn-lg">
