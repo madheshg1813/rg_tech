@@ -6,7 +6,9 @@ import { pickArticles } from '@/lib/recommendedArticles'
 import { serviceKeyOf } from '@/lib/cities'
 import GodPage from '@/components/Gods/GodPage'
 import AluminumPage from '@/components/Service/AluminumPage'
+import CopperPage from '@/components/Service/CopperPage'
 import { resolveAluminum, aluminumMetadata, aluminumGraph, ALUMINUM_SLUG } from '@/lib/aluminum'
+import { resolveCopper, copperMetadata, copperGraph } from '@/lib/copper'
 import { buildMetadata, buildServicePage, resolveGod } from '@/lib/servicePage'
 import { buildGodMetadata, buildGodPage } from '@/lib/godPage'
 import { jsonLdScript } from '@/lib/schema'
@@ -16,6 +18,7 @@ const CITY = 'chennai'
 export async function generateMetadata({ params }) {
     const { slug } = await params
     if (resolveAluminum(CITY, slug).aluminum) return aluminumMetadata(CITY)
+    if (resolveCopper(CITY, slug).copper) return copperMetadata(CITY)
     const { god } = resolveGod(CITY, slug)
     if (god) return buildGodMetadata(CITY, god, slug)
     return buildMetadata(CITY, params)
@@ -46,6 +49,34 @@ export default async function Page({ params }) {
                     articles={
                         recommended.length
                             ? <RecommendedArticles posts={recommended} serviceName="aluminum laser cutting" />
+                            : null
+                    }
+                />
+            </>
+        )
+    }
+
+    /*
+     * Copper laser cutting — the same standalone-pillar arrangement as
+     * aluminum above: exact slug only, four city pillars, no locality
+     * variants, checked before the service resolver.
+     */
+    const { city: cuCity, copper } = resolveCopper(CITY, slug)
+    if (copper) {
+        const posts = await getPosts()
+        const recommended = pickArticles('laser-cutting-services', posts)
+        return (
+            <>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={jsonLdScript(copperGraph(CITY))}
+                />
+                <CopperPage
+                    city={cuCity}
+                    works={<OurWorks />}
+                    articles={
+                        recommended.length
+                            ? <RecommendedArticles posts={recommended} serviceName="copper laser cutting" />
                             : null
                     }
                 />

@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { pillarServices } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
+import { COPPER, copperUrl } from '@/lib/copper'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
 /* Everything under the Resources menu, shared by the desktop and mobile navs so
@@ -31,9 +32,9 @@ const RESOURCE_LINKS = [
 
 /*
  * What the Services menu lists for a city: the six pillarServices, plus the
- * standalone aluminum pillar.
+ * standalone aluminum and copper pillars.
  *
- * Aluminum is deliberately absent from pillarServices — that array is what
+ * Both are deliberately absent from pillarServices — that array is what
  * drives locality page generation, and this category is pillars-only. The menu
  * is the one place the two need to look like a single list, so they are joined
  * here rather than by widening pillarServices.
@@ -48,6 +49,7 @@ function cityServiceLinks(citySlug) {
             href: serviceUrl(citySlug, serviceKeyOf(svc)),
         })),
         { name: ALUMINUM.name, href: aluminumUrl(citySlug) },
+        { name: COPPER.name, href: copperUrl(citySlug) },
     ]
 }
 
