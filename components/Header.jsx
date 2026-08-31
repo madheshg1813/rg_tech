@@ -11,6 +11,7 @@ import {
 import { pillarServices } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
+import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
 /* Everything under the Resources menu, shared by the desktop and mobile navs so
@@ -32,7 +33,7 @@ const RESOURCE_LINKS = [
 
 /*
  * What the Services menu lists for a city: the six pillarServices, plus the
- * standalone aluminum and copper pillars.
+ * standalone aluminum, copper and mild steel pillars.
  *
  * Both are deliberately absent from pillarServices — that array is what
  * drives locality page generation, and this category is pillars-only. The menu
@@ -50,6 +51,7 @@ function cityServiceLinks(citySlug) {
         })),
         { name: ALUMINUM.name, href: aluminumUrl(citySlug) },
         { name: COPPER.name, href: copperUrl(citySlug) },
+        { name: MILD_STEEL.name, href: mildSteelUrl(citySlug) },
     ]
 }
 

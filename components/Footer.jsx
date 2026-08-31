@@ -7,6 +7,7 @@ import {
 import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, SOCIAL_LINKS } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
+import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
 
 // Only the channels RG Tech actually has. Facebook, LinkedIn and Twitter were
 // dropped with the placeholder markup — see the note on SOCIAL_LINKS in
@@ -67,7 +68,7 @@ const Footer = () => {
                          * HTML and no crawler sees them — anything that needs an
                          * inbound link has to be here.
                          *
-                         * Aluminum and copper are appended rather than added to
+                         * Aluminum, copper and mild steel are appended rather than added to
                          * pillarServices, which drives locality page generation
                          * and would turn a pillars-only category into 800+ pages.
                          */}
@@ -76,6 +77,7 @@ const Footer = () => {
                                 ...pillarServices.map((s) => ({ name: s.name, href: s.slug })),
                                 { name: ALUMINUM.name, href: aluminumUrl('chennai') },
                                 { name: COPPER.name, href: copperUrl('chennai') },
+                                { name: MILD_STEEL.name, href: mildSteelUrl('chennai') },
                             ].map(({ name, href }) => (
                                 <li key={href}>
                                     <Link href={href} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">

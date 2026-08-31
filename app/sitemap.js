@@ -3,6 +3,7 @@ import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cit
 import { GODS, godUrl } from '@/lib/gods'
 import { aluminumUrl } from '@/lib/aluminum'
 import { copperUrl } from '@/lib/copper'
+import { mildSteelUrl } from '@/lib/mildSteel'
 import { getPosts } from '@/lib/sanity'
 
 export const revalidate = 3600
@@ -57,6 +58,14 @@ export default async function sitemap() {
         priority: city.isPrimary ? 0.9 : 0.8,
     }))
 
+    // Mild steel laser cutting: same pillars-only arrangement as above.
+    const mildSteelPages = Object.values(CITIES).map((city) => ({
+        url: `${BASE_URL}${mildSteelUrl(city.slug)}`,
+        lastModified: today,
+        changeFrequency: 'weekly',
+        priority: city.isPrimary ? 0.9 : 0.8,
+    }))
+
     // Deity and sacred-symbol design pages. These are live on every city route
     // and were absent from the sitemap entirely — 200 indexable pages with no
     // entry. They are ungated, unlike locality pages, so all of them belong
@@ -79,5 +88,5 @@ export default async function sitemap() {
         priority: 0.7,
     }))
 
-    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...designPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...designPages, ...blogPages]
 }

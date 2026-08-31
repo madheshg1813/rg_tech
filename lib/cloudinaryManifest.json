@@ -5948,6 +5948,15 @@
     "format": "jpg",
     "bytes": 279351
   },
+  "/services/mild-steel-laser-cutting-services.jpg": {
+    "publicId": "rg-tech/services/mild-steel-laser-cutting-services",
+    "resourceType": "image",
+    "version": 1788196689,
+    "width": 1600,
+    "height": 1330,
+    "format": "jpg",
+    "bytes": 343468
+  },
   "/services/sheet-metal-laser-cutting-services.jpg": {
     "publicId": "rg-tech/services/sheet-metal-laser-cutting-services",
     "resourceType": "image",
