@@ -190,6 +190,59 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
              */}
             {works}
 
+            {/*
+              * Specialised work inside this category — the specific jobs people
+              * search for, each a real line of work with its own description.
+              *
+              * PILLAR ONLY. cityName is set only on a locality page, so its
+              * absence marks a pillar; repeating an identical 12-item list
+              * across 822 locality pages would be duplicate content and would
+              * dilute the very terms this section exists to earn.
+              *
+              * Shaped so any entry can later become its own page without the
+              * data changing — the name is already the link text.
+              */}
+            {!cityName && content.subServices?.length > 0 && (
+                <section className="py-20 bg-white border-t border-line">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="text-center mb-12">
+                            <p className="eyebrow mb-3">{content.name} We Take On</p>
+                            <h2 className="section-title text-fg">
+                                Looking for something specific?{' '}
+                                <span className="text-accent">We cut it.</span>
+                            </h2>
+                            <p className="section-lead mt-4 max-w-2xl mx-auto">
+                                If your job is not on this list, send it anyway — most of
+                                what we cut started as a drawing nobody else would quote.
+                            </p>
+                        </div>
+
+                        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0">
+                            {content.subServices.map((sub) => (
+                                <li
+                                    key={sub.name}
+                                    className="framed-soft bg-white px-5 py-4 flex items-start gap-3"
+                                >
+                                    <CheckCircle className="w-4 h-4 flex-none text-accent mt-1" aria-hidden="true" />
+                                    <span>
+                                        <span className="block font-heading font-bold text-[0.95rem] tracking-[-0.015em] text-fg">
+                                            {sub.name}
+                                        </span>
+                                        <span className="block text-sm text-fg-muted mt-0.5">{sub.desc}</span>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div className="text-center mt-12">
+                            <a href="https://wa.me/916380736439" className="btn btn-whatsapp">
+                                <MessageCircle className="w-4 h-4" /> Send your drawing
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* Content & SEO Grid */}
             <section className="py-24 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4">
