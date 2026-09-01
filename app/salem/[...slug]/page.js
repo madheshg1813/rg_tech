@@ -8,9 +8,11 @@ import GodPage from '@/components/Gods/GodPage'
 import AluminumPage from '@/components/Service/AluminumPage'
 import CopperPage from '@/components/Service/CopperPage'
 import MildSteelPage from '@/components/Service/MildSteelPage'
+import JobWorkPage from '@/components/Service/JobWorkPage'
 import { resolveAluminum, aluminumMetadata, aluminumGraph, ALUMINUM_SLUG } from '@/lib/aluminum'
 import { resolveCopper, copperMetadata, copperGraph } from '@/lib/copper'
 import { resolveMildSteel, mildSteelMetadata, mildSteelGraph } from '@/lib/mildSteel'
+import { resolveJobWork, jobWorkMetadata, jobWorkGraph } from '@/lib/jobWork'
 import { buildMetadata, buildServicePage, resolveGod } from '@/lib/servicePage'
 import { buildGodMetadata, buildGodPage } from '@/lib/godPage'
 import { jsonLdScript } from '@/lib/schema'
@@ -22,6 +24,7 @@ export async function generateMetadata({ params }) {
     if (resolveAluminum(CITY, slug).aluminum) return aluminumMetadata(CITY)
     if (resolveCopper(CITY, slug).copper) return copperMetadata(CITY)
     if (resolveMildSteel(CITY, slug).mildSteel) return mildSteelMetadata(CITY)
+    if (resolveJobWork(CITY, slug).jobWork) return jobWorkMetadata(CITY)
     const { god } = resolveGod(CITY, slug)
     if (god) return buildGodMetadata(CITY, god, slug)
     return buildMetadata(CITY, params)
@@ -108,6 +111,33 @@ export default async function Page({ params }) {
                     articles={
                         recommended.length
                             ? <RecommendedArticles posts={recommended} serviceName="mild steel laser cutting" />
+                            : null
+                    }
+                />
+            </>
+        )
+    }
+
+    /*
+     * Laser cutting job work — the commercial pillar above the nine category
+     * pillars. Exact slug only, four city pages, no locality variants.
+     */
+    const { city: jwCity, jobWork } = resolveJobWork(CITY, slug)
+    if (jobWork) {
+        const posts = await getPosts()
+        const recommended = pickArticles('laser-cutting-services', posts)
+        return (
+            <>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={jsonLdScript(jobWorkGraph(CITY))}
+                />
+                <JobWorkPage
+                    city={jwCity}
+                    works={<OurWorks />}
+                    articles={
+                        recommended.length
+                            ? <RecommendedArticles posts={recommended} serviceName="laser cutting job work" />
                             : null
                     }
                 />

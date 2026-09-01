@@ -8,6 +8,7 @@ import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, SOCIAL_LINKS } fr
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
 import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
+import { JOB_WORK, jobWorkUrl } from '@/lib/jobWork'
 
 // Only the channels RG Tech actually has. Facebook, LinkedIn and Twitter were
 // dropped with the placeholder markup — see the note on SOCIAL_LINKS in
@@ -72,8 +73,15 @@ const Footer = () => {
                          * pillarServices, which drives locality page generation
                          * and would turn a pillars-only category into 800+ pages.
                          */}
+                        {/*
+                         * Job work leads the list. It is the commercial pillar the
+                         * nine categories hang off, and the header mega-menu that
+                         * also links it renders only while open — so its links are
+                         * never in the served HTML. This is the crawlable path.
+                         */}
                         <ul className="space-y-4">
                             {[
+                                { name: JOB_WORK.name, href: jobWorkUrl('chennai') },
                                 ...pillarServices.map((s) => ({ name: s.name, href: s.slug })),
                                 { name: ALUMINUM.name, href: aluminumUrl('chennai') },
                                 { name: COPPER.name, href: copperUrl('chennai') },

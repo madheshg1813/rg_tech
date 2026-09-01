@@ -12,6 +12,7 @@ import { pillarServices } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
 import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
+import { jobWorkUrl } from '@/lib/jobWork'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
 /* Everything under the Resources menu, shared by the desktop and mobile navs so
@@ -163,9 +164,15 @@ const Header = ({ setCatalogueModalOpen }) => {
                                         <div className="bg-white rounded-3xl shadow-2xl border border-line p-6 w-[680px] grid grid-cols-2 xl:w-[880px] xl:grid-cols-4 gap-5">
                                             {Object.values(CITIES).map((city) => (
                                                 <div key={city.slug}>
-                                                    <div className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line">
+                                                    {/* The city name is the link to that city's job
+                                                        work hub — the pillar above the nine below it. */}
+                                                    <Link
+                                                        href={jobWorkUrl(city.slug)}
+                                                        onClick={() => setServicesDropdown(false)}
+                                                        className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line group/city hover:border-cta transition-colors"
+                                                    >
                                                         <MapPin className="w-3.5 h-3.5 text-accent" />
-                                                        <p className="meta-label text-fg">
+                                                        <p className="meta-label text-fg group-hover/city:text-accent transition-colors">
                                                             {city.name}
                                                         </p>
                                                         {!city.isPrimary && (
@@ -173,7 +180,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                                 New
                                                             </span>
                                                         )}
-                                                    </div>
+                                                    </Link>
                                                     {cityServiceLinks(city.slug).map((svc) => (
                                                         <Link
                                                             key={svc.href}
@@ -294,6 +301,18 @@ const Header = ({ setCatalogueModalOpen }) => {
 
                                             {open && (
                                                 <div className="bg-surface-2 border-t border-line px-2 py-2">
+                                                    {/* The hub first, marked out from the categories
+                                                        below it — the city header itself is the
+                                                        accordion toggle on mobile, so it cannot also
+                                                        be the link. */}
+                                                    <Link
+                                                        href={jobWorkUrl(city.slug)}
+                                                        onClick={() => setMobileMenuOpen(false)}
+                                                        className="flex items-center gap-2 text-sm font-bold text-fg py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors border-b border-line mb-1"
+                                                    >
+                                                        <MapPin className="w-3.5 h-3.5 text-accent" />
+                                                        Laser Cutting Job Work in {city.name}
+                                                    </Link>
                                                     {cityServiceLinks(city.slug).map((svc) => (
                                                         <Link
                                                             key={svc.href}
