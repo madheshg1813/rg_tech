@@ -68,6 +68,10 @@ export const queue = [
         slug: 'laser-cut-jali-design-guide',
         load: async () => (await import('./laser-cut-jali-design-guide.mjs')).post,
     },
+    {
+        slug: 'how-engineering-workshops-dispose-of-metal-waste',
+        load: async () => (await import('./how-engineering-workshops-dispose-of-metal-waste.mjs')).post,
+    },
     // ── Remaining articles are appended here as they are drafted ──
 ]
 
