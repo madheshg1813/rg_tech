@@ -1,13 +1,27 @@
 name: Release locality pages
 
-# Releases one locality per secondary city each day. Releasing a locality
-# publishes all six of its service pages at once, so a day is 12 pages.
+# Releases one locality per secondary city. Releasing a locality publishes all
+# six of its service pages at once, so a run is 18 pages across three cities.
 #
-# The commit to content/published-locations.json is what triggers the Netlify
-# rebuild, so no separate deploy hook is needed here.
+# The commit to content/published-locations.json is what triggers the rebuild,
+# so no separate deploy hook is needed here.
+#
+# ---------------------------------------------------------------------------
+# PAUSED 5 Sep 2026, on request: locality output stops, blog publishing
+# continues. The daily `schedule` trigger below is commented out rather than
+# deleted so this can be turned back on by uncommenting two lines.
+#
+# Pausing does NOT unpublish anything. Every locality already listed in
+# content/published-locations.json stays live and stays in the sitemap; this
+# only stops NEW ones being added. 85 localities were live at the time of
+# pausing, with 65 still queued in content/locations.mjs.
+#
+# The workflow can still be run by hand from the Actions tab (Run workflow),
+# which is why workflow_dispatch is left in place.
+# ---------------------------------------------------------------------------
 on:
-  schedule:
-    - cron: '0 4 * * *' # 09:30 IST daily
+  # schedule:
+  #   - cron: '0 4 * * *' # 09:30 IST daily
   workflow_dispatch:
     inputs:
       dry_run:
