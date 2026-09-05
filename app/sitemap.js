@@ -7,7 +7,15 @@ import { mildSteelUrl } from '@/lib/mildSteel'
 import { jobWorkUrl } from '@/lib/jobWork'
 import { getPosts } from '@/lib/sanity'
 
-export const revalidate = 3600
+/*
+ * 5 minutes, not an hour.
+ *
+ * Posts are published straight into Sanity by the publish-blog cron, with no
+ * deploy involved, so this window is the only thing that decides how long a new
+ * article stays invisible here. At 3600 a post was live at its own URL but
+ * missing from the listing and the sitemap for up to an hour.
+ */
+export const revalidate = 300
 
 export default async function sitemap() {
     const today = new Date().toISOString().split('T')[0]

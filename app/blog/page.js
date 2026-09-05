@@ -8,7 +8,15 @@ import { breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 
 const BASE = BASE_URL
 
-export const revalidate = 3600
+/*
+ * 5 minutes, not an hour.
+ *
+ * Posts are published straight into Sanity by the publish-blog cron, with no
+ * deploy involved, so this window is the only thing that decides how long a new
+ * article stays invisible here. At 3600 a post was live at its own URL but
+ * missing from the listing and the sitemap for up to an hour.
+ */
+export const revalidate = 300
 
 export const metadata = {
     title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
