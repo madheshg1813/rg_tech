@@ -6,7 +6,7 @@ import {
     X, ChevronLeft, ChevronRight, Maximize2, MessageCircle,
     Sparkles, Phone, ArrowRight, Plus, MapPin,
     Send, PenTool, Flame, Home, DoorOpen, Landmark, Frame,
-    Church, Signpost, LayoutGrid, Lightbulb, BookOpen, UtensilsCrossed,
+    Church,
 } from 'lucide-react'
 import { godImageAlt, designRef, crosslinkDesigns } from '@/lib/godDesigns'
 import { headlinePlaces } from '@/lib/godDesignCopy'
@@ -17,56 +17,45 @@ import { IMAGES } from '@/content/lib/images.mjs'
 const WA = '916380736439'
 
 /*
- * "Where these are used" tiles, keyed by seed placement.
+ * "Where these are used" -- the same four tiles, in the same order, on every
+ * gallery.
  *
- * This was a fixed list — Pooja rooms, Main gates, Temple arches, Wall art —
- * so every Christian and Islamic gallery told its visitors the panel was for a
- * pooja room and a temple arch. It is the same bug the h1 and the blurb had,
- * and it has the same fix: read the gallery's own placements. Every placement
- * value in lib/godDesignSeeds.js has an entry; anything added later without
- * one is skipped rather than shown as a blank card.
+ * These used to be built from each gallery's seed placements. That fixed the
+ * Christian and Islamic pages advertising pooja rooms, but it left the set
+ * uneven: 48 of 68 galleries showed only three tiles, and the order moved
+ * around from page to page (Hanuman led with Main gates, Shiva swapped Main
+ * gates for Backlit walls). A row that changes shape between galleries reads
+ * as unfinished, so it is fixed now.
+ *
+ * Fixed per faith, not globally. Every faith gets the same four slots -- a
+ * room, a gate, an arch, the wall -- and only the two words that name a place
+ * of worship change. Putting "Pooja rooms" and "Temple arches" back on a
+ * Mother Mary or a mihrab page would undo the fix in 59eb205.
  */
+const ROOM = { icon: Home, detail: 'Partitions and back panels' }
+const GATE = { icon: DoorOpen, label: 'Main gates', detail: 'Gate and compound wall inserts' }
+const ARCH = { detail: 'Entrance and arch panels' }
+const WALL = { icon: Frame, label: 'Wall art', detail: 'Living room and hallway pieces' }
+
 const USE_TILES = {
-    'pooja room screens': { icon: Home, label: 'Pooja rooms', detail: 'Partitions and back panels' },
-    'pooja room doors': { icon: DoorOpen, label: 'Pooja room doors', detail: 'Door and shutter inserts' },
-    'prayer room screens': { icon: Home, label: 'Prayer rooms', detail: 'Partitions and back panels' },
-    'main gate inserts': { icon: DoorOpen, label: 'Main gates', detail: 'Gate and compound wall inserts' },
-    'temple arches': { icon: Landmark, label: 'Temple arches', detail: 'Entrance and arch panels' },
-    'church and chapel arches': { icon: Church, label: 'Church arches', detail: 'Entrance and arch panels' },
-    'chapel entrances': { icon: Church, label: 'Chapel entrances', detail: 'Doorway and porch panels' },
-    'masjid arches': { icon: Landmark, label: 'Masjid arches', detail: 'Entrance and arch panels' },
-    'grotto and shrine panels': { icon: Landmark, label: 'Grottos & shrines', detail: 'Surround and backdrop panels' },
-    'shrine surrounds': { icon: Landmark, label: 'Shrines', detail: 'Surround and backdrop panels' },
-    'mandapam panels': { icon: Landmark, label: 'Mandapams', detail: 'Pillar and ceiling panels' },
-    'partition and jali screens': { icon: LayoutGrid, label: 'Jali screens', detail: 'Partitions and room dividers' },
-    'backlit feature walls': { icon: Lightbulb, label: 'Backlit walls', detail: 'LED-lit feature panels' },
-    'wall art': { icon: Frame, label: 'Wall art', detail: 'Living room and hallway pieces' },
-    'name boards': { icon: Signpost, label: 'Name boards', detail: 'Home and gate name plates' },
-    'study wall panels': { icon: BookOpen, label: 'Study walls', detail: 'Study and library panels' },
-    'dining room panels': { icon: UtensilsCrossed, label: 'Dining rooms', detail: 'Feature and partition panels' },
-    'kitchen wall panels': { icon: UtensilsCrossed, label: 'Kitchen walls', detail: 'Feature wall panels' },
-}
-
-/** Up to four tiles from the gallery's placements, in the seed's order. */
-function useTiles(placements = []) {
-    const seen = new Set()
-    const out = []
-    for (const place of placements) {
-        const tile = USE_TILES[place]
-        if (!tile || seen.has(tile.label)) continue
-        seen.add(tile.label)
-        out.push(tile)
-        if (out.length === 4) break
-    }
-    return out
-}
-
-// Static class names, so Tailwind's scanner can see every one of them.
-const USE_GRID = {
-    1: 'grid-cols-1 max-w-xs',
-    2: 'grid-cols-2 max-w-2xl',
-    3: 'grid-cols-2 lg:grid-cols-3',
-    4: 'grid-cols-2 lg:grid-cols-4',
+    hindu: [
+        { ...ROOM, label: 'Pooja rooms' },
+        GATE,
+        { ...ARCH, icon: Landmark, label: 'Temple arches' },
+        WALL,
+    ],
+    christian: [
+        { ...ROOM, label: 'Prayer rooms' },
+        GATE,
+        { ...ARCH, icon: Church, label: 'Church arches' },
+        WALL,
+    ],
+    islamic: [
+        { ...ROOM, label: 'Prayer rooms' },
+        GATE,
+        { ...ARCH, icon: Landmark, label: 'Masjid arches' },
+        WALL,
+    ],
 }
 
 /*
@@ -196,7 +185,7 @@ export default function GodDesignGallery({ design }) {
     const faith = getGod(design.godKey)?.faith || 'hindu'
     const faithInfo = getFaith(faith)
     const crosslinks = crosslinkDesigns(design.slug, IMAGES.panel, faith)
-    const uses = useTiles(design.placements)
+    const uses = USE_TILES[faith] || USE_TILES.hindu
 
     /*
      * Marquee card width, and why it is this wide.
@@ -251,26 +240,38 @@ export default function GodDesignGallery({ design }) {
     }, [isOpen, images.length])
 
     /*
-     * Autoplay for the mobile scroller.
+     * Autoplay for the mobile scroller: one panel every 2 seconds, round and
+     * round the whole set.
      *
-     * Phone only -- from sm: up the grid already shows every panel at once and
-     * there is nothing to advance. Three guards, because a strip that moves by
-     * itself is an accessibility problem if it cannot be stopped:
+     * Phone only -- from sm: up the desktop marquee is already moving on its
+     * own, and there is nothing here to advance.
      *
-     *   - a swipe hands control over for good. Autoplay does not fight the
-     *     visitor for the strip once they have taken hold of it.
-     *   - prefers-reduced-motion turns it off outright.
-     *   - off-screen, or with the lightbox open, it holds still rather than
-     *     scrolling somewhere nobody is looking.
+     * Touching the strip PAUSES it; it does not switch it off. It used to hand
+     * control over for good, so a single tap on an arrow or a panel left the
+     * strip frozen until a reload -- which read as "autoplay is broken". Now a
+     * swipe, an arrow or a tap holds it for RESUME_AFTER_MS, and it carries on
+     * once the visitor has stopped touching it. It still never moves under a
+     * finger, and it holds still off-screen, in a background tab, and while the
+     * lightbox is open.
+     *
+     * Reduced motion no longer disables it. That setting is about animation,
+     * and Windows turns it on for anyone with "Animation effects" off -- so the
+     * carousel silently never moved for a lot of desktop-browsing visitors
+     * testing at phone width. Under it the strip now steps instantly instead of
+     * gliding: the panel changes, nothing slides.
      *
      * Reads the step off the rendered card instead of hardcoding it, so it
      * stays correct if the card width or the gap changes.
      */
+    const AUTOPLAY_MS = 2000
+    const RESUME_AFTER_MS = 5000
+
     const scrollerRef = useRef(null)
     const rafRef = useRef(null)
-    const takenOverRef = useRef(false)
+    const pausedUntilRef = useRef(0)
+    const reducedMotionRef = useRef(false)
     const lightboxOpenRef = useRef(false)
-    const stopAutoplayRef = useRef(() => {})
+    const pauseAutoplayRef = useRef(() => {})
 
     // Which panel the strip is resting on, for the "3 / 7" between the arrows.
     // A no-peek carousel gives no other clue how far through it you are.
@@ -338,16 +339,21 @@ export default function GodDesignGallery({ design }) {
         // events are coalesced away. The listener still covers swipes.
         setPanelIndex(Math.round(to / step))
 
+        // Reduced motion: land on the panel, no slide.
+        if (reducedMotionRef.current) {
+            el.scrollLeft = to
+            return
+        }
+
         // A wrap crosses the whole strip, so it gets longer to travel in
         // rather than arriving as a whip-pan.
         glide(to, (dir > 0 ? atEnd : atStart) ? 700 : 450)
     }, [glide])
 
     // Pressing an arrow is the visitor steering, the same as a swipe: autoplay
-    // stands down rather than yanking the strip onward mid-read.
+    // waits rather than yanking the strip onward mid-read, then resumes.
     const onArrow = useCallback((dir) => {
-        takenOverRef.current = true
-        stopAutoplayRef.current()
+        pauseAutoplayRef.current()
         goToPanel(dir)
     }, [goToPanel])
 
@@ -372,33 +378,54 @@ export default function GodDesignGallery({ design }) {
         if (!el || images.length < 2) return
 
         const phone = window.matchMedia('(max-width: 639px)')
-        const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)')
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
+        const syncMotion = () => { reducedMotionRef.current = reduced.matches }
+        syncMotion()
 
         let timer = null
 
-        const stop = () => {
-            clearInterval(timer)
-            timer = null
+        // Cancel an in-flight glide and hand the strip back to native scrolling.
+        const cancelGlide = () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current)
             rafRef.current = null
             el.style.scrollSnapType = ''
         }
-        stopAutoplayRef.current = stop
+
+        const stop = () => {
+            clearInterval(timer)
+            timer = null
+            cancelGlide()
+        }
+
+        // Hold autoplay for a while without killing it. The interval keeps
+        // ticking and each tick checks the deadline, so there is no restart
+        // logic to get wrong and it resumes on its own.
+        const pause = () => {
+            pausedUntilRef.current = Date.now() + RESUME_AFTER_MS
+            cancelGlide()
+        }
+        pauseAutoplayRef.current = pause
 
         const advance = () => {
-            if (takenOverRef.current || lightboxOpenRef.current) return
+            if (lightboxOpenRef.current) return
+            if (Date.now() < pausedUntilRef.current) return
             goToPanel(1)
         }
 
         const start = () => {
             stop()
-            if (phone.matches && motionOk.matches && !takenOverRef.current) {
-                timer = setInterval(advance, 3500)
-            }
+            if (phone.matches) timer = setInterval(advance, AUTOPLAY_MS)
         }
 
-        const takeOver = () => { takenOverRef.current = true; stop() }
-        el.addEventListener('pointerdown', takeOver, { passive: true })
+        // Any touch pauses: a swipe, a tap on a panel, a press on an arrow.
+        el.addEventListener('pointerdown', pause, { passive: true })
+        // Momentum after a swipe keeps the strip moving past the pointerdown;
+        // wheel and trackpad scrolls never fire one. Both count as the visitor
+        // steering. Programmatic glides set rafRef, so they are not mistaken
+        // for a visitor.
+        const onUserScroll = () => { if (!rafRef.current) pausedUntilRef.current = Date.now() + RESUME_AFTER_MS }
+        el.addEventListener('wheel', onUserScroll, { passive: true })
+        el.addEventListener('touchmove', onUserScroll, { passive: true })
 
         const io = new IntersectionObserver(
             ([entry]) => (entry.isIntersecting ? start() : stop()),
@@ -410,16 +437,18 @@ export default function GodDesignGallery({ design }) {
         document.addEventListener('visibilitychange', onVisibility)
 
         phone.addEventListener('change', start)
-        motionOk.addEventListener('change', start)
+        reduced.addEventListener('change', syncMotion)
 
         return () => {
             stop()
             io.disconnect()
-            el.removeEventListener('pointerdown', takeOver)
+            el.removeEventListener('pointerdown', pause)
+            el.removeEventListener('wheel', onUserScroll)
+            el.removeEventListener('touchmove', onUserScroll)
             document.removeEventListener('visibilitychange', onVisibility)
             phone.removeEventListener('change', start)
-            motionOk.removeEventListener('change', start)
-            stopAutoplayRef.current = () => {}
+            reduced.removeEventListener('change', syncMotion)
+            pauseAutoplayRef.current = () => {}
         }
     }, [images.length, goToPanel])
 
@@ -737,24 +766,20 @@ export default function GodDesignGallery({ design }) {
 
                     {/* Where these are used — four cards across, not a bullet
                         list down one side. */}
-                    {uses.length > 0 && (
-                        <>
-                            <h3 className="card-title text-fg mt-12 sm:mt-14 mb-4 sm:mb-5">
-                                Where these are used
-                            </h3>
-                            <div className={`grid ${USE_GRID[uses.length]} gap-3 sm:gap-5`}>
-                                {uses.map((use) => (
-                                    <div key={use.label} className="framed-soft bg-white p-4 sm:p-5">
-                                        <use.icon className="w-5 h-5 text-accent mb-3" />
-                                        <p className="card-title text-fg leading-snug">{use.label}</p>
-                                        <p className="text-xs sm:text-sm text-fg-muted mt-1 leading-snug">
-                                            {use.detail}
-                                        </p>
-                                    </div>
-                                ))}
+                    <h3 className="card-title text-fg mt-12 sm:mt-14 mb-4 sm:mb-5">
+                        Where these are used
+                    </h3>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+                        {uses.map((use) => (
+                            <div key={use.label} className="framed-soft bg-white p-4 sm:p-5">
+                                <use.icon className="w-5 h-5 text-accent mb-3" />
+                                <p className="card-title text-fg leading-snug">{use.label}</p>
+                                <p className="text-xs sm:text-sm text-fg-muted mt-1 leading-snug">
+                                    {use.detail}
+                                </p>
                             </div>
-                        </>
-                    )}
+                        ))}
+                    </div>
 
                     {/* The ask, as a full-width band. It was a sticky card in a
                         half-width column, which is what left the dead space
