@@ -34,7 +34,7 @@ export function Stars({ count }) {
             {Array.from({ length: 5 }, (_, i) => (
                 <Star
                     key={i}
-                    className={`w-4 h-4 ${i < count ? 'fill-[#F59E0B] text-accent' : 'text-line'}`}
+                    className={`w-4 h-4 ${i < count ? 'fill-[#F59E0B] text-[#F59E0B]' : 'text-line'}`}
                 />
             ))}
         </span>

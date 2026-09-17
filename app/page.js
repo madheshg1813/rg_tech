@@ -5,6 +5,7 @@ import Industries from '@/components/Home/Industries'
 import OurWorks from '@/components/Home/OurWorks'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import Testimonials from '@/components/Home/Testimonials'
+import FindUsOnline from '@/components/Home/FindUsOnline'
 import Process from '@/components/Home/Process'
 import FAQ from '@/components/Home/FAQ'
 import ContactForm from '@/components/Home/ContactForm'
@@ -73,6 +74,7 @@ export default function Home() {
             <WhyChooseUs />
             <Process />
             <Testimonials />
+            <FindUsOnline />
             <FAQ />
             <ContactForm />
         </>

@@ -36,7 +36,7 @@ import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 import { GODS } from '../lib/gods.js'
 import { GOD_DESIGN_SEEDS } from '../lib/godDesignSeeds.js'
-import { PANEL_VARIANTS } from '../lib/godDesignVariants.js'
+import { PANEL_VARIANTS, variantsForFaith } from '../lib/godDesignVariants.js'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -141,6 +141,10 @@ const THUMBS = args.includes('--thumbs')
 const ONE = flag('god')
 const COUNT = Number(flag('count', '7'))
 
+/** Indent and soft-wrap a prompt for --dry-run. */
+const wrap = (text) =>
+    text.replace(/(.{1,92})(\s+|$)/g, '          $1\n').trimEnd()
+
 /* ------------------------------------------------------------------ prompts */
 
 /*
@@ -180,51 +184,99 @@ const STYLE = [
 // to a title and material, but nothing new is generated from them.
 const VARIANTS = PANEL_VARIANTS.filter((v) => !v.retired)
 
-function buildThumbPrompt(name, kind, seedIconography) {
-    const shot = (subject) => `The cut design shows ${subject}. The panel is dark bronze stainless steel with a warm golden PVD sheen. ${THUMB_STYLE}`
+/*
+ * Appended to every Islamic prompt, and it is not boilerplate.
+ *
+ * Islamic sacred art does not depict Allah, the Prophet, or any living form,
+ * and an unconstrained "decorative panel" brief will happily add a silhouetted
+ * worshipper or a bird to fill space — the same drift that returned a Ganesh
+ * panel when Murugan was asked for. It also forbids Arabic script, because an
+ * image model renders Arabic as convincing-looking nonsense: a mangled
+ * Quranic verse cut into steel is not a quality problem, it is an offensive
+ * one. Calligraphy panels wait for real vector artwork.
+ *
+ * Nothing here is checkable by script. It is still worth stating twice, in the
+ * prompt and in review, because the cost of getting it wrong is not symmetric.
+ */
+const NO_FIGURES = [
+    'ABSOLUTELY NO human figures, no faces, no bodies, no animals, no birds and no living creatures of any kind anywhere in the design.',
+    'NO Arabic script, NO calligraphy, NO lettering and NO written words in the cut design.',
+    'The design is purely geometric, floral-arabesque and architectural.',
+].join(' ')
 
-    if (kind === 'symbol') {
-        const bare = name.replace(/\s+Symbol$/i, '')
-        return shot(`the sacred ${bare} symbol, centred and filling the frame`)
-    }
-    if (kind === 'fixture') {
-        return shot(`a decorative ${name.toLowerCase()} design, centred and filling the frame`)
-    }
-    const who = seedIconography
-        ? `the Hindu deity ${name} — ${seedIconography} —`
-        : `the Hindu deity ${name}`
-    return shot(
-        `${who} depicted respectfully and traditionally, the complete figure shown head to feet. ` +
-            `The figure must be ${name} and no other deity.`
-    )
-}
+/*
+ * How the subject is named, which depends on the faith.
+ *
+ * 'the Hindu deity X' was hardcoded while the catalogue was Hindu only. It is
+ * wrong twice over now: Christ, Mary and the saints are not deities in
+ * Christian terms, and nothing Islamic is a figure at all.
+ */
+function describeSubject(name, kind, faith, icon, tail) {
+    const aside = icon ? ' — ' + icon + ' —' : ''
 
-function buildPrompt(name, kind, variant, seedIconography) {
-    const cut = (subject) =>
-        `The cut design shows ${subject}. The panel is ${variant.finish}. ${STYLE}`
+    // For a symbol or a fixture the iconography follows as its own sentence.
+    // Inline it collides with the composition clause — "repeating edge to edge
+    // —, centred within a border" — and the model reads the fragment as noise.
+    const detail = icon ? ' The design itself is ' + icon + '.' : ''
 
     if (kind === 'symbol') {
         // 'Om Symbol' and 'Vel Symbol' carry the word already; appending it
         // gives "the Om Symbol symbol".
         const bare = name.replace(/\s+Symbol$/i, '')
-        return cut(`the sacred ${bare} symbol, ${variant.abstract}`)
+        const noun =
+            faith === 'hindu'
+                ? 'the sacred ' + bare + ' symbol'
+                : 'the ' + bare + ', a ' + (faith === 'islamic' ? 'traditional Islamic' : 'Christian') + ' symbol'
+        return noun + ', ' + tail + '.' + detail
     }
+
     if (kind === 'fixture') {
-        return cut(`a decorative ${name.toLowerCase()} design, ${variant.abstract}`)
+        return 'a decorative ' + name.toLowerCase() + ' design, ' + tail + '.' + detail
     }
+
+    // Figurative: Hindu deities and Christian figures.
+    const who =
+        kind === 'figure'
+            ? name + aside
+            : 'the Hindu deity ' + name + aside
+
     // The guard is not decoration. A sparse brief drifts toward whichever form
     // is most represented in training data, and for a simplified Hindu deity
     // silhouette that is Ganesh — which is what came back for Murugan's
     // 'minimal-bold' panel, elephant head and all.
-    const who = seedIconography
-        ? `the Hindu deity ${name} — ${seedIconography} —`
-        : `the Hindu deity ${name}`
-    return cut(
-        `${who} depicted respectfully and traditionally, ${variant.pose}, ${variant.figure}. ` +
-            `The figure must be ${name} and no other deity.`
+    return (
+        who + ' depicted respectfully and traditionally, ' + tail + '. ' +
+        'The figure must be ' + name + ' and no other subject.'
     )
 }
 
+function buildThumbPrompt(name, kind, faith, seedIconography) {
+    const tail =
+        kind === 'deity' || kind === 'figure'
+            ? 'the complete figure shown head to feet'
+            : 'centred and filling the frame'
+    // describeSubject already terminates non-figurative subjects.
+    const subject = describeSubject(name, kind, faith, seedIconography, tail).replace(/\.$/, '')
+    const guard = faith === 'islamic' ? ' ' + NO_FIGURES : ''
+    return (
+        'The cut design shows ' + subject + '. ' +
+        'The panel is dark bronze stainless steel with a warm golden PVD sheen.' +
+        guard + ' ' + THUMB_STYLE
+    )
+}
+function buildPrompt(name, kind, faith, variant, seedIconography) {
+    const tail =
+        kind === 'deity' || kind === 'figure'
+            ? variant.pose + ', ' + variant.figure
+            : variant.abstract
+    // describeSubject already terminates non-figurative subjects.
+    const subject = describeSubject(name, kind, faith, seedIconography, tail).replace(/\.$/, '')
+    const guard = faith === 'islamic' ? ' ' + NO_FIGURES : ''
+    return (
+        'The cut design shows ' + subject + '. ' +
+        'The panel is ' + variant.finish + '.' + guard + ' ' + STYLE
+    )
+}
 /* ------------------------------------------------------------------- gemini */
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -318,6 +370,7 @@ async function toPanel(buffer, outPath) {
 
 function loadSeeds() {
     const names = new Map(GODS.map((g) => [g.key, g.name]))
+    const faiths = new Map(GODS.map((g) => [g.key, g.faith]))
 
     /*
      * Ganesh has no seed row and never will.
@@ -331,6 +384,14 @@ function loadSeeds() {
     const ganesh = {
         key: 'ganesh',
         kind: 'deity',
+        faith: 'hindu',
+        // Thumbnail only. Its seven panels are hand-written in GOD_DESIGNS with
+        // their own filenames (ganesh-lotus-backlit-panel.jpg and so on), which
+        // do not end in a variant key — so the "already generated?" check never
+        // matches them and --all happily regenerated the whole finished gallery
+        // under new names. Nothing else in the set has this problem, because
+        // everything else is named by the generator in the first place.
+        thumbOnly: true,
         name: 'Lord Ganesh',
         iconography:
             'an elephant-headed god with a curved trunk, a large belly and a broken tusk',
@@ -341,6 +402,7 @@ function loadSeeds() {
         ...GOD_DESIGN_SEEDS.map((s) => ({
             key: s.key,
             kind: s.kind,
+            faith: faiths.get(s.key) || 'hindu',
             iconography: s.iconography,
             name: names.get(s.key) || s.key,
         })),
@@ -369,7 +431,7 @@ async function run() {
         process.exit(1)
     }
 
-    const count = Math.min(Math.max(COUNT, 1), VARIANTS.length)
+    const count = Math.max(COUNT, 1)
     console.log(
         `\n${DRY_RUN ? 'DRY RUN — ' : ''}${targets.length} subject(s), ${count} panel(s) each, ` +
             `model ${MODEL}\n`
@@ -393,10 +455,10 @@ async function run() {
                 continue
             }
 
-            const prompt = buildThumbPrompt(seed.name, seed.kind, seed.iconography)
+            const prompt = buildThumbPrompt(seed.name, seed.kind, seed.faith, seed.iconography)
             if (DRY_RUN) {
                 console.log(`   would  ${file}`)
-                console.log(`          ${prompt.slice(0, 150)}…`)
+                console.log(wrap(prompt))
                 continue
             }
 
@@ -431,7 +493,13 @@ async function run() {
             continue
         }
 
-        for (const variant of VARIANTS.slice(0, count)) {
+        if (seed.thumbOnly) {
+            console.log('   skip   panels (hand-written gallery)')
+            continue
+        }
+
+        const variants = variantsForFaith(seed.faith)
+        for (const variant of variants.slice(0, Math.min(count, variants.length))) {
             const file = `${seed.key}-${variant.key}.jpg`
             const outPath = join(dir, file)
             // Check the published folder as well as review/. Approved images
@@ -444,10 +512,10 @@ async function run() {
                 continue
             }
 
-            const prompt = buildPrompt(seed.name, seed.kind, variant, seed.iconography)
+            const prompt = buildPrompt(seed.name, seed.kind, seed.faith, variant, seed.iconography)
             if (DRY_RUN) {
                 console.log(`   would  ${file}`)
-                console.log(`          ${prompt.slice(0, 150)}…`)
+                console.log(wrap(prompt))
                 continue
             }
 

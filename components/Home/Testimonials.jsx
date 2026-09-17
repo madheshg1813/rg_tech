@@ -41,7 +41,7 @@ function StaticTestimonials() {
 
                         <div className="flex gap-1 mb-6" aria-label={`${t.rating} out of 5 stars`}>
                             {[...Array(t.rating)].map((_, j) => (
-                                <Star key={j} className="w-4 h-4 fill-[#F59E0B] text-accent" />
+                                <Star key={j} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
                             ))}
                         </div>
 

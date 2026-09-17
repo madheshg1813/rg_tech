@@ -1,6 +1,8 @@
 import { Archivo, Public_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import { godDesignGroups } from "@/lib/godDesigns";
+import { FAITHS } from "@/lib/gods";
 import {
     organizationSchema,
     webSiteSchema,
@@ -92,6 +94,21 @@ export const metadata = {
 const siteGraph = jsonLdGraph(organizationSchema, webSiteSchema)
 
 export default function RootLayout({ children }) {
+    /*
+     * Which faiths the Designs menu may link to.
+     *
+     * Computed here rather than in the Header because the Header is a client
+     * component: importing lib/godDesigns there would ship the whole Cloudinary
+     * manifest to the browser. Only the three short slugs cross the boundary.
+     *
+     * A faith with no published galleries 404s on its own page, so linking to
+     * it from the nav would be a broken link on every page of the site while a
+     * set is being filled in.
+     */
+    const designFaiths = FAITHS.filter((f) => godDesignGroups(f.slug).length > 0).map(
+        (f) => f.slug
+    )
+
     return (
         <html lang="en" className={`${archivo.variable} ${publicSans.variable} ${jetbrainsMono.variable} scroll-smooth`}>
             <head>
@@ -101,7 +118,7 @@ export default function RootLayout({ children }) {
                 />
             </head>
             <body className="antialiased">
-                <LayoutWrapper>{children}</LayoutWrapper>
+                <LayoutWrapper designFaiths={designFaiths}>{children}</LayoutWrapper>
             </body>
         </html>
     )

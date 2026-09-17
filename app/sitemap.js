@@ -1,6 +1,7 @@
 import { pillarServices, BASE_URL } from '@/lib/data'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
-import { publishedGodDesigns, godDesignUrl } from '@/lib/godDesigns'
+import { publishedGodDesigns, godDesignUrl, godDesignGroups } from '@/lib/godDesigns'
+import { FAITHS } from '@/lib/gods'
 import { aluminumUrl } from '@/lib/aluminum'
 import { copperUrl } from '@/lib/copper'
 import { mildSteelUrl } from '@/lib/mildSteel'
@@ -114,6 +115,20 @@ export default async function sitemap() {
         priority: 0.8,
     }
 
+    /*
+     * One index per faith, between the parent and the galleries in priority.
+     *
+     * Only faiths that have something published are listed: the page itself
+     * 404s when its faith has no galleries yet, so listing it would put a dead
+     * URL in the sitemap while a set is being filled in.
+     */
+    const faithIndexPages = FAITHS.filter((f) => godDesignGroups(f.slug).length > 0).map((f) => ({
+        url: `${BASE_URL}/designs/gods/${f.slug}`,
+        lastModified: today,
+        changeFrequency: 'weekly',
+        priority: 0.75,
+    }))
+
     const godDesignPages = publishedGodDesigns().map(design => ({
         url: `${BASE_URL}${godDesignUrl(design.slug)}`,
         lastModified: today,
@@ -130,5 +145,5 @@ export default async function sitemap() {
         priority: 0.7,
     }))
 
-    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...jobWorkPages, godDesignIndex, ...godDesignPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...jobWorkPages, godDesignIndex, ...faithIndexPages, ...godDesignPages, ...blogPages]
 }

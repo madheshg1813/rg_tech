@@ -4,7 +4,7 @@ import {
     Phone, Mail, MapPin, ChevronRight, MessageCircle,
     Instagram, Youtube, Star, ExternalLink
 } from 'lucide-react'
-import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, SOCIAL_LINKS } from '@/lib/data'
+import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, JUSTDIAL_URL, SOCIAL_LINKS } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
 import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
@@ -108,6 +108,7 @@ const Footer = () => {
                                 { label: 'About Us', href: '/about' },
                                 { label: 'Terms & Conditions', href: '/terms' },
                                 { label: 'Google Business Profile', href: GMB_URL, external: true },
+                                { label: 'Justdial Listing', href: JUSTDIAL_URL, external: true },
                             ].map(({ label: link, href, external }, i) => {
                                 const cls = "text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium"
                                 const inner = (

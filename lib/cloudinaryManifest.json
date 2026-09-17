@@ -485,6 +485,42 @@
     "format": "jpg",
     "bytes": 151267
   },
+  "/gallery/gods/arabesque-panel/arabesque-panel-arabesque-border.jpg": {
+    "publicId": "rg-tech/gallery/gods/arabesque-panel/arabesque-panel-arabesque-border",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 344432
+  },
+  "/gallery/gods/arabesque-panel/arabesque-panel-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/arabesque-panel/arabesque-panel-floral-jali",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 398681
+  },
+  "/gallery/gods/arabesque-panel/arabesque-panel-star-lattice.jpg": {
+    "publicId": "rg-tech/gallery/gods/arabesque-panel/arabesque-panel-star-lattice",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 351918
+  },
+  "/gallery/gods/arabesque-panel/arabesque-panel-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/arabesque-panel/arabesque-panel-thumb",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 180662
+  },
   "/gallery/gods/ardhanarishvara/ardhanarishvara-arch-framed.jpg": {
     "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-arch-framed",
     "resourceType": "image",
@@ -1367,6 +1403,114 @@
     "format": "jpg",
     "bytes": 122977
   },
+  "/gallery/gods/holy-cross/holy-cross-gothic-arch.jpg": {
+    "publicId": "rg-tech/gallery/gods/holy-cross/holy-cross-gothic-arch",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 267297
+  },
+  "/gallery/gods/holy-cross/holy-cross-radiant-glory.jpg": {
+    "publicId": "rg-tech/gallery/gods/holy-cross/holy-cross-radiant-glory",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 305161
+  },
+  "/gallery/gods/holy-cross/holy-cross-rose-window.jpg": {
+    "publicId": "rg-tech/gallery/gods/holy-cross/holy-cross-rose-window",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 280762
+  },
+  "/gallery/gods/holy-cross/holy-cross-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/holy-cross/holy-cross-thumb",
+    "resourceType": "image",
+    "version": 1789647214,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 103355
+  },
+  "/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-arabesque-border.jpg": {
+    "publicId": "rg-tech/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-arabesque-border",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 355468
+  },
+  "/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-floral-jali",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 412615
+  },
+  "/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-star-lattice.jpg": {
+    "publicId": "rg-tech/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-star-lattice",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 289035
+  },
+  "/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/islamic-geometric-jali/islamic-geometric-jali-thumb",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 260401
+  },
+  "/gallery/gods/jesus-christ/jesus-christ-gothic-arch.jpg": {
+    "publicId": "rg-tech/gallery/gods/jesus-christ/jesus-christ-gothic-arch",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 322615
+  },
+  "/gallery/gods/jesus-christ/jesus-christ-radiant-glory.jpg": {
+    "publicId": "rg-tech/gallery/gods/jesus-christ/jesus-christ-radiant-glory",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 300608
+  },
+  "/gallery/gods/jesus-christ/jesus-christ-rose-window.jpg": {
+    "publicId": "rg-tech/gallery/gods/jesus-christ/jesus-christ-rose-window",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 389772
+  },
+  "/gallery/gods/jesus-christ/jesus-christ-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/jesus-christ/jesus-christ-thumb",
+    "resourceType": "image",
+    "version": 1789647215,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 153377
+  },
   "/gallery/gods/kalasam/kalasam-arch-framed.jpg": {
     "publicId": "rg-tech/gallery/gods/kalasam/kalasam-arch-framed",
     "resourceType": "image",
@@ -2087,6 +2231,42 @@
     "format": "jpg",
     "bytes": 161540
   },
+  "/gallery/gods/masjid-silhouette/masjid-silhouette-arabesque-border.jpg": {
+    "publicId": "rg-tech/gallery/gods/masjid-silhouette/masjid-silhouette-arabesque-border",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 315852
+  },
+  "/gallery/gods/masjid-silhouette/masjid-silhouette-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/masjid-silhouette/masjid-silhouette-floral-jali",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 460413
+  },
+  "/gallery/gods/masjid-silhouette/masjid-silhouette-star-lattice.jpg": {
+    "publicId": "rg-tech/gallery/gods/masjid-silhouette/masjid-silhouette-star-lattice",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 404137
+  },
+  "/gallery/gods/masjid-silhouette/masjid-silhouette-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/masjid-silhouette/masjid-silhouette-thumb",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 228454
+  },
   "/gallery/gods/meenakshi-amman/meenakshi-amman-arch-framed.jpg": {
     "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-arch-framed",
     "resourceType": "image",
@@ -2158,6 +2338,78 @@
     "height": 900,
     "format": "jpg",
     "bytes": 196424
+  },
+  "/gallery/gods/mihrab-arch/mihrab-arch-arabesque-border.jpg": {
+    "publicId": "rg-tech/gallery/gods/mihrab-arch/mihrab-arch-arabesque-border",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 352844
+  },
+  "/gallery/gods/mihrab-arch/mihrab-arch-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/mihrab-arch/mihrab-arch-floral-jali",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 360492
+  },
+  "/gallery/gods/mihrab-arch/mihrab-arch-star-lattice.jpg": {
+    "publicId": "rg-tech/gallery/gods/mihrab-arch/mihrab-arch-star-lattice",
+    "resourceType": "image",
+    "version": 1789647216,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 299755
+  },
+  "/gallery/gods/mihrab-arch/mihrab-arch-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/mihrab-arch/mihrab-arch-thumb",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 221798
+  },
+  "/gallery/gods/mother-mary/mother-mary-gothic-arch.jpg": {
+    "publicId": "rg-tech/gallery/gods/mother-mary/mother-mary-gothic-arch",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 292927
+  },
+  "/gallery/gods/mother-mary/mother-mary-radiant-glory.jpg": {
+    "publicId": "rg-tech/gallery/gods/mother-mary/mother-mary-radiant-glory",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 318312
+  },
+  "/gallery/gods/mother-mary/mother-mary-rose-window.jpg": {
+    "publicId": "rg-tech/gallery/gods/mother-mary/mother-mary-rose-window",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 303409
+  },
+  "/gallery/gods/mother-mary/mother-mary-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/mother-mary/mother-mary-thumb",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 153103
   },
   "/gallery/gods/muneeswaran/muneeswaran-arch-framed.jpg": {
     "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-arch-framed",
@@ -3167,6 +3419,42 @@
     "format": "jpg",
     "bytes": 103878
   },
+  "/gallery/gods/sacred-heart/sacred-heart-gothic-arch.jpg": {
+    "publicId": "rg-tech/gallery/gods/sacred-heart/sacred-heart-gothic-arch",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 303895
+  },
+  "/gallery/gods/sacred-heart/sacred-heart-radiant-glory.jpg": {
+    "publicId": "rg-tech/gallery/gods/sacred-heart/sacred-heart-radiant-glory",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 398157
+  },
+  "/gallery/gods/sacred-heart/sacred-heart-rose-window.jpg": {
+    "publicId": "rg-tech/gallery/gods/sacred-heart/sacred-heart-rose-window",
+    "resourceType": "image",
+    "version": 1789647217,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 333490
+  },
+  "/gallery/gods/sacred-heart/sacred-heart-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/sacred-heart/sacred-heart-thumb",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 128124
+  },
   "/gallery/gods/sai-baba/sai-baba-arch-framed.jpg": {
     "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-arch-framed",
     "resourceType": "image",
@@ -3644,6 +3932,42 @@
     "format": "jpg",
     "bytes": 141732
   },
+  "/gallery/gods/star-and-crescent/star-and-crescent-arabesque-border.jpg": {
+    "publicId": "rg-tech/gallery/gods/star-and-crescent/star-and-crescent-arabesque-border",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 390819
+  },
+  "/gallery/gods/star-and-crescent/star-and-crescent-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/star-and-crescent/star-and-crescent-floral-jali",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 333271
+  },
+  "/gallery/gods/star-and-crescent/star-and-crescent-star-lattice.jpg": {
+    "publicId": "rg-tech/gallery/gods/star-and-crescent/star-and-crescent-star-lattice",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 375022
+  },
+  "/gallery/gods/star-and-crescent/star-and-crescent-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/star-and-crescent/star-and-crescent-thumb",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 183821
+  },
   "/gallery/gods/surya/surya-arch-framed.jpg": {
     "publicId": "rg-tech/gallery/gods/surya/surya-arch-framed",
     "resourceType": "image",
@@ -4021,6 +4345,42 @@
     "height": 900,
     "format": "jpg",
     "bytes": 154549
+  },
+  "/gallery/gods/velankanni-matha/velankanni-matha-gothic-arch.jpg": {
+    "publicId": "rg-tech/gallery/gods/velankanni-matha/velankanni-matha-gothic-arch",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 305804
+  },
+  "/gallery/gods/velankanni-matha/velankanni-matha-radiant-glory.jpg": {
+    "publicId": "rg-tech/gallery/gods/velankanni-matha/velankanni-matha-radiant-glory",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 369844
+  },
+  "/gallery/gods/velankanni-matha/velankanni-matha-rose-window.jpg": {
+    "publicId": "rg-tech/gallery/gods/velankanni-matha/velankanni-matha-rose-window",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 335662
+  },
+  "/gallery/gods/velankanni-matha/velankanni-matha-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/velankanni-matha/velankanni-matha-thumb",
+    "resourceType": "image",
+    "version": 1789647218,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 151166
   },
   "/gallery/Laser Cutting Services/kw_aluminum_hd.png": {
     "publicId": "rg-tech/gallery/laser-cutting-services/kw_aluminum_hd",

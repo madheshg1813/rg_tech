@@ -1,6 +1,33 @@
 import Image from 'next/image'
 import { Phone, Check, ArrowRight, ShieldCheck } from 'lucide-react'
 import GoogleRating from '@/components/GoogleRating'
+import { GoogleMark, JustdialMark } from '@/components/BrandMarks'
+import { GMB_URL, JUSTDIAL_URL } from '@/lib/data'
+
+/*
+ * The primary CTA goes to WhatsApp, not to the contact form further down.
+ *
+ * Nearly every enquiry this business gets arrives on WhatsApp, and the message
+ * is prefilled so the first thing the customer sends already says what they
+ * want — a blank chat window gets abandoned far more often. The form is still
+ * on the page for anyone who prefers it.
+ */
+const QUOTE_MESSAGE =
+    'Hi RG Tech, I would like a quote for laser cutting. ' +
+    'Material, thickness and quantity: '
+const QUOTE_WA = `https://wa.me/916380736439?text=${encodeURIComponent(QUOTE_MESSAGE)}`
+
+/*
+ * Third-party listings, directly under the CTA.
+ *
+ * Placed here rather than only in the section further down because this is
+ * where a first-time visitor decides whether the business is real. Both open in
+ * a new tab: sending someone off-site from the hero would lose the visit.
+ */
+const LISTING_PILLS = [
+    { label: 'Reviewed on Google', href: GMB_URL, Mark: GoogleMark, markClass: 'w-4 h-4' },
+    { label: 'Listed on Justdial', href: JUSTDIAL_URL, Mark: JustdialMark, markClass: 'h-[13px] w-auto' },
+]
 
 /*
  * Hero.
@@ -62,12 +89,32 @@ const Hero = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-9">
-                            <a href="#contact" className="btn btn-primary">
+                            <a
+                                href={QUOTE_WA}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-primary"
+                            >
                                 Get a Quote <ArrowRight className="w-4 h-4" />
                             </a>
                             <a href="tel:+916380736439" className="btn btn-secondary-light">
                                 <Phone className="w-4 h-4" /> Call 63807-36439
                             </a>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2.5 mt-5">
+                            {LISTING_PILLS.map(({ label, href, Mark, markClass }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2.5 rounded-full border border-line bg-white px-4 py-2.5 text-sm font-semibold text-fg hover:border-line-strong hover:shadow-sm transition-all"
+                                >
+                                    <Mark className={markClass} />
+                                    {label}
+                                </a>
+                            ))}
                         </div>
 
                         {/* Ticks run inline and wrap, rather than sitting in a
