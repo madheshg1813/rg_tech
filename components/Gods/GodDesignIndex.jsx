@@ -77,13 +77,11 @@ function Section({ section, shaded }) {
     )
 }
 
-export default function GodDesignIndex({ title, accent, lead, sections, faiths, enquiry, children }) {
+export default function GodDesignIndex({ title, accent, lead, sections, faiths, activeFaith = 'all', enquiry, children }) {
     /*
-     * Shading alternates across the sections that are actually rendered. On the
-     * filtered parent page it is computed before filtering, so switching faith
-     * can leave two plain sections next to each other — which is the right
-     * trade: recomputing it on the client would mean the server HTML and the
-     * first client render disagree.
+     * Shading alternates across the sections that are actually rendered. Each
+     * faith tab is its own page now, so `sections` is already the filtered set
+     * and the alternation is always correct.
      */
     const rendered = sections.map((section, i) => (
         <Section key={section.group} section={section} shaded={i % 2 === 1} />
@@ -129,7 +127,8 @@ export default function GodDesignIndex({ title, accent, lead, sections, faiths, 
             </section>
 
             {/* ── The galleries ────────────────────────────────────────── */}
-            {faiths ? <FaithFilter faiths={faiths}>{rendered}</FaithFilter> : rendered}
+            <FaithFilter faiths={faiths} active={activeFaith} />
+            {rendered}
 
             {/* ── Closing ask ──────────────────────────────────────────── */}
             <section className="py-12 sm:py-16">

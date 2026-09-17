@@ -1,5 +1,4 @@
-import { godDesignGroups } from '@/lib/godDesigns'
-import { FAITHS } from '@/lib/gods'
+import { godDesignGroups, faithTabs } from '@/lib/godDesigns'
 import { BASE_URL } from '@/lib/data'
 import { ORG_ID, breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 import GodDesignIndex from '@/components/Gods/GodDesignIndex'
@@ -52,15 +51,8 @@ export default function Page() {
     const sections = godDesignGroups()
     const total = sections.reduce((n, s) => n + s.designs.length, 0)
 
-    // Only faiths that actually have published galleries get a filter button —
-    // a tab that filters to nothing is worse than no tab.
-    const faiths = FAITHS.map((f) => ({
-        slug: f.slug,
-        label: f.label,
-        count: sections
-            .filter((s) => s.faith === f.slug)
-            .reduce((n, s) => n + s.designs.length, 0),
-    })).filter((f) => f.count > 0)
+    // Shared with the faith pages, so the tab counts match on both.
+    const faiths = faithTabs()
 
     const pageUrl = `${BASE_URL}/designs/gods`
     const graph = jsonLdGraph(
@@ -111,6 +103,7 @@ export default function Page() {
                 }
                 sections={sections}
                 faiths={faiths}
+                activeFaith="all"
                 enquiry="laser cut religious panel designs"
             />
         </>

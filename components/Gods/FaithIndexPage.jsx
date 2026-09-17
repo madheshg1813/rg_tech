@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { godDesignGroups } from '@/lib/godDesigns'
+import { godDesignGroups, faithTabs } from '@/lib/godDesigns'
 import { getFaith } from '@/lib/gods'
 import { BASE_URL } from '@/lib/data'
 import { ORG_ID, breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
@@ -127,6 +127,10 @@ export default function FaithIndexPage({ faith: slug }) {
                     `1 ft up to a full 8 ft arch.`
                 }
                 sections={sections}
+                // The same tabs as /designs/gods, with this faith selected, so
+                // arriving here from a tab click keeps the control in place.
+                faiths={faithTabs()}
+                activeFaith={slug}
                 enquiry={ENQUIRY[slug]}
             />
         </>
