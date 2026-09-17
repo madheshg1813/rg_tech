@@ -8,6 +8,7 @@ import {
     Send, PenTool, Flame, Home, DoorOpen, Landmark, Frame,
 } from 'lucide-react'
 import { godImageAlt, designRef, crosslinkDesigns } from '@/lib/godDesigns'
+import { headlinePlaces } from '@/lib/godDesignCopy'
 import { CITIES, serviceUrl } from '@/lib/cities'
 import { IMAGES } from '@/content/lib/images.mjs'
 
@@ -136,6 +137,9 @@ function Panel({ design, item, index, onOpen, className = '', sizes, decorative 
 }
 
 export default function GodDesignGallery({ design }) {
+    // What the h1 advertises this gallery is for, from the gallery's own data.
+    const places = headlinePlaces(design.placements)
+
     const images = design.images
     const hasImages = images.length > 0
     const faqs = design.faqs || []
@@ -404,13 +408,18 @@ export default function GodDesignGallery({ design }) {
                         </span>
                     </p>
 
-                    {/* The accent is the closing phrase after the dash, as in
-                        the reference -- the dash itself stays in the base
-                        colour so it reads as punctuation, not as part of the
-                        highlight. */}
+                    {/*
+                        The accent is the closing phrase after the dash; the
+                        dash itself stays in the base colour so it reads as
+                        punctuation rather than as part of the highlight.
+
+                        An en dash, not an em dash. A full em rule in a display
+                        headline reads as machine-written, which is the last
+                        thing a page selling hand-checked work wants.
+                    */}
                     <h1 className="display-title max-sm:text-[1.625rem] max-sm:leading-[1.15] text-fg text-balance mt-4 sm:mt-7">
-                        {design.name} Laser Cutting Designs —{' '}
-                        <span className="text-accent">Pooja Rooms, Gates, Arches</span>
+                        {design.name} Laser Cutting Designs –{' '}
+                        <span className="text-accent">{places}</span>
                     </h1>
 
                     <p className="section-lead max-sm:text-[0.9375rem] max-sm:leading-[1.6] sm:text-[1.0625rem] mt-4 sm:mt-7 max-w-[62ch] mx-auto">
