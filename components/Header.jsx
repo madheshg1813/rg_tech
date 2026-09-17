@@ -149,8 +149,21 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
             </div>
 
             {/* Main Header */}
-            <header className="glass sticky top-0 z-50 shadow-premium transition-all duration-300">
-                <div className="max-w-7xl mx-auto px-4 py-4">
+            {/*
+                Tailwind blur utilities, not the old `.glass` class. `.glass`
+                set backdrop-filter both plain and -webkit- prefixed, and the
+                CSS build collapsed the pair to the prefixed one alone — which
+                Chrome ignores. With no blur, 78% white let every gallery photo
+                scrolling underneath show straight through the logo and menu.
+                The utilities compile with both properties intact, and 95% white
+                means the bar still reads as solid on a browser with no blur.
+
+                Compact on phones: py-2.5 and a 44px logo give a 64px bar
+                instead of 94px, which was an eighth of a 375 x 812 screen spent
+                on chrome before the bottom call bar took its share too.
+            */}
+            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-line shadow-premium transition-all duration-300">
+                <div className="max-w-7xl mx-auto px-4 py-2.5 lg:py-4">
                     <div className="flex justify-between items-center">
                         <Link href="/" className="flex items-center gap-3.5 group">
                             <Image
@@ -163,8 +176,11 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                 height={240}
                                 priority
                                 sizes="56px"
-                                className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                                style={{ width: "auto", height: "auto" }}
+                                // Height from the class, not an inline style. The old
+                                // inline `height: auto` beat h-14, so the logo's size
+                                // came from whichever file variant happened to load.
+                                className="h-11 lg:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                style={{ width: "auto" }}
                             />
                             <div className="transition-all hidden sm:block">
                                 <h1 className="card-title text-fg leading-none">
@@ -354,7 +370,12 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                             </button>
                         </div>
 
-                        <button onClick={toggleMobileMenu} className="lg:hidden p-3 rounded-2xl bg-surface-2 text-fg hover:bg-cta/10 hover:text-accent transition-all">
+                        <button
+                            onClick={toggleMobileMenu}
+                            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                            aria-expanded={mobileMenuOpen}
+                            className="lg:hidden p-2.5 rounded-xl bg-surface-2 text-fg hover:bg-cta/10 hover:text-accent transition-all"
+                        >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
