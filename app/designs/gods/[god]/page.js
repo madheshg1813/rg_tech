@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import GodDesignGallery from '@/components/Gods/GodDesignGallery'
 import { GOD_DESIGNS, getGodDesign, godDesignUrl } from '@/lib/godDesigns'
+import { headlinePlaces } from '@/lib/godDesignCopy'
 import { BASE_URL } from '@/lib/data'
 import { ORG_ID, breadcrumbSchema, faqPageSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 
@@ -43,8 +44,13 @@ export async function generateMetadata({ params }) {
             `${design.name.toLowerCase()} laser cutting design`,
             `${design.name.toLowerCase()} laser cut panel`,
             ...design.alsoKnownAs.map((n) => `${n.toLowerCase()} laser cutting design`),
-            'pooja room laser cut panel',
-            'temple laser cutting design',
+            // From the gallery's own placements. These two were hardcoded to
+            // 'pooja room laser cut panel' and 'temple laser cutting design',
+            // which every Christian and Islamic gallery was declaring too.
+            ...headlinePlaces(design.placements, 2)
+                .split(', ')
+                .filter(Boolean)
+                .map((place) => `${place.toLowerCase()} laser cut panel`),
         ],
         alternates: { canonical: path },
         // An empty gallery is thin content. Keep it out of the index until it

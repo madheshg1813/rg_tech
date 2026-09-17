@@ -6,20 +6,68 @@ import {
     X, ChevronLeft, ChevronRight, Maximize2, MessageCircle,
     Sparkles, Phone, ArrowRight, Plus, MapPin,
     Send, PenTool, Flame, Home, DoorOpen, Landmark, Frame,
+    Church, Signpost, LayoutGrid, Lightbulb, BookOpen, UtensilsCrossed,
 } from 'lucide-react'
 import { godImageAlt, designRef, crosslinkDesigns } from '@/lib/godDesigns'
 import { headlinePlaces } from '@/lib/godDesignCopy'
+import { getGod, getFaith } from '@/lib/gods'
 import { CITIES, serviceUrl } from '@/lib/cities'
 import { IMAGES } from '@/content/lib/images.mjs'
 
 const WA = '916380736439'
 
-const USES = [
-    { icon: Home, label: 'Pooja rooms', detail: 'Partitions and back panels' },
-    { icon: DoorOpen, label: 'Main gates', detail: 'Gate and compound wall inserts' },
-    { icon: Landmark, label: 'Temple arches', detail: 'Entrance and arch panels' },
-    { icon: Frame, label: 'Wall art', detail: 'Living and prayer room pieces' },
-]
+/*
+ * "Where these are used" tiles, keyed by seed placement.
+ *
+ * This was a fixed list — Pooja rooms, Main gates, Temple arches, Wall art —
+ * so every Christian and Islamic gallery told its visitors the panel was for a
+ * pooja room and a temple arch. It is the same bug the h1 and the blurb had,
+ * and it has the same fix: read the gallery's own placements. Every placement
+ * value in lib/godDesignSeeds.js has an entry; anything added later without
+ * one is skipped rather than shown as a blank card.
+ */
+const USE_TILES = {
+    'pooja room screens': { icon: Home, label: 'Pooja rooms', detail: 'Partitions and back panels' },
+    'pooja room doors': { icon: DoorOpen, label: 'Pooja room doors', detail: 'Door and shutter inserts' },
+    'prayer room screens': { icon: Home, label: 'Prayer rooms', detail: 'Partitions and back panels' },
+    'main gate inserts': { icon: DoorOpen, label: 'Main gates', detail: 'Gate and compound wall inserts' },
+    'temple arches': { icon: Landmark, label: 'Temple arches', detail: 'Entrance and arch panels' },
+    'church and chapel arches': { icon: Church, label: 'Church arches', detail: 'Entrance and arch panels' },
+    'chapel entrances': { icon: Church, label: 'Chapel entrances', detail: 'Doorway and porch panels' },
+    'masjid arches': { icon: Landmark, label: 'Masjid arches', detail: 'Entrance and arch panels' },
+    'grotto and shrine panels': { icon: Landmark, label: 'Grottos & shrines', detail: 'Surround and backdrop panels' },
+    'shrine surrounds': { icon: Landmark, label: 'Shrines', detail: 'Surround and backdrop panels' },
+    'mandapam panels': { icon: Landmark, label: 'Mandapams', detail: 'Pillar and ceiling panels' },
+    'partition and jali screens': { icon: LayoutGrid, label: 'Jali screens', detail: 'Partitions and room dividers' },
+    'backlit feature walls': { icon: Lightbulb, label: 'Backlit walls', detail: 'LED-lit feature panels' },
+    'wall art': { icon: Frame, label: 'Wall art', detail: 'Living room and hallway pieces' },
+    'name boards': { icon: Signpost, label: 'Name boards', detail: 'Home and gate name plates' },
+    'study wall panels': { icon: BookOpen, label: 'Study walls', detail: 'Study and library panels' },
+    'dining room panels': { icon: UtensilsCrossed, label: 'Dining rooms', detail: 'Feature and partition panels' },
+    'kitchen wall panels': { icon: UtensilsCrossed, label: 'Kitchen walls', detail: 'Feature wall panels' },
+}
+
+/** Up to four tiles from the gallery's placements, in the seed's order. */
+function useTiles(placements = []) {
+    const seen = new Set()
+    const out = []
+    for (const place of placements) {
+        const tile = USE_TILES[place]
+        if (!tile || seen.has(tile.label)) continue
+        seen.add(tile.label)
+        out.push(tile)
+        if (out.length === 4) break
+    }
+    return out
+}
+
+// Static class names, so Tailwind's scanner can see every one of them.
+const USE_GRID = {
+    1: 'grid-cols-1 max-w-xs',
+    2: 'grid-cols-2 max-w-2xl',
+    3: 'grid-cols-2 lg:grid-cols-3',
+    4: 'grid-cols-2 lg:grid-cols-4',
+}
 
 /*
  * How a custom panel actually gets made, in the order it happens.
@@ -49,7 +97,7 @@ const STEPS = [
     {
         icon: Send,
         title: 'Send your reference',
-        body: 'A reference code from the catalogue above, a photograph, a temple image, or a sketch on the back of an envelope. All of them work.',
+        body: 'A reference code from the catalogue above, a photograph, a reference image, or a sketch on the back of an envelope. All of them work.',
     },
     {
         icon: PenTool,
@@ -143,7 +191,12 @@ export default function GodDesignGallery({ design }) {
     const images = design.images
     const hasImages = images.length > 0
     const faqs = design.faqs || []
-    const crosslinks = crosslinkDesigns(design.slug, IMAGES.panel)
+    // Faith is read off the subject in lib/gods.js, which defaults to Hindu.
+    // It scopes the cross-links, their heading and the index they point up to.
+    const faith = getGod(design.godKey)?.faith || 'hindu'
+    const faithInfo = getFaith(faith)
+    const crosslinks = crosslinkDesigns(design.slug, IMAGES.panel, faith)
+    const uses = useTiles(design.placements)
 
     /*
      * Marquee card width, and why it is this wide.
@@ -620,7 +673,7 @@ export default function GodDesignGallery({ design }) {
                             </h2>
                             <p className="section-lead mb-10">
                                 We are photographing our {design.name} panels for this gallery.
-                                In the meantime, send us your reference or temple photograph on
+                                In the meantime, send us your reference or a photograph on
                                 WhatsApp and we will share designs, sizes and pricing directly.
                             </p>
                             <a
@@ -646,10 +699,12 @@ export default function GodDesignGallery({ design }) {
                             <span className="text-accent">from your reference</span>
                         </h2>
                         <p className="text-base sm:text-lg text-fg-muted leading-relaxed">
+                            {/* Was "a Vinayagar pooja room screen, or a bold
+                                Pillaiyar silhouette" — Ganesh's names, printed
+                                on every gallery including Mother Mary's. */}
                             Every {design.name} design is cut from a vector drawing, so the detail
-                            stays crisp at any scale — fine ornamental line work on a Vinayagar
-                            pooja room screen, or a bold Pillaiyar silhouette across a full gate
-                            panel.
+                            stays crisp at any scale — fine line work on a 1 ft panel, or the same
+                            design scaled across a full 8 ft arch.
                         </p>
                     </div>
 
@@ -682,20 +737,24 @@ export default function GodDesignGallery({ design }) {
 
                     {/* Where these are used — four cards across, not a bullet
                         list down one side. */}
-                    <h3 className="card-title text-fg mt-12 sm:mt-14 mb-4 sm:mb-5">
-                        Where these are used
-                    </h3>
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
-                        {USES.map((use) => (
-                            <div key={use.label} className="framed-soft bg-white p-4 sm:p-5">
-                                <use.icon className="w-5 h-5 text-accent mb-3" />
-                                <p className="card-title text-fg leading-snug">{use.label}</p>
-                                <p className="text-xs sm:text-sm text-fg-muted mt-1 leading-snug">
-                                    {use.detail}
-                                </p>
+                    {uses.length > 0 && (
+                        <>
+                            <h3 className="card-title text-fg mt-12 sm:mt-14 mb-4 sm:mb-5">
+                                Where these are used
+                            </h3>
+                            <div className={`grid ${USE_GRID[uses.length]} gap-3 sm:gap-5`}>
+                                {uses.map((use) => (
+                                    <div key={use.label} className="framed-soft bg-white p-4 sm:p-5">
+                                        <use.icon className="w-5 h-5 text-accent mb-3" />
+                                        <p className="card-title text-fg leading-snug">{use.label}</p>
+                                        <p className="text-xs sm:text-sm text-fg-muted mt-1 leading-snug">
+                                            {use.detail}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                        </>
+                    )}
 
                     {/* The ask, as a full-width band. It was a sticky card in a
                         half-width column, which is what left the dead space
@@ -709,7 +768,7 @@ export default function GodDesignGallery({ design }) {
                                 Send us your {design.name} reference
                             </h3>
                             <p className="text-[0.9375rem] sm:text-base text-fg-muted mt-2 leading-relaxed max-w-xl">
-                                Share a photo, temple image or sketch on WhatsApp. We come back with
+                                Share a photo, reference image or sketch on WhatsApp. We come back with
                                 a cutting-ready design, sizes and pricing — usually the same day.
                             </p>
                         </div>
@@ -740,7 +799,8 @@ export default function GodDesignGallery({ design }) {
                         <div className="text-center mb-8 sm:mb-12">
                             <p className="eyebrow text-accent mb-3">More Designs</p>
                             <h2 className="section-title text-fg">
-                                Other deity <span className="text-accent">laser cut panels</span>
+                                {faith === 'hindu' ? 'Other deity' : `More ${faithInfo?.label ?? ''}`}{' '}
+                                <span className="text-accent">laser cut panels</span>
                             </h2>
                         </div>
 
@@ -784,10 +844,10 @@ export default function GodDesignGallery({ design }) {
                         */}
                         <div className="mt-8 sm:mt-10 text-center">
                             <Link
-                                href="/designs/gods"
+                                href={`/designs/gods/${faith}`}
                                 className="btn btn-secondary-light px-6 py-3 text-[0.8125rem] sm:px-8 sm:py-[1rem] sm:text-[0.9375rem]"
                             >
-                                View all god designs <ArrowRight className="w-4 h-4" />
+                                View all {faithInfo?.label} designs <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>
