@@ -359,6 +359,3669 @@
     "format": "jpg",
     "bytes": 266278
   },
+  "/gallery/gods/andal/andal-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-arch-framed",
+    "resourceType": "image",
+    "version": 1789562965,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 330417
+  },
+  "/gallery/gods/andal/andal-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-classic-frame",
+    "resourceType": "image",
+    "version": 1789562965,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 286560
+  },
+  "/gallery/gods/andal/andal-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-floral-jali",
+    "resourceType": "image",
+    "version": 1789562965,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 352332
+  },
+  "/gallery/gods/andal/andal-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562964,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 301462
+  },
+  "/gallery/gods/andal/andal-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-mandala",
+    "resourceType": "image",
+    "version": 1789562965,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 339668
+  },
+  "/gallery/gods/andal/andal-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-om-motif",
+    "resourceType": "image",
+    "version": 1789562965,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 277202
+  },
+  "/gallery/gods/andal/andal-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/andal/andal-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 179502
+  },
+  "/gallery/gods/annapoorani/annapoorani-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-arch-framed",
+    "resourceType": "image",
+    "version": 1789562965,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 362804
+  },
+  "/gallery/gods/annapoorani/annapoorani-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-classic-frame",
+    "resourceType": "image",
+    "version": 1789562964,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 308689
+  },
+  "/gallery/gods/annapoorani/annapoorani-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-floral-jali",
+    "resourceType": "image",
+    "version": 1789562966,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 327496
+  },
+  "/gallery/gods/annapoorani/annapoorani-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562966,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 342336
+  },
+  "/gallery/gods/annapoorani/annapoorani-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-mandala",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 497775
+  },
+  "/gallery/gods/annapoorani/annapoorani-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-om-motif",
+    "resourceType": "image",
+    "version": 1789562967,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 269772
+  },
+  "/gallery/gods/annapoorani/annapoorani-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/annapoorani/annapoorani-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 151267
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-arch-framed",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 325782
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-classic-frame",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 316002
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-floral-jali",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 411645
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 289969
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-mandala",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 468116
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-om-motif",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 303472
+  },
+  "/gallery/gods/ardhanarishvara/ardhanarishvara-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/ardhanarishvara-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 166131
+  },
+  "/gallery/gods/ardhanarishvara/review/ardhanarishvara-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/ardhanarishvara/review/ardhanarishvara-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 166131
+  },
+  "/gallery/gods/ayyanar/ayyanar-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-arch-framed",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 316746
+  },
+  "/gallery/gods/ayyanar/ayyanar-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-classic-frame",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 248768
+  },
+  "/gallery/gods/ayyanar/ayyanar-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-floral-jali",
+    "resourceType": "image",
+    "version": 1789640943,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 504051
+  },
+  "/gallery/gods/ayyanar/ayyanar-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-lotus-frame",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 271949
+  },
+  "/gallery/gods/ayyanar/ayyanar-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-mandala",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 412048
+  },
+  "/gallery/gods/ayyanar/ayyanar-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-om-motif",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 266240
+  },
+  "/gallery/gods/ayyanar/ayyanar-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/ayyanar-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 210420
+  },
+  "/gallery/gods/ayyanar/review/ayyanar-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/review/ayyanar-arch-framed",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 316746
+  },
+  "/gallery/gods/ayyanar/review/ayyanar-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/review/ayyanar-classic-frame",
+    "resourceType": "image",
+    "version": 1789554164,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 248768
+  },
+  "/gallery/gods/ayyanar/review/ayyanar-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/review/ayyanar-floral-jali",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 504051
+  },
+  "/gallery/gods/ayyanar/review/ayyanar-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/review/ayyanar-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 271949
+  },
+  "/gallery/gods/ayyanar/review/ayyanar-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/review/ayyanar-mandala",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 412048
+  },
+  "/gallery/gods/ayyanar/review/ayyanar-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyanar/review/ayyanar-om-motif",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 266240
+  },
+  "/gallery/gods/ayyappa/ayyappa-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-arch-framed",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 329446
+  },
+  "/gallery/gods/ayyappa/ayyappa-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-classic-frame",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 257988
+  },
+  "/gallery/gods/ayyappa/ayyappa-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-floral-jali",
+    "resourceType": "image",
+    "version": 1789554165,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 446438
+  },
+  "/gallery/gods/ayyappa/ayyappa-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554166,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 307271
+  },
+  "/gallery/gods/ayyappa/ayyappa-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-mandala",
+    "resourceType": "image",
+    "version": 1789554166,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 426232
+  },
+  "/gallery/gods/ayyappa/ayyappa-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-om-motif",
+    "resourceType": "image",
+    "version": 1789554166,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 300505
+  },
+  "/gallery/gods/ayyappa/ayyappa-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/ayyappa-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 162294
+  },
+  "/gallery/gods/ayyappa/review/ayyappa-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/ayyappa/review/ayyappa-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 162294
+  },
+  "/gallery/gods/bhairava/bhairava-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-arch-framed",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 325935
+  },
+  "/gallery/gods/bhairava/bhairava-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-classic-frame",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 300549
+  },
+  "/gallery/gods/bhairava/bhairava-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-floral-jali",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 367862
+  },
+  "/gallery/gods/bhairava/bhairava-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 275261
+  },
+  "/gallery/gods/bhairava/bhairava-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-mandala",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 371847
+  },
+  "/gallery/gods/bhairava/bhairava-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-om-motif",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 360531
+  },
+  "/gallery/gods/bhairava/bhairava-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/bhairava/bhairava-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 146107
+  },
+  "/gallery/gods/chandra/chandra-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-arch-framed",
+    "resourceType": "image",
+    "version": 1789562968,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 336084
+  },
+  "/gallery/gods/chandra/chandra-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-classic-frame",
+    "resourceType": "image",
+    "version": 1789562970,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 385352
+  },
+  "/gallery/gods/chandra/chandra-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-floral-jali",
+    "resourceType": "image",
+    "version": 1789562970,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 414012
+  },
+  "/gallery/gods/chandra/chandra-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562970,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 285006
+  },
+  "/gallery/gods/chandra/chandra-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-mandala",
+    "resourceType": "image",
+    "version": 1789562970,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 411182
+  },
+  "/gallery/gods/chandra/chandra-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-om-motif",
+    "resourceType": "image",
+    "version": 1789562970,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 317187
+  },
+  "/gallery/gods/chandra/chandra-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/chandra/chandra-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 162210
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-arch-framed",
+    "resourceType": "image",
+    "version": 1789554166,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 342298
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-classic-frame",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 296215
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-floral-jali",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 356525
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 309509
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-mandala",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 458262
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-om-motif",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 357953
+  },
+  "/gallery/gods/dakshinamurthy/dakshinamurthy-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/dakshinamurthy-thumb",
+    "resourceType": "image",
+    "version": 1789571306,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 205179
+  },
+  "/gallery/gods/dakshinamurthy/review/dakshinamurthy-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/dakshinamurthy/review/dakshinamurthy-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 205179
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-arch-framed",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 282341
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-classic-frame",
+    "resourceType": "image",
+    "version": 1789554167,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 264573
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-floral-jali",
+    "resourceType": "image",
+    "version": 1789554168,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 422468
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554168,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 308007
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-mandala",
+    "resourceType": "image",
+    "version": 1789554168,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 346344
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-om-motif",
+    "resourceType": "image",
+    "version": 1789554168,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 296374
+  },
+  "/gallery/gods/dhanvantari/dhanvantari-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/dhanvantari-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 185789
+  },
+  "/gallery/gods/dhanvantari/review/dhanvantari-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/dhanvantari/review/dhanvantari-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 185789
+  },
+  "/gallery/gods/durga/durga-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-arch-framed",
+    "resourceType": "image",
+    "version": 1789554168,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 391550
+  },
+  "/gallery/gods/durga/durga-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-classic-frame",
+    "resourceType": "image",
+    "version": 1789554168,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 330762
+  },
+  "/gallery/gods/durga/durga-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-floral-jali",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 420144
+  },
+  "/gallery/gods/durga/durga-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 330954
+  },
+  "/gallery/gods/durga/durga-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-mandala",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 460137
+  },
+  "/gallery/gods/durga/durga-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-om-motif",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 312175
+  },
+  "/gallery/gods/durga/durga-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/durga-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 110001
+  },
+  "/gallery/gods/durga/review/durga-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/durga/review/durga-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 110001
+  },
+  "/gallery/gods/ganesh/ganesh-dancing-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-dancing-panel",
+    "resourceType": "image",
+    "version": 1789463821,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 341472
+  },
+  "/gallery/gods/ganesh/ganesh-frontal-framed-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-frontal-framed-panel",
+    "resourceType": "image",
+    "version": 1789463821,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 345815
+  },
+  "/gallery/gods/ganesh/ganesh-lotus-backlit-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-lotus-backlit-panel",
+    "resourceType": "image",
+    "version": 1789463822,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 500416
+  },
+  "/gallery/gods/ganesh/ganesh-lotus-seated-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-lotus-seated-panel",
+    "resourceType": "image",
+    "version": 1789463821,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 390207
+  },
+  "/gallery/gods/ganesh/ganesh-mandala-bold-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-mandala-bold-panel",
+    "resourceType": "image",
+    "version": 1789463822,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 460220
+  },
+  "/gallery/gods/ganesh/ganesh-minimal-backlit-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-minimal-backlit-panel",
+    "resourceType": "image",
+    "version": 1789463822,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 304234
+  },
+  "/gallery/gods/ganesh/ganesh-om-motif-panel.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-om-motif-panel",
+    "resourceType": "image",
+    "version": 1789463821,
+    "width": 1536,
+    "height": 2752,
+    "format": "jpg",
+    "bytes": 392744
+  },
+  "/gallery/gods/ganesh/ganesh-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/ganesh/ganesh-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 152248
+  },
+  "/gallery/gods/hanuman/hanuman-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-arch-framed",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 337591
+  },
+  "/gallery/gods/hanuman/hanuman-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-classic-frame",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 267115
+  },
+  "/gallery/gods/hanuman/hanuman-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-floral-jali",
+    "resourceType": "image",
+    "version": 1789554169,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 383079
+  },
+  "/gallery/gods/hanuman/hanuman-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554170,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 292398
+  },
+  "/gallery/gods/hanuman/hanuman-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-mandala",
+    "resourceType": "image",
+    "version": 1789554170,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 412871
+  },
+  "/gallery/gods/hanuman/hanuman-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-om-motif",
+    "resourceType": "image",
+    "version": 1789554170,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 332047
+  },
+  "/gallery/gods/hanuman/hanuman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/hanuman-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 184058
+  },
+  "/gallery/gods/hanuman/review/hanuman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/hanuman/review/hanuman-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 184058
+  },
+  "/gallery/gods/hayagriva/hayagriva-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-arch-framed",
+    "resourceType": "image",
+    "version": 1789554170,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 294158
+  },
+  "/gallery/gods/hayagriva/hayagriva-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-classic-frame",
+    "resourceType": "image",
+    "version": 1789554170,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 310794
+  },
+  "/gallery/gods/hayagriva/hayagriva-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-floral-jali",
+    "resourceType": "image",
+    "version": 1789554171,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 361861
+  },
+  "/gallery/gods/hayagriva/hayagriva-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554171,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 327499
+  },
+  "/gallery/gods/hayagriva/hayagriva-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-mandala",
+    "resourceType": "image",
+    "version": 1789554171,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 362711
+  },
+  "/gallery/gods/hayagriva/hayagriva-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-om-motif",
+    "resourceType": "image",
+    "version": 1789554171,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 267587
+  },
+  "/gallery/gods/hayagriva/hayagriva-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/hayagriva-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 146105
+  },
+  "/gallery/gods/hayagriva/review/hayagriva-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/hayagriva/review/hayagriva-thumb",
+    "resourceType": "image",
+    "version": 1789569746,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 146105
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-arch-framed",
+    "resourceType": "image",
+    "version": 1789562971,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 365981
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-classic-frame",
+    "resourceType": "image",
+    "version": 1789562971,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 407198
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-floral-jali",
+    "resourceType": "image",
+    "version": 1789562972,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 422228
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562972,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 332840
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-mandala",
+    "resourceType": "image",
+    "version": 1789562972,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 446242
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-om-motif",
+    "resourceType": "image",
+    "version": 1789562972,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 354076
+  },
+  "/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/hindu-temple-decoration/hindu-temple-decoration-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 122977
+  },
+  "/gallery/gods/kalasam/kalasam-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-arch-framed",
+    "resourceType": "image",
+    "version": 1789562973,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 254057
+  },
+  "/gallery/gods/kalasam/kalasam-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-classic-frame",
+    "resourceType": "image",
+    "version": 1789562973,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 214439
+  },
+  "/gallery/gods/kalasam/kalasam-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-floral-jali",
+    "resourceType": "image",
+    "version": 1789562973,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 333281
+  },
+  "/gallery/gods/kalasam/kalasam-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562973,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 337759
+  },
+  "/gallery/gods/kalasam/kalasam-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-mandala",
+    "resourceType": "image",
+    "version": 1789562973,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 315528
+  },
+  "/gallery/gods/kalasam/kalasam-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-om-motif",
+    "resourceType": "image",
+    "version": 1789562974,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 316892
+  },
+  "/gallery/gods/kalasam/kalasam-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/kalasam/kalasam-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 143964
+  },
+  "/gallery/gods/kaliamman/kaliamman-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-arch-framed",
+    "resourceType": "image",
+    "version": 1789554171,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 366511
+  },
+  "/gallery/gods/kaliamman/kaliamman-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-classic-frame",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 300211
+  },
+  "/gallery/gods/kaliamman/kaliamman-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-floral-jali",
+    "resourceType": "image",
+    "version": 1789554171,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 480891
+  },
+  "/gallery/gods/kaliamman/kaliamman-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 333646
+  },
+  "/gallery/gods/kaliamman/kaliamman-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-mandala",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 362582
+  },
+  "/gallery/gods/kaliamman/kaliamman-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-om-motif",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 309083
+  },
+  "/gallery/gods/kaliamman/kaliamman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/kaliamman-thumb",
+    "resourceType": "image",
+    "version": 1789571307,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 189952
+  },
+  "/gallery/gods/kaliamman/review/kaliamman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/kaliamman/review/kaliamman-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 189952
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-arch-framed",
+    "resourceType": "image",
+    "version": 1789576287,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 391730
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-classic-frame",
+    "resourceType": "image",
+    "version": 1789576287,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 233308
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-floral-jali",
+    "resourceType": "image",
+    "version": 1789576287,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 403855
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-lotus-frame",
+    "resourceType": "image",
+    "version": 1789576287,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 391280
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-mandala",
+    "resourceType": "image",
+    "version": 1789576287,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 320086
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-om-motif",
+    "resourceType": "image",
+    "version": 1789576287,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 286109
+  },
+  "/gallery/gods/karuppasamy/karuppasamy-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/karuppasamy-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 129086
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-arch-framed",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 391730
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-classic-frame",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 233308
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-floral-jali",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 403855
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554172,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 391280
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-mandala",
+    "resourceType": "image",
+    "version": 1789554173,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 320086
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-om-motif",
+    "resourceType": "image",
+    "version": 1789554173,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 286109
+  },
+  "/gallery/gods/karuppasamy/review/karuppasamy-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/karuppasamy/review/karuppasamy-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 129086
+  },
+  "/gallery/gods/krishna/krishna-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-arch-framed",
+    "resourceType": "image",
+    "version": 1789554173,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 335985
+  },
+  "/gallery/gods/krishna/krishna-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-classic-frame",
+    "resourceType": "image",
+    "version": 1789554173,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 338738
+  },
+  "/gallery/gods/krishna/krishna-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-floral-jali",
+    "resourceType": "image",
+    "version": 1789554173,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 478086
+  },
+  "/gallery/gods/krishna/krishna-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 347384
+  },
+  "/gallery/gods/krishna/krishna-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-mandala",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 292916
+  },
+  "/gallery/gods/krishna/krishna-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-om-motif",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 287440
+  },
+  "/gallery/gods/krishna/krishna-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/krishna-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 130842
+  },
+  "/gallery/gods/krishna/review/krishna-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/krishna/review/krishna-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 130842
+  },
+  "/gallery/gods/lakshmi/lakshmi-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-arch-framed",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 345100
+  },
+  "/gallery/gods/lakshmi/lakshmi-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-classic-frame",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 319044
+  },
+  "/gallery/gods/lakshmi/lakshmi-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-floral-jali",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 416379
+  },
+  "/gallery/gods/lakshmi/lakshmi-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-lotus-frame",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 336552
+  },
+  "/gallery/gods/lakshmi/lakshmi-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-mandala",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 305000
+  },
+  "/gallery/gods/lakshmi/lakshmi-minimal-bold.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-minimal-bold",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 284968
+  },
+  "/gallery/gods/lakshmi/lakshmi-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-om-motif",
+    "resourceType": "image",
+    "version": 1789481363,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 295445
+  },
+  "/gallery/gods/lakshmi/lakshmi-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/lakshmi-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 200708
+  },
+  "/gallery/gods/lakshmi/review/lakshmi-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/lakshmi/review/lakshmi-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 200708
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-arch-framed",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 304967
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-classic-frame",
+    "resourceType": "image",
+    "version": 1789640942,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 286077
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-floral-jali",
+    "resourceType": "image",
+    "version": 1789640943,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 506997
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-lotus-frame",
+    "resourceType": "image",
+    "version": 1789640943,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 324925
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-mandala",
+    "resourceType": "image",
+    "version": 1789640944,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 322787
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-om-motif",
+    "resourceType": "image",
+    "version": 1789640944,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 279615
+  },
+  "/gallery/gods/madurai-veeran/madurai-veeran-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/madurai-veeran-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 125974
+  },
+  "/gallery/gods/madurai-veeran/review/madurai-veeran-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/review/madurai-veeran-arch-framed",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 304967
+  },
+  "/gallery/gods/madurai-veeran/review/madurai-veeran-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/review/madurai-veeran-classic-frame",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 286077
+  },
+  "/gallery/gods/madurai-veeran/review/madurai-veeran-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/review/madurai-veeran-floral-jali",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 506997
+  },
+  "/gallery/gods/madurai-veeran/review/madurai-veeran-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/review/madurai-veeran-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 324925
+  },
+  "/gallery/gods/madurai-veeran/review/madurai-veeran-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/review/madurai-veeran-mandala",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 322787
+  },
+  "/gallery/gods/madurai-veeran/review/madurai-veeran-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/madurai-veeran/review/madurai-veeran-om-motif",
+    "resourceType": "image",
+    "version": 1789554174,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 279615
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-arch-framed",
+    "resourceType": "image",
+    "version": 1789562974,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 345292
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-classic-frame",
+    "resourceType": "image",
+    "version": 1789562975,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 323872
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-floral-jali",
+    "resourceType": "image",
+    "version": 1789562975,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 404881
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562975,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 295861
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-mandala",
+    "resourceType": "image",
+    "version": 1789562975,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 448821
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-om-motif",
+    "resourceType": "image",
+    "version": 1789562976,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 308907
+  },
+  "/gallery/gods/mahalakshmi/mahalakshmi-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/mahalakshmi/mahalakshmi-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 175224
+  },
+  "/gallery/gods/mariamman/mariamman-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-arch-framed",
+    "resourceType": "image",
+    "version": 1789640944,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 341682
+  },
+  "/gallery/gods/mariamman/mariamman-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-classic-frame",
+    "resourceType": "image",
+    "version": 1789640944,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 311291
+  },
+  "/gallery/gods/mariamman/mariamman-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-floral-jali",
+    "resourceType": "image",
+    "version": 1789640944,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 400871
+  },
+  "/gallery/gods/mariamman/mariamman-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-lotus-frame",
+    "resourceType": "image",
+    "version": 1789640944,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 256707
+  },
+  "/gallery/gods/mariamman/mariamman-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-mandala",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 312578
+  },
+  "/gallery/gods/mariamman/mariamman-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-om-motif",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 302016
+  },
+  "/gallery/gods/mariamman/mariamman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/mariamman-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 161540
+  },
+  "/gallery/gods/mariamman/review/mariamman-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-arch-framed",
+    "resourceType": "image",
+    "version": 1789554175,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 341682
+  },
+  "/gallery/gods/mariamman/review/mariamman-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-classic-frame",
+    "resourceType": "image",
+    "version": 1789554175,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 311291
+  },
+  "/gallery/gods/mariamman/review/mariamman-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-floral-jali",
+    "resourceType": "image",
+    "version": 1789554175,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 400871
+  },
+  "/gallery/gods/mariamman/review/mariamman-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554175,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 256707
+  },
+  "/gallery/gods/mariamman/review/mariamman-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-mandala",
+    "resourceType": "image",
+    "version": 1789554175,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 312578
+  },
+  "/gallery/gods/mariamman/review/mariamman-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-om-motif",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 302016
+  },
+  "/gallery/gods/mariamman/review/mariamman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/mariamman/review/mariamman-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 161540
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-arch-framed",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 307297
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-classic-frame",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 257274
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-floral-jali",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 392384
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 337437
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-mandala",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 453458
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-om-motif",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 276328
+  },
+  "/gallery/gods/meenakshi-amman/meenakshi-amman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/meenakshi-amman-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 196424
+  },
+  "/gallery/gods/meenakshi-amman/review/meenakshi-amman-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/meenakshi-amman/review/meenakshi-amman-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 196424
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-arch-framed",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 258330
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-classic-frame",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 262827
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-floral-jali",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 427160
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-lotus-frame",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 279482
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-mandala",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 387804
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-om-motif",
+    "resourceType": "image",
+    "version": 1789640945,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 270063
+  },
+  "/gallery/gods/muneeswaran/muneeswaran-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/muneeswaran-thumb",
+    "resourceType": "image",
+    "version": 1789571308,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 165024
+  },
+  "/gallery/gods/muneeswaran/review/muneeswaran-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/review/muneeswaran-arch-framed",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 258330
+  },
+  "/gallery/gods/muneeswaran/review/muneeswaran-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/review/muneeswaran-classic-frame",
+    "resourceType": "image",
+    "version": 1789554176,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 262827
+  },
+  "/gallery/gods/muneeswaran/review/muneeswaran-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/review/muneeswaran-floral-jali",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 427160
+  },
+  "/gallery/gods/muneeswaran/review/muneeswaran-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/review/muneeswaran-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 279482
+  },
+  "/gallery/gods/muneeswaran/review/muneeswaran-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/review/muneeswaran-mandala",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 387804
+  },
+  "/gallery/gods/muneeswaran/review/muneeswaran-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/muneeswaran/review/muneeswaran-om-motif",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 270063
+  },
+  "/gallery/gods/murugan/murugan-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-arch-framed",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 291335
+  },
+  "/gallery/gods/murugan/murugan-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-classic-frame",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 283595
+  },
+  "/gallery/gods/murugan/murugan-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-floral-jali",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 406784
+  },
+  "/gallery/gods/murugan/murugan-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-lotus-frame",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 364791
+  },
+  "/gallery/gods/murugan/murugan-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-mandala",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 418387
+  },
+  "/gallery/gods/murugan/murugan-minimal-bold.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-minimal-bold",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 286601
+  },
+  "/gallery/gods/murugan/murugan-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-om-motif",
+    "resourceType": "image",
+    "version": 1789479618,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 304102
+  },
+  "/gallery/gods/murugan/murugan-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/murugan-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 199282
+  },
+  "/gallery/gods/murugan/review/murugan-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/murugan/review/murugan-thumb",
+    "resourceType": "image",
+    "version": 1789569747,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 199282
+  },
+  "/gallery/gods/narasimha/narasimha-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-arch-framed",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 327860
+  },
+  "/gallery/gods/narasimha/narasimha-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-classic-frame",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 308951
+  },
+  "/gallery/gods/narasimha/narasimha-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-floral-jali",
+    "resourceType": "image",
+    "version": 1789554177,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 399088
+  },
+  "/gallery/gods/narasimha/narasimha-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554179,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 335224
+  },
+  "/gallery/gods/narasimha/narasimha-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-mandala",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 320110
+  },
+  "/gallery/gods/narasimha/narasimha-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-om-motif",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 280496
+  },
+  "/gallery/gods/narasimha/narasimha-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/narasimha-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 163427
+  },
+  "/gallery/gods/narasimha/review/narasimha-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/narasimha/review/narasimha-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 163427
+  },
+  "/gallery/gods/nataraja/nataraja-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-arch-framed",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 404588
+  },
+  "/gallery/gods/nataraja/nataraja-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-classic-frame",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 402540
+  },
+  "/gallery/gods/nataraja/nataraja-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-floral-jali",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 428643
+  },
+  "/gallery/gods/nataraja/nataraja-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 294532
+  },
+  "/gallery/gods/nataraja/nataraja-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-mandala",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 327827
+  },
+  "/gallery/gods/nataraja/nataraja-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-om-motif",
+    "resourceType": "image",
+    "version": 1789554178,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 278709
+  },
+  "/gallery/gods/nataraja/nataraja-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/nataraja-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 166447
+  },
+  "/gallery/gods/nataraja/review/nataraja-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/nataraja/review/nataraja-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 166447
+  },
+  "/gallery/gods/navadurga/navadurga-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-arch-framed",
+    "resourceType": "image",
+    "version": 1789562976,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 307926
+  },
+  "/gallery/gods/navadurga/navadurga-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-classic-frame",
+    "resourceType": "image",
+    "version": 1789562976,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 292810
+  },
+  "/gallery/gods/navadurga/navadurga-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-floral-jali",
+    "resourceType": "image",
+    "version": 1789562977,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 463324
+  },
+  "/gallery/gods/navadurga/navadurga-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562977,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 361736
+  },
+  "/gallery/gods/navadurga/navadurga-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-mandala",
+    "resourceType": "image",
+    "version": 1789562977,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 459236
+  },
+  "/gallery/gods/navadurga/navadurga-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-om-motif",
+    "resourceType": "image",
+    "version": 1789562978,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 370885
+  },
+  "/gallery/gods/navadurga/navadurga-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/navadurga/navadurga-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 200008
+  },
+  "/gallery/gods/navagraha/navagraha-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-arch-framed",
+    "resourceType": "image",
+    "version": 1789562978,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 325666
+  },
+  "/gallery/gods/navagraha/navagraha-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-classic-frame",
+    "resourceType": "image",
+    "version": 1789562979,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 367968
+  },
+  "/gallery/gods/navagraha/navagraha-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-floral-jali",
+    "resourceType": "image",
+    "version": 1789562979,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 466837
+  },
+  "/gallery/gods/navagraha/navagraha-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562979,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 462034
+  },
+  "/gallery/gods/navagraha/navagraha-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-mandala",
+    "resourceType": "image",
+    "version": 1789562979,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 328939
+  },
+  "/gallery/gods/navagraha/navagraha-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-om-motif",
+    "resourceType": "image",
+    "version": 1789562980,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 296240
+  },
+  "/gallery/gods/navagraha/navagraha-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/navagraha/navagraha-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 198928
+  },
+  "/gallery/gods/om-symbol/om-symbol-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-arch-framed",
+    "resourceType": "image",
+    "version": 1789562980,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 284599
+  },
+  "/gallery/gods/om-symbol/om-symbol-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-classic-frame",
+    "resourceType": "image",
+    "version": 1789562980,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 245589
+  },
+  "/gallery/gods/om-symbol/om-symbol-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-floral-jali",
+    "resourceType": "image",
+    "version": 1789562980,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 385309
+  },
+  "/gallery/gods/om-symbol/om-symbol-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562980,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 252649
+  },
+  "/gallery/gods/om-symbol/om-symbol-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-mandala",
+    "resourceType": "image",
+    "version": 1789562981,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 298173
+  },
+  "/gallery/gods/om-symbol/om-symbol-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-om-motif",
+    "resourceType": "image",
+    "version": 1789562981,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 230010
+  },
+  "/gallery/gods/om-symbol/om-symbol-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/om-symbol/om-symbol-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 206763
+  },
+  "/gallery/gods/parvati/parvati-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-arch-framed",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 235542
+  },
+  "/gallery/gods/parvati/parvati-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-classic-frame",
+    "resourceType": "image",
+    "version": 1789554179,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 312689
+  },
+  "/gallery/gods/parvati/parvati-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-floral-jali",
+    "resourceType": "image",
+    "version": 1789554179,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 436023
+  },
+  "/gallery/gods/parvati/parvati-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554179,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 391693
+  },
+  "/gallery/gods/parvati/parvati-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-mandala",
+    "resourceType": "image",
+    "version": 1789554179,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 348774
+  },
+  "/gallery/gods/parvati/parvati-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-om-motif",
+    "resourceType": "image",
+    "version": 1789554180,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 253868
+  },
+  "/gallery/gods/parvati/parvati-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/parvati-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 180269
+  },
+  "/gallery/gods/parvati/review/parvati-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/parvati/review/parvati-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 180269
+  },
+  "/gallery/gods/perumal/perumal-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-arch-framed",
+    "resourceType": "image",
+    "version": 1789554180,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 365133
+  },
+  "/gallery/gods/perumal/perumal-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-classic-frame",
+    "resourceType": "image",
+    "version": 1789554180,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 272583
+  },
+  "/gallery/gods/perumal/perumal-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-floral-jali",
+    "resourceType": "image",
+    "version": 1789554180,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 453703
+  },
+  "/gallery/gods/perumal/perumal-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554180,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 331195
+  },
+  "/gallery/gods/perumal/perumal-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-mandala",
+    "resourceType": "image",
+    "version": 1789554180,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 310099
+  },
+  "/gallery/gods/perumal/perumal-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-om-motif",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 326043
+  },
+  "/gallery/gods/perumal/perumal-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/perumal-thumb",
+    "resourceType": "image",
+    "version": 1789571309,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 124378
+  },
+  "/gallery/gods/perumal/review/perumal-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/perumal/review/perumal-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 124378
+  },
+  "/gallery/gods/pooja-room/pooja-room-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-arch-framed",
+    "resourceType": "image",
+    "version": 1789562982,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 319237
+  },
+  "/gallery/gods/pooja-room/pooja-room-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-classic-frame",
+    "resourceType": "image",
+    "version": 1789562982,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 272852
+  },
+  "/gallery/gods/pooja-room/pooja-room-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-floral-jali",
+    "resourceType": "image",
+    "version": 1789562982,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 376333
+  },
+  "/gallery/gods/pooja-room/pooja-room-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562982,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 250891
+  },
+  "/gallery/gods/pooja-room/pooja-room-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-mandala",
+    "resourceType": "image",
+    "version": 1789562983,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 363433
+  },
+  "/gallery/gods/pooja-room/pooja-room-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-om-motif",
+    "resourceType": "image",
+    "version": 1789562983,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 261411
+  },
+  "/gallery/gods/pooja-room/pooja-room-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/pooja-room/pooja-room-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 226005
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-arch-framed",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 349361
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-classic-frame",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 234269
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-floral-jali",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 457989
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 224087
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-mandala",
+    "resourceType": "image",
+    "version": 1789554181,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 381509
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-om-motif",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 345282
+  },
+  "/gallery/gods/radha-krishna/radha-krishna-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/radha-krishna-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 137391
+  },
+  "/gallery/gods/radha-krishna/review/radha-krishna-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/radha-krishna/review/radha-krishna-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 137391
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-arch-framed",
+    "resourceType": "image",
+    "version": 1789562983,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 354466
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-classic-frame",
+    "resourceType": "image",
+    "version": 1789562983,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 272395
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-floral-jali",
+    "resourceType": "image",
+    "version": 1789562984,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 451492
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562985,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 372248
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-mandala",
+    "resourceType": "image",
+    "version": 1789562985,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 371209
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-om-motif",
+    "resourceType": "image",
+    "version": 1789562985,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 317469
+  },
+  "/gallery/gods/raghavendra-swamy/raghavendra-swamy-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/raghavendra-swamy/raghavendra-swamy-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 151621
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-arch-framed",
+    "resourceType": "image",
+    "version": 1789562985,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 345308
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-classic-frame",
+    "resourceType": "image",
+    "version": 1789562985,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 359983
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-floral-jali",
+    "resourceType": "image",
+    "version": 1789562986,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 417056
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562985,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 282361
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-mandala",
+    "resourceType": "image",
+    "version": 1789562986,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 378588
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-om-motif",
+    "resourceType": "image",
+    "version": 1789562987,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 260036
+  },
+  "/gallery/gods/rahu-ketu/rahu-ketu-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/rahu-ketu/rahu-ketu-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 195638
+  },
+  "/gallery/gods/rama/rama-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-arch-framed",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 275227
+  },
+  "/gallery/gods/rama/rama-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-classic-frame",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 285545
+  },
+  "/gallery/gods/rama/rama-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-floral-jali",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 425771
+  },
+  "/gallery/gods/rama/rama-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 264470
+  },
+  "/gallery/gods/rama/rama-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-mandala",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 291094
+  },
+  "/gallery/gods/rama/rama-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-om-motif",
+    "resourceType": "image",
+    "version": 1789554182,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 248994
+  },
+  "/gallery/gods/rama/rama-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/rama-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 103878
+  },
+  "/gallery/gods/rama/review/rama-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/rama/review/rama-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 103878
+  },
+  "/gallery/gods/sai-baba/sai-baba-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-arch-framed",
+    "resourceType": "image",
+    "version": 1789562987,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 347198
+  },
+  "/gallery/gods/sai-baba/sai-baba-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-classic-frame",
+    "resourceType": "image",
+    "version": 1789562987,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 240451
+  },
+  "/gallery/gods/sai-baba/sai-baba-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-floral-jali",
+    "resourceType": "image",
+    "version": 1789562987,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 388079
+  },
+  "/gallery/gods/sai-baba/sai-baba-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562987,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 254013
+  },
+  "/gallery/gods/sai-baba/sai-baba-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-mandala",
+    "resourceType": "image",
+    "version": 1789562987,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 354702
+  },
+  "/gallery/gods/sai-baba/sai-baba-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-om-motif",
+    "resourceType": "image",
+    "version": 1789562988,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 271091
+  },
+  "/gallery/gods/sai-baba/sai-baba-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/sai-baba/sai-baba-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 159686
+  },
+  "/gallery/gods/saraswati/review/saraswati-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/review/saraswati-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 167047
+  },
+  "/gallery/gods/saraswati/saraswati-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-arch-framed",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 338721
+  },
+  "/gallery/gods/saraswati/saraswati-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-classic-frame",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 338735
+  },
+  "/gallery/gods/saraswati/saraswati-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-floral-jali",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 427805
+  },
+  "/gallery/gods/saraswati/saraswati-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 292565
+  },
+  "/gallery/gods/saraswati/saraswati-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-mandala",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 480183
+  },
+  "/gallery/gods/saraswati/saraswati-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-om-motif",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 306267
+  },
+  "/gallery/gods/saraswati/saraswati-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/saraswati/saraswati-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 167047
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-arch-framed",
+    "resourceType": "image",
+    "version": 1789562988,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 316218
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-classic-frame",
+    "resourceType": "image",
+    "version": 1789562988,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 224299
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-floral-jali",
+    "resourceType": "image",
+    "version": 1789562988,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 377341
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562989,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 282473
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-mandala",
+    "resourceType": "image",
+    "version": 1789562989,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 354066
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-om-motif",
+    "resourceType": "image",
+    "version": 1789562989,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 220661
+  },
+  "/gallery/gods/sathya-sai-baba/sathya-sai-baba-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/sathya-sai-baba/sathya-sai-baba-thumb",
+    "resourceType": "image",
+    "version": 1789571310,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 149631
+  },
+  "/gallery/gods/shani/shani-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-arch-framed",
+    "resourceType": "image",
+    "version": 1789562990,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 317538
+  },
+  "/gallery/gods/shani/shani-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-classic-frame",
+    "resourceType": "image",
+    "version": 1789562990,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 274295
+  },
+  "/gallery/gods/shani/shani-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-floral-jali",
+    "resourceType": "image",
+    "version": 1789562990,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 378006
+  },
+  "/gallery/gods/shani/shani-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562990,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 332150
+  },
+  "/gallery/gods/shani/shani-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-mandala",
+    "resourceType": "image",
+    "version": 1789562990,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 313708
+  },
+  "/gallery/gods/shani/shani-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-om-motif",
+    "resourceType": "image",
+    "version": 1789562990,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 276776
+  },
+  "/gallery/gods/shani/shani-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/shani/shani-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 126810
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-arch-framed",
+    "resourceType": "image",
+    "version": 1789562992,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 265629
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-classic-frame",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 242951
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-floral-jali",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 422567
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 382729
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-mandala",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 338596
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-om-motif",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 297711
+  },
+  "/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/shirdi-sai-baba/shirdi-sai-baba-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 189535
+  },
+  "/gallery/gods/shiva/review/shiva-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/review/shiva-thumb",
+    "resourceType": "image",
+    "version": 1789569748,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 117102
+  },
+  "/gallery/gods/shiva/shiva-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-arch-framed",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 299790
+  },
+  "/gallery/gods/shiva/shiva-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-classic-frame",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 316666
+  },
+  "/gallery/gods/shiva/shiva-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-floral-jali",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 423264
+  },
+  "/gallery/gods/shiva/shiva-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-lotus-frame",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 328343
+  },
+  "/gallery/gods/shiva/shiva-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-mandala",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 308932
+  },
+  "/gallery/gods/shiva/shiva-minimal-bold.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-minimal-bold",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 230964
+  },
+  "/gallery/gods/shiva/shiva-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-om-motif",
+    "resourceType": "image",
+    "version": 1789480850,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 280056
+  },
+  "/gallery/gods/shiva/shiva-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/shiva/shiva-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 117102
+  },
+  "/gallery/gods/sita/review/sita-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/review/sita-thumb",
+    "resourceType": "image",
+    "version": 1789569749,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 141732
+  },
+  "/gallery/gods/sita/sita-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-arch-framed",
+    "resourceType": "image",
+    "version": 1789554183,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 324052
+  },
+  "/gallery/gods/sita/sita-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-classic-frame",
+    "resourceType": "image",
+    "version": 1789554184,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 303381
+  },
+  "/gallery/gods/sita/sita-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-floral-jali",
+    "resourceType": "image",
+    "version": 1789554185,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 452400
+  },
+  "/gallery/gods/sita/sita-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-lotus-frame",
+    "resourceType": "image",
+    "version": 1789554185,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 260949
+  },
+  "/gallery/gods/sita/sita-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-mandala",
+    "resourceType": "image",
+    "version": 1789554185,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 368722
+  },
+  "/gallery/gods/sita/sita-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-om-motif",
+    "resourceType": "image",
+    "version": 1789554185,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 240818
+  },
+  "/gallery/gods/sita/sita-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/sita/sita-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 141732
+  },
+  "/gallery/gods/surya/surya-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-arch-framed",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 322719
+  },
+  "/gallery/gods/surya/surya-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-classic-frame",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 346968
+  },
+  "/gallery/gods/surya/surya-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-floral-jali",
+    "resourceType": "image",
+    "version": 1789562993,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 449651
+  },
+  "/gallery/gods/surya/surya-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 345076
+  },
+  "/gallery/gods/surya/surya-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-mandala",
+    "resourceType": "image",
+    "version": 1789563004,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 382967
+  },
+  "/gallery/gods/surya/surya-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-om-motif",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 231650
+  },
+  "/gallery/gods/surya/surya-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/surya/surya-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 184281
+  },
+  "/gallery/gods/swastik/swastik-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-arch-framed",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 270213
+  },
+  "/gallery/gods/swastik/swastik-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-classic-frame",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 222859
+  },
+  "/gallery/gods/swastik/swastik-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-floral-jali",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 429224
+  },
+  "/gallery/gods/swastik/swastik-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 268849
+  },
+  "/gallery/gods/swastik/swastik-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-mandala",
+    "resourceType": "image",
+    "version": 1789562995,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 365773
+  },
+  "/gallery/gods/swastik/swastik-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-om-motif",
+    "resourceType": "image",
+    "version": 1789563004,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 273856
+  },
+  "/gallery/gods/swastik/swastik-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/swastik/swastik-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 140857
+  },
+  "/gallery/gods/temple-arch/temple-arch-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-arch-framed",
+    "resourceType": "image",
+    "version": 1789562998,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 244653
+  },
+  "/gallery/gods/temple-arch/temple-arch-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-classic-frame",
+    "resourceType": "image",
+    "version": 1789562998,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 228056
+  },
+  "/gallery/gods/temple-arch/temple-arch-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-floral-jali",
+    "resourceType": "image",
+    "version": 1789562998,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 421274
+  },
+  "/gallery/gods/temple-arch/temple-arch-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-lotus-frame",
+    "resourceType": "image",
+    "version": 1789562998,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 224482
+  },
+  "/gallery/gods/temple-arch/temple-arch-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-mandala",
+    "resourceType": "image",
+    "version": 1789562998,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 309859
+  },
+  "/gallery/gods/temple-arch/temple-arch-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-om-motif",
+    "resourceType": "image",
+    "version": 1789562998,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 370523
+  },
+  "/gallery/gods/temple-arch/temple-arch-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-arch/temple-arch-thumb",
+    "resourceType": "image",
+    "version": 1789571311,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 198716
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-arch-framed",
+    "resourceType": "image",
+    "version": 1789562999,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 314003
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-classic-frame",
+    "resourceType": "image",
+    "version": 1789562999,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 301956
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-floral-jali",
+    "resourceType": "image",
+    "version": 1789563000,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 369836
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-lotus-frame",
+    "resourceType": "image",
+    "version": 1789563003,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 356067
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-mandala",
+    "resourceType": "image",
+    "version": 1789563000,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 303371
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-om-motif",
+    "resourceType": "image",
+    "version": 1789563000,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 377929
+  },
+  "/gallery/gods/temple-entrance-panel/temple-entrance-panel-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/temple-entrance-panel/temple-entrance-panel-thumb",
+    "resourceType": "image",
+    "version": 1789571312,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 139301
+  },
+  "/gallery/gods/trishul/trishul-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-arch-framed",
+    "resourceType": "image",
+    "version": 1789563000,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 287094
+  },
+  "/gallery/gods/trishul/trishul-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-classic-frame",
+    "resourceType": "image",
+    "version": 1789563001,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 219285
+  },
+  "/gallery/gods/trishul/trishul-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-floral-jali",
+    "resourceType": "image",
+    "version": 1789563002,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 372700
+  },
+  "/gallery/gods/trishul/trishul-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-lotus-frame",
+    "resourceType": "image",
+    "version": 1789563002,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 252329
+  },
+  "/gallery/gods/trishul/trishul-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-mandala",
+    "resourceType": "image",
+    "version": 1789563002,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 369745
+  },
+  "/gallery/gods/trishul/trishul-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-om-motif",
+    "resourceType": "image",
+    "version": 1789563002,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 270385
+  },
+  "/gallery/gods/trishul/trishul-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/trishul/trishul-thumb",
+    "resourceType": "image",
+    "version": 1789571312,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 116377
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-arch-framed.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-arch-framed",
+    "resourceType": "image",
+    "version": 1789563002,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 312564
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-classic-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-classic-frame",
+    "resourceType": "image",
+    "version": 1789563003,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 257616
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-floral-jali.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-floral-jali",
+    "resourceType": "image",
+    "version": 1789563003,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 431870
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-lotus-frame.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-lotus-frame",
+    "resourceType": "image",
+    "version": 1789563004,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 261732
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-mandala.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-mandala",
+    "resourceType": "image",
+    "version": 1789563004,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 370306
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-om-motif.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-om-motif",
+    "resourceType": "image",
+    "version": 1789563004,
+    "width": 1024,
+    "height": 1707,
+    "format": "jpg",
+    "bytes": 247466
+  },
+  "/gallery/gods/vel-symbol/vel-symbol-thumb.jpg": {
+    "publicId": "rg-tech/gallery/gods/vel-symbol/vel-symbol-thumb",
+    "resourceType": "image",
+    "version": 1789571312,
+    "width": 1200,
+    "height": 900,
+    "format": "jpg",
+    "bytes": 154549
+  },
   "/gallery/Laser Cutting Services/kw_aluminum_hd.png": {
     "publicId": "rg-tech/gallery/laser-cutting-services/kw_aluminum_hd",
     "resourceType": "image",

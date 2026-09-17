@@ -1,0 +1,5 @@
+Drop Lord Ganesh photos here, then run:  npm run cloudinary:migrate
+Then paste the Cloudinary URLs into lib/godDesigns.js -> GOD_DESIGNS[].images
+
+This folder must stay under public/gallery — the upload script only walks
+gallery, works and services.
