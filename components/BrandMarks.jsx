@@ -42,9 +42,16 @@ export function GoogleMark({ className = 'w-6 h-6' }) {
  * The Justdial wordmark, served from public/ rather than hotlinked.
  *
  * Their own CDN would put a third-party request on the critical path and break
- * wherever this appears the day they move the file. width/height are the
- * source's intrinsics (820x215) so next/image reserves the right box before it
- * loads; `className` is what actually sizes it.
+ * wherever this appears the day they move the file.
+ *
+ * The file is generated, not the raw download: scripts/prepare-logo.mjs trims
+ * the padded square canvas and lifts the white background to transparency.
+ * Without that pass the stock 600x600 download renders as a white block with a
+ * four-pixel wordmark adrift in the middle of it.
+ *
+ * width/height are the generated file's intrinsics (540x139) so next/image
+ * reserves the right box before it loads; `className` is what sizes it. Re-run
+ * the script if the source is ever replaced, and update these two numbers.
  */
 export function JustdialMark({ className = 'h-[18px] w-auto' }) {
     return (
@@ -52,8 +59,8 @@ export function JustdialMark({ className = 'h-[18px] w-auto' }) {
             src="/ai-logos/justdial.png"
             alt=""
             aria-hidden="true"
-            width={820}
-            height={215}
+            width={540}
+            height={139}
             sizes="80px"
             className={className}
         />
