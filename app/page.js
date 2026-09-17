@@ -41,6 +41,18 @@ export const metadata = {
     },
 }
 
+/*
+ * The Testimonials section fetches live Google reviews during static generation,
+ * so the page itself has to re-generate for a new review to ever appear.
+ *
+ * Twelve hours. Featurable refreshes its own upstream cache every 48 hours, so
+ * polling it faster than this buys nothing; the Places API has no such cache but
+ * reviews on a workshop listing arrive weekly at best. Unlike /blog and the
+ * sitemap — both on 5 minutes because publishing is scripted and should show up
+ * promptly — nothing here is waiting on an operator.
+ */
+export const revalidate = 43200
+
 export default function Home() {
     // The FAQ accordion below renders exactly these questions and answers, which
     // is what FAQPage markup requires.

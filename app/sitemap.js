@@ -1,6 +1,6 @@
 import { pillarServices, BASE_URL } from '@/lib/data'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
-import { GODS, godUrl } from '@/lib/gods'
+import { publishedGodDesigns, godDesignUrl } from '@/lib/godDesigns'
 import { aluminumUrl } from '@/lib/aluminum'
 import { copperUrl } from '@/lib/copper'
 import { mildSteelUrl } from '@/lib/mildSteel'
@@ -85,18 +85,41 @@ export default async function sitemap() {
         priority: city.isPrimary ? 1.0 : 0.9,
     }))
 
-    // Deity and sacred-symbol design pages. These are live on every city route
-    // and were absent from the sitemap entirely — 200 indexable pages with no
-    // entry. They are ungated, unlike locality pages, so all of them belong
-    // here as soon as the city exists.
-    const designPages = Object.values(CITIES).flatMap(city =>
-        GODS.map(god => ({
-            url: `${BASE_URL}${godUrl(city.slug, god.key)}`,
-            lastModified: today,
-            changeFrequency: 'monthly',
-            priority: city.isPrimary ? 0.6 : 0.5,
-        }))
-    )
+    /*
+     * The 200 city deity pages used to be listed here. They now 301 to their
+     * design gallery (see cityDeityRedirects in next.config.js), and a sitemap
+     * that advertises a redirect asks Google to crawl a page only to be sent
+     * somewhere else — so they are gone rather than merely deprioritised.
+     *
+     * The galleries they point at are listed below, which is where the
+     * crawl budget should go.
+     */
+
+    /*
+     * City-independent deity design galleries (/designs/gods/<slug>), and the
+     * index that collects them.
+     *
+     * The index goes first and at a higher priority: it is the parent of the
+     * fifty galleries and the destination the 200 redirected city pages now
+     * funnel toward, so it is the page to have crawled soonest.
+     *
+     * publishedGodDesigns() returns only galleries that actually have images —
+     * an empty one is noindex on the page itself, so listing it here would
+     * contradict that and point crawlers at a "coming soon" panel.
+     */
+    const godDesignIndex = {
+        url: `${BASE_URL}/designs/gods`,
+        lastModified: today,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+    }
+
+    const godDesignPages = publishedGodDesigns().map(design => ({
+        url: `${BASE_URL}${godDesignUrl(design.slug)}`,
+        lastModified: today,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+    }))
 
     // Blog posts now come from Sanity, matching what /blog actually renders.
     const posts = await getPosts()
@@ -107,5 +130,5 @@ export default async function sitemap() {
         priority: 0.7,
     }))
 
-    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...jobWorkPages, ...designPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...jobWorkPages, godDesignIndex, ...godDesignPages, ...blogPages]
 }
