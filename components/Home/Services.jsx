@@ -17,7 +17,6 @@ const Services = () => {
                         <p className="eyebrow mb-2">Our Capabilities</p>
                         <h3 className="section-title text-fg">Industrial Services</h3>
                     </div>
-                    <p className="section-lead max-w-md">Precision engineering services delivered from our state-of-the-art facility in Chennai.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pillarServices.map((s, i) => (
