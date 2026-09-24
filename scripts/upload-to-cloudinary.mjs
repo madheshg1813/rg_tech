@@ -71,6 +71,7 @@ cloudinary.config({
 
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif', '.svg'])
 const RAW_EXT = new Set(['.pdf'])
+const VIDEO_EXT = new Set(['.mp4', '.webm', '.mov', '.m4v'])
 
 // Only these live under public/ and are actually referenced by the site.
 // Everything else in public/ is ignored.
@@ -78,7 +79,10 @@ const RAW_EXT = new Set(['.pdf'])
 // public/catalogues is deliberately NOT included: Cloudinary blocks PDF/ZIP
 // delivery by default and three of the four volumes exceed the 10 MB free-tier
 // upload limit, so the catalogues are still served from the origin.
-const INCLUDE_DIRS = ['gallery', 'works', 'services']
+//
+// public/videos holds the home page clips. Video on the free tier is capped at
+// 100 MB per file, which a phone clip of a minute or two stays well inside.
+const INCLUDE_DIRS = ['gallery', 'works', 'services', 'videos']
 const INCLUDE_FILES = ['hero-laser.png', 'RG-Tech-Logo.png']
 
 function walk(dir, out = []) {
@@ -102,7 +106,7 @@ function collectFiles() {
     }
     return files.filter((f) => {
         const ext = extname(f).toLowerCase()
-        return IMAGE_EXT.has(ext) || RAW_EXT.has(ext)
+        return IMAGE_EXT.has(ext) || RAW_EXT.has(ext) || VIDEO_EXT.has(ext)
     })
 }
 
@@ -179,11 +183,12 @@ async function main() {
         while (queue.length) {
             const task = queue.shift()
             if (!task) break
-            const isRaw = RAW_EXT.has(extname(task.abs).toLowerCase())
+            const ext = extname(task.abs).toLowerCase()
+            const kind = RAW_EXT.has(ext) ? 'raw' : VIDEO_EXT.has(ext) ? 'video' : 'image'
             try {
                 const res = await cloudinary.uploader.upload(task.abs, {
                     public_id: task.publicId,
-                    resource_type: isRaw ? 'raw' : 'image',
+                    resource_type: kind,
                     overwrite: FORCE,
                     // Let Cloudinary keep the pristine original; we request
                     // derived sizes at delivery time via f_auto/q_auto/w_*.
@@ -192,7 +197,7 @@ async function main() {
                 })
                 manifest[task.publicPath] = {
                     publicId: res.public_id,
-                    resourceType: isRaw ? 'raw' : 'image',
+                    resourceType: kind,
                     version: res.version,
                     width: res.width ?? null,
                     height: res.height ?? null,
