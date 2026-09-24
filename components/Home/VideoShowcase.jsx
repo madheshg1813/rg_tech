@@ -17,11 +17,16 @@ import { cld, cldPoster } from '@/lib/cloudinary'
  * pushes everything below it off the screen — these are meant to read as a row
  * of small tiles sitting under the photographs, not as a feature.
  *
- * One clip autoplays muted and loops, which at this size costs little and
- * gives the row some life. `controls` is not optional when it does: WCAG 2.2.2
- * requires a way to stop motion running past five seconds, and a loop runs
- * forever. Two or more wait for a click — several decoders running at once is
- * several streams downloading and nothing for the eye to settle on.
+ * Every clip autoplays, muted and looping. `muted` and `playsInline` are what
+ * make that permitted at all: an unmuted autoplay is blocked outright, and
+ * without playsInline iOS takes the video fullscreen rather than playing it in
+ * place. `controls` is not optional either — WCAG 2.2.2 wants a way to stop
+ * motion running past five seconds, and a loop runs forever.
+ *
+ * The cost of running the whole row at once is paid down at delivery rather
+ * than by not autoplaying: each clip is requested from Cloudinary at twice its
+ * rendered width and no further, so a 720x1280 source is not shipped whole
+ * into a 250px tile.
  */
 
 // A single clip is the feature and gets the most height. Several become a row,
@@ -40,16 +45,25 @@ const MIN_RATIO = 0.55
 const MAX_RATIO = 1.45
 
 function Clip({ video, solo }) {
-    // Falls back to the local path until the upload script has run, and to the
-    // entry's own poster (then to none) until Cloudinary can generate one.
-    const src = cld(video.src)
-    const poster = cldPoster(video.src) || (video.poster ? cld(video.poster) : undefined)
-
     const natural = video.width && video.height ? video.width / video.height : 9 / 16
     const ratio = Math.min(Math.max(natural, MIN_RATIO), MAX_RATIO)
 
     const hMobile = solo ? SOLO_H_MOBILE : TILE_H_MOBILE
     const h = solo ? SOLO_H : TILE_H
+
+    // Ask Cloudinary for a rendition sized to the slot, at 2x for retina. A
+    // 720x1280 source delivered whole is ~2MB; into a 250px tile that is most
+    // of a megabyte per clip spent on pixels no one can see, and with every
+    // clip autoplaying it is paid on every page load.
+    const deliveryWidth = Math.round(h * ratio * 2)
+
+    // Falls back to the local path until the upload script has run, and to the
+    // entry's own poster (then to none) until Cloudinary can generate one.
+    // q_auto:eco rather than q_auto. It is a visible tradeoff on a full-bleed
+    // hero video and an invisible one at 250px, and here it is paid four times
+    // on every page load: 3.89MB across the row becomes 2.73MB.
+    const src = cld(video.src, { width: deliveryWidth, quality: 'auto:eco' })
+    const poster = cldPoster(video.src, deliveryWidth) || (video.poster ? cld(video.poster) : undefined)
 
     return (
         <figure className="m-0 flex flex-col">
@@ -66,12 +80,12 @@ function Clip({ video, solo }) {
                 <video
                     src={src}
                     poster={poster}
-                    autoPlay={solo}
-                    muted={solo}
-                    loop={solo}
+                    autoPlay
+                    muted
+                    loop
                     playsInline
                     controls
-                    preload="metadata"
+                    preload="auto"
                     // Deliberately generic without a label: one that names the
                     // wrong process is worse for a screen reader than none.
                     aria-label={video.title || 'Video of work at RG Tech Engineering Works'}
