@@ -457,54 +457,157 @@
      */
     .faq-columns {
         display: grid;
-        gap: 1rem;
+        gap: 0.875rem;
         align-items: start;
     }
 
     @media (min-width: 768px) {
         .faq-columns {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 1.5rem;
+            column-gap: 1.75rem;
+            row-gap: 1.25rem;
         }
     }
 
     .faq-column {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.875rem;
         align-content: start;
+    }
+
+    @media (min-width: 768px) {
+        .faq-column {
+            gap: 1.25rem;
+        }
     }
 
     .faq-card {
         background-color: var(--color-surface);
         border: 1px solid var(--color-line);
-        border-radius: 1rem;
-        box-shadow: var(--shadow-premium);
-        transition: border-color .2s ease, box-shadow .2s ease;
+        border-radius: 1.25rem;
+        box-shadow:
+            0 1px 2px rgba(15, 42, 68, .04),
+            0 10px 28px -18px rgba(15, 42, 68, .16);
+        transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+        /* Inherited, and has to be in effect on the ancestor for the
+         * transition to a keyword height to resolve. Scoped here rather than
+         * on :root so nothing else changes how it interpolates. */
+        interpolate-size: allow-keywords;
     }
 
     .faq-card:hover {
         border-color: var(--color-line-strong);
+        transform: translateY(-2px);
+        box-shadow:
+            0 2px 4px rgba(15, 42, 68, .05),
+            0 22px 44px -22px rgba(15, 42, 68, .24);
     }
 
+    /*
+     * Open state, carried by four things at once -- border, shadow, a tinted
+     * question row and the filled icon -- so it never rests on the icon
+     * rotation alone, which is invisible to anyone who cannot see it.
+     */
     .faq-card[open] {
         border-color: var(--color-cta-ring);
-        box-shadow: var(--shadow-glass);
+        box-shadow:
+            0 2px 4px rgba(15, 42, 68, .05),
+            0 24px 48px -24px rgba(29, 78, 216, .28);
+    }
+
+    .faq-card[open]:hover {
+        transform: none;
     }
 
     .faq-q {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        padding: 1.25rem 1.5rem;
+        padding: 1.25rem 1.25rem;
         cursor: pointer;
         list-style: none;
-        font-size: var(--text-base);
+        /* 17/18px against the 16px body: the question is what gets scanned,
+         * and in two columns it competes with a second column for the eye. */
+        font-size: 1.0625rem;
         font-weight: 700;
-        line-height: 1.45;
-        letter-spacing: -0.011em;
+        line-height: 1.5;
+        letter-spacing: -0.012em;
         color: var(--color-fg);
+        transition: color .2s ease, background-color .25s ease;
+        /* The row is the control; a drag that selects its text reads as a
+         * failed tap on touch. */
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    /*
+     * Reserved question height, so every closed card is the same size.
+     *
+     * A card sized to its own question is as tall as that question wraps: on
+     * the home page five cards came out at 86px and "Can I order custom
+     * gates/doors with laser patterns?" at 104px, so the two columns stopped
+     * lining up row for row.
+     *
+     * The reserve is on the question row, NOT on the card. Equalising whole
+     * cards would mean stretching a row to its tallest member, and opening one
+     * answer would then drag its neighbour into a tall empty box -- the exact
+     * failure the column layout above was built to avoid. Equalising only the
+     * question row keeps every closed card identical while an open one grows
+     * alone.
+     *
+     * Two lines of question plus the row's own padding at every width, and
+     * three in the 768-1023 band, where two columns share the narrowest
+     * measure the layout ever gives them.
+     */
+    .faq-q {
+        min-height: 117px;
+        min-height: calc(3lh + 2.5rem);
+    }
+
+    /* Under 375 the longest service-page question ("What is the maximum
+     * thickness RG Tech can laser cut?") reaches a fourth line. The reserve
+     * follows it, scoped to that band so the cost -- some blank card under a
+     * short question -- is paid only on the narrowest screens. */
+    @media (max-width: 374.98px) {
+        .faq-q {
+            min-height: 142px;
+            min-height: calc(4lh + 2.5rem);
+        }
+    }
+
+    /* One column and a wide card between 640 and 767, so two lines is the
+     * most any question takes there. */
+    @media (min-width: 640px) and (max-width: 767.98px) {
+        .faq-q {
+            min-height: 99px;
+            min-height: calc(2lh + 3rem);
+        }
+    }
+
+    @media (min-width: 640px) {
+        .faq-q {
+            gap: 1.25rem;
+            padding: 1.5rem 1.75rem;
+            min-height: 99px;
+            min-height: calc(2lh + 3rem);
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023.98px) {
+        .faq-q {
+            min-height: 126px;
+            min-height: calc(3lh + 3rem);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .faq-q {
+            font-size: 1.125rem;
+            min-height: 102px;
+            min-height: calc(2lh + 3rem);
+        }
     }
 
     /* Safari still paints its own disclosure triangle without this. */
@@ -516,33 +619,96 @@
         color: var(--color-cta-ink);
     }
 
-    /* The +/x icon. Rotating a plus 45deg is the close affordance. */
+    /* Ring traces the whole row, inset so the card border does not clip it. */
+    .faq-q:focus-visible {
+        outline: 2px solid var(--color-cta);
+        outline-offset: -2px;
+        border-radius: 1.25rem;
+    }
+
+    .faq-card[open] .faq-q {
+        color: var(--color-cta-ink);
+        background-color: rgba(29, 78, 216, .04);
+        border-radius: 1.25rem 1.25rem 0 0;
+    }
+
+    /*
+     * The +/x control.
+     *
+     * A circular plate drawn on the icon itself rather than a wrapper: this
+     * accordion's markup is shared by the home page and every service page,
+     * so styling the SVG keeps all of them in step without touching a single
+     * component. Rotating a plus 45deg is the close affordance.
+     */
     .faq-icon {
         flex-shrink: 0;
-        width: 1.125rem;
-        height: 1.125rem;
-        margin-top: 0.1875rem;
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: 0.4375rem;
+        border-radius: 9999px;
+        border: 1px solid var(--color-line);
+        background-color: var(--color-surface-2);
         color: var(--color-cta-ink);
-        transition: transform .25s ease;
+        transition: transform .28s cubic-bezier(.4, 0, .2, 1),
+            background-color .28s ease, border-color .28s ease, color .28s ease;
+    }
+
+    .faq-card:hover .faq-icon {
+        border-color: var(--color-cta-ring);
+        background-color: var(--color-cta-soft);
     }
 
     .faq-card[open] .faq-icon {
         transform: rotate(45deg);
+        background-color: var(--color-cta);
+        border-color: var(--color-cta);
+        color: var(--color-cta-fg);
     }
 
-    /* Indented to start under the question text, with the amber rule marking
-     * the answer. margin-left matches .faq-q's horizontal padding. */
+    /*
+     * The answer sits in its own inset panel with a brand rule down its edge,
+     * rather than as loose text under the question. It is the part people
+     * actually read, and it was the least considered thing in the card.
+     */
     .faq-a {
-        margin: 0 1.5rem 1.375rem;
-        padding-left: 1rem;
-        border-left: 2px solid var(--color-cta);
-        font-size: var(--text-sm);
-        line-height: 1.75;
+        margin: 0 1.25rem 1.25rem;
+        padding: 1rem 1.125rem;
+        border-left: 3px solid var(--color-cta);
+        border-radius: 0 0.75rem 0.75rem 0;
+        background-color: var(--color-surface-2);
+        font-size: 0.9375rem;
+        line-height: 1.8;
         color: var(--color-fg-muted);
     }
 
-    /* <details> cannot transition its own height, so the answer fades in
-     * instead of the panel snapping open. */
+    @media (min-width: 640px) {
+        .faq-a {
+            margin: 0 1.75rem 1.75rem;
+            padding: 1.125rem 1.375rem;
+        }
+    }
+
+    /*
+     * Height transition.
+     *
+     * <details> could not be animated at all before ::details-content; the
+     * old behaviour faded the answer while the panel itself snapped open.
+     * Where the pseudo-element is supported the panel now eases. Everywhere
+     * else the @supports block never applies and the original fade runs
+     * instead, so no browser loses the affordance.
+     */
+    @supports selector(::details-content) {
+        .faq-card::details-content {
+            block-size: 0;
+            overflow: hidden;
+            transition: block-size .3s ease, content-visibility .3s allow-discrete;
+        }
+
+        .faq-card[open]::details-content {
+            block-size: auto;
+        }
+    }
+
     .faq-card[open] .faq-a {
         animation: faq-reveal .24s ease-out;
     }
@@ -565,8 +731,15 @@
             animation: none;
         }
 
+        .faq-card,
+        .faq-card:hover,
         .faq-icon {
             transition: none;
+            transform: none;
+        }
+
+        .faq-card[open] .faq-icon {
+            transform: rotate(45deg);
         }
     }
 }
@@ -712,7 +885,6 @@
                 rgba(0, 160, 80, .16), transparent 62%),
             linear-gradient(160deg, #1B1750 0%, #141B45 60%, #10203C 100%);
     }
-
 
     /*
      * ---- Persistent contact: WhatsApp float + mobile call bar ----

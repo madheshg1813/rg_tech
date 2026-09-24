@@ -88,49 +88,97 @@ const Testimonials = async () => {
                 )}
 
                 {/* ── Delivery trust strip ──────────────────────────────────── */}
-                <div className="mt-16 rounded-[2rem] border border-line bg-white p-8 md:p-10">
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                        <div className="lg:w-[40%]">
-                            <p className="eyebrow mb-3">
+                {/*
+                    A dark panel, not a white box on a white section. This is
+                    the one block on the page whose job is to say "national
+                    scale", and it was the least distinguishable thing in the
+                    section -- a hairline border on the same surface as
+                    everything around it.
+
+                    .surface-dark and .on-dark are the design system's own
+                    dark-band treatment, already used by the contact band and
+                    footer, so this stays inside the existing palette: the
+                    accent resolves to its on-dark green and the eyebrow and
+                    lead follow automatically.
+                */}
+                <div className="on-dark surface-dark relative isolate overflow-hidden mt-16 sm:mt-20 rounded-[28px] p-6 sm:p-10 lg:p-14 shadow-[0_30px_70px_-34px_rgba(13,11,43,0.6)]">
+                    {/* Same 46px rhythm as the site's hero texture, inverted
+                        to white for a dark ground. */}
+                    <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0"
+                        style={{
+                            backgroundImage:
+                                'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)',
+                            backgroundSize: '46px 46px',
+                            WebkitMaskImage:
+                                'radial-gradient(ellipse 75% 65% at 12% 15%, #000, transparent 72%)',
+                            maskImage:
+                                'radial-gradient(ellipse 75% 65% at 12% 15%, #000, transparent 72%)',
+                        }}
+                    />
+
+                    <div className="relative z-10 flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-16">
+                        <div className="lg:w-[38%]">
+                            <p className="eyebrow mb-4 flex items-center gap-3">
+                                <span
+                                    aria-hidden="true"
+                                    className="h-px w-8 flex-none bg-gradient-to-r from-accent-on-dark to-transparent"
+                                />
                                 Dispatching Nationwide
                             </p>
-                            <h3 className="subsection-title text-fg">
+                            <h3 className="subsection-title text-[1.75rem] sm:text-[2rem] leading-[1.18] text-white text-balance">
                                 Delivering laser-cut parts across India
                             </h3>
-                            <p className="text-base text-fg-muted mt-3 leading-relaxed">
+                            <p className="section-lead mt-5 max-w-[46ch]">
                                 Cut and fabricated in Chennai, packed to survive transit, and dispatched to
                                 fabricators, OEMs and architects nationwide.
                             </p>
                         </div>
 
                         <div className="lg:flex-1">
-                            <div className="flex flex-wrap gap-2.5">
+                            {/* Chips read as a served-cities map legend: glass
+                                pills on the dark ground, each lifting on
+                                hover. They were grey-on-white and the faintest
+                                thing in a card about reach. */}
+                            <div className="flex flex-wrap gap-2 sm:gap-2.5">
                                 {deliveryCities.map((city) => (
                                     <span
                                         key={city}
-                                        className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-2 px-4 py-2 text-sm font-semibold text-fg-muted"
+                                        className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 sm:px-4 py-2.5 text-sm font-semibold text-fg-invert backdrop-blur-sm transition-[transform,background-color,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent-on-dark/50 hover:bg-white/[0.14] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                                     >
-                                        <MapPin className="w-3.5 h-3.5 text-accent" />
+                                        <MapPin className="w-3.5 h-3.5 flex-none text-accent" />
                                         {city}
                                     </span>
                                 ))}
                             </div>
 
-                            <div className="mt-8 pt-6 border-t border-line grid sm:grid-cols-3 gap-6">
+                            <span
+                                aria-hidden="true"
+                                className="mt-9 block h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                            />
+
+                            {/* Three equal capability blocks. Bare icon-and-text
+                                rows sharing one gutter read as a single run-on
+                                line; these read as three claims. */}
+                            <div className="mt-7 grid gap-2.5 sm:grid-cols-3 sm:gap-4">
                                 {[
                                     { Icon: ShieldCheck, label: 'Dimensional QC', sub: 'Checked before dispatch' },
                                     { Icon: Truck, label: 'Protected packing', sub: 'Edge-guarded crating' },
                                     { Icon: Clock, label: '24h quote', sub: 'Business-hours response' },
                                 ].map(({ Icon, label, sub }) => (
-                                    <div key={label} className="flex items-center gap-3">
-                                        <span className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
-                                            <Icon className="w-5 h-5 text-accent" />
+                                    <div
+                                        key={label}
+                                        className="flex flex-row sm:flex-col items-center sm:items-start gap-3.5 sm:gap-3.5 rounded-2xl border border-white/10 bg-white/[0.05] p-3.5 sm:p-4"
+                                    >
+                                        <span className="w-12 h-12 rounded-xl border border-accent-on-dark/25 bg-accent-on-dark/10 flex items-center justify-center flex-shrink-0">
+                                            <Icon className="w-5 h-5 text-accent" strokeWidth={1.75} />
                                         </span>
-                                        <div>
-                                            <p className="meta-label text-fg">
+                                        <div className="min-w-0">
+                                            <p className="meta-label text-white whitespace-nowrap">
                                                 {label}
                                             </p>
-                                            <p className="text-xs text-fg-subtle font-medium">{sub}</p>
+                                            <p className="text-xs text-fg-invert-muted font-medium mt-1 leading-snug">{sub}</p>
                                         </div>
                                     </div>
                                 ))}

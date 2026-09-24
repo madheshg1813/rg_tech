@@ -13,11 +13,18 @@ const FAQ = () => {
     ].filter((column) => column.length > 0)
 
     return (
-        <section className="py-24 bg-white">
-            <div className="max-w-5xl mx-auto px-4">
-                <div className="text-center mb-12">
-                    <p className="eyebrow mb-3">Support</p>
-                    <h2 className="section-title text-fg">
+        <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-surface-2 via-white to-white">
+            <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+                <div className="text-center mb-12 sm:mb-16">
+                    {/* Flanking hairlines make the label read as a stamped
+                        section marker rather than the smallest line of text on
+                        the page. Decoration only; the label is unchanged. */}
+                    <p className="eyebrow mb-4 flex items-center justify-center gap-3">
+                        <span aria-hidden="true" className="h-px w-6 bg-gradient-to-r from-transparent to-accent-ink/40" />
+                        Support
+                        <span aria-hidden="true" className="h-px w-6 bg-gradient-to-l from-transparent to-accent-ink/40" />
+                    </p>
+                    <h2 className="section-title text-fg text-balance">
                         Technical <span className="text-accent">FAQs</span>
                     </h2>
                 </div>

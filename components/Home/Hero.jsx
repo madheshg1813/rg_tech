@@ -32,15 +32,16 @@ const LISTING_PILLS = [
 /*
  * Hero.
  *
- * Restructured to the Sree E-Waste layout: white ground with graph-paper rule,
- * a mono credential stamp above the headline, the accent word carried inside
- * the H1 rather than on a separate line, a compact tick list, and a hard-framed
- * photograph with a spec card breaking its bottom-left corner.
+ * Light ground, as the design system intends — "white is the page default,
+ * heroes included".
  *
- * The colour scheme is unchanged — RG Tech's green accent and blue CTA. What
- * changed is how much of the page is white: the tinted gradient, the stripe
- * texture and the skewed indigo wedge are all gone, so the only colour above
- * the fold is in the three places that carry meaning.
+ * What changed is everything standing on it: a larger headline, a primary CTA
+ * that carries its own light, a rim-lit photograph over a soft brand bloom,
+ * and the spec card floating across its corner rather than parked beside it.
+ *
+ * The blooms are the light-ground reading of the same idea: brand colour, far
+ * enough out of focus to be lit air rather than a shape, at an opacity that
+ * survives on white without tinting the copy in front of it.
  */
 
 const POINTS = [
@@ -62,14 +63,30 @@ const Hero = () => {
     return (
         <section
             id="home"
-            className="hero-gradient relative overflow-hidden border-b border-line py-14 md:py-20"
+            className="hero-gradient relative isolate overflow-hidden border-b border-line py-16 sm:py-20 lg:py-28"
         >
-            <div className="hero-grid-paper" aria-hidden="true" />
+            {/* Soft lighting: a green bloom behind the photograph and a blue
+                one under the CTA, both far enough out of focus to read as lit
+                air rather than as shapes. */}
+            <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-32 -top-40 -z-10 h-[34rem] w-[34rem] rounded-full bg-brand-green/10 blur-[130px]"
+            />
+            <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-48 -left-40 -z-10 h-[32rem] w-[32rem] rounded-full bg-cta/10 blur-[140px]"
+            />
+            {/* The site's own engineering rule. The dark version of this hero
+                drew its grid in white, which is invisible on a light ground —
+                this is the light-surface original, drawn in --color-line. */}
+            <span aria-hidden="true" className="hero-grid-paper" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full">
-                <div className="grid lg:grid-cols-[1.04fr_.96fr] gap-10 lg:gap-14 items-center">
+                <div className="grid lg:grid-cols-[1.04fr_.96fr] gap-12 lg:gap-16 items-center">
                     <div>
-                        <p className="stamp mb-6">
+                        {/* .stamp, the system's own credential badge, carried
+                            on a pill rather than its default square corner. */}
+                        <p className="stamp mb-7 rounded-full px-4 py-2">
                             <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
                             CNC Fiber Laser Specialist
                         </p>
@@ -78,12 +95,12 @@ const Hero = () => {
                             brand lockup as the page's h1 on every route. Kept as
                             it was — this restyle is not the place to change the
                             heading structure. */}
-                        <h2 className="display-title text-fg text-balance">
+                        <h2 className="display-title text-[clamp(2.375rem,5.6vw,4.25rem)] leading-[1.04] text-fg text-balance">
                             Your Trusted Partner for{' '}
                             <span className="text-accent">CNC Laser Cutting</span>{' '}&amp; Fabrication
                         </h2>
 
-                        <p className="section-lead mt-6 max-w-[50ch]">
+                        <p className="section-lead mt-6 max-w-[52ch] text-[1.0625rem] sm:text-lg">
                             High-precision metal cutting up to 45mm — MS, SS, Aluminium, Copper
                             and Brass, cut at our Chennai unit and delivered on schedule.
                         </p>
@@ -93,23 +110,23 @@ const Hero = () => {
                                 href={QUOTE_WA}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-primary"
+                                className="btn btn-primary btn-lg shadow-[0_18px_40px_-14px_rgba(29,78,216,0.75)]"
                             >
                                 Get a Quote <ArrowRight className="w-4 h-4" />
                             </a>
-                            <a href="tel:+916380736439" className="btn btn-secondary-light">
+                            <a href="tel:+916380736439" className="btn btn-secondary-light btn-lg">
                                 <Phone className="w-4 h-4" /> Call 63807-36439
                             </a>
                         </div>
 
-                        <div className="flex flex-wrap gap-2.5 mt-5">
+                        <div className="flex flex-wrap gap-2.5 mt-7">
                             {LISTING_PILLS.map(({ label, href, Mark, markClass }) => (
                                 <a
                                     key={label}
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2.5 rounded-full border border-line bg-white px-4 py-2.5 text-sm font-semibold text-fg hover:border-line-strong hover:shadow-sm transition-all"
+                                    className="inline-flex items-center gap-2.5 rounded-full border border-line bg-white px-4 py-3 min-h-11 text-sm font-semibold text-fg shadow-[0_1px_2px_rgba(15,42,68,0.05)] transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent-ink/35 hover:shadow-[0_8px_18px_-10px_rgba(15,42,68,0.28)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                                 >
                                     <Mark className={markClass} />
                                     {label}
@@ -117,19 +134,20 @@ const Hero = () => {
                             ))}
                         </div>
 
-                        {/* Ticks run inline and wrap, rather than sitting in a
-                            two-column grid. At this size they are a list of
-                            claims, not a feature table. */}
-                        <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-9 p-0 list-none">
+                        {/* Each claim gets a ringed tick rather than a bare
+                            check. They were the faintest thing in the column. */}
+                        <ul className="flex flex-wrap gap-x-6 gap-y-3 mt-8 p-0 list-none">
                             {POINTS.map((item) => (
-                                <li key={item} className="flex items-center gap-2 text-sm font-medium text-fg-muted">
-                                    <Check className="w-4 h-4 flex-none text-accent" aria-hidden="true" />
+                                <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-fg-muted">
+                                    <span className="inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-ink/10">
+                                        <Check className="w-3 h-3 text-accent" aria-hidden="true" />
+                                    </span>
                                     {item}
                                 </li>
                             ))}
                         </ul>
 
-                        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-9 pt-7 border-t border-line">
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-8 pt-7 border-t border-line">
                             <GoogleRating />
                             <span className="hidden sm:block w-px h-8 bg-line" aria-hidden="true" />
                             {CREDENTIALS.map((c) => (
@@ -138,11 +156,16 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    {/* The badge overlaps the frame's bottom-left corner and is
-                        allowed to hang outside it, so the photograph reads as a
-                        mounted print rather than as a card with a caption. */}
+                    {/* The photograph is the centrepiece: a bloom behind it, a
+                        light-catching rim, and the spec card breaking its
+                        bottom-left corner as a floating glass panel rather than
+                        a white box parked beside it. */}
                     <div className="relative">
-                        <div className="framed">
+                        <span
+                            aria-hidden="true"
+                            className="pointer-events-none absolute -inset-6 -z-10 rounded-2xl bg-gradient-to-tr from-cta/15 via-brand-green/12 to-transparent blur-3xl"
+                        />
+                        <div className="group relative overflow-hidden rounded-2xl ring-1 ring-line shadow-[0_30px_70px_-32px_rgba(15,42,68,0.45)]">
                             <Image
                                 src="https://res.cloudinary.com/o1ytbfuz/image/upload/v1785177077/rg-tech/hero-laser"
                                 alt="CNC fiber laser cutting machine at RG Tech Engineering, Chennai"
@@ -150,16 +173,25 @@ const Hero = () => {
                                 height={900}
                                 priority
                                 sizes="(max-width: 1024px) 100vw, 50vw"
-                                className="w-full aspect-[4/3] object-cover"
+                                className="w-full aspect-[4/3] object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                            />
+                            {/* Seats the photograph into the dark ground so its
+                                lower edge does not cut off against it. */}
+                            <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent"
                             />
                         </div>
-                        <div className="framed absolute -left-3 -bottom-4 sm:-left-4 sm:-bottom-5 max-w-[78%] px-4 py-3 flex items-center gap-3">
-                            <ShieldCheck className="w-6 h-6 flex-none text-accent" aria-hidden="true" />
+
+                        <div className="absolute -left-2 -bottom-6 sm:-left-6 sm:-bottom-7 max-w-[88%] rounded-2xl border border-line bg-white/95 px-5 py-4 backdrop-blur-md shadow-[0_24px_50px_-24px_rgba(15,42,68,0.45)] flex items-center gap-4">
+                            <span className="inline-flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-accent-ink/15 bg-gradient-to-br from-brand-green/15 via-cta/10 to-transparent">
+                                <ShieldCheck className="w-6 h-6 text-accent" aria-hidden="true" />
+                            </span>
                             <span className="block">
-                                <b className="block font-heading font-extrabold text-[0.95rem] leading-tight tracking-[-0.02em] text-fg">
+                                <b className="block font-heading font-extrabold text-[1.125rem] leading-tight tracking-[-0.02em] text-fg">
                                     8000 x 2500mm
                                 </b>
-                                <span className="meta-label block text-fg-subtle mt-0.5">
+                                <span className="meta-label block text-fg-subtle mt-1">
                                     Large Format Bed
                                 </span>
                             </span>
