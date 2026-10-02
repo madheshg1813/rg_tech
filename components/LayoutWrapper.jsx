@@ -30,14 +30,14 @@ function hasOwnGoogleCard(pathname) {
     return CITY_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`))
 }
 
-export default function LayoutWrapper({ children }) {
+export default function LayoutWrapper({ children, designFaiths }) {
     const [catalogueModalOpen, setCatalogueModalOpen] = useState(false)
     const pathname = usePathname()
     const showGooglePreFooter = !hasOwnGoogleCard(pathname)
 
     return (
         <div className="bg-white selection:bg-cta/20">
-            <Header setCatalogueModalOpen={setCatalogueModalOpen} />
+            <Header setCatalogueModalOpen={setCatalogueModalOpen} designFaiths={designFaiths} />
             <main>{children}</main>
 
             {/* Pre-footer profile block, for the routes that do not already

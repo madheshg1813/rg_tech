@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import {
     Phone, Mail, MapPin, Clock, ChevronDown, ChevronRight, MessageCircle,
-    Menu, X, FileText, Newspaper, Building2
+    Menu, X, FileText, Newspaper, Building2, Flame, Cross, Moon
 } from 'lucide-react'
 import { pillarServices } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
@@ -29,6 +29,39 @@ const RESOURCE_LINKS = [
         href: '/about',
         desc: 'The workshop, capacity and materials we cut',
         Icon: Building2,
+    },
+]
+
+/* Everything under the Designs menu, shared by the desktop and mobile navs.
+ *
+ * These are a product category of their own — something we make, not something
+ * to read — which is why they sit next to Services rather than under Resources
+ * or inside Gallery.
+ *
+ * The parent /designs/gods carries all three with a filter; these link to the
+ * faith pages directly, because someone who opens this menu already knows
+ * which one they want. */
+const DESIGN_LINKS = [
+    {
+        label: 'Hindu Gods',
+        href: '/designs/gods/hindu',
+        faith: 'hindu',
+        desc: 'Deity, amman and symbol panels for pooja rooms and arches',
+        Icon: Flame,
+    },
+    {
+        label: 'Christian',
+        href: '/designs/gods/christian',
+        faith: 'christian',
+        desc: 'Jesus, Mother Mary, Velankanni and Holy Cross panels',
+        Icon: Cross,
+    },
+    {
+        label: 'Islamic',
+        href: '/designs/gods/islamic',
+        faith: 'islamic',
+        desc: 'Geometric jali, arabesque and mihrab arch panels',
+        Icon: Moon,
     },
 ]
 
@@ -56,21 +89,30 @@ function cityServiceLinks(citySlug) {
     ]
 }
 
-const Header = ({ setCatalogueModalOpen }) => {
+const Header = ({ setCatalogueModalOpen, designFaiths }) => {
+    // A faith with nothing published 404s on its own page — see app/layout.js.
+    // No list means show them all, so the menu still works if a caller forgets.
+    const designLinks = designFaiths
+        ? DESIGN_LINKS.filter((l) => designFaiths.includes(l.faith))
+        : DESIGN_LINKS
+
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [servicesDropdown, setServicesDropdown] = useState(false)
     const [resourcesDropdown, setResourcesDropdown] = useState(false)
+    const [designsDropdown, setDesignsDropdown] = useState(false)
     const [openMobileService, setOpenMobileService] = useState(null)
     const pathname = usePathname()
 
     const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev)
     const toggleServicesDropdown = () => setServicesDropdown(prev => !prev)
     const toggleResourcesDropdown = () => setResourcesDropdown(prev => !prev)
+    const toggleDesignsDropdown = () => setDesignsDropdown(prev => !prev)
 
     useEffect(() => {
         setMobileMenuOpen(false)
         setServicesDropdown(false)
         setResourcesDropdown(false)
+        setDesignsDropdown(false)
         setOpenMobileService(null)
     }, [pathname])
 
@@ -107,8 +149,21 @@ const Header = ({ setCatalogueModalOpen }) => {
             </div>
 
             {/* Main Header */}
-            <header className="glass sticky top-0 z-50 shadow-premium transition-all duration-300">
-                <div className="shell py-4">
+            {/*
+                Tailwind blur utilities, not the old `.glass` class. `.glass`
+                set backdrop-filter both plain and -webkit- prefixed, and the
+                CSS build collapsed the pair to the prefixed one alone — which
+                Chrome ignores. With no blur, 78% white let every gallery photo
+                scrolling underneath show straight through the logo and menu.
+                The utilities compile with both properties intact, and 95% white
+                means the bar still reads as solid on a browser with no blur.
+
+                Compact on phones: py-2.5 and a 44px logo give a 64px bar
+                instead of 94px, which was an eighth of a 375 x 812 screen spent
+                on chrome before the bottom call bar took its share too.
+            */}
+            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-line shadow-premium transition-all duration-300">
+                <div className="shell py-2.5 lg:py-4">
                     <div className="flex justify-between items-center">
                         <Link href="/" className="flex items-center gap-3.5 group">
                             <Image
@@ -121,20 +176,23 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 height={240}
                                 priority
                                 sizes="56px"
-                                className="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                                style={{ width: "auto", height: "auto" }}
+                                // Height from the class, not an inline style. The old
+                                // inline `height: auto` beat h-14, so the logo's size
+                                // came from whichever file variant happened to load.
+                                className="h-11 lg:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                style={{ width: "auto" }}
                             />
                             <div className="transition-all hidden sm:block">
                                 <h1 className="card-title text-fg leading-none">
                                     RG Tech <span className="text-accent">Engineering</span>
                                 </h1>
-                                <p className="meta-label text-fg-muted mt-1 opacity-70">
+                                <p className="meta-label text-fg-muted mt-1 opacity-70 hidden sm:max-lg:block xl:block">
                                     CNC Fiber Laser Specialist
                                 </p>
                             </div>
                         </Link>
 
-                        <nav className="hidden lg:flex items-center gap-8">
+                        <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
                             <div className="relative group">
                                 <button
                                     onClick={toggleServicesDropdown}
@@ -201,6 +259,57 @@ const Header = ({ setCatalogueModalOpen }) => {
                                 )}
                             </div>
 
+                            {/* Designs sits next to Services because it is the same
+                                kind of thing — something we make — rather than
+                                something to read. */}
+                            <div className="relative">
+                                <button
+                                    onClick={toggleDesignsDropdown}
+                                    onMouseEnter={() => !designsDropdown && setDesignsDropdown(true)}
+                                    aria-expanded={designsDropdown}
+                                    className="nav-link flex items-center gap-1.5 py-2"
+                                >
+                                    Designs
+                                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${designsDropdown ? 'rotate-180' : ''}`} />
+                                </button>
+                                {designsDropdown && (
+                                    <div
+                                        onMouseLeave={() => setDesignsDropdown(false)}
+                                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
+                                    >
+                                        <div className="bg-white rounded-2xl shadow-2xl border border-line p-2 w-[19rem]">
+                                            {designLinks.map(({ label, href, desc, Icon }) => (
+                                                <Link
+                                                    key={href}
+                                                    href={href}
+                                                    onClick={() => setDesignsDropdown(false)}
+                                                    className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-surface-2 transition-colors group/link"
+                                                >
+                                                    <span className="w-8 h-8 rounded-lg bg-cta/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                        <Icon className="w-4 h-4 text-accent" />
+                                                    </span>
+                                                    <span className="min-w-0">
+                                                        <span className="block text-sm font-bold text-fg group-hover/link:text-accent transition-colors">
+                                                            {label}
+                                                        </span>
+                                                        <span className="block text-xs text-fg-muted leading-snug mt-0.5">
+                                                            {desc}
+                                                        </span>
+                                                    </span>
+                                                </Link>
+                                            ))}
+                                            <Link
+                                                href="/designs/gods"
+                                                onClick={() => setDesignsDropdown(false)}
+                                                className="block px-3 py-2.5 mt-1 border-t border-line text-sm font-semibold text-accent hover:bg-surface-2 rounded-b-xl transition-colors"
+                                            >
+                                                View all designs →
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
                             <Link href="/gallery" className="nav-link">Gallery</Link>
 
                             {/* Resources groups the reading material — Blog and About —
@@ -249,17 +358,24 @@ const Header = ({ setCatalogueModalOpen }) => {
                             <Link href="/contact" className="nav-link">Contact</Link>
                         </nav>
 
-                        <div className="hidden lg:flex items-center gap-4">
+                        <div className="hidden lg:flex items-center gap-3 xl:gap-4">
                             <a href="https://wa.me/916380736439" className="btn btn-whatsapp btn-sm group">
                                 <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                 WhatsApp
                             </a>
                             <button onClick={() => setCatalogueModalOpen(true)} className="btn btn-primary btn-sm">
-                                <FileText className="w-4 h-4" /> Request Catalogue
+                                <FileText className="w-4 h-4" />
+                                <span className="xl:hidden">Catalogue</span>
+                                <span className="hidden xl:inline">Request Catalogue</span>
                             </button>
                         </div>
 
-                        <button onClick={toggleMobileMenu} className="lg:hidden p-3 rounded-full bg-surface-2 text-fg transition-colors hover:bg-surface-3">
+                        <button
+                            onClick={toggleMobileMenu}
+                            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                            aria-expanded={mobileMenuOpen}
+                            className="lg:hidden p-2.5 rounded-full bg-surface-2 text-fg transition-colors hover:bg-surface-3"
+                        >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
@@ -333,6 +449,33 @@ const Header = ({ setCatalogueModalOpen }) => {
                                         </div>
                                     )
                                 })}
+                            </div>
+
+                            <div className="flex flex-col gap-1 pt-3 border-t border-line">
+                                <p className="meta-label text-accent mb-1 pl-1">Designs</p>
+                                {designLinks.map(({ label, href, desc, Icon }) => (
+                                    <Link
+                                        key={href}
+                                        href={href}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="flex items-start gap-3 py-3 px-4 rounded-xl hover:bg-surface-2 transition-colors"
+                                    >
+                                        <span className="w-8 h-8 rounded-lg bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                            <Icon className="w-4 h-4 text-accent" />
+                                        </span>
+                                        <span className="min-w-0">
+                                            <span className="block text-fg font-bold text-base">{label}</span>
+                                            <span className="block text-xs text-fg-muted leading-snug mt-0.5">{desc}</span>
+                                        </span>
+                                    </Link>
+                                ))}
+                                <Link
+                                    href="/designs/gods"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-accent font-bold text-sm py-3 px-4 rounded-xl hover:bg-surface-2 transition-colors"
+                                >
+                                    View all designs →
+                                </Link>
                             </div>
 
                             <div className="flex flex-col gap-1 pt-3 border-t border-line">
