@@ -25,14 +25,13 @@ const Services = () => {
     return (
         <section id="services" className="section bg-surface-2">
             <div className="shell">
-                <div className="mb-10 flex flex-col gap-4 sm:mb-14 md:flex-row md:items-end md:justify-between md:gap-6">
-                    <div>
-                        <p className="eyebrow-text">Our Capabilities</p>
-                        <h2 className="h2 mt-2">Industrial Services</h2>
-                    </div>
-                    <p className="section-lead max-w-md">
-                        Precision engineering services delivered from our facility in Chennai.
-                    </p>
+                {/* No lead paragraph. "Precision engineering services delivered
+                    from our facility in Chennai" restated the heading above it and
+                    the six cards below it, and the facility is already named in
+                    the hero, the workflow and the footer. */}
+                <div className="mb-10 sm:mb-14">
+                    <p className="eyebrow-text">Our Capabilities</p>
+                    <h2 className="h2 mt-2">Industrial Services</h2>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
