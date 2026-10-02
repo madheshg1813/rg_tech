@@ -35,11 +35,49 @@ const IconMap = { FileText, Send, Zap, Wrench, Eye, Truck }
  * one-line change in STAGE_MEDIA below — nothing else moves.
  */
 
-// Genuine photography only. A stage with no honest image stays an icon.
+/*
+ * Stage imagery.
+ *
+ * Two stages are RG Tech's own work and are the real thing:
+ *   03  a poster frame from rg-video-01, our fiber laser actually cutting
+ *   06  rg-work-53, our grill packed and ready for dispatch
+ *
+ * The other four are Unsplash stock, used because the company photographs
+ * finished product and has no picture of a drawing being reviewed, a weld being
+ * run or a part being measured. They are deliberately CLOSE-UP process shots —
+ * hands, sparks, a caliper — rather than wide facility views. A wide shot of
+ * someone else's factory on this page would read as a claim about our premises;
+ * a caliper on a drawing reads as what the stage is, which is all it has to do.
+ *
+ * Every one was checked for visible third-party branding and rejected if it had
+ * any: the first pick for stage 02 carried a "TECNIC" logo on the technician's
+ * jacket, and the first pick for 05 had a Stanley toolbox in frame.
+ *
+ * Unsplash Licence: free for commercial use, no attribution required.
+ * Swap any entry for a photograph of our own floor and nothing else changes.
+ */
+const UNSPLASH = (id) => `https://images.unsplash.com/${id}`
+
 const STAGE_MEDIA = {
+    '01': {
+        src: UNSPLASH('photo-1780034766267-cf76b8484212'),
+        alt: 'Machined metal components resting on technical engineering drawings',
+    },
+    '02': {
+        src: UNSPLASH('photo-1503387837-b154d5074bd2'),
+        alt: 'Hands marking up a technical drawing with a ruler and pen at a drafting desk',
+    },
     '03': {
         src: cldPoster('/videos/rg-video-01.mp4', 900),
-        alt: 'RG Tech\'s fiber laser cutting a perforated circular panel on the bed',
+        alt: "RG Tech's fiber laser cutting a perforated circular panel on the bed",
+    },
+    '04': {
+        src: UNSPLASH('photo-1647586028042-1de4d4a935e6'),
+        alt: 'Sparks flying from metal being cut and dressed in a fabrication workshop',
+    },
+    '05': {
+        src: UNSPLASH('photo-1563448448467-7fc866d214bb'),
+        alt: 'Dial caliper used to check a dimension on a finished metal part',
     },
     '06': {
         src: cld('/works/rg-work-53.jpg', { width: 900 }),
