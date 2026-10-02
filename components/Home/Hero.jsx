@@ -1,100 +1,120 @@
-import { Phone, Check, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowRight, Images, Crosshair, Timer, ShieldCheck, Handshake } from 'lucide-react'
 import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
+import { cld, cldSize, cldBlurUrl } from '@/lib/cloudinary'
 
 /*
- * Hero — rebuilt to the playbook's fixed hero rules.
+ * Hero — split screen, per the industrial redesign brief.
  *
- * What the playbook fixes, and what changed to meet it:
+ * Left: headline, subheadline, two CTAs, trust row.
+ * Right: the fiber laser mid-cut, with four capability cards floating over its
+ * lower edge on desktop and sitting beneath it as a 2x2 grid on phones.
  *
- *   white ground, no tint or glow   the hero-gradient and its indigo/green
- *                                   radial washes are gone; the only texture is
- *                                   a faint neutral grid, radially masked
- *   no badge above the H1           the mono "CNC Fiber Laser Specialist" stamp
- *                                   is removed — the headline starts the page
- *   headline <= 7 words             was nine ("Your Trusted Partner for ...")
- *   one accent word only            "Precision" carries it; the headline
- *                                   previously ran three accented words
+ * Why the cards move rather than float on small screens: floating them means
+ * overlapping the photograph, and at 390px there is no part of this image that
+ * can lose a third of its height and still read as a laser cutting a sheet. So
+ * the overlap is a desktop affordance and the phone gets a plain grid.
  *
- * The headline states the service plainly rather than leading with the
- * customer's problem, which is a deliberate departure from the playbook's
- * preference for a pain-point hero: asked for simple and professional, and for
- * an industrial supplier a buyer is scanning for capability, not a hook.
- *   home hero centred, no image     the framed photograph and its spec card are
- *                                   gone, so the fold is headline -> CTA -> proof
- *   buttons side by side on phones  they stacked full-width before, which is the
- *                                   single thing the playbook calls out twice
- *   exactly three trust ticks       was four, in a wrapping inline list
+ * The four cards are capability claims, not statistics — the brief lists them
+ * under "statistic cards" but none of them is a number, and inventing figures to
+ * fit the label is not on. The actual numbers live in the trust strip below.
  *
- * The photograph is not lost — OurWorks runs directly below this section and is
- * where the machine and the cut parts now live.
+ * Palette is unchanged: green accent, navy ink, white ground. No gradient is
+ * introduced; the only non-white surface here is the photograph itself.
  */
 
-// Three, not four: the playbook caps the tick row at three so it reads as a
-// claim strip rather than a spec table. Each one is verifiable from the
-// capability data on the service pages.
-const TICKS = [
-    '0.01mm precision',
-    'Up to 45mm thick',
-    'All metal types',
+const HERO_IMG = '/hero-laser.png'
+
+// Capability cards. Each is defensible from the machine spec or the service
+// pages — nothing here is a claim the site cannot stand behind.
+const CARDS = [
+    { Icon: Crosshair, title: 'High Precision Cutting', sub: 'Tolerances to 0.01mm' },
+    { Icon: Timer, title: 'Fast Turnaround', sub: 'Quote within 24 hours' },
+    { Icon: ShieldCheck, title: 'Industrial Grade Quality', sub: 'Dimensional QC before dispatch' },
+    { Icon: Handshake, title: 'Trusted Engineering Partner', sub: '15+ years in Chennai' },
 ]
 
 const Hero = () => {
+    // cldSize returns null and cldBlurUrl undefined when the manifest has no
+    // entry (a fresh checkout before the Cloudinary upload runs). Both are fatal
+    // to <Image> if passed through blind, so fall back to the asset's own 1:1.
+    const { width, height } = cldSize(HERO_IMG) || { width: 1024, height: 1024 }
+    const blur = cldBlurUrl(HERO_IMG)
+
     return (
-        <section
-            id="home"
-            className="section relative overflow-hidden border-b border-line bg-surface py-14 md:"
-        >
+        <section id="home" className="relative overflow-hidden border-b border-line bg-surface">
             <div className="grid-backdrop" aria-hidden="true" />
 
-            <div className="shell relative z-10">
-                <div className="mx-auto max-w-3xl text-center">
-                    {/* h2, not h1: components/Header.jsx renders the brand lockup
-                        as the page's h1 on every route. The playbook calls this
-                        slot the H1 and the site should follow, but that is a
-                        heading-structure change across 1,400 pages, not a
-                        restyle, so it stays as it was. */}
-                    <h2 className="display-title text-fg text-balance">
-                        <span className="text-accent">Precision</span>{' '}
-                        CNC Laser Cutting &amp; Fabrication
-                    </h2>
+            <div className="shell relative z-10 py-10 sm:py-14 lg:py-20">
+                <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
 
-                    <p className="section-lead mt-6 mx-auto max-w-[52ch]">
-                        High-precision metal cutting up to 45mm — MS, SS, Aluminium, Copper
-                        and Brass, cut at our Chennai unit and delivered on the date we gave you.
-                    </p>
+                    {/* ── Left column ──────────────────────────────────── */}
+                    <div>
+                        <h2 className="display-title text-fg text-balance">
+                            <span className="text-accent">Precision</span>{' '}
+                            CNC Laser Cutting &amp; Fabrication Services
+                        </h2>
 
-                    {/* One row at every width. The playbook is explicit that the
-                        pair never stacks and never goes full-width on phones, so
-                        the call button sheds the number below 640px rather than
-                        wrapping the pair onto two lines — at 390px the full
-                        label pushes the two buttons 28px past the gutter. */}
-                    <div className="mt-8 flex flex-row flex-nowrap justify-center gap-2.5 sm:gap-3">
-                        <a href="#contact" className="btn btn-primary">
-                            Get a Quote <ArrowRight className="w-4 h-4" />
-                        </a>
-                        <a href="tel:+916380736439" className="btn btn-ghost">
-                            <Phone className="w-4 h-4" />
-                            <span className="hidden sm:inline">Call 63807-36439</span>
-                            <span className="sm:hidden">Call Now</span>
-                        </a>
+                        <p className="section-lead mt-5 max-w-[54ch] sm:mt-6">
+                            High-precision laser cutting, sheet metal fabrication and engineering
+                            solutions for industries across Chennai.
+                        </p>
+
+                        <div className="mt-7 flex flex-row flex-nowrap gap-2.5 sm:mt-9 sm:gap-3">
+                            <a href="#contact" className="btn btn-primary">
+                                Get Free Quote <ArrowRight className="h-4 w-4" />
+                            </a>
+                            <Link href="/gallery" className="btn btn-ghost">
+                                <Images className="h-4 w-4" />
+                                <span className="hidden sm:inline">View Projects</span>
+                                <span className="sm:hidden">Projects</span>
+                            </Link>
+                        </div>
+
+                        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-7 sm:mt-10">
+                            <GoogleRating />
+                            <JustdialBadge />
+                        </div>
                     </div>
 
-                    <ul className="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2 p-0 list-none">
-                        {TICKS.map((item) => (
-                            <li key={item} className="tick">
-                                <Check aria-hidden="true" />
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
+                    {/* ── Right column ─────────────────────────────────── */}
+                    {/* pb on desktop reserves the space the cards overhang into,
+                        so the following section is never overlapped. */}
+                    <div className="relative lg:pb-24">
+                        <div className="overflow-hidden rounded-2xl border border-line shadow-[0_30px_70px_-34px_rgba(15,42,68,0.45)] sm:rounded-3xl">
+                            <Image
+                                src={cld(HERO_IMG, { width: 1200 })}
+                                alt="RG Tech's CNC fiber laser cutting a decorative pattern into mild steel sheet, sparks flying from the cut head"
+                                width={width}
+                                height={height}
+                                priority
+                                {...(blur ? { placeholder: 'blur', blurDataURL: blur } : {})}
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                                className="h-full w-full object-cover"
+                            />
+                        </div>
 
-                    {/* The playbook puts a proof row under the ticks. Ours is the
-                        Google rating: third-party, clickable and checkable, which
-                        is the only claim here a visitor can independently verify. */}
-                    <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 border-t border-line pt-7">
-                        <GoogleRating />
-                        <JustdialBadge />
+                        {/* Floating on desktop, stacked below on phones. */}
+                        <ul className="mt-4 grid list-none grid-cols-2 gap-2.5 p-0 sm:gap-3 lg:absolute lg:-bottom-0 lg:left-4 lg:right-4 lg:mt-0 lg:gap-4">
+                            {CARDS.map(({ Icon, title, sub }) => (
+                                <li
+                                    key={title}
+                                    className="rounded-xl border border-line bg-surface p-3 shadow-[0_10px_30px_-18px_rgba(15,42,68,0.45)] sm:rounded-2xl sm:p-4"
+                                >
+                                    <Icon
+                                        className="mb-2 h-5 w-5 text-accent"
+                                        strokeWidth={1.7}
+                                        aria-hidden="true"
+                                    />
+                                    <p className="text-[0.8125rem] font-bold leading-tight tracking-[-0.01em] text-fg sm:text-sm">
+                                        {title}
+                                    </p>
+                                    <p className="mt-1 text-xs leading-snug text-fg-muted">{sub}</p>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </div>

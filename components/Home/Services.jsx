@@ -42,8 +42,12 @@ const Services = () => {
                             <Link
                                 key={i}
                                 href={s.slug}
-                                className="card card-link flex h-full flex-col p-3.5 sm:p-7"
+                                className="card card-link relative isolate flex h-full flex-col overflow-hidden p-3.5 pt-5 sm:p-7 sm:pt-8"
                             >
+                                <span
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-accent-ink"
+                                />
                                 <Icon
                                     className="mb-4 h-6 w-6 flex-none text-fg sm:mb-6 sm:h-7 sm:w-7"
                                     strokeWidth={1.6}

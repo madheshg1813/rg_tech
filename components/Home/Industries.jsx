@@ -24,17 +24,26 @@ const Industries = () => {
                     <h2 className="h2 mt-2">Industries We Serve</h2>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
                     {industries.map((ind, i) => {
                         const Icon = IconMap[ind.icon] || HelpCircle
                         return (
-                            <div key={i} className="card p-3.5 text-center sm:p-6">
+                            <div key={i} className="card relative isolate flex h-full flex-col overflow-hidden p-4 pt-5 sm:p-6 sm:pt-7">
+                                <span
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-accent-ink"
+                                />
                                 <Icon
-                                    className="mx-auto mb-3 h-7 w-7 text-fg sm:mb-4 sm:h-8 sm:w-8"
+                                    className="mb-3 h-7 w-7 text-accent sm:mb-4 sm:h-8 sm:w-8"
                                     strokeWidth={1.6}
                                     aria-hidden="true"
                                 />
-                                <p className="meta-label text-fg">{ind.name}</p>
+                                <h3 className="font-heading text-[0.9375rem] font-bold leading-snug tracking-[-0.012em] text-fg sm:text-base">
+                                    {ind.name}
+                                </h3>
+                                <p className="mt-1.5 text-xs leading-snug text-fg-muted sm:text-sm">
+                                    {ind.desc}
+                                </p>
                             </div>
                         )
                     })}

@@ -1,4 +1,5 @@
 import Hero from '@/components/Home/Hero'
+import TrustStrip from '@/components/Home/TrustStrip'
 import RollingLogos from '@/components/Home/RollingLogos'
 import Services from '@/components/Home/Services'
 import Industries from '@/components/Home/Industries'
@@ -68,6 +69,7 @@ export default function Home() {
                 dangerouslySetInnerHTML={jsonLdScript(homeGraph)}
             />
             <Hero />
+            <TrustStrip />
             <OurWorks />
             <VideoShowcase />
             <RollingLogos />
