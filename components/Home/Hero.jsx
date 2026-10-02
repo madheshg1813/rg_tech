@@ -12,10 +12,14 @@ import JustdialBadge from '@/components/JustdialBadge'
  *                                   a faint neutral grid, radially masked
  *   no badge above the H1           the mono "CNC Fiber Laser Specialist" stamp
  *                                   is removed — the headline starts the page
- *   headline <= 7 words             was nine, and named the company rather than
- *                                   the customer's problem
- *   one accent word only            "exactly" carries it; "CNC Laser Cutting"
+ *   headline <= 7 words             was nine ("Your Trusted Partner for ...")
+ *   one accent word only            "Precision" carries it; the headline
  *                                   previously ran three accented words
+ *
+ * The headline states the service plainly rather than leading with the
+ * customer's problem, which is a deliberate departure from the playbook's
+ * preference for a pain-point hero: asked for simple and professional, and for
+ * an industrial supplier a buyer is scanning for capability, not a hook.
  *   home hero centred, no image     the framed photograph and its spec card are
  *                                   gone, so the fold is headline -> CTA -> proof
  *   buttons side by side on phones  they stacked full-width before, which is the
@@ -51,8 +55,8 @@ const Hero = () => {
                         heading-structure change across 1,400 pages, not a
                         restyle, so it stays as it was. */}
                     <h2 className="display-title text-fg text-balance">
-                        Your drawing, cut{' '}
-                        <span className="text-accent">exactly</span>. On schedule.
+                        <span className="text-accent">Precision</span>{' '}
+                        CNC Laser Cutting &amp; Fabrication
                     </h2>
 
                     <p className="section-lead mt-6 mx-auto max-w-[52ch]">
