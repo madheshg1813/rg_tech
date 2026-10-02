@@ -43,9 +43,9 @@ const GalleryClient = () => {
     return (
         <div className="bg-white min-h-screen">
             {/* Gallery Hero */}
-            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+                <div className="shell sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">Visual Portfolio</p>
                     <h1 className="display-title text-fg mb-6">Design <span className="text-accent">Library</span></h1>
                     <p className="section-lead max-w-2xl mx-auto">
@@ -54,8 +54,8 @@ const GalleryClient = () => {
                 </div>
             </section>
 
-            <section className="py-24 bg-surface-2">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-surface-2">
+                <div className="shell">
                     <div className="flex flex-wrap justify-center gap-3 mb-16">
                         {filters.map(f => (
                             <button
@@ -99,7 +99,7 @@ const GalleryClient = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className="max-w-3xl mx-auto py-14 px-6 sm:py-20 sm:px-8 text-center bg-white border border-line rounded-[1.5rem] sm:rounded-[3rem] shadow-xl shadow-line-strong/50">
+                        <div className="max-w-3xl mx-auto py-14 px-6 sm:py-20 sm:px-8 text-center bg-white border border-line rounded-2xl sm:rounded-3xl shadow-xl shadow-line-strong/50">
                             <div className="w-24 h-24 bg-surface-2 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-line">
                                 <Plus className="w-10 h-10 text-accent animate-pulse" />
                             </div>
@@ -132,14 +132,14 @@ const GalleryClient = () => {
                             </button>
 
                             <div className="max-w-6xl w-full flex flex-col lg:flex-row gap-12 items-center px-4">
-                                <div className="flex-1 relative group bg-black/20 rounded-[2.5rem] p-4 border border-white/5 shadow-2xl">
+                                <div className="flex-1 relative group bg-black/20 rounded-2xl sm:rounded-3xl p-4 border border-white/5 shadow-2xl">
                                     <Image
                                         src={displayed[lightboxIndex].img}
                                         alt={galleryAlt(displayed[lightboxIndex], lightboxIndex + 1)}
                                         width={1200}
                                         height={900}
                                         sizes="(max-width: 1024px) 100vw, 60vw"
-                                        className="w-full max-h-[65vh] object-contain rounded-[2rem]"
+                                        className="w-full max-h-[65vh] object-contain rounded-2xl sm:rounded-3xl"
                                     />
                                 </div>
 
@@ -151,7 +151,7 @@ const GalleryClient = () => {
                                         <h3 className="section-title">{displayed[lightboxIndex].title}</h3>
                                     </div>
 
-                                    <div className="p-8 bg-white/5 rounded-[2rem] border border-white/10 space-y-6 backdrop-blur-md">
+                                    <div className="p-8 bg-white/5 rounded-2xl sm:rounded-3xl border border-white/10 space-y-6 backdrop-blur-md">
                                         <div className="flex justify-between items-center text-sm">
                                             <span className="text-white/40 meta-label">Material Grade</span>
                                             <span className="font-bold text-accent">{displayed[lightboxIndex].material}</span>

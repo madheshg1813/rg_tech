@@ -72,9 +72,9 @@ export default async function BlogPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
             {/* Blog Hero */}
-            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+                <div className="shell sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">
                         Technical Deep Dives
                     </p>
@@ -88,8 +88,8 @@ export default async function BlogPage() {
                 </div>
             </section>
 
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section ">
+                <div className="shell">
                     {posts.length > 0 ? (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {posts.map((post) => {
@@ -98,7 +98,7 @@ export default async function BlogPage() {
                                     <Link
                                         key={post.slug}
                                         href={`/blog/${post.slug}`}
-                                        className="group bg-white rounded-[2rem] overflow-hidden border border-line shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col"
+                                        className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-line shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col"
                                     >
                                         <div className="aspect-[16/10] overflow-hidden relative bg-surface-2">
                                             {img && (
@@ -148,7 +148,7 @@ export default async function BlogPage() {
                             })}
                         </div>
                     ) : (
-                        <div className="text-center py-16 sm:py-24 bg-surface-2 rounded-[1.5rem] sm:rounded-[3rem] border-2 border-dashed border-line-strong">
+                        <div className="text-center py-16 sm:py-24 bg-surface-2 rounded-2xl sm:rounded-3xl border-2 border-dashed border-line-strong">
                             <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                                 <FileText className="w-8 h-8 text-accent" />
                             </div>

@@ -7,6 +7,7 @@ import {
 import { COPPER, copperCopy, copperUrl } from '@/lib/copper'
 import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
+import JustdialBadge from '@/components/JustdialBadge'
 
 /*
  * Copper laser cutting pillar.
@@ -42,9 +43,9 @@ export default function CopperPage({ city, works, articles }) {
         <div className="bg-white">
 
             {/* ── 1. Hero ─────────────────────────────────────────────────── */}
-            <section className="hero-gradient relative overflow-hidden py-16 md:py-24">
+            <section className="section hero-gradient relative overflow-hidden py-16 md:">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div className="shell sm:px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div>
                             <p className="stamp mb-6">
@@ -70,6 +71,7 @@ export default function CopperPage({ city, works, articles }) {
 
                             <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-9 pt-7 border-t border-line">
                                 <GoogleRating />
+                                <JustdialBadge />
                                 <span className="hidden sm:block w-px h-8 bg-line" aria-hidden="true" />
                                 {HERO_CREDENTIALS.map((h) => (
                                     <span key={h} className="meta-label text-fg-subtle">{h}</span>
@@ -112,8 +114,8 @@ export default function CopperPage({ city, works, articles }) {
                 WCAG 2.2.2 requires a way to stop motion that runs past five
                 seconds. `poster` means the section paints before a single video
                 byte is fetched. */}
-            <section className="py-20 bg-surface-2 border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-surface-2 border-t border-line">
+                <div className="shell">
                     <div className="grid lg:grid-cols-[minmax(0,330px)_1fr] gap-10 lg:gap-16 items-center">
                         <div className="framed overflow-hidden w-full max-w-[330px] mx-auto lg:mx-0">
                             <video
@@ -163,8 +165,8 @@ export default function CopperPage({ city, works, articles }) {
             {works}
 
             {/* ── 4. Why choose RG Tech — pain -> fix ─────────────────────── */}
-            <section className="py-20 bg-white border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-white border-t border-line">
+                <div className="shell">
                     <div className="text-center mb-14">
                         <p className="eyebrow mb-3">What Goes Wrong Elsewhere</p>
                         <h2 className="section-title text-fg">
@@ -184,7 +186,7 @@ export default function CopperPage({ city, works, articles }) {
                                     key={p.pain}
                                     className="framed-soft bg-white p-6 flex flex-col hover:shadow-lg transition-shadow duration-300"
                                 >
-                                    <span className="w-11 h-11 rounded-sm bg-cta/5 flex items-center justify-center text-accent mb-5">
+                                    <span className="inline-flex mb-5">
                                         <Icon className="w-5 h-5" />
                                     </span>
                                     <h3 className="card-title text-fg mb-2">{p.pain}</h3>
@@ -197,8 +199,8 @@ export default function CopperPage({ city, works, articles }) {
             </section>
 
             {/* ── 5. How we work — three steps ────────────────────────────── */}
-            <section className="py-20 bg-surface-2 border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-surface-2 border-t border-line">
+                <div className="shell">
                     <div className="text-center mb-14">
                         <p className="eyebrow mb-3">How We Work</p>
                         <h2 className="section-title text-fg">
@@ -218,7 +220,7 @@ export default function CopperPage({ city, works, articles }) {
                                         <span className="font-heading font-extrabold text-3xl leading-none tracking-[-0.04em] text-line-strong">
                                             {s.step}
                                         </span>
-                                        <span className="w-11 h-11 rounded-sm bg-cta/5 flex items-center justify-center text-accent">
+                                        <span className="inline-flex">
                                             <Icon className="w-5 h-5" />
                                         </span>
                                     </div>
@@ -232,8 +234,8 @@ export default function CopperPage({ city, works, articles }) {
             </section>
 
             {/* ── 6. Sub-categories ──────────────────────────────────────── */}
-            <section className="py-20 bg-white border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-white border-t border-line">
+                <div className="shell">
                     <div className="text-center mb-14">
                         <p className="eyebrow mb-3">Copper Work We Take On</p>
                         <h2 className="section-title text-fg">
@@ -273,8 +275,8 @@ export default function CopperPage({ city, works, articles }) {
             </section>
 
             {/* ── 7. FAQs ─────────────────────────────────────────────────── */}
-            <section className="py-20 bg-surface-2 border-t border-line">
-                <div className="max-w-5xl mx-auto px-4">
+            <section className="section bg-surface-2 border-t border-line">
+                <div className="shell max-w-5xl">
                     <div className="text-center mb-12">
                         <p className="eyebrow mb-3">Support &amp; FAQ</p>
                         <h2 className="section-title text-fg">
@@ -311,7 +313,7 @@ export default function CopperPage({ city, works, articles }) {
                 pages to link up from, the header mega-menu only renders while it
                 is open, and the footer carries the Chennai URL only. */}
             <section className="py-14 bg-white border-t border-line">
-                <div className="max-w-5xl mx-auto px-4 text-center">
+                <div className="shell max-w-5xl text-center">
                     <p className="eyebrow mb-4">Also Serving</p>
                     <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
                         {OTHER_CITIES.filter((o) => o.slug !== city.slug).map((o) => (
@@ -333,9 +335,8 @@ export default function CopperPage({ city, works, articles }) {
             {articles}
 
             {/* Closing CTA */}
-            <section className="on-dark py-20 surface-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-cta/10 skew-y-3 translate-y-32" />
-                <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <section className="section on-dark surface-dark relative overflow-hidden">
+                <div className="shell max-w-4xl relative z-10 text-center">
                     <h2 className="section-title text-white mb-6">
                         Copper job in {city.name}?{' '}
                         <span className="text-accent">Send the drawing.</span>

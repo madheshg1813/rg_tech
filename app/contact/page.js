@@ -85,9 +85,9 @@ export default function ContactPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
             {/* Hero */}
-            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
+                <div className="shell max-w-4xl relative z-10 text-center">
                     <p className="eyebrow mb-4">
                         Get In Touch
                     </p>
@@ -103,14 +103,14 @@ export default function ContactPage() {
 
             {/* Quick actions */}
             <section className="py-16 bg-surface-2 border-b border-line">
-                <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+                <div className="shell max-w-6xl grid md:grid-cols-3 gap-6">
                     {QUICK_ACTIONS.map(({ Icon, label, value, href, note }) => (
                         <a
                             key={label}
                             href={href}
                             className="group min-w-0 bg-white rounded-2xl border border-line p-6 sm:p-8 hover:border-cta hover:shadow-xl transition-all"
                         >
-                            <span className="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
+                            <span className="inline-flex mb-5">
                                 <Icon className="w-5 h-5 text-accent" />
                             </span>
                             <p className="meta-label text-fg-subtle">
@@ -137,10 +137,10 @@ export default function ContactPage() {
             <GoogleBusinessCard />
 
             {/* Visit us */}
-            <section className="py-20 bg-white">
-                <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+            <section className="section bg-white">
+                <div className="shell max-w-6xl grid md:grid-cols-2 gap-10">
                     <div className="rounded-2xl border border-line p-8">
-                        <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
+                        <span className="inline-flex mb-5">
                             <MapPin className="w-5 h-5 text-accent" />
                         </span>
                         <h2 className="card-title text-fg mb-3">Visit the workshop</h2>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                         </p>
                     </div>
                     <div className="rounded-2xl border border-line p-8">
-                        <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
+                        <span className="inline-flex mb-5">
                             <Clock className="w-5 h-5 text-accent" />
                         </span>
                         <h2 className="card-title text-fg mb-3">Working hours</h2>

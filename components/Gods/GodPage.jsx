@@ -40,9 +40,9 @@ export default function GodPage({ god, city }) {
     return (
         <div className="bg-white">
             {/* ── Hero ─────────────────────────────────────────────────────── */}
-            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 relative z-10">
+                <div className="shell relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <div className="inline-flex items-center gap-3 px-4 py-2 bg-cta/10 border border-cta/20 rounded-xl mb-8">
@@ -111,11 +111,11 @@ export default function GodPage({ god, city }) {
 
             {/* ── Specs ────────────────────────────────────────────────────── */}
             <section className="bg-white border-b border-line">
-                <div className="max-w-7xl mx-auto px-4">
+                <div className="shell">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-x-0 lg:divide-y-0 lg:divide-x divide-line">
                         {SPECS.map(({ Icon, label, value }) => (
                             <div key={label} className="py-8 px-6 flex items-start gap-4">
-                                <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <span className="inline-flex flex-shrink-0">
                                     <Icon className="w-5 h-5 text-accent" />
                                 </span>
                                 <div>
@@ -131,8 +131,8 @@ export default function GodPage({ god, city }) {
             </section>
 
             {/* ── Detail + uses ────────────────────────────────────────────── */}
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-start">
+            <section className="section ">
+                <div className="shell grid lg:grid-cols-2 gap-16 items-start">
                     <div>
                         <h2 className="section-title text-fg mb-6">
                             Custom {god.name} Panels,
@@ -165,7 +165,7 @@ export default function GodPage({ god, city }) {
 
                     {/* Sticky WhatsApp card — the ask stays on screen while reading */}
                     <div className="lg:sticky lg:top-28">
-                        <div className="rounded-[2rem] border border-line bg-surface-2 p-8">
+                        <div className="rounded-2xl sm:rounded-3xl border border-line bg-surface-2 p-8">
                             <span className="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center mb-5">
                                 <MessageCircle className="w-6 h-6 text-[#128C4A]" />
                             </span>
@@ -206,8 +206,8 @@ export default function GodPage({ god, city }) {
             </section>
 
             {/* ── Related designs ──────────────────────────────────────────── */}
-            <section className="py-20 bg-surface-2 border-t border-line">
-                <div className="max-w-6xl mx-auto px-4">
+            <section className="section bg-surface-2 border-t border-line">
+                <div className="shell max-w-6xl">
                     <div className="text-center mb-10">
                         <p className="eyebrow mb-3">
                             More Designs
@@ -248,9 +248,8 @@ export default function GodPage({ god, city }) {
             <GoogleBusinessCard cityName={city.name} />
 
             {/* ── Closing CTA ──────────────────────────────────────────────── */}
-            <section className="on-dark py-24 surface-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-cta/10 skew-y-3 translate-y-32" />
-                <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <section className="section on-dark surface-dark relative overflow-hidden">
+                <div className="shell max-w-4xl relative z-10 text-center">
                     <h2 className="section-title text-white mb-6">
                         Ready to make your <span className="text-accent">{god.name} design?</span>
                     </h2>

@@ -18,7 +18,7 @@ export default function ArticleBanner({
     imageAlt,
 }) {
     return (
-        <div className="on-dark surface-dark relative overflow-hidden rounded-[1.75rem] text-white">
+        <div className="on-dark surface-dark relative overflow-hidden rounded-2xl sm:rounded-3xl text-white">
             <div className="relative z-10 p-6 sm:p-8 md:p-12 min-h-[320px] md:min-h-[360px] flex flex-col">
                 <p className="text-base font-semibold text-white/85">RG Tech Engineering</p>
 

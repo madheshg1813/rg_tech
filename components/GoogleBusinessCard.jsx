@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { MapPin, Star, Navigation, ExternalLink } from 'lucide-react'
 import { GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, GMB_DIRECTIONS_URL } from '@/lib/data'
 import GoogleRating from '@/components/GoogleRating'
+import JustdialBadge from '@/components/JustdialBadge'
 
 /**
  * Google Business Profile block for landing pages.
@@ -23,8 +24,8 @@ export default function GoogleBusinessCard({ cityName }) {
 
     return (
         <section className="py-16 bg-surface-2 border-t border-line">
-            <div className="max-w-6xl mx-auto px-4">
-                <div className="rounded-[2rem] border border-line bg-white p-8 md:p-10 flex flex-col lg:flex-row lg:items-center gap-8">
+            <div className="shell max-w-6xl">
+                <div className="rounded-2xl sm:rounded-3xl border border-line bg-white p-8 md:p-10 flex flex-col lg:flex-row lg:items-center gap-8">
                     <div className="flex-1 min-w-0">
                         <p className="eyebrow mb-3">
                             Verified Business
@@ -41,8 +42,9 @@ export default function GoogleBusinessCard({ cityName }) {
                             Door No. 63, B&amp;C Flat, Galaxy Company Salai, Ponniamman Nagar,
                             Ayanambakkam, Chennai 600095
                         </p>
-                        <div className="mt-5 pt-5 border-t border-line">
+                        <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-line pt-5">
                             <GoogleRating />
+                            <JustdialBadge />
                         </div>
                     </div>
 

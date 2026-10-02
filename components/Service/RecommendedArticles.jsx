@@ -36,8 +36,8 @@ export default function RecommendedArticles({ posts = [], serviceName }) {
         : 'Recommended articles'
 
     return (
-        <section className="py-20 bg-surface-2 border-t border-line">
-            <div className="max-w-7xl mx-auto px-4">
+        <section className="section bg-surface-2 border-t border-line">
+            <div className="shell">
                 <div className="text-center mb-12">
                     <p className="eyebrow mb-3">Technical Blog</p>
                     <h2 className="section-title text-fg">{heading}</h2>

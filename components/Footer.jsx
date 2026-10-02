@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import GoogleRating from '@/components/GoogleRating'
+import JustdialBadge from '@/components/JustdialBadge'
 import Image from 'next/image'
 import {
     Phone, Mail, MapPin, ChevronRight, MessageCircle,
@@ -18,7 +20,7 @@ const SocialIcon = { Instagram, Youtube }
 const Footer = () => {
     return (
         <footer className="on-dark surface-dark text-white py-24 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="shell relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
                     {/* Brand Section */}
                     <div className="space-y-8">
@@ -136,7 +138,7 @@ const Footer = () => {
                         <h4 className="card-title mb-8 text-accent">Reach Us</h4>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <div className="inline-flex flex-shrink-0">
                                     <MapPin className="w-5 h-5 text-accent" />
                                 </div>
                                 <div>
@@ -156,14 +158,14 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <div className="inline-flex flex-shrink-0">
                                     <Phone className="w-5 h-5 text-accent" />
                                 </div>
                                 <a href="tel:+916380736439" className="text-white hidden sm:block font-bold">+91 63807 36439</a>
                                 <a href="tel:+916380736439" className="text-white sm:hidden font-bold">+91 63807-36439</a>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <div className="inline-flex flex-shrink-0">
                                     <Mail className="w-5 h-5 text-accent" />
                                 </div>
                                 <a href="mailto:admin@rgtechengineeringworks.com" className="text-white/80 hover:text-white transition-colors text-sm font-medium truncate">admin@rgtechengineeringworks.com</a>
@@ -172,7 +174,12 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="mt-16 flex flex-wrap items-center gap-3 border-t border-white/5 pt-8">
+                    <GoogleRating onDark />
+                    <JustdialBadge onDark />
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
                     <p className="text-white/40 text-sm font-medium">
                         © {new Date().getFullYear()} RG Tech Engineering Works. All Rights Reserved.
                     </p>
@@ -185,7 +192,6 @@ const Footer = () => {
             </div>
 
             {/* Background elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-cta/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
         </footer>
     )

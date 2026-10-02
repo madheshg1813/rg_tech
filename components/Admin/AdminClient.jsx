@@ -86,8 +86,7 @@ const AdminClient = () => {
     if (!isLoggedIn) {
         return (
             <div className="on-dark min-h-screen surface-dark flex items-center justify-center p-4 sm:p-6">
-                <div className="on-light w-full max-w-[440px] bg-white rounded-[2.5rem] shadow-2xl p-6 sm:p-10 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-cta/5 rounded-full blur-2xl"></div>
+                <div className="on-light w-full max-w-[440px] bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-10 relative overflow-hidden">
                     <div className="text-center mb-10">
                         <div className="w-16 h-16 bg-ink-2 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-[#0F2A44]/20 transform -rotate-6">
                             <Shield className="w-8 h-8 text-accent" />
@@ -133,11 +132,11 @@ const AdminClient = () => {
                 )}
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 pt-32 pb-24">
+            <div className="shell pt-32 pb-24">
                 {tab === 'gallery' ? (
                     <div className="grid lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-5">
-                            <div className="bg-white p-10 rounded-[2.5rem] border border-line shadow-premium sticky top-32">
+                            <div className="bg-white p-10 rounded-2xl sm:rounded-3xl border border-line shadow-premium sticky top-32">
                                 <h3 className="subsection-title text-fg mb-8">Add to <span className="text-accent">Portfolio</span></h3>
                                 <form onSubmit={handleGallerySubmit} className="space-y-5">
                                     <input type="text" placeholder="Design Title" className="w-full px-6 py-4 rounded-xl bg-surface-2 border border-line focus:bg-white outline-none transition-all text-sm font-bold" value={galleryData.title} onChange={(e) => setGalleryData({ ...galleryData, title: e.target.value })} required />
@@ -158,14 +157,14 @@ const AdminClient = () => {
                             </div>
                         </div>
                         <div className="lg:col-span-7">
-                            <div className="bg-surface-2 p-10 rounded-[2.5rem] border border-line-strong border-dashed text-center">
+                            <div className="bg-surface-2 p-10 rounded-2xl sm:rounded-3xl border border-line-strong border-dashed text-center">
                                 <p className="text-fg-subtle font-medium">Gallery list management currently syncs directly with data.js via the Apps Script backend.</p>
                             </div>
                         </div>
                     </div>
                 ) : (
                     <div className="space-y-12">
-                        <div className="bg-white p-12 rounded-[1.5rem] sm:rounded-[3rem] border border-line shadow-premium">
+                        <div className="bg-white p-12 rounded-2xl sm:rounded-3xl border border-line shadow-premium">
                             <h3 className="subsection-title text-fg mb-10">Write New <span className="text-accent">Technical Analysis</span></h3>
                             <form onSubmit={handleBlogSubmit} className="space-y-8">
                                 <div className="grid md:grid-cols-2 gap-8">
@@ -183,7 +182,7 @@ const AdminClient = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <textarea placeholder="Analysis Content (Supports HTML)" className="w-full px-8 py-8 rounded-[2rem] bg-surface-2 border border-line focus:bg-white outline-none transition-all font-medium min-h-[400px] font-mono text-sm leading-relaxed" value={blogData.content} onChange={(e) => setBlogData({ ...blogData, content: e.target.value })} required></textarea>
+                                <textarea placeholder="Analysis Content (Supports HTML)" className="w-full px-8 py-8 rounded-2xl sm:rounded-3xl bg-surface-2 border border-line focus:bg-white outline-none transition-all font-medium min-h-[400px] font-mono text-sm leading-relaxed" value={blogData.content} onChange={(e) => setBlogData({ ...blogData, content: e.target.value })} required></textarea>
                                 <button type="submit" disabled={loading} className="btn btn-primary btn-lg w-full">
                                     {loading ? 'Processing Industrial Upload...' : 'Publish Technical Analysis'}
                                 </button>

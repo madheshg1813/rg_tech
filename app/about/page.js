@@ -98,9 +98,9 @@ export default function AboutPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
             {/* Hero */}
-            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+                <div className="shell sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">About Us</p>
                     <h1 className="display-title text-fg mb-6 text-balance">
                         Precision in Every Cut,{' '}
@@ -115,8 +115,8 @@ export default function AboutPage() {
             </section>
 
             {/* Who we are */}
-            <section className="py-20 md:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <section className="section md:">
+                <div className="shell sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                     <div>
                         <p className="eyebrow mb-3">Who We Are</p>
                         <h2 className="section-title text-fg mb-6">
@@ -144,7 +144,7 @@ export default function AboutPage() {
                     </div>
 
                     {/* Registered particulars */}
-                    <div className="bg-surface-2 rounded-[1.5rem] border border-line p-6 sm:p-8">
+                    <div className="bg-surface-2 rounded-2xl sm:rounded-3xl border border-line p-6 sm:p-8">
                         <p className="eyebrow mb-5">Registered Particulars</p>
                         <dl className="divide-y divide-line">
                             {[
@@ -166,8 +166,8 @@ export default function AboutPage() {
             </section>
 
             {/* What we do */}
-            <section className="py-20 md:py-24 bg-surface-2">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <section className="section md: bg-surface-2">
+                <div className="shell sm:px-6">
                     <div className="text-center mb-12">
                         <p className="eyebrow mb-3">What We Do</p>
                         <h2 className="section-title text-fg">
@@ -177,7 +177,7 @@ export default function AboutPage() {
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {CAPABILITIES.map(({ Icon, title, body }) => (
                             <div key={title} className="bg-white rounded-2xl border border-line p-6 sm:p-8">
-                                <span className="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center mb-6">
+                                <span className="inline-flex mb-6">
                                     <Icon className="w-6 h-6 text-accent" />
                                 </span>
                                 <h3 className="card-title text-fg mb-3">{title}</h3>
@@ -189,8 +189,8 @@ export default function AboutPage() {
             </section>
 
             {/* Machine capacity */}
-            <section className="py-20 md:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <section className="section md:">
+                <div className="shell sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                     <div>
                         <p className="eyebrow mb-3">Capacity</p>
                         <h2 className="section-title text-fg mb-6">
@@ -244,8 +244,8 @@ export default function AboutPage() {
             </section>
 
             {/* How we work */}
-            <section className="py-20 md:py-24 bg-surface-2">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <section className="section md: bg-surface-2">
+                <div className="shell sm:px-6">
                     <div className="text-center mb-12">
                         <p className="eyebrow mb-3">How We Work</p>
                         <h2 className="section-title text-fg">
@@ -255,7 +255,7 @@ export default function AboutPage() {
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {PRINCIPLES.map(({ Icon, title, body }) => (
                             <div key={title} className="bg-white rounded-2xl border border-line p-6 sm:p-8">
-                                <span className="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center mb-6">
+                                <span className="inline-flex mb-6">
                                     <Icon className="w-6 h-6 text-accent" />
                                 </span>
                                 <h3 className="card-title text-fg mb-3">{title}</h3>
@@ -268,8 +268,8 @@ export default function AboutPage() {
 
             {/* Contact. GoogleBusinessCard is a full-width band of its own, so it
                 sits after this section rather than inside the grid. */}
-            <section className="py-20 md:py-24">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <section className="section md:">
+                <div className="shell max-w-3xl sm:px-6">
                     <div>
                         <p className="eyebrow mb-3">Find Us</p>
                         <h2 className="section-title text-fg mb-8">
@@ -277,7 +277,7 @@ export default function AboutPage() {
                         </h2>
                         <ul className="space-y-6">
                             <li className="flex items-start gap-4">
-                                <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <span className="inline-flex flex-shrink-0">
                                     <MapPin className="w-5 h-5 text-accent" />
                                 </span>
                                 <div>
@@ -290,7 +290,7 @@ export default function AboutPage() {
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
-                                <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <span className="inline-flex flex-shrink-0">
                                     <Phone className="w-5 h-5 text-accent" />
                                 </span>
                                 <div>
@@ -304,7 +304,7 @@ export default function AboutPage() {
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
-                                <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <span className="inline-flex flex-shrink-0">
                                     <Mail className="w-5 h-5 text-accent" />
                                 </span>
                                 <div>
@@ -315,7 +315,7 @@ export default function AboutPage() {
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
-                                <span className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center flex-shrink-0">
+                                <span className="inline-flex flex-shrink-0">
                                     <Clock className="w-5 h-5 text-accent" />
                                 </span>
                                 <div>

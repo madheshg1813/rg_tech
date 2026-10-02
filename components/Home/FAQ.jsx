@@ -13,11 +13,11 @@ const FAQ = () => {
     ].filter((column) => column.length > 0)
 
     return (
-        <section className="py-24 bg-white">
-            <div className="max-w-5xl mx-auto px-4">
-                <div className="text-center mb-12">
-                    <p className="eyebrow mb-3">Support</p>
-                    <h2 className="section-title text-fg">
+        <section className="section bg-surface">
+            <div className="shell max-w-5xl">
+                <div className="mb-10 text-center sm:mb-12">
+                    <p className="eyebrow-text">Support</p>
+                    <h2 className="h2 mt-2">
                         Technical <span className="text-accent">FAQs</span>
                     </h2>
                 </div>

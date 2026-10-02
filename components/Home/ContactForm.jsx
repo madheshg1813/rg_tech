@@ -98,10 +98,9 @@ const ContactForm = () => {
         'w-full px-5 py-4 rounded-xl border border-line bg-surface-2 focus:bg-white focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-cta outline-none transition-all text-sm disabled:opacity-60'
 
     return (
-        <section id="contact" className="on-dark py-24 surface-dark relative overflow-hidden">
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-cta/10 rounded-full blur-[120px]"></div>
-            <div className="max-w-7xl mx-auto px-4 relative z-10">
-                <div className="on-light bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-white/20">
+        <section id="contact" className="section on-dark surface-dark relative overflow-hidden">
+            <div className="shell relative z-10">
+                <div className="on-light bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-white/20">
                     <div className="lg:w-2/5 bg-surface-2 p-6 sm:p-10">
                         <h2 className="section-title text-fg mb-6">
                             Start Your <span className="text-accent">Project</span>

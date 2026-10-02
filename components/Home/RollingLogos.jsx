@@ -16,7 +16,7 @@ const RollingLogos = () => {
     
     return (
         <div className="bg-white border-y border-line py-10 overflow-hidden relative">
-            <div className="max-w-7xl mx-auto px-4 mb-6">
+            <div className="shell mb-6">
                 <p className="text-center meta-label text-fg-subtle">Our Industrial Standards & Capabilities</p>
             </div>
             <div className="flex animate-scroll whitespace-nowrap">

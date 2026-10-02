@@ -189,6 +189,228 @@
 
 @layer components {
 
+    /* =====================================================================
+     * PLAYBOOK PRIMITIVES
+     *
+     * Shared classes from the build playbook, resolved against RG Tech's own
+     * palette rather than the playbook's. The playbook names two brand colours
+     * that this site does not use, so they are mapped once, here, and nowhere
+     * else:
+     *
+     *   playbook "brand orange" (primary CTA, eyebrows) -> --color-cta  #1D4ED8
+     *   playbook "green"        (H1 accent, ticks, tags) -> --color-accent-ink #046A38
+     *   playbook "ink"          (text, dark bands, steps) -> --color-fg   #0F2A44
+     *
+     * Everything below is structure, spacing and shape. No new colour enters
+     * the system through this block.
+     * ===================================================================== */
+
+    /* The single page gutter. Every section's inner wrapper uses this, so the
+     * left edge of a heading lines up across the whole site. */
+    .shell {
+        width: 100%;
+        max-width: 80rem;      /* 1280px */
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+        .shell {
+            padding-inline: 2rem;
+        }
+    }
+
+    /* The single vertical rhythm. Tighter on phones so pages do not scroll
+     * forever, which is the playbook's main mobile complaint. */
+    .section {
+        padding-block: 2.25rem;
+    }
+
+    @media (min-width: 640px) {
+        .section {
+            padding-block: 4rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .section {
+            padding-block: 5rem;
+        }
+    }
+
+    /* The one card shell. White, hairline border, generous radius — and the
+     * radius grows on larger screens so a full-width phone card does not look
+     * like a rounded rectangle floating in nothing. */
+    .card {
+        background-color: var(--color-surface);
+        border: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
+        border-radius: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .card {
+            border-radius: 1.5rem;
+        }
+    }
+
+    /* Hover on a card that leads somewhere: lift and soften, nothing else.
+     * The playbook is explicit that hover never recolours anything. */
+    .card-link {
+        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .card-link:hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--color-fg) 18%, transparent);
+        box-shadow: 0 18px 40px -24px rgba(15, 42, 68, 0.35);
+    }
+
+    .card-link:hover .card-arrow {
+        transform: translateX(3px);
+    }
+
+    .card-arrow {
+        transition: transform .18s ease;
+    }
+
+    /* Section eyebrow: small, wide-tracked, in the CTA colour. */
+    .eyebrow-text {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: var(--tracking-label);
+        text-transform: uppercase;
+        color: var(--color-cta-ink);
+    }
+
+    .on-dark .eyebrow-text {
+        color: var(--color-accent-on-dark);
+    }
+
+    /* Section heading. One size for every H2 on the site. */
+    .h2 {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: 1.6rem;
+        line-height: 1.14;
+        letter-spacing: -0.03em;
+        color: var(--color-fg);
+    }
+
+    @media (min-width: 640px) {
+        .h2 {
+            font-size: 2.25rem;
+        }
+    }
+
+    /* A trust tick: a bare green check, never a circled or filled one. */
+    .tick {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--color-fg-muted);
+    }
+
+    .tick > svg {
+        flex: none;
+        width: 1rem;
+        height: 1rem;
+        color: var(--color-accent-ink);
+    }
+
+    .on-dark .tick {
+        color: var(--color-fg-invert-muted);
+    }
+
+    .on-dark .tick > svg {
+        color: var(--color-accent-on-dark);
+    }
+
+    /* Numbered step marker: ink circle, white numeral. Never the CTA colour —
+     * a step number is not something you can click. */
+    .step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 999px;
+        background-color: var(--color-fg);
+        color: var(--color-surface);
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 0.8125rem;
+        line-height: 1;
+    }
+
+    .on-dark .step-num {
+        background-color: var(--color-surface);
+        color: var(--color-fg);
+    }
+
+    /* "Best for ..." style tag. Green, tinted, never filled. */
+    .tag-green {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.3rem 0.65rem;
+        border-radius: 999px;
+        background-color: color-mix(in srgb, var(--color-accent-ink) 10%, transparent);
+        color: var(--color-accent-ink);
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    /* Faint neutral grid for hero backgrounds, masked so it fades out before it
+     * reaches the edges and never competes with the headline. */
+    .grid-backdrop {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(to right, rgba(15, 42, 68, 0.055) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15, 42, 68, 0.055) 1px, transparent 1px);
+        background-size: 46px 46px;
+        -webkit-mask-image: radial-gradient(70% 60% at 50% 38%, #000 0%, transparent 78%);
+        mask-image: radial-gradient(70% 60% at 50% 38%, #000 0%, transparent 78%);
+    }
+
+    /* Phone swipe row. Tall cards (plans, stories, categories) become a
+     * horizontal rail at 86% width so the next card peeks and the page stops
+     * scrolling vertically forever. */
+    .swipe-row {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 86%;
+        gap: 0.75rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 1.25rem;
+        padding-inline: 1.25rem;
+        margin-inline: -1.25rem;
+    }
+
+    .swipe-row > * {
+        scroll-snap-align: start;
+    }
+
+    @media (min-width: 640px) {
+        .swipe-row {
+            display: grid;
+            grid-auto-flow: row;
+            grid-auto-columns: auto;
+            overflow-x: visible;
+            padding-inline: 0;
+            margin-inline: 0;
+        }
+    }
+
+
     /*
      * The site's CTA system. Every call to action uses one of these three,
      * so the primary action is the same blue everywhere.
@@ -200,16 +422,17 @@
         gap: 0.55rem;
         padding: 0.95rem 1.6rem;
         /*
-         * 2px, down from 14px. The rounded pill read as a soft consumer app;
-         * a near-square edge reads as industrial, and it is the single change
-         * that most changes the character of the page — every CTA on the site
-         * goes through this class.
+         * Pill, per the playbook. This replaces the 2px near-square edge: the
+         * square read as industrial, which suited the subject, but the playbook
+         * is explicit that both the primary and the ghost button are pills, and
+         * the shape has to agree with the cards' large radii or the page reads
+         * as two design systems bolted together.
          *
          * A border on the base class, not just on the outline variants, so the
          * filled and outlined buttons are the same physical size and sit on the
          * same baseline when they are side by side in a hero.
          */
-        border-radius: 2px;
+        border-radius: 999px;
         border: 1.5px solid transparent;
         font-family: var(--font-heading);
         font-weight: 700;
@@ -276,6 +499,36 @@
         border-color: rgba(255, 255, 255, 0.24);
     }
 
+    /*
+     * Ghost — the playbook's white outlined pill, and the standard partner to
+     * .btn-primary in a hero pair. This is the same shape as the primary so the
+     * two sit level; only the fill differs.
+     */
+    .btn-ghost {
+        background-color: var(--color-surface);
+        color: var(--color-fg);
+        border-color: color-mix(in srgb, var(--color-fg) 18%, transparent);
+    }
+
+    .btn-ghost:hover {
+        border-color: var(--color-cta);
+        color: var(--color-cta-hover);
+        transform: translateY(-1px);
+    }
+
+    /* Outlined on a dark band — the final CTA's secondary action. */
+    .btn-on-ink {
+        background-color: transparent;
+        color: var(--color-fg-invert);
+        border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .btn-on-ink:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.45);
+        transform: translateY(-1px);
+    }
+
     /* Secondary on a light surface */
     .btn-secondary-light {
         background-color: var(--color-surface);
@@ -312,7 +565,6 @@
     .btn-sm {
         padding: 0.7rem 1.25rem;
         font-size: 0.8125rem;
-        border-radius: 0.75rem;
     }
 
     .btn-lg {
@@ -363,7 +615,7 @@
     /* Hero headline. Fluid, so it never needs md:/lg: size variants. */
     .display-title {
         font-family: var(--font-heading);
-        font-size: clamp(2.25rem, 5.6vw, 3.85rem);
+        font-size: clamp(2.1rem, 5.6vw, 4.25rem);
         font-weight: 800;
         line-height: 1.06;
         letter-spacing: -0.035em;
@@ -833,6 +1085,13 @@
 
         .mcall .btn {
             flex: 1;
+            /* min-width:0 defeats flexbox's default min-width:auto. Without it a
+             * flex item refuses to shrink below its content width, and because
+             * .btn sets white-space:nowrap these two buttons together measured
+             * wider than a 390px viewport. The fixed bar then overflowed, which
+             * grew the document's scroll width, which pushed every centred
+             * section on the page sideways. */
+            min-width: 0;
             padding: .92rem 1rem;
             font-size: .92rem;
         }
@@ -845,10 +1104,11 @@
             justify-content: center;
             gap: .5rem;
             flex: 1;
+            min-width: 0;
             padding: .92rem 1rem;
             background: var(--color-wa);
             color: var(--color-wa-fg);
-            border-radius: 2px;
+            border-radius: 999px;
             text-decoration: none;
             font-family: var(--font-heading);
             font-weight: 700;
@@ -859,6 +1119,8 @@
         }
 
         .mcall-wa svg { flex: none }
+        .mcall .btn > span,
+        .mcall-wa > span { overflow: hidden; text-overflow: ellipsis }
         .mcall-wa:hover, .mcall-wa:active { filter: brightness(1.07) }
 
         /* Sheen: a band of light crossing the face in the first ~28% of the

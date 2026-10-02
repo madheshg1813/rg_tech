@@ -114,7 +114,7 @@ const CatalogueModal = ({ isOpen, onClose }) => {
                                     <div key={idx} className="border-2 border-line rounded-xl p-4 hover:border-cta transition-all group">
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center group-hover:bg-cta/20 transition-colors">
+                                                <div className="inline-flex">
                                                     <FileText className="w-6 h-6 text-accent" />
                                                 </div>
                                                 <div>

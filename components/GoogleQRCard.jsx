@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Star, ExternalLink } from 'lucide-react'
 import { GMB_URL, GMB_REVIEW_URL } from '@/lib/data'
 import GoogleRating from '@/components/GoogleRating'
+import JustdialBadge from '@/components/JustdialBadge'
 
 /*
  * The Google Business Profile QR, cut out of the sheet Google issued.
@@ -89,8 +90,9 @@ export default function GoogleQRCard({ className = '' }) {
                     </a>
                 </div>
 
-                <div className="mt-5 pt-5 border-t border-line flex justify-center sm:justify-start">
+                <div className="mt-5 pt-5 border-t border-line flex flex-wrap items-center gap-x-4 gap-y-3 justify-center sm:justify-start">
                     <GoogleRating />
+                    <JustdialBadge />
                 </div>
             </div>
         </div>

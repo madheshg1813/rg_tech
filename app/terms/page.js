@@ -152,9 +152,9 @@ export default function TermsPage() {
         <div className="bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(graph)} />
 
-            <section className="hero-gradient py-16 md:py-20 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+                <div className="shell max-w-3xl sm:px-6 relative z-10 text-center">
                     <p className="eyebrow mb-4">Legal</p>
                     <h1 className="display-title text-fg mb-6">
                         Terms &amp; <span className="text-accent">Conditions</span>
@@ -166,8 +166,8 @@ export default function TermsPage() {
                 </div>
             </section>
 
-            <section className="py-16 md:py-24">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <section className="section py-16 md:">
+                <div className="shell max-w-3xl sm:px-6">
                     {/* Contents */}
                     <nav aria-label="Contents" className="rounded-2xl border border-line bg-surface-2 p-6 sm:p-8 mb-14">
                         <p className="eyebrow mb-4">Contents</p>

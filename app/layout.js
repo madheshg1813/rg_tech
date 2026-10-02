@@ -1,4 +1,4 @@
-import { Archivo, Public_Sans, JetBrains_Mono } from "next/font/google";
+import { Sora, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import {
@@ -10,27 +10,26 @@ import {
 
 // Three self-hosted families, each doing one job. next/font inlines the
 // @font-face rules at build time, so there is no render-blocking request to
-// Google Fonts — the same trio is loaded over the network on the Sree site this
-// type system came from, and that is a round trip worth not paying.
+// Google Fonts.
 //
-// Archivo for display: a grotesque with flat terminals and tight, even spacing,
-// which is what lets a headline sit at -0.035em without the letters colliding.
-// Plus Jakarta Sans, the previous single family, is geometric and rounder — it
-// could not be tracked that tight.
-const archivo = Archivo({
+// Sora for display. A geometric grotesque with a tall x-height and flat
+// terminals, it holds its shape at the 2.1rem -> 4.75rem range the headlines
+// run across. Archivo, which this replaces, sat lower and needed tighter
+// tracking to read as a headline; Sora carries the weight on its own.
+const sora = Sora({
     variable: "--font-display-brand",
     subsets: ["latin"],
     display: "swap",
-    weight: ["500", "600", "700", "800"],
+    weight: ["600", "700", "800"],
 });
 
-// Public Sans for body copy. Neutral, slightly narrower than Archivo, and
-// designed for long reading at the 17px/1.62 the body is set in.
-const publicSans = Public_Sans({
+// Inter for body copy. Designed for screen reading at small sizes, and neutral
+// enough that it never competes with Sora in a heading/sub-line pair.
+const inter = Inter({
     variable: "--font-body-brand",
     subsets: ["latin"],
     display: "swap",
-    weight: ["400", "500", "600"],
+    weight: ["400", "500", "600", "700"],
 });
 
 // JetBrains Mono for every uppercase micro-label — eyebrows, stat captions,
@@ -93,7 +92,7 @@ const siteGraph = jsonLdGraph(organizationSchema, webSiteSchema)
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${archivo.variable} ${publicSans.variable} ${jetbrainsMono.variable} scroll-smooth`}>
+        <html lang="en" className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
             <head>
                 <script
                     type="application/ld+json"

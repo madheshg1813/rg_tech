@@ -130,8 +130,8 @@ function Row({ row }) {
 
 const OurWorks = () => {
     return (
-        <section id="our-works" className="py-24 bg-surface-2 border-y border-line overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 mb-12">
+        <section id="our-works" className="section bg-surface-2 border-y border-line overflow-hidden">
+            <div className="shell mb-12">
                 <div className="text-center">
                     <p className="eyebrow mb-2">Delivered Projects</p>
                     <h3 className="section-title text-fg">Our Works</h3>
@@ -148,7 +148,7 @@ const OurWorks = () => {
                 ))}
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 mt-12 text-center">
+            <div className="shell mt-12 text-center">
                 <Link href="/gallery" className="btn btn-secondary-light group">
                     View the full gallery
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

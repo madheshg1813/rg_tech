@@ -81,7 +81,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                 two or three words, and pushes a phone number and an address off
                 the bar on narrow screens. */}
             <div className="bg-ink text-white/90 text-xs font-medium tracking-wide uppercase border-b border-white/5">
-                <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+                <div className="shell py-2 flex justify-between items-center">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
                             <MapPin className="w-3 h-3 text-accent" />
@@ -108,7 +108,7 @@ const Header = ({ setCatalogueModalOpen }) => {
 
             {/* Main Header */}
             <header className="glass sticky top-0 z-50 shadow-premium transition-all duration-300">
-                <div className="max-w-7xl mx-auto px-4 py-4">
+                <div className="shell py-4">
                     <div className="flex justify-between items-center">
                         <Link href="/" className="flex items-center gap-3.5 group">
                             <Image
@@ -176,7 +176,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                             {city.name}
                                                         </p>
                                                         {!city.isPrimary && (
-                                                            <span className="ml-auto meta-label text-accent bg-cta/10 px-2 py-0.5 rounded-full">
+                                                            <span className="ml-auto tag-green">
                                                                 New
                                                             </span>
                                                         )}
@@ -228,7 +228,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                     onClick={() => setResourcesDropdown(false)}
                                                     className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-surface-2 transition-colors group/link"
                                                 >
-                                                    <span className="w-8 h-8 rounded-lg bg-cta/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                    <span className="flex-shrink-0 mt-0.5">
                                                         <Icon className="w-4 h-4 text-accent" />
                                                     </span>
                                                     <span className="min-w-0">
@@ -259,7 +259,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                             </button>
                         </div>
 
-                        <button onClick={toggleMobileMenu} className="lg:hidden p-3 rounded-2xl bg-surface-2 text-fg hover:bg-cta/10 hover:text-accent transition-all">
+                        <button onClick={toggleMobileMenu} className="lg:hidden p-3 rounded-full bg-surface-2 text-fg transition-colors hover:bg-surface-3">
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
@@ -289,7 +289,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                     <MapPin className="w-4 h-4 text-accent" />
                                                     {city.name}
                                                     {!city.isPrimary && (
-                                                        <span className="meta-label text-accent bg-cta/10 px-2 py-0.5 rounded-full">
+                                                        <span className="tag-green">
                                                             New
                                                         </span>
                                                     )}
@@ -308,7 +308,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                     <Link
                                                         href={jobWorkUrl(city.slug)}
                                                         onClick={() => setMobileMenuOpen(false)}
-                                                        className="flex items-center gap-2 text-sm font-bold text-fg py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors border-b border-line mb-1"
+                                                        className="flex items-center gap-2 text-sm font-bold text-fg py-2.5 px-3 rounded-lg hover:bg-white transition-colors border-b border-line mb-1"
                                                     >
                                                         <MapPin className="w-3.5 h-3.5 text-accent" />
                                                         Laser Cutting Job Work in {city.name}
@@ -318,7 +318,7 @@ const Header = ({ setCatalogueModalOpen }) => {
                                                             key={svc.href}
                                                             href={svc.href}
                                                             onClick={() => setMobileMenuOpen(false)}
-                                                            className="block text-sm font-medium text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white hover:text-accent transition-colors"
+                                                            className="block text-sm font-medium text-fg-muted py-2.5 px-3 rounded-lg hover:bg-white transition-colors"
                                                         >
                                                             {svc.name}
                                                         </Link>

@@ -11,6 +11,7 @@ import { SERVICE_IMAGE_POOLS } from '@/lib/data'
 import { getRotationIndex, localizeText, buildAlt, resolveFaqs } from '@/lib/utils'
 import GoogleBusinessCard from '@/components/GoogleBusinessCard'
 import GoogleRating from '@/components/GoogleRating'
+import JustdialBadge from '@/components/JustdialBadge'
 import ServiceAreas from '@/components/Service/ServiceAreas'
 
 // Matches the home hero. "ISO Certified" is deliberately absent from both:
@@ -74,9 +75,9 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
     return (
         <div className="bg-white">
             {/* Service Hero */}
-            <section className="hero-gradient py-16 md:py-24 relative overflow-hidden">
+            <section className="section hero-gradient py-16 md: relative overflow-hidden">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div className="shell sm:px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div>
                             <p className="stamp mb-6">
@@ -109,6 +110,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                 the visitor can click through and check. */}
                             <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-9 pt-7 border-t border-line">
                                 <GoogleRating />
+                                <JustdialBadge />
                                 <span className="hidden sm:block w-px h-8 bg-line" aria-hidden="true" />
                                 {HERO_CREDENTIALS.map((c) => (
                                     <span key={c} className="meta-label text-fg-subtle">{c}</span>
@@ -203,8 +205,8 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
               * data changing — the name is already the link text.
               */}
             {!cityName && content.subServices?.length > 0 && (
-                <section className="py-20 bg-white border-t border-line">
-                    <div className="max-w-7xl mx-auto px-4">
+                <section className="section bg-white border-t border-line">
+                    <div className="shell">
                         <div className="text-center mb-12">
                             <p className="eyebrow mb-3">{content.name} We Take On</p>
                             <h2 className="section-title text-fg">
@@ -244,8 +246,8 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
             )}
 
             {/* Content & SEO Grid */}
-            <section className="py-24 bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-white overflow-hidden">
+                <div className="shell">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div className="order-2 lg:order-1">
                             <h2 className="section-title text-fg mb-8">
@@ -258,7 +260,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                 {content.whyCards.slice(0, 2).map((card, i) => {
                                     const WIcon = IconMap[card.icon] || Settings
                                     return (
-                                        <div key={i} className="p-8 rounded-[2rem] bg-surface-2 border border-line hover:shadow-xl transition-all">
+                                        <div key={i} className="p-8 rounded-2xl sm:rounded-3xl bg-surface-2 border border-line hover:shadow-xl transition-all">
                                             <WIcon className="w-8 h-8 text-accent mb-6" />
                                             <h4 className="card-title text-fg mb-3">{card.title}</h4>
                                             <p className="text-sm text-fg-muted font-medium leading-relaxed">{localizeText(card.desc, cityName, cityIndex)}</p>
@@ -268,8 +270,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                             </div>
                         </div>
                         <div className="order-1 lg:order-2 relative">
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cta/5 rounded-full blur-[120px] pointer-events-none"></div>
-                            <div className="relative rounded-[1.5rem] sm:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
+                            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                                 <Image
                                     src={displaySecondaryImage}
                                     alt={buildAlt({
@@ -294,9 +295,9 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
             </section>
 
             {/* Capabilities List */}
-            <section className="py-24 bg-surface-2">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="on-dark surface-dark rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-12 md:p-20 relative overflow-hidden shadow-2xl">
+            <section className="section bg-surface-2">
+                <div className="shell">
+                    <div className="on-dark surface-dark rounded-2xl sm:rounded-3xl p-6 sm:p-12 md:p-20 relative overflow-hidden shadow-2xl">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[120px]"></div>
                         <div className="relative z-10">
                             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
@@ -323,8 +324,8 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
             </section>
 
             {/* Execution Process */}
-            <section className="bg-white py-24">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section bg-white">
+                <div className="shell">
                     <div className="text-center mb-20">
                         <p className="eyebrow mb-4">Quality Assurance</p>
                         <h3 className="section-title text-fg">Execution <span className="text-accent">Workflow</span></h3>
@@ -332,7 +333,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                     </div>
                     <div className={`grid md:grid-cols-2 lg:grid-cols-${(content.processSteps.length === 4 || content.processSteps.length === 8) ? '4' : '3'} gap-10`}>
                         {content.processSteps.map((s, i) => (
-                            <div key={i} className="relative group p-6 sm:p-10 rounded-[1.75rem] sm:rounded-[2.5rem] bg-surface-2 hover:bg-white hover:shadow-2xl transition-all duration-300">
+                            <div key={i} className="relative group p-6 sm:p-10 rounded-2xl sm:rounded-3xl bg-surface-2 hover:bg-white hover:shadow-2xl transition-all duration-300">
                                 <div className="absolute -top-6 left-6 sm:left-10 w-14 h-14 bg-ink-2 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg border-4 border-white">
                                     {s.step}
                                 </div>
@@ -352,8 +353,8 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
              * Splitting the list into two flex stacks keeps top-to-bottom
              * reading order and lets each column size itself.
              */}
-            <section className="py-24 bg-surface-2">
-                <div className="max-w-5xl mx-auto px-4">
+            <section className="section bg-surface-2">
+                <div className="shell max-w-5xl">
                     <div className="text-center mb-12">
                         <p className="eyebrow mb-3">Support &amp; FAQ</p>
                         <h2 className="section-title text-fg">
@@ -390,9 +391,8 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
             <GoogleBusinessCard cityName={place} />
 
             {/* Call to Action */}
-            <section className="on-dark py-24 surface-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-cta/10 skew-y-3 translate-y-32"></div>
-                <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
+            <section className="section on-dark surface-dark relative overflow-hidden">
+                <div className="shell relative z-10 text-center">
                     <h3 className="section-title text-white mb-10">
                         Ready to Start Your <span className="text-accent">Industrial Project?</span>
                     </h3>

@@ -46,7 +46,7 @@ export default function LayoutWrapper({ children }) {
                 any of them. */}
             {showGooglePreFooter && (
                 <section className="py-14 bg-surface-2 border-t border-line">
-                    <div className="max-w-5xl mx-auto px-4">
+                    <div className="shell max-w-5xl">
                         <GoogleQRCard />
                     </div>
                 </section>

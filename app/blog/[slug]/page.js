@@ -130,7 +130,7 @@ export default async function BlogPostPage({ params }) {
              * rather than a 12-column fraction — on a 4/12 split it grew with
              * the viewport and squeezed the prose down to ~700px.
              */}
-            <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
+            <div className="shell py-12 md:py-16">
                 <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-12 lg:gap-16">
                     {/* ── Article column ─────────────────────────────────────── */}
                     <div className="min-w-0">

@@ -8,6 +8,7 @@ import {
 import { JOB_WORK, jobWorkCopy, jobWorkUrl, categoryHub } from '@/lib/jobWork'
 import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
+import JustdialBadge from '@/components/JustdialBadge'
 
 /*
  * Laser cutting job work — the commercial pillar that sits above the nine
@@ -41,9 +42,9 @@ export default function JobWorkPage({ city, works, articles }) {
         <div className="bg-white">
 
             {/* ── Hero ─────────────────────────────────────────────────────── */}
-            <section className="hero-gradient relative overflow-hidden py-14 md:py-24">
+            <section className="section hero-gradient relative overflow-hidden py-14 md:">
                 <div className="hero-grid-paper" aria-hidden="true" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div className="shell sm:px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                         <div>
                             <p className="stamp mb-6">
@@ -69,6 +70,7 @@ export default function JobWorkPage({ city, works, articles }) {
 
                             <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-9 pt-7 border-t border-line">
                                 <GoogleRating />
+                                <JustdialBadge />
                                 <span className="hidden sm:block w-px h-8 bg-line" aria-hidden="true" />
                                 {HERO_CREDENTIALS.map((c) => (
                                     <span key={c} className="meta-label text-fg-subtle">{c}</span>
@@ -106,8 +108,8 @@ export default function JobWorkPage({ city, works, articles }) {
             {works}
 
             {/* ── How job work runs ────────────────────────────────────────── */}
-            <section className="py-16 md:py-20 bg-white border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section py-16 md: bg-white border-t border-line">
+                <div className="shell">
                     <div className="text-center mb-10 md:mb-14">
                         <p className="eyebrow mb-3">How It Works</p>
                         <h2 className="section-title text-fg">
@@ -126,7 +128,7 @@ export default function JobWorkPage({ city, works, articles }) {
                             const Icon = IconMap[t.icon] || Package
                             return (
                                 <div key={t.q} className="flex items-start gap-4 py-5 border-b border-line">
-                                    <span className="w-10 h-10 rounded-sm bg-cta/5 flex items-center justify-center text-accent flex-none mt-0.5">
+                                    <span className="inline-flex flex-none mt-0.5">
                                         <Icon className="w-4.5 h-4.5" style={{ width: '1.1rem', height: '1.1rem' }} />
                                     </span>
                                     <div>
@@ -145,8 +147,8 @@ export default function JobWorkPage({ city, works, articles }) {
             </section>
 
             {/* ── Who sends us job work ────────────────────────────────────── */}
-            <section className="py-16 md:py-20 bg-surface-2 border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section py-16 md: bg-surface-2 border-t border-line">
+                <div className="shell">
                     <div className="text-center mb-10 md:mb-14">
                         <p className="eyebrow mb-3">Who We Cut For</p>
                         <h2 className="section-title text-fg">
@@ -163,7 +165,7 @@ export default function JobWorkPage({ city, works, articles }) {
                             const Icon = IconMap[ind.icon] || Factory
                             return (
                                 <li key={ind.name} className="framed-soft bg-white p-5 flex flex-col">
-                                    <span className="w-10 h-10 rounded-sm bg-cta/5 flex items-center justify-center text-accent mb-4">
+                                    <span className="inline-flex mb-4">
                                         <Icon className="w-5 h-5" />
                                     </span>
                                     <h3 className="font-heading font-bold text-[0.98rem] tracking-[-0.015em] text-fg mb-1.5">
@@ -178,8 +180,8 @@ export default function JobWorkPage({ city, works, articles }) {
             </section>
 
             {/* ── The hub: every category, linked ──────────────────────────── */}
-            <section className="py-16 md:py-20 bg-white border-t border-line">
-                <div className="max-w-7xl mx-auto px-4">
+            <section className="section py-16 md: bg-white border-t border-line">
+                <div className="shell">
                     <div className="text-center mb-10 md:mb-14">
                         <p className="eyebrow mb-3">Every Category</p>
                         <h2 className="section-title text-fg">
@@ -217,8 +219,8 @@ export default function JobWorkPage({ city, works, articles }) {
             </section>
 
             {/* ── FAQs ─────────────────────────────────────────────────────── */}
-            <section className="py-16 md:py-20 bg-surface-2 border-t border-line">
-                <div className="max-w-5xl mx-auto px-4">
+            <section className="section py-16 md: bg-surface-2 border-t border-line">
+                <div className="shell max-w-5xl">
                     <div className="text-center mb-10 md:mb-12">
                         <p className="eyebrow mb-3">Support &amp; FAQ</p>
                         <h2 className="section-title text-fg">
@@ -251,7 +253,7 @@ export default function JobWorkPage({ city, works, articles }) {
 
             {/* ── Other cities ─────────────────────────────────────────────── */}
             <section className="py-12 md:py-14 bg-white border-t border-line">
-                <div className="max-w-5xl mx-auto px-4 text-center">
+                <div className="shell max-w-5xl text-center">
                     <p className="eyebrow mb-4">Also Serving</p>
                     <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
                         {otherCities.map((c) => (
@@ -273,9 +275,8 @@ export default function JobWorkPage({ city, works, articles }) {
             {articles}
 
             {/* ── Closing CTA ──────────────────────────────────────────────── */}
-            <section className="on-dark py-16 md:py-20 surface-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-cta/10 skew-y-3 translate-y-32" />
-                <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <section className="section on-dark py-16 md: surface-dark relative overflow-hidden">
+                <div className="shell max-w-4xl relative z-10 text-center">
                     <h2 className="section-title text-white mb-6">
                         Have a drawing ready?{' '}
                         <span className="text-accent">Send it across.</span>

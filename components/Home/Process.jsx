@@ -1,38 +1,58 @@
-import { 
-    FileText, Send, Zap, Eye, Truck, HelpCircle 
-} from 'lucide-react'
 import { processSteps } from '@/lib/data'
 
-const IconMap = {
-    FileText, Send, Zap, Eye, Truck, HelpCircle
-}
-
+/*
+ * Process — rebuilt as the playbook's compact stepper.
+ *
+ * It was five tall cards with 2.5rem radii, a floating numbered badge breaking
+ * each card's top edge, a tinted icon tile that filled blue on hover, and a full
+ * description. On a phone that was five full screens to read five steps.
+ *
+ * The playbook's version is one line of numbered ink dots with a short title and
+ * a brief subline, readable in a single view. The connecting rule runs behind
+ * the dots on desktop so the row reads as a sequence rather than five unrelated
+ * items; it is hidden on phones, where the steps stack two per row.
+ *
+ * The icons are dropped rather than restyled: at this size a number and a title
+ * carry the step, and an icon beside a numeral competes with it.
+ */
 const Process = () => {
-
     return (
-        <section id="process" className="bg-white py-24">
-            <div className="max-w-7xl mx-auto px-4">
-                <div className="text-center mb-20">
-                    <p className="eyebrow mb-2">Workflow</p>
-                    <h3 className="section-title text-fg">Execution <span className="text-accent">Workflow</span></h3>
-                    <p className="section-lead mt-4">Precision and discipline from blueprint to finished part.</p>
+        <section id="process" className="section bg-surface">
+            <div className="shell">
+                <div className="mb-10 text-center sm:mb-14">
+                    <p className="eyebrow-text">Workflow</p>
+                    <h2 className="h2 mt-2">
+                        Execution <span className="text-accent">Workflow</span>
+                    </h2>
+                    <p className="section-lead mx-auto mt-4 max-w-xl">
+                        Precision and discipline from blueprint to finished part.
+                    </p>
                 </div>
-                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-10">
-                    {processSteps.map((s, i) => {
-                        const Icon = IconMap[s.icon] || HelpCircle
-                        return (
-                            <div key={i} className="relative group p-6 sm:p-10 rounded-[1.75rem] sm:rounded-[2.5rem] bg-surface-2 hover:bg-white hover:shadow-xl transition-all duration-300">
-                                <div className="absolute -top-6 left-10 w-14 h-14 bg-ink-2 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg border-4 border-white">
+
+                <div className="relative">
+                    {/* The rule sits behind the dots, inset by half a dot so it
+                        never pokes out past the first or last one. */}
+                    <div
+                        className="absolute left-0 right-0 top-4 hidden h-px bg-line lg:block"
+                        style={{ marginInline: '10%' }}
+                        aria-hidden="true"
+                    />
+
+                    <ol className="relative grid list-none grid-cols-2 gap-x-4 gap-y-8 p-0 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-6">
+                        {processSteps.map((s, i) => (
+                            <li key={i} className="text-center">
+                                <span className="step-num mx-auto ring-4 ring-surface">
                                     {s.step}
-                                </div>
-                                <div className="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center mb-4 group-hover:bg-cta transition-colors mt-4">
-                                    <Icon className="w-5 h-5 text-accent group-hover:text-white" />
-                                </div>
-                                <h4 className="card-title text-fg mb-3">{s.title}</h4>
-                                <p className="text-sm text-fg-muted leading-relaxed font-medium opacity-80">{s.desc}</p>
-                            </div>
-                        )
-                    })}
+                                </span>
+                                <h3 className="mt-3 text-sm font-bold leading-tight tracking-tight text-fg sm:text-base">
+                                    {s.title}
+                                </h3>
+                                <p className="mt-1.5 text-xs leading-snug text-fg-muted sm:text-sm">
+                                    {s.desc}
+                                </p>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
             </div>
         </section>
