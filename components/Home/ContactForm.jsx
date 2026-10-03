@@ -222,7 +222,7 @@ const ContactForm = () => {
                             ) : (
                                 <label
                                     htmlFor="enquiry-file"
-                                    className="w-full py-6 border-2 border-dashed border-line rounded-xl text-fg-subtle meta-label hover:border-cta hover:text-accent transition-all flex items-center justify-center gap-3 cursor-pointer"
+                                    className="w-full py-6 border-2 border-dashed border-line rounded-xl text-fg-subtle meta-label hover:border-accent-ink/40 hover:text-accent transition-all flex items-center justify-center gap-3 cursor-pointer"
                                 >
                                     <Upload className="w-5 h-5" /> Attach CAD/DXF/STEP File
                                 </label>

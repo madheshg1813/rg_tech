@@ -258,7 +258,7 @@ export default function AluminumPage({ city, works, articles }) {
                             <li key={c.slug}>
                                 <Link
                                     href={aluminumUrl(c.slug)}
-                                    className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
+                                    className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-accent-ink/40 hover:text-fg transition-colors"
                                 >
                                     <MapPin className="w-3.5 h-3.5 text-accent" />
                                     Aluminum laser cutting in {c.name}

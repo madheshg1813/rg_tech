@@ -111,7 +111,7 @@ const CatalogueModal = ({ isOpen, onClose }) => {
 
                             <div className="grid gap-3">
                                 {catalogues.map((cat, idx) => (
-                                    <div key={idx} className="border-2 border-line rounded-xl p-4 hover:border-cta transition-all group">
+                                    <div key={idx} className="border-2 border-line rounded-xl p-4 hover:border-accent-ink/40 transition-all group">
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-3">
                                                 <div className="inline-flex">

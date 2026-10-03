@@ -52,7 +52,7 @@ const Footer = () => {
                                         rel="noopener noreferrer"
                                         aria-label={`RG Tech Engineering on ${name}`}
                                         data-analytics={`social-${name.toLowerCase()}`}
-                                        className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-cta hover:scale-110 transition-all duration-300"
+                                        className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center transition-colors duration-200 hover:bg-white/15"
                                     >
                                         <Icon className="w-5 h-5" />
                                     </a>

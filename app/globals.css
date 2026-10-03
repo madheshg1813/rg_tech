@@ -511,8 +511,8 @@
     }
 
     .btn-ghost:hover {
-        border-color: var(--color-cta);
-        color: var(--color-cta-hover);
+        border-color: color-mix(in srgb, var(--color-fg) 38%, transparent);
+        background-color: var(--color-surface-2);
         transform: translateY(-1px);
     }
 
@@ -537,8 +537,8 @@
     }
 
     .btn-secondary-light:hover {
-        border-color: var(--color-cta);
-        color: var(--color-cta-hover);
+        border-color: color-mix(in srgb, var(--color-fg) 38%, transparent);
+        background-color: var(--color-surface-2);
     }
 
     /*
@@ -559,7 +559,7 @@
     }
 
     .nav-link:hover {
-        color: var(--color-cta-ink);
+        color: var(--color-accent-ink);
     }
 
     .btn-sm {
@@ -868,7 +868,7 @@
     }
 
     .faq-q:hover {
-        color: var(--color-cta-ink);
+        color: var(--color-accent-ink);
     }
 
     /* Ring traces the whole row, inset so the card border does not clip it. */
@@ -906,8 +906,8 @@
     }
 
     .faq-card:hover .faq-icon {
-        border-color: var(--color-cta-ring);
-        background-color: var(--color-cta-soft);
+        border-color: color-mix(in srgb, var(--color-accent-ink) 35%, transparent);
+        background-color: color-mix(in srgb, var(--color-accent-ink) 10%, transparent);
     }
 
     .faq-card[open] .faq-icon {

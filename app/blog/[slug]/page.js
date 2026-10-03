@@ -255,7 +255,7 @@ export default async function BlogPostPage({ params }) {
                                         <Link
                                             key={rp.slug}
                                             href={`/blog/${rp.slug}`}
-                                            className="group rounded-2xl border border-line p-6 hover:border-cta transition-colors"
+                                            className="group rounded-2xl border border-line p-6 hover:border-accent-ink/40 transition-colors"
                                         >
                                             <p className="font-bold text-fg leading-snug group-hover:text-accent transition-colors">
                                                 {rp.title}

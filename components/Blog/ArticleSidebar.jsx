@@ -108,7 +108,7 @@ function SummarizeWithAi({ url, title }) {
                         href={t.href}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2.5 text-sm font-semibold text-fg hover:border-cta hover:text-accent transition-colors"
+                        className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2.5 text-sm font-semibold text-fg hover:border-accent-ink/40 hover:text-accent transition-colors"
                     >
                         <Image
                             src={t.logo}
@@ -160,7 +160,7 @@ function ShareRail({ url, title }) {
                         rel="noopener noreferrer nofollow"
                         aria-label={`Share on ${name}`}
                         title={`Share on ${name}`}
-                        className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-cta hover:text-accent transition-colors"
+                        className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-accent-ink/40 hover:text-accent transition-colors"
                     >
                         <Icon className="w-4 h-4" />
                     </a>
@@ -169,7 +169,7 @@ function ShareRail({ url, title }) {
                     onClick={copy}
                     aria-label="Copy link"
                     title={copied ? 'Link copied' : 'Copy link'}
-                    className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-cta hover:text-accent transition-colors"
+                    className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-fg-muted hover:border-accent-ink/40 hover:text-accent transition-colors"
                 >
                     {copied ? <Check className="w-4 h-4 text-green-600" /> : <Link2 className="w-4 h-4" />}
                 </button>

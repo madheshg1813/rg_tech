@@ -198,7 +198,7 @@ export default function JobWorkPage({ city, works, articles }) {
                             <li key={c.href}>
                                 <Link
                                     href={c.href}
-                                    className="framed-soft group bg-white p-5 flex items-start gap-3 h-full hover:border-cta hover:shadow-md transition-all"
+                                    className="framed-soft group bg-white p-5 flex items-start gap-3 h-full hover:border-accent-ink/40 hover:shadow-md transition-all"
                                 >
                                     <ChevronRight className="w-4 h-4 flex-none text-fg-subtle group-hover:text-accent mt-1 transition-colors" />
                                     <span>
@@ -260,7 +260,7 @@ export default function JobWorkPage({ city, works, articles }) {
                             <li key={c.slug}>
                                 <Link
                                     href={jobWorkUrl(c.slug)}
-                                    className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
+                                    className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-accent-ink/40 hover:text-fg transition-colors"
                                 >
                                     <MapPin className="w-3.5 h-3.5 text-accent" />
                                     Job work in {c.name}

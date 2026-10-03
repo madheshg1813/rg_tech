@@ -227,7 +227,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                                     <Link
                                                         href={jobWorkUrl(city.slug)}
                                                         onClick={() => setServicesDropdown(false)}
-                                                        className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line group/city hover:border-cta transition-colors"
+                                                        className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line group/city hover:border-accent-ink/40 transition-colors"
                                                     >
                                                         <MapPin className="w-3.5 h-3.5 text-accent" />
                                                         <p className="meta-label text-fg group-hover/city:text-accent transition-colors">

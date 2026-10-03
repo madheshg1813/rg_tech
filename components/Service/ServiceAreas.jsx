@@ -78,7 +78,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                             <li key={locality}>
                                 <Link
                                     href={serviceUrl(city.slug, serviceKey, locality)}
-                                    className="inline-block rounded-sm border border-line bg-surface-2 px-3 py-1.5 text-sm text-fg-muted hover:bg-white hover:border-cta hover:text-fg transition-colors"
+                                    className="inline-block rounded-sm border border-line bg-surface-2 px-3 py-1.5 text-sm text-fg-muted hover:bg-white hover:border-accent-ink/40 hover:text-fg transition-colors"
                                 >
                                     {locality}
                                 </Link>

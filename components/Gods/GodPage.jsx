@@ -221,7 +221,7 @@ export default function GodPage({ god, city }) {
                             <Link
                                 key={g.key}
                                 href={godUrl(city.slug, g.key)}
-                                className="group rounded-2xl border border-line bg-white px-6 py-5 hover:border-cta transition-colors"
+                                className="group rounded-2xl border border-line bg-white px-6 py-5 hover:border-accent-ink/40 transition-colors"
                             >
                                 <p className="font-bold text-fg group-hover:text-accent transition-colors">
                                     {g.name}

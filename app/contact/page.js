@@ -108,7 +108,7 @@ export default function ContactPage() {
                         <a
                             key={label}
                             href={href}
-                            className="group min-w-0 bg-white rounded-2xl border border-line p-6 sm:p-8 hover:border-cta hover:shadow-xl transition-all"
+                            className="group min-w-0 bg-white rounded-2xl border border-line p-6 sm:p-8 hover:border-accent-ink/40 hover:shadow-xl transition-all"
                         >
                             <span className="inline-flex mb-5">
                                 <Icon className="w-5 h-5 text-accent" />

@@ -61,7 +61,7 @@ const GalleryClient = () => {
                             <button
                                 key={f}
                                 onClick={() => handleFilterClick(f)}
-                                className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all border shadow-sm ${activeFilter === f ? 'bg-ink-2 text-white border-ink-2 shadow-xl shadow-ink-2/25 scale-105' : 'bg-white text-fg/60 border-line hover:border-cta hover:text-accent'}`}
+                                className={`px-6 py-3 rounded-2xl text-sm font-bold transition-all border shadow-sm ${activeFilter === f ? 'bg-ink-2 text-white border-ink-2 shadow-xl shadow-ink-2/25 scale-105' : 'bg-white text-fg/60 border-line hover:border-accent-ink/40 hover:text-accent'}`}
                             >
                                 {f}
                             </button>
