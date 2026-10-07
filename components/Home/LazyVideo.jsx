@@ -75,10 +75,27 @@ export default function LazyVideo({ src, poster, label, className }) {
 
         window.addEventListener('scroll', onScroll, { passive: true })
         window.addEventListener('resize', onScroll, { passive: true })
-        // Covers a load that already lands with the row on screen.
-        onScroll()
+
+        /*
+         * Covers a load that already lands with the row on screen -- but in a
+         * frame of its own, not inline.
+         *
+         * Called synchronously it read layout in the middle of hydration, which
+         * forces the browser to stop and recalculate before carrying on. Inside
+         * requestAnimationFrame the read happens once layout has settled, so
+         * nothing is forced.
+         *
+         * This did not clear Lighthouse's forced-reflow audit and did not move
+         * the score: three runs either side were 75-77 against 73-77, which is
+         * the same noise band. The remaining reflow is still attributed to the
+         * page chunk, so something else in it reads layout too. Kept anyway,
+         * because not forcing layout during hydration is right regardless of
+         * whether an audit notices.
+         */
+        const raf = requestAnimationFrame(onScroll)
 
         return () => {
+            cancelAnimationFrame(raf)
             if (io) io.disconnect()
             window.removeEventListener('scroll', onScroll)
             window.removeEventListener('resize', onScroll)
