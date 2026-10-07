@@ -45,18 +45,17 @@ function toCard(work) {
     const natural = size ? size.width / size.height : 1
     const ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, natural))
 
-    // One slot, at 1x and 2x, rather than both card heights at both densities.
+    // Both card heights, each at 1x and 2x.
     //
-    // The two heights are 220px and 260px -- an 18% difference -- so four
-    // candidates were being written out to choose between sizes a person cannot
-    // tell apart. That cost is not the images, which are lazy; it is the URL
-    // text. At 50 photos rendered twice for the loop, the marquee was emitting
-    // over a thousand Cloudinary URLs into the HTML, and every one of them is
-    // written a second time into the hydration payload. Phones now take the
-    // desktop slot's candidate, which is marginally larger than they need and
-    // never visible.
-    const slot = { w: Math.round(CARD_H * ratio), h: CARD_H }
-    const variants = [slot, { w: slot.w * 2, h: slot.h * 2 }]
+    // This was briefly cut to one slot to shrink the HTML -- 50 photos rendered
+    // twice for the loop emit a lot of URL text, and every URL is written again
+    // into the hydration payload. Measured, that saved 58KB of HTML and moved
+    // the score not at all, while costing phones real image bytes: a 220px card
+    // was being handed the 260px candidate, which is 40% more pixels by area.
+    // Lighthouse put the waste at ~107KB across the strip. Reverted.
+    const slots = [CARD_H_MOBILE, CARD_H].map((h) => ({ w: Math.round(h * ratio), h }))
+    const variants = [...slots, ...slots.map((v) => ({ w: v.w * 2, h: v.h * 2 }))]
+        .sort((a, b) => a.w - b.w)
 
     // Only the frames that got clamped are actually cropped; g_auto keeps the
     // cut centred on the panel rather than on empty floor.
@@ -66,9 +65,9 @@ function toCard(work) {
     return {
         ...work,
         ratio,
-        src: url(slot),
+        src: url(slots[1]),
         srcSet: variants.map((v) => `${url(v)} ${v.w}w`).join(', '),
-        sizes: `${slot.w}px`,
+        sizes: `(max-width: 767px) ${slots[0].w}px, ${slots[1].w}px`,
     }
 }
 
