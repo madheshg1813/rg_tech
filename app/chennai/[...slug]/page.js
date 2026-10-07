@@ -8,10 +8,12 @@ import GodPage from '@/components/Gods/GodPage'
 import AluminumPage from '@/components/Service/AluminumPage'
 import CopperPage from '@/components/Service/CopperPage'
 import MildSteelPage from '@/components/Service/MildSteelPage'
+import StainlessSteelPage from '@/components/Service/StainlessSteelPage'
 import JobWorkPage from '@/components/Service/JobWorkPage'
 import { resolveAluminum, aluminumMetadata, aluminumGraph, ALUMINUM_SLUG } from '@/lib/aluminum'
 import { resolveCopper, copperMetadata, copperGraph } from '@/lib/copper'
 import { resolveMildSteel, mildSteelMetadata, mildSteelGraph } from '@/lib/mildSteel'
+import { resolveStainlessSteel, stainlessSteelMetadata, stainlessSteelGraph } from '@/lib/stainlessSteel'
 import { resolveJobWork, jobWorkMetadata, jobWorkGraph } from '@/lib/jobWork'
 import { buildMetadata, buildServicePage, resolveGod } from '@/lib/servicePage'
 import { buildGodMetadata, buildGodPage } from '@/lib/godPage'
@@ -24,6 +26,7 @@ export async function generateMetadata({ params }) {
     if (resolveAluminum(CITY, slug).aluminum) return aluminumMetadata(CITY)
     if (resolveCopper(CITY, slug).copper) return copperMetadata(CITY)
     if (resolveMildSteel(CITY, slug).mildSteel) return mildSteelMetadata(CITY)
+    if (resolveStainlessSteel(CITY, slug).stainlessSteel) return stainlessSteelMetadata(CITY)
     if (resolveJobWork(CITY, slug).jobWork) return jobWorkMetadata(CITY)
     const { god } = resolveGod(CITY, slug)
     if (god) return buildGodMetadata(CITY, god, slug)
@@ -111,6 +114,34 @@ export default async function Page({ params }) {
                     articles={
                         recommended.length
                             ? <RecommendedArticles posts={recommended} serviceName="mild steel laser cutting" />
+                            : null
+                    }
+                />
+            </>
+        )
+    }
+
+    /*
+     * Stainless steel laser cutting — same arrangement as mild steel above:
+     * exact slug only, no locality variants, checked before the service
+     * resolver so "...-in-adyar" cannot resolve here.
+     */
+    const { city: ssCity, stainlessSteel } = resolveStainlessSteel(CITY, slug)
+    if (stainlessSteel) {
+        const posts = await getPosts()
+        const recommended = pickArticles('laser-cutting-services', posts)
+        return (
+            <>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={jsonLdScript(stainlessSteelGraph(CITY))}
+                />
+                <StainlessSteelPage
+                    city={ssCity}
+                    works={<OurWorks />}
+                    articles={
+                        recommended.length
+                            ? <RecommendedArticles posts={recommended} serviceName="stainless steel laser cutting" />
                             : null
                     }
                 />
