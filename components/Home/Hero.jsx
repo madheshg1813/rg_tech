@@ -90,6 +90,13 @@ const Hero = () => {
                                 width={width}
                                 height={height}
                                 priority
+                                // `priority` generates the preload, but Next 16
+                                // treats fetchPriority as a separate prop, so
+                                // without it the preload carries ordinary
+                                // priority and the LCP image queues behind the
+                                // stylesheet. A download-order hint only: it
+                                // changes nothing about how the page looks.
+                                fetchPriority="high"
                                 {...(blur ? { placeholder: 'blur', blurDataURL: blur } : {})}
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                                 className="h-full w-full object-cover"
