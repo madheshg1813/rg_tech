@@ -1464,3 +1464,61 @@
         border-radius: 999px;
     }
 }
+
+/*
+ * ---- Deferred rendering for everything below the first screen ----
+ *
+ * The home page is ~22,000px tall and 1,574 elements. Lighthouse measured the
+ * hero image, which is the LCP element, downloading in 0ms and then waiting
+ * 3,455ms to paint: the bytes were never the problem, the main thread was. It
+ * was spending 969ms in Style & Layout and 734ms in Rendering, laying out and
+ * painting thirteen sections nobody had scrolled to, before it could put the
+ * one image that matters on screen.
+ *
+ * content-visibility: auto lets the browser skip style, layout and paint for a
+ * subtree that is off screen, and do the work when it approaches the viewport
+ * instead. Nothing is removed, no JavaScript is involved, and the markup does
+ * not change -- the content is all still there for find-in-page, for anchor
+ * links and for crawlers, because this is a rendering hint rather than a
+ * display one.
+ *
+ * It also stops the Our Works marquee: three composited tracks each about
+ * 10,000px wide, animating continuously while off screen.
+ *
+ * contain-intrinsic-size gives the browser a placeholder height so the scroll
+ * bar is roughly right before a section has ever been rendered. The `auto`
+ * keyword means it remembers each real height after the first render, so the
+ * estimate only has to be close, and only matters once. Values below are the
+ * measured heights at 412px wide.
+ *
+ * The first two sections -- the hero and the trust strip -- are deliberately
+ * left out: they are in the first viewport, so deferring them would do nothing
+ * but add a containment check.
+ */
+@layer utilities {
+    main > section:nth-of-type(n + 3),
+    footer {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 1200px;
+    }
+
+    #our-works { contain-intrinsic-size: auto 1546px; }
+    #on-the-floor { contain-intrinsic-size: auto 1788px; }
+    #services { contain-intrinsic-size: auto 860px; }
+    #industries { contain-intrinsic-size: auto 1055px; }
+    #about { contain-intrinsic-size: auto 1452px; }
+    #process { contain-intrinsic-size: auto 1496px; }
+    #contact { contain-intrinsic-size: auto 2055px; }
+    footer { contain-intrinsic-size: auto 3598px; }
+
+    /*
+     * Printing renders the whole document at once, where skipping off-screen
+     * subtrees would silently drop most of the page.
+     */
+    @media print {
+        main > section:nth-of-type(n + 3),
+        footer {
+            content-visibility: visible;
+        }
+    }
+}

@@ -45,13 +45,18 @@ function toCard(work) {
     const natural = size ? size.width / size.height : 1
     const ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, natural))
 
-    // The two slot sizes the layout renders, plus each at double density. The
-    // 2x entries are derived from the rounded 1x width rather than from the
-    // height, so a 2x device asks for a candidate that exists exactly instead
-    // of rounding past it to the next one up.
-    const slots = [CARD_H_MOBILE, CARD_H].map((h) => ({ w: Math.round(h * ratio), h }))
-    const variants = [...slots, ...slots.map((s) => ({ w: s.w * 2, h: s.h * 2 }))]
-        .sort((a, b) => a.w - b.w)
+    // One slot, at 1x and 2x, rather than both card heights at both densities.
+    //
+    // The two heights are 220px and 260px -- an 18% difference -- so four
+    // candidates were being written out to choose between sizes a person cannot
+    // tell apart. That cost is not the images, which are lazy; it is the URL
+    // text. At 50 photos rendered twice for the loop, the marquee was emitting
+    // over a thousand Cloudinary URLs into the HTML, and every one of them is
+    // written a second time into the hydration payload. Phones now take the
+    // desktop slot's candidate, which is marginally larger than they need and
+    // never visible.
+    const slot = { w: Math.round(CARD_H * ratio), h: CARD_H }
+    const variants = [slot, { w: slot.w * 2, h: slot.h * 2 }]
 
     // Only the frames that got clamped are actually cropped; g_auto keeps the
     // cut centred on the panel rather than on empty floor.
@@ -61,9 +66,9 @@ function toCard(work) {
     return {
         ...work,
         ratio,
-        src: url(slots[1]),
+        src: url(slot),
         srcSet: variants.map((v) => `${url(v)} ${v.w}w`).join(', '),
-        sizes: `(max-width: 767px) ${slots[0].w}px, ${slots[1].w}px`,
+        sizes: `${slot.w}px`,
     }
 }
 
