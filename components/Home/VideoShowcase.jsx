@@ -85,7 +85,16 @@ function Clip({ video, solo }) {
                     loop
                     playsInline
                     controls
-                    preload="auto"
+                    // preload="none", not "auto". This row sits well below the
+                    // fold, and "auto" had all four clips fetched to
+                    // completion before the page had finished painting --
+                    // 2.73MB competing with the hero image for bandwidth on
+                    // a mobile connection, for a section nobody has scrolled
+                    // to. Autoplay is unaffected: browsers do not start a
+                    // muted autoplay video until it is on screen, so playback
+                    // still begins by itself, and the poster frame holds the
+                    // tile until it does.
+                    preload="none"
                     // Deliberately generic without a label: one that names the
                     // wrong process is worse for a screen reader than none.
                     aria-label={video.title || 'Video of work at RG Tech Engineering Works'}

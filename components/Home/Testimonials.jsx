@@ -39,7 +39,7 @@ function StaticTestimonials() {
                     >
                         <Star className="w-10 h-10 text-accent/10 absolute top-8 right-8 group-hover:scale-110 transition-transform" />
 
-                        <div className="flex gap-1 mb-6" aria-label={`${t.rating} out of 5 stars`}>
+                        <div className="flex gap-1 mb-6" role="img" aria-label={`${t.rating} out of 5 stars`}>
                             {[...Array(t.rating)].map((_, j) => (
                                 <Star key={j} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
                             ))}

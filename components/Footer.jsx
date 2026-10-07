@@ -63,7 +63,7 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="card-title mb-8 text-accent">Core Services</h4>
+                        <h3 className="card-title mb-8 text-accent">Core Services</h3>
                         {/*
                          * This list, not the header mega-menu, is what actually
                          * links the service pillars. The mega-menu renders only
@@ -101,7 +101,7 @@ const Footer = () => {
 
                     {/* Important Pages */}
                     <div>
-                        <h4 className="card-title mb-8 text-accent">Resources</h4>
+                        <h3 className="card-title mb-8 text-accent">Resources</h3>
                         <ul className="space-y-4">
                             {[
                                 { label: 'Gallery', href: '/gallery' },
@@ -136,7 +136,7 @@ const Footer = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="card-title mb-8 text-accent">Reach Us</h4>
+                        <h3 className="card-title mb-8 text-accent">Reach Us</h3>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
                                 <div className="inline-flex flex-shrink-0">
