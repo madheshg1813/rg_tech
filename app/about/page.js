@@ -3,7 +3,7 @@ import {
     ArrowRight, MessageCircle, Phone, Mail, MapPin, Clock,
     Target, Layers, Ruler, Truck, ShieldCheck, Factory,
 } from 'lucide-react'
-import { organizationSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
+import { jsonLdGraph, jsonLdScript } from '@/lib/schema'
 import { BASE_URL } from '@/lib/data'
 import GoogleBusinessCard from '@/components/GoogleBusinessCard'
 
@@ -85,7 +85,15 @@ const PRINCIPLES = [
 ]
 
 export default function AboutPage() {
-    const graph = jsonLdGraph(organizationSchema, {
+    /*
+     * organizationSchema is NOT repeated here. app/layout.js already emits it on
+     * every page with the same @id, so including it again put two byte-identical
+     * 23-key Organization nodes in the markup. Google merges them by @id, so it
+     * was never wrong — just ~2KB of duplication on the one page most likely to
+     * be read for company facts. The AboutPage node still points at the entity
+     * through `about`, which is what carries the relationship.
+     */
+    const graph = jsonLdGraph({
         '@type': 'AboutPage',
         '@id': `${BASE_URL}/about#webpage`,
         url: `${BASE_URL}/about`,
