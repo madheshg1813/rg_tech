@@ -5,6 +5,7 @@ import {
     ArrowRight, MessageCircle, Phone, Check, Plus, MapPin,
 } from 'lucide-react'
 import { MILD_STEEL, mildSteelCopy, mildSteelUrl } from '@/lib/mildSteel'
+import { otherMaterials } from '@/lib/materialPillars'
 import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
@@ -210,7 +211,28 @@ export default function MildSteelPage({ city, works, articles }) {
                         </a>
                     </div>
                 </div>
-            </section>
+            
+                    {/* Other materials. Same chip markup as the "Also Serving"
+                        band further down, so no new styling enters the page;
+                        filtered to pillars actually routed in this city, so no
+                        link can 404. */}
+                    <div className="mt-14 pt-10 border-t border-line text-center">
+                        <p className="eyebrow mb-4">Other Materials We Cut</p>
+                        <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
+                            {otherMaterials(a.slug, city.slug).map((m) => (
+                                <li key={m.slug}>
+                                    <Link
+                                        href={`/${city.slug}/${m.slug}`}
+                                        className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-accent-ink/40 hover:text-fg transition-colors"
+                                    >
+                                        <Layers className="w-3.5 h-3.5 text-accent" />
+                                        {m.label} in {city.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
 
             {/* ── 6. FAQs ─────────────────────────────────────────────────── */}
             <section className="section bg-surface-2 border-t border-line">

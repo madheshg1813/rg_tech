@@ -5,6 +5,7 @@ import {
     ArrowRight, MessageCircle, Phone, Check, Plus, MapPin,
 } from 'lucide-react'
 import { STAINLESS_STEEL, stainlessSteelCopy, stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
+import { otherMaterials } from '@/lib/materialPillars'
 import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
@@ -25,23 +26,6 @@ import JustdialBadge from '@/components/JustdialBadge'
 const IconMap = { Zap, Layers, Wind, Shield, Ruler, Clock, Send, FileText, Truck }
 
 
-/*
- * Cross-links to the other material pillars.
- *
- * The four material pages had no link between them: each linked only to
- * /contact, WhatsApp, and itself in other cities. A buyer comparing stainless
- * against mild steel had to go back to the menu, and the four pages passed no
- * authority to one another.
- *
- * Built from the same chip markup as the "Also Serving" band below, so no new
- * styling enters the page. `cities` lists where each pillar is routed.
- */
-const MATERIAL_PILLARS = [
-    { slug: 'aluminum-laser-cutting-services',   label: 'Aluminium laser cutting', cities: ['chennai', 'madurai', 'coimbatore', 'salem'] },
-    { slug: 'copper-laser-cutting-services',     label: 'Copper laser cutting',    cities: ['chennai', 'madurai', 'coimbatore', 'salem'] },
-    { slug: 'mild-steel-laser-cutting-services', label: 'Mild steel laser cutting', cities: ['chennai', 'madurai', 'coimbatore', 'salem'] },
-    { slug: 'stainless-steel-laser-cutting',     label: 'Stainless steel laser cutting', cities: ['chennai'] },
-]
 
 const HERO_CREDENTIALS = ['15+ Years', '1000+ Projects']
 
@@ -243,9 +227,7 @@ export default function StainlessSteelPage({ city, works, articles }) {
                     <div className="mt-14 pt-10 border-t border-line text-center">
                         <p className="eyebrow mb-4">Other Materials We Cut</p>
                         <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
-                            {MATERIAL_PILLARS
-                                .filter((m) => m.slug !== a.slug && m.cities.includes(city.slug))
-                                .map((m) => (
+                            {otherMaterials(a.slug, city.slug).map((m) => (
                                     <li key={m.slug}>
                                         <Link
                                             href={`/${city.slug}/${m.slug}`}
@@ -255,7 +237,7 @@ export default function StainlessSteelPage({ city, works, articles }) {
                                             {m.label} in {city.name}
                                         </Link>
                                     </li>
-                                ))}
+                            ))}
                         </ul>
                     </div>
                 </section>
