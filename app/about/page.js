@@ -20,9 +20,11 @@ import GoogleBusinessCard from '@/components/GoogleBusinessCard'
  */
 
 export const metadata = {
-    title: 'About RG Tech Engineering Works | CNC Laser Cutting Chennai',
+    // The layout appends ' | RG Tech Engineering Works'. Naming the brand
+    // here too rendered it twice and pushed the keyword out of the result.
+    title: 'About Our CNC Laser Cutting Unit in Chennai',
     description:
-        'RG Tech Engineering Works is a CNC fiber laser cutting and metal fabrication unit in Ayanambakkam, Chennai. Cutting MS, SS and aluminium up to 45mm on 8000x2500mm and 3000x1500mm beds.',
+        'A CNC fiber laser cutting and metal fabrication unit in Ayanambakkam, Chennai. MS, SS and aluminium cut to 45mm on an 8000x2500mm bed.',
     alternates: { canonical: '/about' },
     openGraph: {
         title: 'About RG Tech Engineering Works',

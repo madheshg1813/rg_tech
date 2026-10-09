@@ -19,7 +19,8 @@ const BASE = BASE_URL
 export const revalidate = 300
 
 export const metadata = {
-    title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
+    // Brand removed: the layout template already appends it.
+    title: 'CNC Laser Cutting & Fabrication Guides',
     description:
         'Technical insights and deep dives into industrial laser cutting, fiber technology, and precision metal fabrication from RG Tech Engineering experts in Chennai.',
     alternates: { canonical: '/blog' },

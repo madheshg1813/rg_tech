@@ -4,8 +4,9 @@ import GalleryClient from '@/components/Gallery/GalleryClient'
 const BASE = "https://www.rgtechengineeringworks.com"
 
 export const metadata = {
-    title: 'Metal Design & Laser Cutting Portfolio | RG Tech Engineering',
-    description: 'Explore our portfolio of precision laser cutting and metal fabrication projects in Chennai — CNC jali patterns, steel gates, safety doors, decorative panels and more.',
+    // Brand removed: the layout template already appends it.
+    title: 'Laser Cutting & Metal Design Portfolio',
+    description: 'Laser cutting and metal fabrication projects from our Chennai unit — CNC jali patterns, steel gates, safety doors and decorative panels.',
     alternates: {
         canonical: '/gallery',
     },

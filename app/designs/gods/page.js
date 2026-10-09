@@ -25,9 +25,8 @@ export const metadata = {
     // Works" template, and adding one here double-brands the tab.
     title: 'Laser Cut God & Religious Panel Designs',
     description:
-        'Laser cut panel designs for pooja rooms, prayer rooms, main gates and arches. ' +
-        'Hindu deity, Christian and Islamic designs cut in mild steel, stainless steel, ' +
-        'brass and copper in Chennai.',
+        'Laser cut panel designs for pooja rooms, main gates and arches. Hindu, ' +
+        'Christian and Islamic designs cut in MS, SS, brass and copper in Chennai.',
     keywords: [
         'laser cut god designs',
         'deity panel designs',

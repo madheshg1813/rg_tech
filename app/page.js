@@ -17,8 +17,19 @@ import { faqPageSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 const BASE = "https://www.rgtechengineeringworks.com"
 
 export const metadata = {
-    title: 'RG Tech Engineering | Best CNC Laser Cutting & Metal Fabrication Chennai',
-    description: 'RG Tech Engineering Works: Leading CNC Fiber Laser Cutting Services in Chennai. Precision MS, SS, Aluminum, Copper & Brass cutting up to 45mm. Fast 24/7 support.',
+    /*
+     * Absolute, so the layout does not append the brand a second time — the
+     * brand already opens this title. "Best" is gone: it is an unsupported
+     * superlative, it is not a phrase anyone searches, and it cost seven
+     * characters ahead of the keyword.
+     */
+    title: { absolute: 'CNC Laser Cutting & Metal Fabrication in Chennai | RG Tech' },
+    /*
+     * "Fast 24/7 support" is removed: the business runs Mon-Sat 09:00-19:00,
+     * which the opening-hours schema on every page already states, so the claim
+     * contradicted our own structured data.
+     */
+    description: 'CNC fiber laser cutting and metal fabrication in Chennai. MS, SS, aluminium, copper and brass cut to 45mm. Send a drawing, get a quote in 24 hours.',
     alternates: {
         canonical: '/',
     },

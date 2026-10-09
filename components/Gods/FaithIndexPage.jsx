@@ -53,7 +53,12 @@ export function faithMetadata(slug) {
     if (!faith) return {}
 
     const url = `${BASE_URL}/designs/gods/${slug}`
-    const description = `${faith.lead} Cut in mild steel, stainless steel, brass and copper in Chennai, 1 ft to 8 ft.`
+    /*
+     * The tail was "Cut in mild steel, stainless steel, brass and copper in
+     * Chennai, 1 ft to 8 ft." — 79 characters that pushed every faith page past
+     * 160 and got truncated. Shortened to the two facts a buyer scans for.
+     */
+    const description = `${faith.lead} Cut in MS, SS, brass and copper, 1 ft to 8 ft, in Chennai.`
 
     return {
         // No brand suffix — app/layout.js applies the title template.

@@ -48,11 +48,20 @@ const BASE = "https://www.rgtechengineeringworks.com"
 
 export const metadata = {
     title: {
-        default: "RG Tech Engineering | CNC Fiber Laser Cutting Specialist Chennai",
-        // Full registered name in the suffix. Page titles should therefore stay
-        // under ~33 characters to keep the whole thing inside Google's ~60
-        // character display limit.
-        template: "%s | RG Tech Engineering Works",
+        default: "CNC Fiber Laser Cutting in Chennai | RG Tech",
+        /*
+         * Suffix shortened from " | RG Tech Engineering Works" (28 characters)
+         * to " | RG Tech" (10). At 28 the suffix consumed nearly half of
+         * Google's ~60-character display limit, so a page title had to fit in
+         * ~32 characters to survive — which none of them did. Twelve of
+         * thirteen templates were being truncated.
+         *
+         * The registered name is unchanged everywhere it carries legal or
+         * trust weight: the Organization schema, the footer, the about page and
+         * the OpenGraph siteName. This is the title tag only, and "RG Tech" is
+         * already how the site refers to itself in body copy.
+         */
+        template: "%s | RG Tech",
     },
     description: "Tamil Nadu's premier CNC Fiber Laser Cutting & Metal Fabrication partner. Specialising in MS, SS, Aluminum laser cutting, steel gates, and decorative panels in Chennai.",
     metadataBase: new URL(BASE),

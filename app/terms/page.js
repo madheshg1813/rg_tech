@@ -17,9 +17,12 @@ import { organizationSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 const LAST_UPDATED = '30 July 2026'
 
 export const metadata = {
-    title: 'Terms & Conditions | RG Tech Engineering Works',
+    // Brand removed: the layout appended it a second time, so this page's
+    // title read 'Terms & Conditions | RG Tech Engineering Works | RG Tech
+    // Engineering Works'.
+    title: 'Terms & Conditions',
     description:
-        'Terms and conditions governing quotations, orders, payment, delivery and liability for CNC laser cutting and metal fabrication work carried out by RG Tech Engineering Works, Chennai.',
+        'Terms governing quotations, orders, payment, delivery and liability for CNC laser cutting and metal fabrication work by RG Tech Engineering Works, Chennai.',
     alternates: { canonical: '/terms' },
     robots: { index: true, follow: true },
 }
