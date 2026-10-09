@@ -4,7 +4,7 @@ import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
 
 /*
- * Hero — centred, with the four capability cards under the fold line.
+ * Hero - centred, with the four capability cards under the fold line.
  *
  * The split screen is gone. The right column held a photograph of a fiber laser
  * that was stock, not ours, and on the page that has to establish we cut metal
@@ -21,7 +21,7 @@ import JustdialBadge from '@/components/JustdialBadge'
 
 
 // Capability cards. Each is defensible from the machine spec or the service
-// pages — nothing here is a claim the site cannot stand behind.
+// pages - nothing here is a claim the site cannot stand behind.
 const CARDS = [
     { Icon: Crosshair, title: 'High Precision Cutting', sub: 'Tolerances to 0.01mm' },
     { Icon: Timer, title: 'Fast Turnaround', sub: 'Quote within 24 hours' },

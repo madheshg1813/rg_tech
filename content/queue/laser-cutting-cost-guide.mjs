@@ -62,7 +62,7 @@ const body = [
     h2('How to Get a Quote You Can Rely On'),
     p('Send these five things and a quote comes back quickly and does not move afterwards:'),
     nli('The DXF or DWG, drawn 1:1 in millimetres.'),
-    nli('Material and grade — "mild steel" is not enough if you meant SS 304.'),
+    nli('Material and grade - "mild steel" is not enough if you meant SS 304.'),
     nli('Thickness.'),
     nli('Quantity, and whether it is likely to repeat.'),
     nli('What happens to the part next: bending, welding, powder coating, or straight into service.'),
@@ -80,7 +80,7 @@ export const post = makePost({
     title: 'What Does Laser Cutting Cost? A Practical Pricing Guide',
     sheetTitle: 'Laser Cutting Cost Guide',
     summary:
-        'What actually goes into a laser cutting quote — material, cut length, piercing, gas and setup — and the three decisions that move your price the most.',
+        'What actually goes into a laser cutting quote - material, cut length, piercing, gas and setup - and the three decisions that move your price the most.',
     tldr:
         'Laser cutting is priced per job rather than per hour. Material is usually the biggest line, then cutting time driven by total cut length and piercing count. Quantity, nesting and drawing quality are the levers you control.',
     readTime: '8 min read',
@@ -112,7 +112,7 @@ export const post = makePost({
         ['Does ordering more parts reduce the price per piece?',
             'Yes, substantially at first. Setup and programming are largely fixed per job, so per-unit cost falls steeply from one piece up to roughly twenty, then flattens out.'],
         ['What information do you need to give me an accurate quote?',
-            'A DXF or DWG drawn 1:1 in millimetres, the material and grade, the thickness, the quantity, and what happens to the part after cutting — bending, welding, coating or straight into service.'],
+            'A DXF or DWG drawn 1:1 in millimetres, the material and grade, the thickness, the quantity, and what happens to the part after cutting - bending, welding, coating or straight into service.'],
         ['Why do laser cutting quotes expire?',
             'Metal prices move. Since material is usually the largest line in the quote, a price that was accurate one month may not hold the next, so quotations carry a validity period.'],
         ['Is laser cutting cheaper than plasma or waterjet?',

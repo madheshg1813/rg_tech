@@ -5,15 +5,15 @@ import GoogleReviews from '@/components/Home/GoogleReviews'
 import { getGoogleReviews } from '@/lib/googleReviews'
 
 /*
- * "Voice of Trust" — live Google Business Profile reviews, with the hand-written
+ * "Voice of Trust" - live Google Business Profile reviews, with the hand-written
  * testimonials as the fallback.
  *
  * This is an async server component. lib/googleReviews.js reads an API
  * credential, so the fetch has to stay on the server; only the already-fetched
  * array crosses into components/Home/GoogleReviews.jsx, which is the client half.
  *
- * When no review source is configured — local dev, or a build without the
- * credential — getGoogleReviews() returns null and StaticTestimonials() renders
+ * When no review source is configured - local dev, or a build without the
+ * credential - getGoogleReviews() returns null and StaticTestimonials() renders
  * the lib/data.js copy instead. The section is never empty and a review-API
  * outage can never fail the build. See lib/googleReviews.js for the setup.
  *

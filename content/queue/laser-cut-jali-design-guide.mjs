@@ -3,7 +3,7 @@ import { createBuilder, IMAGES, makePost } from '../lib/pt.mjs'
 const { p, h2, h3, li, nli, rich, image, table, callout, faqs } = createBuilder('jal')
 
 const body = [
-    p('Laser-cut jali screens have become a standard element in South Indian architecture — compound gates, staircase railings, balcony infills, temple arches, pooja room partitions and facade shading.'),
+    p('Laser-cut jali screens have become a standard element in South Indian architecture - compound gates, staircase railings, balcony infills, temple arches, pooja room partitions and facade shading.'),
     p('They are also the job most often designed without regard to how metal behaves, which is why some panels arrive crisp and flat and others arrive wavy with pieces missing.'),
     p('This guide covers what makes a jali design manufacturable, how to think about material and thickness, and what changes the price.'),
 
@@ -31,16 +31,16 @@ const body = [
     p('Dense patterns also remove a lot of material. A screen that is 70% open has lost most of its stiffness, and needs either thicker material or a supporting frame.'),
 
     h2('Choosing Thickness for the Job'),
-    li('1 to 2 mm — indoor decorative panels, pooja room screens, wall art, light partitions. Needs a frame or backing for anything larger than about a metre.'),
-    li('3 mm — the general-purpose choice for interior screens and smaller gate infills. Holds a pattern well and stays flat.'),
-    li('4 to 6 mm — compound gates, main gates, balcony railings, anything at ground level that people lean on or children pull.'),
-    li('8 to 12 mm — structural or security applications, large spans, or where the panel is the barrier rather than an infill.'),
+    li('1 to 2 mm - indoor decorative panels, pooja room screens, wall art, light partitions. Needs a frame or backing for anything larger than about a metre.'),
+    li('3 mm - the general-purpose choice for interior screens and smaller gate infills. Holds a pattern well and stays flat.'),
+    li('4 to 6 mm - compound gates, main gates, balcony railings, anything at ground level that people lean on or children pull.'),
+    li('8 to 12 mm - structural or security applications, large spans, or where the panel is the barrier rather than an infill.'),
     p('Span matters more than appearance here. A 3 mm panel that looks substantial at 600 mm wide will visibly flex at 1,800 mm.'),
     image(IMAGES.panel, 'Laser cut decorative metal jali panel with connected pattern and even web thickness', 'A pattern where every element connects to the frame, with webs sized to the material thickness.'),
 
     h2('Material Choice'),
     h3('Mild steel'),
-    p('The default for gates and outdoor screens. It is economical, cuts cleanly at any thickness, and takes powder coating well. It must be coated — bare mild steel will rust outdoors in a single Chennai monsoon.'),
+    p('The default for gates and outdoor screens. It is economical, cuts cleanly at any thickness, and takes powder coating well. It must be coated - bare mild steel will rust outdoors in a single Chennai monsoon.'),
 
     h3('Stainless steel'),
     p('For coastal sites, or where the client wants a bare metal finish with no coating maintenance. It costs more but there is nothing to repaint.'),
@@ -57,7 +57,7 @@ const body = [
     li('Number of separate enclosed shapes, because each one needs its own pierce.'),
     li('Thickness, which slows the cut and lengthens every pierce.'),
     li('Material grade.'),
-    li('Finishing — powder coating, and whether edges need deburring for a hand-contact surface.'),
+    li('Finishing - powder coating, and whether edges need deburring for a hand-contact surface.'),
     rich('The general breakdown of a cutting quote is in ', ['what laser cutting costs', '/blog/laser-cutting-cost-guide'], '.'),
     callout('tip', 'If a design is over budget, reducing pattern density usually saves more than reducing panel size or dropping a thickness. A slightly more open version of the same motif can cut the price substantially and often looks better from a distance.'),
 
@@ -69,7 +69,7 @@ const body = [
     nli('Powder coat after cutting, not before, and confirm the colour against a sample rather than a code.'),
 
     h2('What to Send Us'),
-    p('A jali enquiry moves fastest with: the finished panel size, the material and thickness, the pattern as a vector file or a clear reference image, the quantity, and where it is going — indoor, outdoor or coastal.'),
+    p('A jali enquiry moves fastest with: the finished panel size, the material and thickness, the pattern as a vector file or a clear reference image, the quantity, and where it is going - indoor, outdoor or coastal.'),
     rich('If the pattern is a photograph or a sketch, that is fine. We convert it into a cutting file, add the bridges the design needs, and send it back for approval before anything is cut. The file requirements for vector artwork are covered in ', ['how to prepare a DXF for laser cutting', '/blog/dxf-file-preparation-for-laser-cutting'], '.'),
 ]
 
@@ -116,6 +116,6 @@ export const post = makePost({
         ['How do I reduce the cost of a jali design?',
             'Reducing pattern density saves more than reducing panel size or thickness, because density drives cutting time. A slightly more open version of the same motif is usually cheaper and often reads better from a distance.'],
         ['Should a jali panel be powder coated before or after cutting?',
-            'After. Coating adds measurable thickness, so a panel cut to the exact opening size will not fit once coated — allow a tolerance gap in the opening as well.'],
+            'After. Coating adds measurable thickness, so a panel cut to the exact opening size will not fit once coated - allow a tolerance gap in the opening as well.'],
     ]),
 })

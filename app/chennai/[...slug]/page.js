@@ -39,7 +39,7 @@ export default async function Page({ params }) {
     /*
      * Aluminum laser cutting is its own pillar with its own layout, checked
      * before the service resolver so its slug cannot be shadowed. It matches on
-     * the exact slug only, so there is no locality variant — by design, this
+     * the exact slug only, so there is no locality variant - by design, this
      * category exists on the four city pillars and nowhere else.
      */
     const { city: alCity, aluminum } = resolveAluminum(CITY, slug)
@@ -66,7 +66,7 @@ export default async function Page({ params }) {
     }
 
     /*
-     * Copper laser cutting — the same standalone-pillar arrangement as
+     * Copper laser cutting - the same standalone-pillar arrangement as
      * aluminum above: exact slug only, four city pillars, no locality
      * variants, checked before the service resolver.
      */
@@ -94,7 +94,7 @@ export default async function Page({ params }) {
     }
 
     /*
-     * Mild steel laser cutting — same standalone-pillar arrangement as aluminum
+     * Mild steel laser cutting - same standalone-pillar arrangement as aluminum
      * and copper above: exact slug only, four city pillars, no locality
      * variants, checked before the service resolver.
      */
@@ -122,7 +122,7 @@ export default async function Page({ params }) {
     }
 
     /*
-     * Stainless steel laser cutting — same arrangement as mild steel above:
+     * Stainless steel laser cutting - same arrangement as mild steel above:
      * exact slug only, no locality variants, checked before the service
      * resolver so "...-in-adyar" cannot resolve here.
      */
@@ -150,7 +150,7 @@ export default async function Page({ params }) {
     }
 
     /*
-     * Laser cutting job work — the commercial pillar above the nine category
+     * Laser cutting job work - the commercial pillar above the nine category
      * pillars. Exact slug only, four city pages, no locality variants.
      */
     const { city: jwCity, jobWork } = resolveJobWork(CITY, slug)
@@ -194,7 +194,7 @@ export default async function Page({ params }) {
     // The works strip is for the six service pillars only. buildServicePage
     // sets cityName only on a locality page (/{city}/{service}-in-{locality}),
     // so its absence is what marks a pillar. Rendered here rather than inside
-    // ServiceClient, which is a client component — see the slot comment there.
+    // ServiceClient, which is a client component - see the slot comment there.
     const isPillar = !page.cityName
 
     // Only the pillars fetch posts. getPosts() goes through safeFetch, so an

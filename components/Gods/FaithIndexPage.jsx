@@ -6,14 +6,14 @@ import { ORG_ID, breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schem
 import GodDesignIndex from '@/components/Gods/GodDesignIndex'
 
 /*
- * One faith's index — /designs/gods/hindu, /christian, /islamic.
+ * One faith's index - /designs/gods/hindu, /christian, /islamic.
  *
  * Three routes, one component, because the pages differ only in their data.
  * Each route file is four lines: it names its faith and nothing else.
  *
  * These sit alongside the dynamic [god] segment. Next resolves a literal
  * segment before a dynamic one, so /designs/gods/hindu reaches this page and
- * /designs/gods/ganesh reaches the gallery — but it does mean the three faith
+ * /designs/gods/ganesh reaches the gallery - but it does mean the three faith
  * slugs are now reserved and can never also be gallery slugs. Nothing in GODS
  * uses them, and the check in lib/gods.js would have to be the place to catch
  * it if anything ever did.
@@ -55,13 +55,13 @@ export function faithMetadata(slug) {
     const url = `${BASE_URL}/designs/gods/${slug}`
     /*
      * The tail was "Cut in mild steel, stainless steel, brass and copper in
-     * Chennai, 1 ft to 8 ft." — 79 characters that pushed every faith page past
+     * Chennai, 1 ft to 8 ft." - 79 characters that pushed every faith page past
      * 160 and got truncated. Shortened to the two facts a buyer scans for.
      */
     const description = `${faith.lead} Cut in MS, SS, brass and copper, 1 ft to 8 ft, in Chennai.`
 
     return {
-        // No brand suffix — app/layout.js applies the title template.
+        // No brand suffix - app/layout.js applies the title template.
         title: faith.title,
         description,
         keywords: KEYWORDS[slug],

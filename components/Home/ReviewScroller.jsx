@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
  * Takes the cards as `children` rather than the review array, so they stay
  * server-rendered: GoogleReviews.jsx is a server component and the review text
  * has to be in the HTML that leaves the server, not fetched by the browser.
- * A client component can accept an already-rendered server tree as children —
+ * A client component can accept an already-rendered server tree as children -
  * only the arrows and the scroll position live on this side of the boundary.
  *
  * Three cards visible at a time on a desktop, two on a tablet, one and a peek
@@ -47,7 +47,7 @@ export default function ReviewScroller({ children, label = 'Customer reviews' })
     /*
      * Animated by hand rather than with scrollTo's 'smooth'.
      *
-     * A `snap-mandatory` container fights a smooth programmatic scroll —
+     * A `snap-mandatory` container fights a smooth programmatic scroll -
      * Chromium re-snaps mid-flight and the row ends up back where it started.
      * Snapping is lifted for the glide and restored at the end, where the row
      * is already resting on a snap point, so a swipe still snaps normally.
@@ -175,7 +175,7 @@ export default function ReviewScroller({ children, label = 'Customer reviews' })
 
             {/*
                 Arrows only where there is no touch to swipe with, and only
-                pointing somewhere there is still row to see — an arrow that
+                pointing somewhere there is still row to see - an arrow that
                 does nothing is worse than no arrow.
             */}
             <div className="hidden lg:block">

@@ -64,7 +64,7 @@ export function JustdialMark({ className = 'h-[18px] w-auto' }) {
             sizes="80px"
             /*
              * unoptimized because a custom loader is configured site-wide, and
-             * it cannot resize a local /public file — it has no Cloudinary or
+             * it cannot resize a local /public file - it has no Cloudinary or
              * imgix pipeline to hand the width to. Without this, Next logs
              * "loader does not implement width" on every render of every page
              * that shows the footer. The file is an 8KB pre-sized PNG, so there

@@ -2,7 +2,7 @@ import { works } from '@/lib/works'
 import { industries, deliveryCities } from '@/lib/data'
 
 /*
- * Trust strip — Section 2 of the industrial redesign brief.
+ * Trust strip - Section 2 of the industrial redesign brief.
  *
  * The brief asked for "Years of Experience, Projects Delivered, Industries
  * Served, Client Satisfaction". Three of those are supportable. "Client

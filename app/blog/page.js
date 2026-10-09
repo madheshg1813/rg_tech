@@ -35,7 +35,7 @@ export const metadata = {
                 url: `${BASE}/og?title=Engineering+Insights+Blog&sub=CNC+Laser+Cutting+%26+Metal+Fabrication+Expertise`,
                 width: 1200,
                 height: 630,
-                alt: 'RG Tech Engineering — Technical Blog',
+                alt: 'RG Tech Engineering - Technical Blog',
             },
         ],
     },

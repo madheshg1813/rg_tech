@@ -127,7 +127,7 @@ export default async function BlogPostPage({ params }) {
             {/*
              * max-w-7xl matches the header and footer gutters so the article
              * lines up with the rest of the site. The sidebar is a fixed 320px
-             * rather than a 12-column fraction — on a 4/12 split it grew with
+             * rather than a 12-column fraction - on a 4/12 split it grew with
              * the viewport and squeezed the prose down to ~700px.
              */}
             <div className="shell py-12 md:py-16">

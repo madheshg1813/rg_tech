@@ -9,7 +9,7 @@ const IconMap = {
 }
 
 /*
- * Services — restyled to the playbook's card rules.
+ * Services - restyled to the playbook's card rules.
  *
  *   plain outline icons        the blue-tinted icon tile, and its fill-with-blue
  *                              hover, are gone; the icon is a bare ink outline

@@ -3,7 +3,7 @@ import { GoogleMark, JustdialMark } from '@/components/BrandMarks'
 import { GMB_URL, JUSTDIAL_URL } from '@/lib/data'
 
 /*
- * "Listed, Reviewed and Reachable" — the third-party listings, under the
+ * "Listed, Reviewed and Reachable" - the third-party listings, under the
  * reviews.
  *
  * Reviews on our own page are our word for it. These two are not: they are
@@ -14,7 +14,7 @@ import { GMB_URL, JUSTDIAL_URL } from '@/lib/data'
  * Both links open in a new tab and carry rel="noopener". They also appear in
  * the organisation's sameAs (lib/schema.js), which is the signal Google uses to
  * reconcile the website, the Business Profile and the Justdial listing as one
- * entity — worth more for the local pack than most on-page markup.
+ * entity - worth more for the local pack than most on-page markup.
  *
  * A server component: two static links, nothing to hydrate.
  */
@@ -60,7 +60,7 @@ export default function FindUsOnline() {
                         </span>
                     </h2>
                     <p className="section-lead text-base sm:text-[1.0625rem] mt-4 sm:mt-5 max-w-[52ch] mx-auto">
-                        We are a real, verifiable CNC laser cutting unit in Chennai — check us on
+                        We are a real, verifiable CNC laser cutting unit in Chennai - check us on
                         the platforms you already trust before you send a drawing.
                     </p>
                 </div>

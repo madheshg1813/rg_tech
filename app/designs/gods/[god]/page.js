@@ -6,7 +6,7 @@ import { BASE_URL } from '@/lib/data'
 import { ORG_ID, breadcrumbSchema, faqPageSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
 
 /*
- * Deity design galleries — /designs/gods/<slug>.
+ * Deity design galleries - /designs/gods/<slug>.
  *
  * City-independent on purpose. The city deity pages under /{city}/ sell the
  * service and rank locally; this ranks for the picture searches ("ganesh laser
@@ -15,7 +15,7 @@ import { ORG_ID, breadcrumbSchema, faqPageSchema, jsonLdGraph, jsonLdScript } fr
  *
  * Every slug in GOD_DESIGNS gets a route so it can be opened and checked, but
  * a gallery with no images is marked noindex here and left out of the sitemap.
- * Both flip automatically on the first image — there is no second switch.
+ * Both flip automatically on the first image - there is no second switch.
  */
 
 export function generateStaticParams() {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
     if (!design) return {}
 
     const path = godDesignUrl(design.slug)
-    // No brand suffix — app/layout.js applies the "%s | RG Tech Engineering
+    // No brand suffix - app/layout.js applies the "%s | RG Tech Engineering
     // Works" template. Adding one here double-brands the tab and pushes the
     // title past Google's display limit.
     const title = `${design.name} Laser Cutting Designs`
@@ -89,7 +89,7 @@ export default async function Page({ params }) {
      * which keeps the deity pages on material, thickness and finish and makes
      * no claim about ritual suitability.
      *
-     * Only emitted once there are images — an ImageGallery declaring zero
+     * Only emitted once there are images - an ImageGallery declaring zero
      * images is a contradiction Google is right to distrust.
      */
     const gallerySchema = design.images.length > 0 && {

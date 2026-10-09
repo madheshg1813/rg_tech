@@ -40,7 +40,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
      * every locality page.
      *
      * It used to be `place ? pool[cityIndex % pool.length] : content.heroImage`
-     * — a gallery shot rotated by city, so Porur and Ambattur opened with
+     * - a gallery shot rotated by city, so Porur and Ambattur opened with
      * different pictures of the same service for no reason a reader could see.
      * One deliberate photograph per category is the stronger signal, and it is
      * the same asset everywhere so it caches once across all 846 pages.
@@ -151,7 +151,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                      * display:none does NOT stop the browser
                                      * fetching an <img>, and `priority` emits a
                                      * <link rel=preload> that fires regardless
-                                     * of CSS — so without this a phone
+                                     * of CSS - so without this a phone
                                      * downloaded the full 828px hero, at high
                                      * priority, for a column it never paints.
                                      *
@@ -178,7 +178,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
 
 
             {/*
-             * Photo proof, straight after the hero and its trust strip — the
+             * Photo proof, straight after the hero and its trust strip - the
              * same position it holds on the home page. Delivered work is the
              * strongest thing on the page, so it runs before the copy rather
              * than after it.
@@ -187,13 +187,13 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
              * 54 Cloudinary URLs through the 710-entry manifest, and this file
              * is a client component, so importing it would push that whole
              * manifest into the browser bundle. Passed in as an already-rendered
-             * element it stays server-side. The route also decides who gets it —
+             * element it stays server-side. The route also decides who gets it -
              * pillar pages only, not the locality pages.
              */}
             {works}
 
             {/*
-              * Specialised work inside this category — the specific jobs people
+              * Specialised work inside this category - the specific jobs people
               * search for, each a real line of work with its own description.
               *
               * PILLAR ONLY. cityName is set only on a locality page, so its
@@ -202,7 +202,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
               * dilute the very terms this section exists to earn.
               *
               * Shaped so any entry can later become its own page without the
-              * data changing — the name is already the link text.
+              * data changing - the name is already the link text.
               */}
             {!cityName && content.subServices?.length > 0 && (
                 <section className="section bg-white border-t border-line">
@@ -214,7 +214,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                                 <span className="text-accent">We cut it.</span>
                             </h2>
                             <p className="section-lead mt-4 max-w-2xl mx-auto">
-                                If your job is not on this list, send it anyway — most of
+                                If your job is not on this list, send it anyway - most of
                                 what we cut started as a drawing nobody else would quote.
                             </p>
                         </div>
@@ -346,7 +346,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
             </section>
             
             {/*
-             * FAQ — two independent columns, NOT one 2x4 grid. Grid rows are
+             * FAQ - two independent columns, NOT one 2x4 grid. Grid rows are
              * sized to the tallest cell in the row, so the previous
              * `grid-rows-4 grid-flow-col` version opened a card-sized hole in
              * every row of both columns as soon as one answer was expanded.
@@ -379,7 +379,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
                 </div>
             </section>
 
-            {/* Locality mesh — after the FAQs */}
+            {/* Locality mesh - after the FAQs */}
             <ServiceAreas
                 city={city}
                 serviceName={content.name}
@@ -413,7 +413,7 @@ const ServiceClient = ({ content, city, cityName, cityIndex, pathName, metaTitle
             {/* Recommended reading, last thing before the footer. Same slot
                 pattern as {works} above: built by the route so this client
                 component never pulls the Sanity client into the browser
-                bundle, and so the route decides who gets it — pillars only. */}
+                bundle, and so the route decides who gets it - pillars only. */}
             {articles}
         </div>
     )

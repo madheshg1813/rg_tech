@@ -8,7 +8,7 @@ const IconMap = {
 }
 
 /*
- * Why choose us — three playbook corrections.
+ * Why choose us - three playbook corrections.
  *
  *   no decorative blobs        the 384px blue radial blur in the top-right
  *                              corner is removed

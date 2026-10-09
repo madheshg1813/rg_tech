@@ -4,24 +4,24 @@ import { ORG_ID, breadcrumbSchema, jsonLdGraph, jsonLdScript } from '@/lib/schem
 import GodDesignIndex from '@/components/Gods/GodDesignIndex'
 
 /*
- * The design index — /designs/gods.
+ * The design index - /designs/gods.
  *
  * Until the galleries were built this path was deliberately not a page: an
  * index of three tiles is not worth a route. With the set filled in it is the
- * obvious parent — every gallery links up to it, and it collects the picture
+ * obvious parent - every gallery links up to it, and it collects the picture
  * searches that name no particular subject ("laser cut god designs", "temple
  * panel designs").
  *
  * It now carries three faiths, so it holds everything with a filter across the
  * top and each faith also gets its own page underneath: /designs/gods/hindu,
  * /christian and /islamic. The galleries themselves stay flat at
- * /designs/gods/<slug> — they were published and indexed before the other two
+ * /designs/gods/<slug> - they were published and indexed before the other two
  * faiths existed, and moving sixty pages to gain a tidier path would cost more
  * in redirects than the tidiness is worth.
  */
 
 export const metadata = {
-    // No brand suffix — app/layout.js applies the "%s | RG Tech Engineering
+    // No brand suffix - app/layout.js applies the "%s | RG Tech Engineering
     // Works" template, and adding one here double-brands the tab.
     title: 'Laser Cut God & Religious Panel Designs',
     description:
@@ -39,7 +39,7 @@ export const metadata = {
     openGraph: {
         title: 'Laser Cut God & Religious Panel Designs',
         description:
-            'Hindu, Christian and Islamic panel designs for prayer rooms, gates and arches — cut in Chennai.',
+            'Hindu, Christian and Islamic panel designs for prayer rooms, gates and arches - cut in Chennai.',
         url: `${BASE_URL}/designs/gods`,
         type: 'website',
         siteName: 'RG Tech Engineering Works',

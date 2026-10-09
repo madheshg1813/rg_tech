@@ -8,7 +8,7 @@ const IconMap = {
 }
 
 /*
- * Industries — the hover tint is gone.
+ * Industries - the hover tint is gone.
  *
  * The tile previously went blue on hover (bg-cta/10) and the icon scaled and
  * changed opacity. The playbook forbids hover recolouring, and these tiles are

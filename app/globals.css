@@ -3,7 +3,7 @@
 /*
  * RG Tech design system
  * ---------------------
- * Light + dark mixed theme. White is the page default — heroes included; dark
+ * Light + dark mixed theme. White is the page default - heroes included; dark
  * surfaces are used deliberately for band, contact and footer sections to
  * create rhythm.
  * TWO call-to-action colours, and only two: --color-cta (blue) asks for a
@@ -12,10 +12,10 @@
  * shows two filled buttons competing.
  * Emphasis uses a separate accent (the logo green) so green never reads as a link.
  *
- * Type: three families, one job each — Archivo (display), Public Sans (body),
+ * Type: three families, one job each - Archivo (display), Public Sans (body),
  * JetBrains Mono (uppercase micro-labels). See the --font-* tokens below.
  * Corners: 2px on buttons, 3px on photo mounts. Sharp is the house style.
- * Fonts are self-hosted by next/font (see app/layout.js) — never @import them
+ * Fonts are self-hosted by next/font (see app/layout.js) - never @import them
  * here, a CSS @import is render-blocking.
  */
 
@@ -30,11 +30,11 @@
 
     /* ---- Dark surfaces (used for hero / bands / footer) ---- */
     --color-ink: #0D0B2B;
-    /* deepest — top bar, footer base (darkened brand indigo) */
+    /* deepest - top bar, footer base (darkened brand indigo) */
     --color-ink-2: #16224F;
-    /* primary dark surface — mid stop of the hero gradient */
+    /* primary dark surface - mid stop of the hero gradient */
     --color-ink-3: #222C63;
-    /* elevated dark — cards sitting on a dark surface */
+    /* elevated dark - cards sitting on a dark surface */
 
     /* ---- Light surfaces ---- */
     --color-surface: #FFFFFF;
@@ -71,13 +71,13 @@
     --color-cta-soft: rgba(29, 78, 216, 0.12);
     --color-cta-ring: rgba(29, 78, 216, 0.35);
     --color-cta-ink: #1D4ED8;
-    /* The CTA blue used as TEXT on light — 6.7:1 on white. Reserved for
+    /* The CTA blue used as TEXT on light - 6.7:1 on white. Reserved for
      * interactive affordances (link hover, the FAQ +/x). Decorative accents use
      * the green below instead. */
 
     /* ---- WhatsApp green ----
      * The channel CTA. WhatsApp's brand green is #25D366, but white text on it
-     * is 1.98:1 — a severe contrast failure, so it cannot carry a label.
+     * is 1.98:1 - a severe contrast failure, so it cannot carry a label.
      * --color-wa keeps that green's exact hue (142deg) and saturation (0.82)
      * and drops the value until white clears AA: 4.88:1. It still reads as
      * WhatsApp; it is simply legible. The raw #25D366 stays for icon fills and
@@ -92,7 +92,7 @@
      *
      * The raw logo green #00A050 is NOT usable as text: 3.4:1 on white and
      * 2.5:1 over the tinted corner of the light hero, both under the 4.5
-     * minimum. --color-accent-ink is that same hue darkened until it passes —
+     * minimum. --color-accent-ink is that same hue darkened until it passes -
      * 6.7:1 on white, 5.9:1 on the light surfaces, 4.8:1 at the worst point of
      * the hero gradient. On dark bands the green goes the other way, lighter:
      * 7.1:1 on the footer surface. Verified, not assumed. */
@@ -238,7 +238,7 @@
         }
     }
 
-    /* The one card shell. White, hairline border, generous radius — and the
+    /* The one card shell. White, hairline border, generous radius - and the
      * radius grows on larger screens so a full-width phone card does not look
      * like a rounded rectangle floating in nothing. */
     .card {
@@ -328,7 +328,7 @@
         color: var(--color-accent-on-dark);
     }
 
-    /* Numbered step marker: ink circle, white numeral. Never the CTA colour —
+    /* Numbered step marker: ink circle, white numeral. Never the CTA colour -
      * a step number is not something you can click. */
     .step-num {
         display: inline-flex;
@@ -444,7 +444,7 @@
             color .16s ease, box-shadow .16s ease, transform .16s ease;
     }
 
-    /* Primary — the one CTA colour, identical on light and dark backgrounds */
+    /* Primary - the one CTA colour, identical on light and dark backgrounds */
     .btn-primary {
         background-color: var(--color-cta);
         color: var(--color-cta-fg);
@@ -462,11 +462,11 @@
     }
 
     /*
-     * WhatsApp — the primary action on the service and category pillars.
+     * WhatsApp - the primary action on the service and category pillars.
      *
      * This is the one place the site carries two CTA colours at once: blue
      * asks for a quote, green opens the channel that actually gets answered.
-     * They are never both filled in the same pair — where they appear
+     * They are never both filled in the same pair - where they appear
      * together, WhatsApp is filled and the quote button is the white outline.
      */
     .btn-whatsapp {
@@ -500,7 +500,7 @@
     }
 
     /*
-     * Ghost — the playbook's white outlined pill, and the standard partner to
+     * Ghost - the playbook's white outlined pill, and the standard partner to
      * .btn-primary in a hero pair. This is the same shape as the primary so the
      * two sit level; only the fill differs.
      */
@@ -516,7 +516,7 @@
         transform: translateY(-1px);
     }
 
-    /* Outlined on a dark band — the final CTA's secondary action. */
+    /* Outlined on a dark band - the final CTA's secondary action. */
     .btn-on-ink {
         background-color: transparent;
         color: var(--color-fg-invert);
@@ -579,7 +579,7 @@
     }
 
     /*
-     * Accent text — the logo green. Because this is a mixed light/dark site the
+     * Accent text - the logo green. Because this is a mixed light/dark site the
      * same accent has to be two different lightnesses to stay legible, so it is
      * resolved from the nearest surface rather than hardcoded at each call site.
      * Default = light surface. Wrap a dark section in `.on-dark`, and any white
@@ -673,7 +673,7 @@
 
     /* Eyebrow label above a section heading. Uses the accent green.
      * At 12px an eyebrow counts as normal-sized text for contrast purposes, so
-     * it needs the full 4.5:1 — which is why this is --color-accent-ink and not
+     * it needs the full 4.5:1 - which is why this is --color-accent-ink and not
      * the raw logo green (3.4:1 on white). */
     .eyebrow {
         font-family: var(--font-mono);
@@ -710,7 +710,7 @@
      * Layout note: the answers must NOT be laid out by grid rows. A two column
      * grid with explicit `grid-rows-4` gives every row the height of the
      * tallest cell in it, so opening one answer left four card-sized holes down
-     * both columns. Each column is now its own flex stack — see .faq-columns —
+     * both columns. Each column is now its own flex stack - see .faq-columns -
      * so an open answer only ever moves the cards below it.
      */
     .faq-columns {
@@ -996,14 +996,14 @@
      * `.glass` used to live here. Removed rather than fixed: the build keeps
      * only the -webkit- half of a backdrop-filter pair written by hand, so the
      * blur silently never reached Chrome. Use Tailwind's `backdrop-blur-*`
-     * utilities, which compile with both properties — see components/Header.jsx.
+     * utilities, which compile with both properties - see components/Header.jsx.
      */
 
     .text-balance {
         text-wrap: balance;
     }
 
-    /* Horizontal scroller with no visible bar — used by the /designs category
+    /* Horizontal scroller with no visible bar - used by the /designs category
      * pill, which scrolls sideways on a phone rather than wrapping to two rows. */
     .no-scrollbar {
         scrollbar-width: none;
@@ -1015,19 +1015,19 @@
     }
 
     /*
-     * Hero background — light, built from the three logo colours.
+     * Hero background - light, built from the three logo colours.
      *
      * The base is a near-white indigo tint that resolves to pure white at the
      * bottom, so the hero melts into the page instead of ending on a hard band.
      * Indigo (#382898) and green (#00A050) carry the wash because together they
-     * are 82% of the mark; red (#D82820) is left out entirely — at the low
+     * are 82% of the mark; red (#D82820) is left out entirely - at the low
      * opacities a light hero needs, red turns pink and reads as an error state.
      *
      * Tints are capped at 12% so text stays on an effectively white field.
      * Measured at the worst point of the gradient (the indigo corner, which
      * composites to #D7D9F3): --color-fg is 10.5:1 and --color-accent-ink is
      * 5.1:1, both AA. Deepening either radial past 12% breaks the accent first
-     * — re-check it before touching these stops.
+     * - re-check it before touching these stops.
      */
     .hero-gradient {
         /*
@@ -1052,7 +1052,7 @@
      *
      * A 46px grid of hairlines, masked to an ellipse so it fades out before it
      * reaches the photograph and never runs under body text at full strength.
-     * It is drawn with gradients — no image request — and replaces both the old
+     * It is drawn with gradients - no image request - and replaces both the old
      * .hero-texture stripes and the skewed indigo wedge.
      */
     .hero-grid-paper {
@@ -1072,7 +1072,7 @@
     /*
      * The photo mount.
      *
-     * What makes the reference site's images look sharp is not the file — it is
+     * What makes the reference site's images look sharp is not the file - it is
      * the mount: a 1.5px near-black rule hard against the image edge, a 3px
      * radius rather than a soft one, and a shadow that sits under the frame
      * instead of blurring around it. A 24px-radius card with a pale border does
@@ -1091,7 +1091,7 @@
             0 8px 24px -12px rgba(15, 42, 68, .18);
     }
 
-    /* Lighter mount for images that repeat — grids, strips, cards — where a
+    /* Lighter mount for images that repeat - grids, strips, cards - where a
      * full-strength rule on every tile would read as a cage. */
     .framed-soft {
         border: 1px solid var(--color-line-strong);
@@ -1102,7 +1102,7 @@
 
     /*
      * Stamp: the hero's credential badge. Mono, boxed, in the brand green
-     * rather than the CTA blue — it is a statement of fact, not something to
+     * rather than the CTA blue - it is a statement of fact, not something to
      * click, and it must not compete with the button below it.
      */
     .stamp {
@@ -1138,7 +1138,7 @@
      * Markup in components/FloatingContact.jsx.
      *
      * #25D366 is WhatsApp's own green and is used verbatim here. It is the one
-     * deliberate exception to "green means RG Tech" — on a channel badge the
+     * deliberate exception to "green means RG Tech" - on a channel badge the
      * platform's colour is the recognition cue, and recolouring it to the brand
      * green would make it read as decoration rather than as WhatsApp.
      */
@@ -1367,9 +1367,9 @@
     }
 
     /*
-     * "Our Works" photo strip. Same mechanic as .animate-scroll — the track is
+     * "Our Works" photo strip. Same mechanic as .animate-scroll - the track is
      * rendered twice and translated to -50%, so the seam lands on an identical
-     * frame — but slower, because these are photographs a visitor reads rather
+     * frame - but slower, because these are photographs a visitor reads rather
      * than logos they glance at.
      *
      * Duration is a variable so the two rows can run at slightly different
@@ -1386,7 +1386,7 @@
     }
 
     /* Pause while the pointer is over the strip, or while a card inside it has
-     * keyboard focus — otherwise a link can scroll out from under the cursor. */
+     * keyboard focus - otherwise a link can scroll out from under the cursor. */
     .marquee-viewport:hover .marquee-track,
     .marquee-viewport:focus-within .marquee-track {
         animation-play-state: paused;
@@ -1394,7 +1394,7 @@
 
     /* Soften both ends so photos enter and leave rather than being sliced off
      * at the viewport edge. The mask is on the viewport, which is only as wide
-     * as the screen — never on the track, which is thousands of pixels wide. */
+     * as the screen - never on the track, which is thousands of pixels wide. */
     .marquee-viewport {
         -webkit-mask-image: linear-gradient(to right,
                 transparent 0,

@@ -4,7 +4,7 @@ const { p, h2, h3, li, nli, rich, image, table, callout, faqs } = createBuilder(
 
 const body = [
     p('Three stainless grades cover almost everything that comes through a fabrication shop in Tamil Nadu: 304, 316 and 430. They look nearly identical on the rack and behave very differently in service.'),
-    p('Choosing wrongly is expensive in both directions — 430 that rusts within a year on a coastal site, or 316 specified for an indoor bracket at three times the necessary cost.'),
+    p('Choosing wrongly is expensive in both directions - 430 that rusts within a year on a coastal site, or 316 specified for an indoor bracket at three times the necessary cost.'),
 
     callout('tldr', '304 is the default for general use. 316 adds molybdenum and is the one to use near the sea or around chlorides. 430 is the budget option for dry indoor decorative work and is magnetic. All three cut cleanly on a fiber laser up to 45 mm.'),
 
@@ -25,16 +25,16 @@ const body = [
 
     h2('304: the Default'),
     p('If nobody has specified a grade, 304 is almost certainly what is meant. Around 18% chromium and 8% nickel give it a self-healing passive oxide layer, good formability and excellent weldability.'),
-    p('It handles rain, humidity and most food and domestic environments without trouble. Railings, gates, kitchen equipment, structural brackets, planters, signage — 304 does all of it.'),
+    p('It handles rain, humidity and most food and domestic environments without trouble. Railings, gates, kitchen equipment, structural brackets, planters, signage - 304 does all of it.'),
     p('Its weakness is chlorides. Salt attacks the passive layer locally and causes pitting: small deep holes rather than general rust. That is a real consideration in Chennai, and a serious one within a couple of kilometres of the coast.'),
 
     h2('316: When There Is Salt or Chemistry'),
-    p('316 adds roughly 2% molybdenum, which stabilises the passive layer against chloride attack. Everything else about it is broadly similar to 304 — same look, same weldability, same fabrication behaviour.'),
+    p('316 adds roughly 2% molybdenum, which stabilises the passive layer against chloride attack. Everything else about it is broadly similar to 304 - same look, same weldability, same fabrication behaviour.'),
     p('Use it when the part will live near the sea, in a swimming pool environment, in chemical processing, or anywhere it will be washed down with chlorinated water. In those conditions the price difference buys years of service life.'),
     callout('tip', 'For a coastal installation, do not stop at the grade. A 316 panel bolted with mild steel fasteners will still fail, because the fasteners rust and stain the panel. Match the fixings to the sheet.'),
 
     h2('430: the Budget Grade, With Conditions'),
-    p('430 is ferritic. It contains chromium but essentially no nickel, which is why it costs the least of the three — nickel is the expensive ingredient in stainless.'),
+    p('430 is ferritic. It contains chromium but essentially no nickel, which is why it costs the least of the three - nickel is the expensive ingredient in stainless.'),
     p('It gives a bright finish and resists indoor humidity perfectly well, which makes it a sensible choice for decorative panels, pooja room screens, wall art and interior trim that will never be rained on.'),
     p('It is magnetic, unlike 304 and 316, which is occasionally useful and occasionally a surprise. It is less weldable and less formable, and it will develop surface rust outdoors, particularly in coastal air.'),
     callout('warning', 'Do not use 430 outdoors in Chennai, Ramanathapuram or anywhere on the coast. It will look acceptable for a few months and then stain. The saving is not worth the callback.'),
@@ -79,7 +79,7 @@ export const post = makePost({
     bannerBadge: 'GRADE SELECTION',
     metaTitle: 'Stainless Steel Grades Compared: 304 vs 316 vs 430',
     metaDescription:
-        'A practical comparison of stainless steel 304, 316 and 430 — corrosion resistance, cost, magnetism, weldability and which to specify for coastal or indoor use.',
+        'A practical comparison of stainless steel 304, 316 and 430 - corrosion resistance, cost, magnetism, weldability and which to specify for coastal or indoor use.',
     keywords: [
         'stainless steel 304 vs 316',
         'ss 430 stainless steel',
@@ -93,7 +93,7 @@ export const post = makePost({
         ['What is the difference between 304 and 316 stainless steel?',
             '316 contains roughly 2% molybdenum, which stabilises its passive layer against chloride attack. Both are austenitic with similar appearance and weldability, but 316 resists salt and pool water far better and costs noticeably more.'],
         ['Is 430 stainless steel any good?',
-            'For dry indoor decorative work, yes — it gives a bright finish at the lowest cost of the three. It is magnetic, less weldable, and will stain if used outdoors, especially in coastal air.'],
+            'For dry indoor decorative work, yes - it gives a bright finish at the lowest cost of the three. It is magnetic, less weldable, and will stain if used outdoors, especially in coastal air.'],
         ['Which stainless steel is magnetic?',
             '430 is magnetic because it is ferritic and contains essentially no nickel. 304 and 316 are austenitic and largely non-magnetic, though heavily cold-worked 304 can become slightly magnetic.'],
         ['Which stainless grade should I use near the sea?',

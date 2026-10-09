@@ -22,7 +22,7 @@ export const metadata = {
                 url: `${BASE_URL}/og?title=Contact+RG+Tech+Engineering&sub=Get+a+CNC+Laser+Cutting+Quote+in+24+Hours`,
                 width: 1200,
                 height: 630,
-                alt: 'Contact RG Tech Engineering — CNC laser cutting quotes in Chennai',
+                alt: 'Contact RG Tech Engineering - CNC laser cutting quotes in Chennai',
             },
         ],
     },
@@ -40,7 +40,7 @@ const QUICK_ACTIONS = [
         label: 'Call us',
         value: '+91 63807 36439',
         href: 'tel:+916380736439',
-        note: 'Mon–Sat, 09:00–19:00',
+        note: 'Mon-Sat, 09:00-19:00',
     },
     {
         Icon: MessageCircle,
@@ -131,7 +131,7 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            {/* The form — same component the home page uses */}
+            {/* The form - same component the home page uses */}
             <ContactForm />
 
             {/* Google Business Profile */}
@@ -161,7 +161,7 @@ export default function ContactPage() {
                         <p className="text-fg-muted leading-relaxed">
                             Monday to Saturday
                             <br />
-                            09:00 – 19:00
+                            09:00 - 19:00
                             <br />
                             <span className="text-fg-subtle">Sunday closed</span>
                         </p>

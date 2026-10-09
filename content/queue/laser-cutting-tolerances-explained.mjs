@@ -19,11 +19,11 @@ const body = [
             ['25 to 45 mm', '+/- 0.3 mm or wider', 'Taper, heat input, edge squareness'],
         ]
     ),
-    callout('tldr', 'Expect +/- 0.1 mm on sheet, widening to +/- 0.3 mm or more on heavy plate. If your part needs tighter than that on a specific feature, it needs machining after cutting — say so on the drawing.'),
+    callout('tldr', 'Expect +/- 0.1 mm on sheet, widening to +/- 0.3 mm or more on heavy plate. If your part needs tighter than that on a specific feature, it needs machining after cutting - say so on the drawing.'),
 
     h2('The Four Things That Move a Dimension'),
     h3('1. Kerf width'),
-    p('The beam removes material. That removed width — the kerf — is typically 0.1 to 0.4 mm depending on thickness and parameters. The machine compensates by offsetting the toolpath to one side of the line, so the finished part matches the drawing.'),
+    p('The beam removes material. That removed width - the kerf - is typically 0.1 to 0.4 mm depending on thickness and parameters. The machine compensates by offsetting the toolpath to one side of the line, so the finished part matches the drawing.'),
     p('This works well, but it means the software has to know which side of the line is scrap. On an open contour or an ambiguous geometry it can guess wrong, and you get a part half a kerf undersize.'),
     h3('2. Kerf taper'),
     p('The cut is very slightly wider at the top than at the bottom, because the beam is a cone converging to a focal point. On 2 mm sheet this is undetectable. On 30 mm plate it is measurable and visible.'),
@@ -39,11 +39,11 @@ const body = [
     li('Bending. Press brake tolerance on a bent flange is typically wider than the cutting tolerance, and bend allowance varies with material batch.'),
     li('Welding. Heat pulls assemblies out of position by amounts that dwarf +/- 0.1 mm.'),
     li('Coating. Powder coat adds measurable thickness, which matters on close-fitting parts and inside holes.'),
-    rich('If a fabricated assembly has to hit a tight overall dimension, the cutting tolerance is rarely the constraint. Specify where it counts and leave the rest open — we cover the practical consequences in ', ['how CNC laser cutting works', '/blog/how-cnc-laser-cutting-works'], '.'),
+    rich('If a fabricated assembly has to hit a tight overall dimension, the cutting tolerance is rarely the constraint. Specify where it counts and leave the rest open - we cover the practical consequences in ', ['how CNC laser cutting works', '/blog/how-cnc-laser-cutting-works'], '.'),
 
     h2('ISO 9013 and Edge Quality'),
     rich('Thermal cut quality has a formal standard: ', ['ISO 9013', 'https://www.iso.org/standard/71133.html', true], ', which grades perpendicularity, surface roughness and dimensional deviation for laser, plasma and oxy-fuel cuts.'),
-    p('Most commercial work never invokes it, and it is not needed for a bracket. But if you are working to a customer specification that calls out an edge quality class, put it on the drawing at enquiry stage rather than at inspection. It changes process choice, assist gas and feed rate — and therefore price.'),
+    p('Most commercial work never invokes it, and it is not needed for a bracket. But if you are working to a customer specification that calls out an edge quality class, put it on the drawing at enquiry stage rather than at inspection. It changes process choice, assist gas and feed rate - and therefore price.'),
 
     h2('How to Specify Tolerance So You Get What You Need'),
     p('Four practical rules, in order of how much trouble they save:'),
@@ -57,11 +57,11 @@ const body = [
     p('A quick incoming check catches problems while they are still cheap to fix:'),
     li('Overall length and width against the drawing.'),
     li('Centre-to-centre distance across the widest bolt pattern, not individual hole positions.'),
-    li('Flatness — lay the part on a known flat surface and look for rock.'),
+    li('Flatness - lay the part on a known flat surface and look for rock.'),
     li('Edge squareness on thick plate, where taper is expected.'),
     li('Burr on the underside, which indicates parameters were off.'),
     rich('RG Tech cuts to approximately +/- 0.1 mm on typical sheet, on an 8000 x 2500 mm bed in Chennai. If your drawing has critical features, flag them when you send it through our ', ['contact form', '/contact'], ' and we will confirm what is achievable before you commit to an order.'),
-    rich('Accuracy also depends on what you are cutting — see ', ['materials that can be laser cut', '/blog/materials-that-can-be-laser-cut'], ' for how thickness limits vary by metal.'),
+    rich('Accuracy also depends on what you are cutting - see ', ['materials that can be laser cut', '/blog/materials-that-can-be-laser-cut'], ' for how thickness limits vary by metal.'),
 ]
 
 export const post = makePost({
@@ -105,7 +105,7 @@ export const post = makePost({
         ['Does material thickness affect laser cutting accuracy?',
             'Yes, significantly. Thin sheet holds the tightest tolerance. As thickness increases, kerf taper and heat input both grow and accuracy loosens accordingly.'],
         ['What is ISO 9013?',
-            'The international standard grading thermal cut quality — perpendicularity, surface roughness and dimensional deviation. If your specification calls out an edge quality class, state it at enquiry stage since it affects process and price.'],
+            'The international standard grading thermal cut quality - perpendicularity, surface roughness and dimensional deviation. If your specification calls out an edge quality class, state it at enquiry stage since it affects process and price.'],
         ['How should I specify tolerance on a laser cutting drawing?',
             'Flag only the dimensions that genuinely matter rather than applying a blanket tight tolerance. Distinguish hole position from hole diameter, and say what happens after cutting, since bending, welding and coating each add their own variation.'],
     ]),

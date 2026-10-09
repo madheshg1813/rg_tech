@@ -9,7 +9,7 @@ import JustdialBadge from '@/components/JustdialBadge'
  *
  * The code encodes:
  *   https://local.google.com/place?placeid=ChIJG19k-TRhUjoRi4KEeB11SGE&utm_medium=noren&utm_source=gbp&utm_campaign=2026
- * — the same place id as GMB_PLACE_ID in lib/data.js, verified by decoding the
+ * - the same place id as GMB_PLACE_ID in lib/data.js, verified by decoding the
  * PNG that ships in public/. Note it opens the profile; it is not a
  * write-a-review deep link, which is why the review CTA next to it uses
  * GMB_REVIEW_URL instead.
@@ -21,7 +21,7 @@ import JustdialBadge from '@/components/JustdialBadge'
  * person most likely to be reading this is already holding the phone that would
  * have to scan it. So:
  *
- *   - Desktop  the code is useful — scan it with a phone and carry the listing
+ *   - Desktop  the code is useful - scan it with a phone and carry the listing
  *              away with you. Shown at a scannable size.
  *   - Mobile   the code is hidden outright and the buttons take over. Nobody
  *              scans their own screen.

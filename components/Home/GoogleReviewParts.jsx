@@ -7,7 +7,7 @@ import { Star } from 'lucide-react'
  * neighbouring file. GoogleReviews.jsx is a server component and
  * GoogleReviewCard.jsx is a client one, and both need these. A plain function
  * exported from a 'use client' module becomes a client reference when a server
- * component imports it — calling it during SSR then throws — so anything used
+ * component imports it - calling it during SSR then throws - so anything used
  * on both sides of the boundary has to sit outside it, as this does.
  *
  * Nothing here uses a hook or touches the DOM, so it renders in either place.

@@ -10,7 +10,7 @@ import GoogleBusinessCard from '@/components/GoogleBusinessCard'
 
 const WA = '916380736439'
 
-/** Prefilled WhatsApp link — the enquiry arrives already saying what it is about. */
+/** Prefilled WhatsApp link - the enquiry arrives already saying what it is about. */
 function waLink(god, city) {
     const msg = `Hi RG Tech, I'm interested in a laser cut ${god.name} design in ${city.name}. Please share designs, sizes and pricing.`
     return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`
@@ -66,7 +66,7 @@ export default function GodPage({ god, city }) {
 
                             <p className="section-lead mb-10 max-w-xl">
                                 Precision CNC laser cut {god.name} panels in mild steel, stainless steel and
-                                brass — cut from your reference or ours, finished and delivered across{' '}
+                                brass - cut from your reference or ours, finished and delivered across{' '}
                                 {city.name}.
                             </p>
 
@@ -88,7 +88,7 @@ export default function GodPage({ god, city }) {
                             </div>
 
                             <p className="text-fg-subtle text-sm mt-5">
-                                Send a photo or sketch — we reply with sizes and pricing the same day.
+                                Send a photo or sketch - we reply with sizes and pricing the same day.
                             </p>
                         </div>
 
@@ -141,7 +141,7 @@ export default function GodPage({ god, city }) {
                         </h2>
                         <p className="text-lg text-fg-muted leading-relaxed mb-6">
                             Every {god.name} design is cut on our CNC fiber laser from a vector drawing, so
-                            the detail stays crisp at any scale — fine ornamental line work on a pooja room
+                            the detail stays crisp at any scale - fine ornamental line work on a pooja room
                             screen, or a bold silhouette across a full gate panel.
                         </p>
                         <p className="text-lg text-fg-muted leading-relaxed mb-8">
@@ -163,7 +163,7 @@ export default function GodPage({ god, city }) {
                         </ul>
                     </div>
 
-                    {/* Sticky WhatsApp card — the ask stays on screen while reading */}
+                    {/* Sticky WhatsApp card - the ask stays on screen while reading */}
                     <div className="lg:sticky lg:top-28">
                         <div className="rounded-2xl sm:rounded-3xl border border-line bg-surface-2 p-8">
                             <span className="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center mb-5">
@@ -174,7 +174,7 @@ export default function GodPage({ god, city }) {
                             </h3>
                             <p className="text-base text-fg-muted mt-3 leading-relaxed">
                                 Share a photo, temple image or sketch on WhatsApp. We come back with
-                                achievable sizes, material options, finish and a price — usually the same
+                                achievable sizes, material options, finish and a price - usually the same
                                 day.
                             </p>
 
@@ -234,7 +234,7 @@ export default function GodPage({ god, city }) {
                     </div>
                     {/*
                      * There was a "View all N designs" link to /{city}/designs
-                     * here. No such route exists — the city catch-all resolves
+                     * here. No such route exists - the city catch-all resolves
                      * its slug against the service list, so it 404'd on all 50
                      * deity pages in all four cities. Removed rather than
                      * repointed: the national /designs catalogue is a different

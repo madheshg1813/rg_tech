@@ -108,7 +108,7 @@ export function makePost({
         title,
         // Exact "Cluster Page" wording from the tracking sheet. Page titles are
         // written for search and rarely match the sheet verbatim, so the
-        // publisher reports this instead — otherwise the row silently never
+        // publisher reports this instead - otherwise the row silently never
         // gets marked Published.
         sheetTitle: sheetTitle || title,
         slug: { _type: 'slug', current: slug },

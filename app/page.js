@@ -18,7 +18,7 @@ const BASE = "https://www.rgtechengineeringworks.com"
 
 export const metadata = {
     /*
-     * Absolute, so the layout does not append the brand a second time — the
+     * Absolute, so the layout does not append the brand a second time - the
      * brand already opens this title. "Best" is gone: it is an unsupported
      * superlative, it is not a phrase anyone searches, and it cost seven
      * characters ahead of the keyword.
@@ -43,7 +43,7 @@ export const metadata = {
                 url: `${BASE}/og?title=RG+Tech+Engineering&sub=Best+CNC+Laser+Cutting+%26+Metal+Fabrication+in+Chennai`,
                 width: 1200,
                 height: 630,
-                alt: 'RG Tech Engineering — Best CNC Laser Cutting & Metal Fabrication Chennai',
+                alt: 'RG Tech Engineering - Best CNC Laser Cutting & Metal Fabrication Chennai',
             },
         ],
     },
@@ -62,8 +62,8 @@ export const metadata = {
  * Twelve hours. Featurable refreshes its own upstream cache every 48 hours, so
  * polling it faster than this buys nothing; the Places API has no such cache but
  * reviews on a workshop listing arrive weekly at best. Unlike /blog and the
- * sitemap — both on 5 minutes because publishing is scripted and should show up
- * promptly — nothing here is waiting on an operator.
+ * sitemap - both on 5 minutes because publishing is scripted and should show up
+ * promptly - nothing here is waiting on an operator.
  */
 export const revalidate = 43200
 

@@ -3,7 +3,7 @@ import { createBuilder, IMAGES, makePost } from '../lib/pt.mjs'
 const { p, h2, h3, li, nli, rich, image, table, callout, faqs } = createBuilder('lvw')
 
 const body = [
-    p('Laser and waterjet get compared because both are precise. They are precise in different ways, and the deciding factor is usually not accuracy at all — it is heat.'),
+    p('Laser and waterjet get compared because both are precise. They are precise in different ways, and the deciding factor is usually not accuracy at all - it is heat.'),
     p('Waterjet is a cold process. Laser is not. For most metal parts that difference is irrelevant and laser wins on speed and cost. For a specific set of jobs it is the only thing that matters, and no amount of laser speed compensates.'),
 
     h2('Laser Cutting vs Waterjet Cutting: The Short Answer'),
@@ -12,7 +12,7 @@ const body = [
         ['Criterion', 'Fiber laser', 'Waterjet'],
         [
             ['Typical tolerance', '+/- 0.1 mm', '+/- 0.1 to 0.2 mm'],
-            ['Heat-affected zone', 'Narrow but present', 'None — cold cutting'],
+            ['Heat-affected zone', 'Narrow but present', 'None - cold cutting'],
             ['Edge finish', 'Clean, may show oxide', 'Slightly frosted, no oxide'],
             ['Speed on thin sheet', 'Very fast', 'Slow'],
             ['Maximum thickness', 'Limited by machine power', 'Very thick, but very slow'],
@@ -25,7 +25,7 @@ const body = [
     callout('tldr', 'Both hold roughly the same tolerance. Laser is far faster and cheaper on metal. Choose waterjet when heat would damage the material, when the part is a non-metal, or when the plate is thicker than any available laser.'),
 
     h2('The Real Difference Is Heat, Not Accuracy'),
-    p('People assume waterjet is chosen for precision. In practice the tolerances overlap — both processes sit around a tenth of a millimetre on typical work. The genuine differentiator is thermal input.'),
+    p('People assume waterjet is chosen for precision. In practice the tolerances overlap - both processes sit around a tenth of a millimetre on typical work. The genuine differentiator is thermal input.'),
     h3('What laser heat actually does'),
     p('A fiber laser melts material locally. That leaves a narrow heat-affected zone where the metal has been through a rapid heat and cool cycle. In the vast majority of parts this is completely harmless.'),
     p('It matters in three situations:'),
@@ -33,7 +33,7 @@ const body = [
     li('Parts with a tightly specified metallurgical condition, common in aerospace and some pressure applications.'),
     li('Material already prone to cracking under thermal stress.'),
     h3('Why waterjet has none'),
-    rich('Abrasive waterjet cuts by erosion — a stream of water at roughly 4,000 bar carrying garnet abrasive physically wears through the material. No melting, no heat-affected zone, no metallurgical change. ', ['TWI has a good technical overview of the process', 'https://www.twi-global.com/technical-knowledge/faqs/what-is-water-jet-cutting', true], '.'),
+    rich('Abrasive waterjet cuts by erosion - a stream of water at roughly 4,000 bar carrying garnet abrasive physically wears through the material. No melting, no heat-affected zone, no metallurgical change. ', ['TWI has a good technical overview of the process', 'https://www.twi-global.com/technical-knowledge/faqs/what-is-water-jet-cutting', true], '.'),
     image(IMAGES.machine, 'CNC fiber laser cutting metal, the thermal alternative to cold waterjet cutting', 'Laser removes material with heat; waterjet removes it by abrasion.'),
 
     h2('Speed and Cost: Laser Wins Decisively on Metal'),
@@ -46,11 +46,11 @@ const body = [
 
     h2('Where Waterjet Is the Only Option'),
     p('Waterjet earns its cost in cases laser simply cannot serve:'),
-    nli('Non-metals — stone, glass, composites, thick rubber, some plastics. Fiber laser cuts none of these.'),
+    nli('Non-metals - stone, glass, composites, thick rubber, some plastics. Fiber laser cuts none of these.'),
     nli('Heat-sensitive alloys where the heat-affected zone is unacceptable to the specification.'),
     nli('Very thick plate beyond available laser power, where waterjet will get there eventually.'),
     nli('Stacked or laminated materials that would fuse under thermal cutting.'),
-    nli('Reflective metals on a laser without back-reflection protection — though a properly equipped fiber laser handles copper and brass safely.'),
+    nli('Reflective metals on a laser without back-reflection protection - though a properly equipped fiber laser handles copper and brass safely.'),
 
     h2('Edge Quality: Different, Not Better'),
     p('The two edges look and behave differently, and neither is universally superior.'),
@@ -59,7 +59,7 @@ const body = [
         ['Aspect', 'Fiber laser', 'Waterjet'],
         [
             ['Appearance', 'Smooth, may show heat tint', 'Matte, lightly frosted'],
-            ['Oxide layer', 'Present with oxygen assist, absent with nitrogen', 'Never — cold process'],
+            ['Oxide layer', 'Present with oxygen assist, absent with nitrogen', 'Never - cold process'],
             ['Burr', 'Minimal', 'Minimal, occasional exit burr'],
             ['Taper', 'Slight, grows with thickness', 'Noticeable unless the head compensates'],
             ['Ready to weld', 'Yes with nitrogen assist', 'Yes'],
@@ -69,7 +69,7 @@ const body = [
     callout('tip', 'If your only objection to laser is the oxide layer, ask for a nitrogen cut instead of switching process. Nitrogen gives a bright oxide-free edge at a fraction of waterjet cost.'),
 
     h2('Thickness: Both Have Limits'),
-    p('Waterjet is often described as having no thickness limit. Technically almost true, practically misleading — it slows dramatically as thickness increases, and cost scales with time.'),
+    p('Waterjet is often described as having no thickness limit. Technically almost true, practically misleading - it slows dramatically as thickness increases, and cost scales with time.'),
     p('Cutting 100 mm plate on a waterjet is possible and painfully slow. Most shops would route that job to plasma or oxy-fuel and accept the looser tolerance.'),
     rich('For reference, RG Tech cuts mild and stainless steel to 45 mm, aluminium to 30 mm and copper or brass to 16 mm on our fiber laser. Details are on our ', ['laser cutting services page', '/chennai/laser-cutting-services'], '.'),
 
@@ -88,7 +88,7 @@ const body = [
     nli('Is the material a metal? If not, waterjet.'),
     nli('Is the material heat-treated, or does the spec restrict the heat-affected zone? If yes, waterjet.'),
     nli('Is it thicker than the available laser can cut? If yes, waterjet or plasma.'),
-    nli('Otherwise — laser, on speed and cost.'),
+    nli('Otherwise - laser, on speed and cost.'),
     rich('Most enquiries that arrive asking for waterjet turn out to be ordinary steel parts where laser is faster, cheaper and equally accurate. Send your drawing through our ', ['contact form', '/contact'], ' and we will tell you honestly which process the part needs, including when that means sending you elsewhere.'),
     rich('If you are also weighing plasma, see ', ['laser cutting vs plasma cutting', '/blog/laser-cutting-vs-plasma-cutting'], '.'),
 ]
@@ -129,7 +129,7 @@ export const post = makePost({
         ['Does laser cutting damage heat-treated steel?',
             'It can locally soften material immediately at the cut edge. On most parts this is harmless, but where the specification restricts the heat-affected zone, waterjet is the correct choice.'],
         ['Can a waterjet cut materials a laser cannot?',
-            'Yes — stone, glass, composites, thick rubber and many plastics. Fiber lasers cut metals only.'],
+            'Yes - stone, glass, composites, thick rubber and many plastics. Fiber lasers cut metals only.'],
         ['Which leaves a better edge, laser or waterjet?',
             'Different rather than better. Laser gives a smooth edge, oxide-free when cut with nitrogen. Waterjet gives a lightly frosted edge with no oxide at all but more taper unless the head compensates.'],
         ['Is there a thickness limit for waterjet cutting?',

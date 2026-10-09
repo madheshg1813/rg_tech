@@ -10,11 +10,11 @@ import JustdialBadge from '@/components/JustdialBadge'
  * Links the page to the verified GBP listing.
  *
  * It now carries a rating badge and the profile QR. The original note here said
- * no rating should be shown, for two reasons — a hardcoded number goes stale,
+ * no rating should be shown, for two reasons - a hardcoded number goes stale,
  * and review markup risks a penalty. The second reason is fully respected:
  * components/GoogleRating.jsx renders the figure visually and emits NO
  * schema.org AggregateRating, which is the part Google actually penalises. The
- * first is mitigated, not solved — the number lives in one constant in that
+ * first is mitigated, not solved - the number lives in one constant in that
  * file and has to be edited by hand if it moves.
  *
  * @param {string} [cityName] locality, used only to make the copy specific
@@ -35,7 +35,7 @@ export default function GoogleBusinessCard({ cityName }) {
                         </h2>
                         <p className="text-base text-fg-muted mt-3 leading-relaxed">
                             See our workshop location, opening hours, photos of recent work and
-                            customer reviews on our Google Business Profile — serving {where}.
+                            customer reviews on our Google Business Profile - serving {where}.
                         </p>
                         <p className="text-sm text-fg-subtle mt-4 flex items-start gap-2">
                             <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 text-accent" />

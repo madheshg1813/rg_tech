@@ -13,7 +13,7 @@ import GoogleBusinessCard from '@/components/GoogleBusinessCard'
  * Company facts here are the ones the business publishes on its own printed
  * collateral (GSTIN, proprietor, machine bed sizes, per-material cutting
  * limits). Contact details deliberately match lib/schema.js rather than the
- * printed flyer — the flyer lists rgtechlaser.com and a gmail address, and the
+ * printed flyer - the flyer lists rgtechlaser.com and a gmail address, and the
  * site has always used this domain and admin@. Two published addresses for one
  * business is exactly what confuses customers and structured-data validators,
  * so one source of truth wins.
@@ -63,7 +63,7 @@ const CAPABILITIES = [
     {
         Icon: Layers,
         title: 'Sheet Metal Cutting',
-        body: 'Production runs and one-off prototypes from your DXF, DWG, STEP or PDF — or a hand sketch we convert.',
+        body: 'Production runs and one-off prototypes from your DXF, DWG, STEP or PDF - or a hand sketch we convert.',
     },
     {
         Icon: Factory,
@@ -89,7 +89,7 @@ export default function AboutPage() {
      * organizationSchema is NOT repeated here. app/layout.js already emits it on
      * every page with the same @id, so including it again put two byte-identical
      * 23-key Organization nodes in the markup. Google merges them by @id, so it
-     * was never wrong — just ~2KB of duplication on the one page most likely to
+     * was never wrong - just ~2KB of duplication on the one page most likely to
      * be read for company facts. The AboutPage node still points at the entity
      * through `about`, which is what carries the relationship.
      */
@@ -118,7 +118,7 @@ export default function AboutPage() {
                     </h1>
                     <p className="section-lead max-w-2xl mx-auto">
                         RG Tech Engineering Works is a CNC fiber laser cutting and metal fabrication
-                        unit in Ayanambakkam, Chennai — cutting, forming and finishing metal for
+                        unit in Ayanambakkam, Chennai - cutting, forming and finishing metal for
                         fabricators, OEMs, architects and homeowners across Tamil Nadu.
                     </p>
                 </div>
@@ -135,7 +135,7 @@ export default function AboutPage() {
                         <div className="space-y-5 text-fg-muted text-base leading-relaxed">
                             <p>
                                 We cut ideas and shape them into finished metal. Most of what leaves the
-                                floor is job work — a customer sends a drawing, a material and a
+                                floor is job work - a customer sends a drawing, a material and a
                                 quantity, and gets back parts that fit the first time.
                             </p>
                             <p>
@@ -162,8 +162,8 @@ export default function AboutPage() {
                                 ['Proprietor', 'Surya Narayanan Gopikrishnan'],
                                 ['GSTIN', '33HGZPS9605D1ZP'],
                                 ['Business', 'CNC fiber laser cutting & metal fabrication'],
-                                ['Location', 'Ayanambakkam, Chennai — 600095'],
-                                ['Working hours', 'Monday to Saturday, 09:00 – 19:00'],
+                                ['Location', 'Ayanambakkam, Chennai - 600095'],
+                                ['Working hours', 'Monday to Saturday, 09:00 - 19:00'],
                             ].map(([term, value]) => (
                                 <div key={term} className="py-3.5 grid sm:grid-cols-[9rem_1fr] gap-1 sm:gap-4">
                                     <dt className="meta-label text-fg-subtle sm:pt-0.5">{term}</dt>
@@ -295,7 +295,7 @@ export default function AboutPage() {
                                     <p className="text-sm text-fg-muted leading-relaxed">
                                         Door No. 63, B&amp;C Flat, Galaxy Company Salai,<br />
                                         Ponniamman Nagar, Ayanambakkam,<br />
-                                        Chennai — 600095, Tamil Nadu
+                                        Chennai - 600095, Tamil Nadu
                                     </p>
                                 </div>
                             </li>
@@ -330,7 +330,7 @@ export default function AboutPage() {
                                 </span>
                                 <div>
                                     <p className="meta-label text-fg-subtle mb-1.5">Hours</p>
-                                    <p className="text-sm text-fg-muted">Monday to Saturday, 09:00 – 19:00</p>
+                                    <p className="text-sm text-fg-muted">Monday to Saturday, 09:00 - 19:00</p>
                                 </div>
                             </li>
                         </ul>

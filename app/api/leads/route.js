@@ -26,7 +26,7 @@ const LEADS_QUERY = /* groq */ `
 function csvCell(value) {
     if (value === null || value === undefined) return ''
     let s = String(value)
-    // Neutralise spreadsheet formula injection — a lead could otherwise submit
+    // Neutralise spreadsheet formula injection - a lead could otherwise submit
     // a name beginning with = and have it execute inside your sheet.
     if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`
     return `"${s.replace(/"/g, '""')}"`

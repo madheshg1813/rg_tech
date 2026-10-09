@@ -8,7 +8,7 @@ import { cld, cldPoster } from '@/lib/cloudinary'
 const IconMap = { FileText, Send, Zap, Wrench, Eye, Truck }
 
 /*
- * Workflow — rebuilt as six premium process cards.
+ * Workflow - rebuilt as six premium process cards.
  *
  * The problem it fixes: six steps were laid into a five-column grid, so step 06
  * wrapped onto a row of its own and left a half-screen of dead white below it.
@@ -20,7 +20,7 @@ const IconMap = { FileText, Send, Zap, Wrench, Eye, Truck }
  * reviewing CAD, the laser cutting, welding, inspection, packed goods.
  *
  * RG Tech's library is roughly 1,057 photographs and almost all of them are
- * finished product — installed gates, screens, pergolas, panels. There is no
+ * finished product - installed gates, screens, pergolas, panels. There is no
  * CAD workstation, no welding bay, no inspection bench and no packing table
  * anywhere in it.
  *
@@ -32,7 +32,7 @@ const IconMap = { FileText, Send, Zap, Wrench, Eye, Truck }
  * nearest available photographs show finished pergolas, and a pergola standing
  * in for "quality inspection" would be a picture that lies about what it shows.
  * Each card takes an optional `img`, so supplying a real photo later is a
- * one-line change in STAGE_MEDIA below — nothing else moves.
+ * one-line change in STAGE_MEDIA below - nothing else moves.
  */
 
 /*
@@ -44,8 +44,8 @@ const IconMap = { FileText, Send, Zap, Wrench, Eye, Truck }
  *
  * The other four are Unsplash stock, used because the company photographs
  * finished product and has no picture of a drawing being reviewed, a weld being
- * run or a part being measured. They are deliberately CLOSE-UP process shots —
- * hands, sparks, a caliper — rather than wide facility views. A wide shot of
+ * run or a part being measured. They are deliberately CLOSE-UP process shots -
+ * hands, sparks, a caliper - rather than wide facility views. A wide shot of
  * someone else's factory on this page would read as a claim about our premises;
  * a caliper on a drawing reads as what the stage is, which is all it has to do.
  *

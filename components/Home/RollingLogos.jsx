@@ -6,7 +6,7 @@ import {
  * Industrial standards ribbon.
  *
  * The items used to sit at opacity-30 and grayscale, lifting to full only under
- * the pointer. That made a row of capability claims read as disabled — and on a
+ * the pointer. That made a row of capability claims read as disabled - and on a
  * phone, where there is no pointer at all, they could never reach the state they
  * were designed for. They now render at full strength at rest.
  *

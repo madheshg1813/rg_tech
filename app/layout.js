@@ -34,7 +34,7 @@ const inter = Inter({
     weight: ["400", "500", "600", "700"],
 });
 
-// JetBrains Mono for every uppercase micro-label — eyebrows, stat captions,
+// JetBrains Mono for every uppercase micro-label - eyebrows, stat captions,
 // badges. The monospace is what makes those labels read as stamped record
 // headings rather than as small headlines.
 const jetbrainsMono = JetBrains_Mono({
@@ -53,7 +53,7 @@ export const metadata = {
          * Suffix shortened from " | RG Tech Engineering Works" (28 characters)
          * to " | RG Tech" (10). At 28 the suffix consumed nearly half of
          * Google's ~60-character display limit, so a page title had to fit in
-         * ~32 characters to survive — which none of them did. Twelve of
+         * ~32 characters to survive - which none of them did. Twelve of
          * thirteen templates were being truncated.
          *
          * The registered name is unchanged everywhere it carries legal or
@@ -83,7 +83,7 @@ export const metadata = {
                 url: "/og?title=RG+Tech+Engineering&sub=CNC+Fiber+Laser+Cutting+Specialist+%E2%80%94+Chennai",
                 width: 1200,
                 height: 630,
-                alt: "RG Tech Engineering — CNC Fiber Laser Cutting Specialist Chennai",
+                alt: "RG Tech Engineering - CNC Fiber Laser Cutting Specialist Chennai",
             },
         ],
         locale: "en_IN",

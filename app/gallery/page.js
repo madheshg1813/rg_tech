@@ -6,7 +6,7 @@ const BASE = "https://www.rgtechengineeringworks.com"
 export const metadata = {
     // Brand removed: the layout template already appends it.
     title: 'Laser Cutting & Metal Design Portfolio',
-    description: 'Laser cutting and metal fabrication projects from our Chennai unit — CNC jali patterns, steel gates, safety doors and decorative panels.',
+    description: 'Laser cutting and metal fabrication projects from our Chennai unit - CNC jali patterns, steel gates, safety doors and decorative panels.',
     alternates: {
         canonical: '/gallery',
     },
@@ -20,7 +20,7 @@ export const metadata = {
                 url: `${BASE}/og?title=Our+Design+Portfolio&sub=Precision+Laser+Cutting+%26+Metal+Fabrication+Projects`,
                 width: 1200,
                 height: 630,
-                alt: 'RG Tech Engineering — Metal Design & Laser Cutting Portfolio',
+                alt: 'RG Tech Engineering - Metal Design & Laser Cutting Portfolio',
             },
         ],
     },

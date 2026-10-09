@@ -13,8 +13,8 @@ import JustdialBadge from '@/components/JustdialBadge'
 /*
  * Copper laser cutting pillar.
  *
- * Same section order as AluminumPage — hero, works, pain points, three-step
- * process, sub-categories, FAQs, other cities, articles — with one addition:
+ * Same section order as AluminumPage - hero, works, pain points, three-step
+ * process, sub-categories, FAQs, other cities, articles - with one addition:
  * a process video directly below the hero, as specified.
  *
  * A server component, like AluminumPage. `works` and `articles` arrive as
@@ -28,12 +28,12 @@ const HERO_CREDENTIALS = ['15+ Years', '1000+ Projects']
 
 const OTHER_CITIES = Object.values(CITIES)
 
-/* Spec lines beside the video. Kept short — the detail lives in the FAQs. */
+/* Spec lines beside the video. Kept short - the detail lives in the FAQs. */
 const VIDEO_SPECS = [
-    ['Thickness', '0.5 – 16 mm copper sheet & plate'],
+    ['Thickness', '0.5 - 16 mm copper sheet & plate'],
     ['Grades', 'C11000 ETP · C10100 OFHC · C12200 DHP'],
     ['Bed size', '8000 × 2500 mm, single setup'],
-    ['Assist gas', 'Nitrogen — bright, oxide-free edge'],
+    ['Assist gas', 'Nitrogen - bright, oxide-free edge'],
 ]
 
 export default function CopperPage({ city, works, articles }) {
@@ -81,13 +81,13 @@ export default function CopperPage({ city, works, articles }) {
                         </div>
 
                         {/* Desktop only, matching the other service heroes. The
-                            sizes gate — not just the CSS — is what stops a phone
+                            sizes gate - not just the CSS - is what stops a phone
                             fetching a hero it never paints. */}
                         <div className="relative hidden lg:block">
                             <div className="framed relative z-10">
                                 <Image
                                     src={c.heroImage}
-                                    alt={`${c.heroAlt} — Copper Laser Cutting Services in ${city.name} | RG Tech Engineering`}
+                                    alt={`${c.heroAlt} - Copper Laser Cutting Services in ${city.name} | RG Tech Engineering`}
                                     width={1000}
                                     height={Math.round(1000 / c.heroRatio)}
                                     priority
@@ -99,7 +99,7 @@ export default function CopperPage({ city, works, articles }) {
                             <div className="framed absolute -bottom-5 -left-4 xl:-left-8 px-5 py-4 z-20">
                                 <p className="meta-label text-fg-subtle mb-1">Sheet To Plate</p>
                                 <p className="subsection-title text-fg">
-                                    0.5 – 16<span className="text-accent">mm</span>
+                                    0.5 - 16<span className="text-accent">mm</span>
                                 </p>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ export default function CopperPage({ city, works, articles }) {
                             </h2>
                             <p className="section-lead mt-4 max-w-[56ch]">
                                 Nitrogen assist, back-reflection protection and a nested sheet.
-                                This is copper sheet laser cutting as it actually runs — not a
+                                This is copper sheet laser cutting as it actually runs - not a
                                 stock clip. Every job for {city.name} is cut on this machine and
                                 checked before it is packed.
                             </p>
@@ -165,7 +165,7 @@ export default function CopperPage({ city, works, articles }) {
             {/* ── 3. Our works ────────────────────────────────────────────── */}
             {works}
 
-            {/* ── 4. Why choose RG Tech — pain -> fix ─────────────────────── */}
+            {/* ── 4. Why choose RG Tech - pain -> fix ─────────────────────── */}
             <section className="section bg-white border-t border-line">
                 <div className="shell">
                     <div className="text-center mb-14">
@@ -199,7 +199,7 @@ export default function CopperPage({ city, works, articles }) {
                 </div>
             </section>
 
-            {/* ── 5. How we work — three steps ────────────────────────────── */}
+            {/* ── 5. How we work - three steps ────────────────────────────── */}
             <section className="section bg-surface-2 border-t border-line">
                 <div className="shell">
                     <div className="text-center mb-14">
@@ -245,7 +245,7 @@ export default function CopperPage({ city, works, articles }) {
                         </h2>
                         <p className="section-lead mt-4 max-w-2xl mx-auto">
                             From copper busbar cutting for electrical panels to decorative jali
-                            screens. If your job is not on this list, send it anyway — most of
+                            screens. If your job is not on this list, send it anyway - most of
                             what we cut started as a drawing nobody else would quote.
                         </p>
                     </div>
@@ -306,7 +306,7 @@ export default function CopperPage({ city, works, articles }) {
                         </h2>
                     </div>
 
-                    {/* Two independent flex columns, not a grid — a grid row is
+                    {/* Two independent flex columns, not a grid - a grid row is
                         sized to its tallest cell, so opening one answer would
                         punch a hole in the row beside it. */}
                     <div className="faq-columns">

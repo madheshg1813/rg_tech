@@ -14,7 +14,7 @@ import { STAINLESS_STEEL, stainlessSteelUrl } from '@/lib/stainlessSteel'
 import { JOB_WORK, jobWorkUrl } from '@/lib/jobWork'
 
 // Only the channels RG Tech actually has. Facebook, LinkedIn and Twitter were
-// dropped with the placeholder markup — see the note on SOCIAL_LINKS in
+// dropped with the placeholder markup - see the note on SOCIAL_LINKS in
 // lib/data.js. Add an entry there and it appears here automatically.
 const SocialIcon = { Instagram, Youtube }
 
@@ -28,7 +28,7 @@ const Footer = () => {
                         <Link href="/" className="flex items-center gap-3">
                             <Image
                                 src="https://res.cloudinary.com/o1ytbfuz/image/upload/v1785177077/rg-tech/rg-tech-logo"
-                                alt="RG Tech Engineering Works — CNC laser cutting and metal fabrication in Chennai"
+                                alt="RG Tech Engineering Works - CNC laser cutting and metal fabrication in Chennai"
                                 width={220}
                                 height={240}
                                 loading="lazy"
@@ -69,7 +69,7 @@ const Footer = () => {
                          * This list, not the header mega-menu, is what actually
                          * links the service pillars. The mega-menu renders only
                          * while it is open, so its links are never in the served
-                         * HTML and no crawler sees them — anything that needs an
+                         * HTML and no crawler sees them - anything that needs an
                          * inbound link has to be here.
                          *
                          * Aluminum, copper and mild steel are appended rather than added to
@@ -79,7 +79,7 @@ const Footer = () => {
                         {/*
                          * Job work leads the list. It is the commercial pillar the
                          * nine categories hang off, and the header mega-menu that
-                         * also links it renders only while open — so its links are
+                         * also links it renders only while open - so its links are
                          * never in the served HTML. This is the crawlable path.
                          */}
                         <ul className="space-y-4">

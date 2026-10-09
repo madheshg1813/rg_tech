@@ -17,13 +17,13 @@ import { cld, cldSize } from '@/lib/cloudinary'
 // pixel ratio rather than a phone downloading a desktop-sized crop.
 //
 // Mobile is deliberately close to desktop: at 150px a phone showed three
-// slivers per row and the cut detail — which is the whole point of these
-// photos — was unreadable. 220px puts roughly two cards on a 375px screen.
+// slivers per row and the cut detail - which is the whole point of these
+// photos - was unreadable. 220px puts roughly two cards on a 375px screen.
 const CARD_H_MOBILE = 220
 const CARD_H = 260
 
 // Card width follows each photo's own aspect ratio rather than cropping
-// everything to one shape — the work is a mix of tall gate panels and wide
+// everything to one shape - the work is a mix of tall gate panels and wide
 // compound walls. Clamped so a very tall or very wide frame cannot turn into a
 // sliver or a banner.
 const MIN_RATIO = 0.62
@@ -136,7 +136,7 @@ const OurWorks = () => {
                     <p className="eyebrow mb-2">Delivered Projects</p>
                     <h3 className="section-title text-fg">Our Works</h3>
                     <p className="mt-4 text-fg-muted max-w-2xl mx-auto">
-                        Laser-cut gates, jali screens, temple panels, signage and decor —
+                        Laser-cut gates, jali screens, temple panels, signage and decor -
                         cut, finished and installed by RG Tech Engineering.
                     </p>
                 </div>

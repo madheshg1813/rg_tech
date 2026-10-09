@@ -70,7 +70,7 @@ const ContactForm = () => {
             const data = await res.json().catch(() => ({}))
 
             if (!res.ok || !data.ok) {
-                // Never claim success we cannot verify — the previous version of
+                // Never claim success we cannot verify - the previous version of
                 // this form showed a thank-you alert and discarded the lead.
                 setStatus({
                     state: 'error',
@@ -81,7 +81,7 @@ const ContactForm = () => {
 
             setStatus({
                 state: 'success',
-                message: "Thank you — your request is with our team. We respond within 24 business hours.",
+                message: "Thank you - your request is with our team. We respond within 24 business hours.",
             })
             setFormData(EMPTY)
             clearFile()
@@ -195,7 +195,7 @@ const ContactForm = () => {
                                 className={`${inputCls} resize-none`} disabled={sending}
                             />
 
-                            {/* Real file input — this button previously did nothing at all */}
+                            {/* Real file input - this button previously did nothing at all */}
                             <input
                                 ref={fileInputRef}
                                 type="file"

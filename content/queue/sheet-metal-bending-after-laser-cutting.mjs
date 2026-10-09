@@ -4,13 +4,13 @@ const { p, h2, h3, li, nli, rich, image, table, callout, faqs } = createBuilder(
 
 const body = [
     p('A laser cuts flat blanks. Most of those blanks then go to a press brake, and that is where a surprising number of otherwise good parts go wrong.'),
-    p('The problem is almost never the bending itself. It is that the flat pattern was drawn without accounting for what bending does to the metal — so the part comes off the brake with the right angles and the wrong dimensions.'),
+    p('The problem is almost never the bending itself. It is that the flat pattern was drawn without accounting for what bending does to the metal - so the part comes off the brake with the right angles and the wrong dimensions.'),
 
     callout('tldr', 'Metal stretches when bent, so the flat blank must be shorter than the sum of the finished legs. That difference is the bend allowance. Get it from your fabricator before cutting, keep holes away from bend lines, and mind the grain direction.'),
 
     h2('Why a Flat Blank Is Not Just the Legs Added Up'),
     p('Bend a 100 mm and a 50 mm leg at 90 degrees and you might expect a 150 mm blank. Cut one and the finished part will be too long.'),
-    p('When metal bends, the outside of the curve stretches and the inside compresses. Somewhere between them is a line that does neither — the neutral axis. The material effectively gains length across the bend, and the flat blank has to be shortened to compensate.'),
+    p('When metal bends, the outside of the curve stretches and the inside compresses. Somewhere between them is a line that does neither - the neutral axis. The material effectively gains length across the bend, and the flat blank has to be shortened to compensate.'),
     p('That shortening is the bend deduction. Its size depends on material, thickness, bend radius and the tooling used.'),
 
     h2('K-Factor, in Plain Terms'),
@@ -34,7 +34,7 @@ const body = [
 
     h3('Mind the grain'),
     p('Rolled sheet has a grain direction. Bending along the grain is more likely to crack the outside of the bend, especially in aluminium and in harder tempers. Bending across the grain is safer.'),
-    p('If a part has bends in two directions, tell us — the nesting can often be arranged so the critical bend runs the safe way.'),
+    p('If a part has bends in two directions, tell us - the nesting can often be arranged so the critical bend runs the safe way.'),
     image(IMAGES.sheet, 'Flat laser cut sheet metal blanks prepared for press brake forming', 'Flat blanks cut with bend allowance, reliefs and hole clearance already designed in.'),
 
     h2('Bend Radius by Material'),
@@ -55,12 +55,12 @@ const body = [
     h2('Springback'),
     p('Metal is elastic before it is plastic. Bend it to 90 degrees and release, and it will relax to slightly more than 90. The brake compensates by overbending, and the amount depends on material and thickness.'),
     p('Stainless springs back more than mild steel. This is normal and handled at the machine, but it is why a bend angle tolerance is wider than a cut tolerance.'),
-    rich('That distinction between cutting accuracy and assembly accuracy is worth understanding before specifying tight tolerances — see ', ['laser cutting tolerances explained', '/blog/laser-cutting-tolerances-explained'], '.'),
+    rich('That distinction between cutting accuracy and assembly accuracy is worth understanding before specifying tight tolerances - see ', ['laser cutting tolerances explained', '/blog/laser-cutting-tolerances-explained'], '.'),
 
     h2('What to Send Us'),
     nli('The flat DXF if you have calculated the bend allowance yourself, and tell us what K-factor you used.'),
     nli('Or the finished part dimensions and bend angles, and let us produce the flat pattern. This is usually safer.'),
-    nli('Bend directions — up or down relative to the face you are dimensioning from.'),
+    nli('Bend directions - up or down relative to the face you are dimensioning from.'),
     nli('Which dimensions are critical on the finished part rather than on the blank.'),
     nli('The material and temper, since formability varies significantly within aluminium in particular.'),
     rich('Sending the file clean makes all of this faster; the file-side requirements are in ', ['how to prepare a DXF for laser cutting', '/blog/dxf-file-preparation-for-laser-cutting'], '.'),
@@ -73,7 +73,7 @@ export const post = makePost({
     title: 'Sheet Metal Bending After Laser Cutting: What to Design In',
     sheetTitle: 'Sheet Metal Bending After Laser Cutting',
     summary:
-        'Bend allowance, K-factor, minimum flange lengths, hole clearance and grain direction — what has to be designed into a flat blank before it is cut.',
+        'Bend allowance, K-factor, minimum flange lengths, hole clearance and grain direction - what has to be designed into a flat blank before it is cut.',
     tldr:
         'Metal stretches when bent, so a flat blank is shorter than the sum of its legs. Bend allowance, reliefs and hole clearance must be in the flat pattern before cutting, because none can be added afterwards.',
     readTime: '7 min read',

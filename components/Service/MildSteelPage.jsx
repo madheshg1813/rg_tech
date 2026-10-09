@@ -15,7 +15,7 @@ import JustdialBadge from '@/components/JustdialBadge'
  *
  * A separate layout from ServiceClient, as specified: hero, works, pain points,
  * three-step process, sub-categories, FAQs, articles. It shares the design
- * system — .btn, .stamp, .framed, .eyebrow, the FAQ accordion — so it reads as
+ * system - .btn, .stamp, .framed, .eyebrow, the FAQ accordion - so it reads as
  * the same site, but none of the section structure is inherited.
  *
  * A server component. `works` and `articles` arrive as already-rendered
@@ -74,13 +74,13 @@ export default function MildSteelPage({ city, works, articles }) {
                         </div>
 
                         {/* Desktop only, matching the other service heroes. The
-                            sizes gate — not just the CSS — is what stops a phone
+                            sizes gate - not just the CSS - is what stops a phone
                             fetching a hero it never paints. */}
                         <div className="relative hidden lg:block">
                             <div className="framed relative z-10">
                                 <Image
                                     src={a.heroImage}
-                                    alt={`${a.heroAlt} — Mild Steel Laser Cutting Services in ${city.name} | RG Tech Engineering`}
+                                    alt={`${a.heroAlt} - Mild Steel Laser Cutting Services in ${city.name} | RG Tech Engineering`}
                                     width={1000}
                                     height={Math.round(1000 / a.heroRatio)}
                                     priority
@@ -103,7 +103,7 @@ export default function MildSteelPage({ city, works, articles }) {
             {/* ── 2. Our works ────────────────────────────────────────────── */}
             {works}
 
-            {/* ── 3. Why choose RG Tech — pain -> fix ─────────────────────── */}
+            {/* ── 3. Why choose RG Tech - pain -> fix ─────────────────────── */}
             <section className="section bg-white border-t border-line">
                 <div className="shell">
                     <div className="text-center mb-14">
@@ -138,7 +138,7 @@ export default function MildSteelPage({ city, works, articles }) {
                 </div>
             </section>
 
-            {/* ── 4. How we work — three steps ────────────────────────────── */}
+            {/* ── 4. How we work - three steps ────────────────────────────── */}
             <section className="section bg-surface-2 border-t border-line">
                 <div className="shell">
                     <div className="text-center mb-14">
@@ -183,7 +183,7 @@ export default function MildSteelPage({ city, works, articles }) {
                             <span className="text-accent">We cut it.</span>
                         </h2>
                         <p className="section-lead mt-4 max-w-2xl mx-auto">
-                            If your job is not on this list, send it anyway — most of what
+                            If your job is not on this list, send it anyway - most of what
                             we cut started as a drawing nobody else would quote.
                         </p>
                     </div>
@@ -244,7 +244,7 @@ export default function MildSteelPage({ city, works, articles }) {
                         </h2>
                     </div>
 
-                    {/* Two independent flex columns, not a grid — a grid row is
+                    {/* Two independent flex columns, not a grid - a grid row is
                         sized to its tallest cell, so opening one answer would
                         punch a hole in the row beside it. */}
                     <div className="faq-columns">

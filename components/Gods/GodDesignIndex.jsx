@@ -8,7 +8,7 @@ import FaithFilter from '@/components/Gods/FaithFilter'
  * pages under it.
  *
  * They differ only in their heading, their lead, which sections they carry and
- * whether the faith filter is shown — so they are one component rather than
+ * whether the faith filter is shown - so they are one component rather than
  * four near-copies. The first version of the Hindu page was a copy of the
  * parent with two lines changed, and it had already drifted by the time the
  * Christian one was written.

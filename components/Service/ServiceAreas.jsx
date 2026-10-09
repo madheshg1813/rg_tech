@@ -3,7 +3,7 @@ import { MapPin } from 'lucide-react'
 import { serviceUrl, publishedLocalities } from '@/lib/cities'
 
 /**
- * "Serving All Areas in {city.name}" — the locality mesh for a service.
+ * "Serving All Areas in {city.name}" - the locality mesh for a service.
  *
  * Rendered on the pillar page and on every locality page for that service, so
  * each cluster page links to its siblings and back to the pillar.
@@ -19,7 +19,7 @@ import { serviceUrl, publishedLocalities } from '@/lib/cities'
  * cards. Chennai publishes 97 localities: as cards that was ~25 rows and over
  * 1300px of chips, which pushed the rest of the page below it out of reach.
  * Flowing them inline packs the same 97 links into roughly a third of the
- * height. Every locality is still a real link — nothing is truncated, collapsed
+ * height. Every locality is still a real link - nothing is truncated, collapsed
  * behind a toggle, or hidden from crawlers.
  *
  * @param {object}  city         city config from lib/cities
@@ -49,7 +49,7 @@ export default function ServiceAreas({ city, serviceName, serviceKey, cityName }
                     </h2>
                     <p className="text-sm text-fg-muted mt-3 max-w-2xl mx-auto">
                         {serviceName} delivered across {city.name} and the surrounding
-                        industrial belt — {areas.length} localities covered.
+                        industrial belt - {areas.length} localities covered.
                     </p>
                 </div>
 

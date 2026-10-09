@@ -13,7 +13,7 @@ import { Stars, GoogleG, starsOf } from '@/components/Home/GoogleReviewParts'
  * Why react-google-reviews' <ReactGoogleReviews> is not used to render this.
  *
  * The library was the starting point here and lib/googleReviews.js still
- * follows its data contract exactly — the GoogleReview shape its `renderer`
+ * follows its data contract exactly - the GoogleReview shape its `renderer`
  * receives, and the same Places-response mapping its dangerouslyFetchPlaceReviews
  * helper performs. What it cannot do is render on the server, in two ways:
  *
@@ -23,7 +23,7 @@ import { Stars, GoogleG, starsOf } from '@/components/Home/GoogleReviewParts'
  *      build dies with "$.createContext is not a function".
  *
  *   2. Even behind 'use client' it renders nothing on the server. Passing
- *      `reviews` as a prop does not render them — the component copies the prop
+ *      `reviews` as a prop does not render them - the component copies the prop
  *      into internal state inside a useEffect, and effects do not run during
  *      SSR, so its `renderer` is called with an empty array and the prerendered
  *      HTML contains no reviews at all. They appear only after hydration.
@@ -34,12 +34,12 @@ import { Stars, GoogleG, starsOf } from '@/components/Home/GoogleReviewParts'
  * not use. So the cards are rendered directly instead.
  *
  * If the stock Google-branded widget is ever wanted instead, the library does
- * that well — `layout="carousel"` or `"badge"` with its dist/index.css, wrapped
+ * that well - `layout="carousel"` or `"badge"` with its dist/index.css, wrapped
  * in a client component, accepting that it paints after hydration.
  * ---------------------------------------------------------------------------
  *
  * On structured data: the library can emit schema.org AggregateRating from these
- * reviews, and this deliberately does not — see the long note in
+ * reviews, and this deliberately does not - see the long note in
  * components/GoogleRating.jsx. Self-serving review markup on your own domain is
  * the thing Google penalises; showing the figures and linking to the live
  * listing is not.
@@ -83,7 +83,7 @@ export default function GoogleReviews({
                         href={profileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Rated ${average.toFixed(1)} out of 5 from ${count} Google reviews — open our Google Business Profile`}
+                        aria-label={`Rated ${average.toFixed(1)} out of 5 from ${count} Google reviews - open our Google Business Profile`}
                         data-analytics="google-reviews-header"
                         className="group mt-6 inline-flex items-center gap-3 rounded-full border border-line bg-white px-5 py-2.5"
                     >
@@ -100,7 +100,7 @@ export default function GoogleReviews({
             </div>
 
             {/*
-                One row, scrolled sideways — not a grid that wraps to a second.
+                One row, scrolled sideways - not a grid that wraps to a second.
                 Three cards at a time is the readable number on a desktop, and
                 every review the widget returns is reachable by scrolling rather
                 than being cut off at six.

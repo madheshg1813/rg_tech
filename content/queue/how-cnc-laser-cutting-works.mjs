@@ -7,12 +7,12 @@ const body = [
 
     h2('How CNC Laser Cutting Works: The Six Stages'),
     p('Every job follows the same sequence, whether it is one prototype bracket or a thousand production parts:'),
-    nli('CAD file preparation — your drawing is checked and converted into machine-ready geometry.'),
-    nli('Nesting — parts are arranged on the sheet to get the most out of the material.'),
-    nli('Machine setup — nozzle, focal position and assist gas are selected for the material and thickness.'),
-    nli('Piercing — the beam burns an entry hole before it can begin following a contour.'),
-    nli('Cutting — the head traces the profile at a feed rate matched to material and thickness.'),
-    nli('Separation and inspection — parts are removed, edges checked, critical dimensions verified.'),
+    nli('CAD file preparation - your drawing is checked and converted into machine-ready geometry.'),
+    nli('Nesting - parts are arranged on the sheet to get the most out of the material.'),
+    nli('Machine setup - nozzle, focal position and assist gas are selected for the material and thickness.'),
+    nli('Piercing - the beam burns an entry hole before it can begin following a contour.'),
+    nli('Cutting - the head traces the profile at a feed rate matched to material and thickness.'),
+    nli('Separation and inspection - parts are removed, edges checked, critical dimensions verified.'),
 
     h2('Stage 1: From CAD File to Cutting Path'),
     p('The machine does not read your drawing directly. Geometry is converted into a toolpath: a sequence of coordinates plus instructions for where to pierce, where to start and stop, and which direction to travel.'),
@@ -20,7 +20,7 @@ const body = [
     li('Open contours. A profile with a gap cannot be cut as a closed shape and must be repaired.'),
     li('Duplicate lines. Two identical overlapping lines make the laser cut the same path twice, doubling time and often ruining the edge.'),
     li('Features below minimum size. A hole smaller than the material thickness rarely cuts reliably.'),
-    p('Send vector geometry — DXF or DWG — rather than a scanned drawing or an image. Getting this right before you send the file is the single biggest lever on turnaround.'),
+    p('Send vector geometry - DXF or DWG - rather than a scanned drawing or an image. Getting this right before you send the file is the single biggest lever on turnaround.'),
 
     h2('Stage 2: Nesting and Why It Decides Your Material Cost'),
     p('Nesting arranges every part on the sheet to maximise yield. It sounds like a detail. It is often the largest single influence on the material line of your quote.'),
@@ -32,11 +32,11 @@ const body = [
     image(IMAGES.sheet, 'Nested sheet metal parts cut on a CNC fiber laser to maximise material yield', 'Tight nesting is where most of the material saving on a job comes from.'),
     callout('tip', 'If you are ordering repeat quantities, say so at quoting stage. A quantity that fills a sheet cleanly can cost less per part than a smaller batch that wastes half of it.'),
 
-    h2('Stage 3: Machine Setup — Focus, Nozzle and Gas'),
+    h2('Stage 3: Machine Setup - Focus, Nozzle and Gas'),
     h3('Focal position'),
     p('The beam converges to its narrowest point at the focal spot. Where that point sits relative to the sheet surface changes the cut. Focus slightly into the material for thicker plate, near the surface for thin sheet. Wrong focus produces a wide, rough kerf and often an incomplete cut.'),
     h3('Nozzle'),
-    p('The nozzle shapes the assist gas flow around the beam. Diameter is matched to thickness — too small and gas cannot clear the kerf, too large and gas is wasted while pressure at the cut drops.'),
+    p('The nozzle shapes the assist gas flow around the beam. Diameter is matched to thickness - too small and gas cannot clear the kerf, too large and gas is wasted while pressure at the cut drops.'),
     h3('Assist gas'),
     p('This is the choice that most affects your finished edge:'),
     table(
@@ -48,11 +48,11 @@ const body = [
             ['Compressed air', 'Thin mild steel and aluminium', 'Light oxide, acceptable for many uses', 'Lowest'],
         ]
     ),
-    p('Oxygen adds an exothermic reaction that speeds cutting on thick mild steel, which is why it remains standard there despite the oxide it leaves. Nitrogen is inert — it clears molten metal without reacting, leaving a clean edge, but uses far more gas.'),
+    p('Oxygen adds an exothermic reaction that speeds cutting on thick mild steel, which is why it remains standard there despite the oxide it leaves. Nitrogen is inert - it clears molten metal without reacting, leaving a clean edge, but uses far more gas.'),
 
     h2('Stage 4: Piercing'),
     p('A laser cannot start mid-material at full speed. It must first pierce: dwelling in one spot to burn through before motion begins.'),
-    p('Piercing matters commercially because it is slow relative to cutting. A part with many small holes spends a surprising proportion of its cycle time piercing rather than cutting. This is why a perforated panel costs far more than a plain blank of the same size — the cut length may be similar, but the pierce count is not.'),
+    p('Piercing matters commercially because it is slow relative to cutting. A part with many small holes spends a surprising proportion of its cycle time piercing rather than cutting. This is why a perforated panel costs far more than a plain blank of the same size - the cut length may be similar, but the pierce count is not.'),
     callout('warning', 'If a design has hundreds of small holes, ask whether the pattern can be simplified. Reducing pierce count is often the cheapest change you can make to a part.'),
 
     h2('Stage 5: The Cut Itself'),
@@ -62,13 +62,13 @@ const body = [
 
     h2('Stage 6: Separation, Deburring and Inspection'),
     p('Parts are held in the sheet by small tabs or by the surrounding skeleton until cutting finishes. They are then separated, and critical dimensions are checked before dispatch.'),
-    p('A correctly parameterised fiber laser cut needs little or no deburring, which is one of its main advantages. Where dross does appear — usually on thicker plate or with incorrect gas settings — it is removed at this stage.'),
+    p('A correctly parameterised fiber laser cut needs little or no deburring, which is one of its main advantages. Where dross does appear - usually on thicker plate or with incorrect gas settings - it is removed at this stage.'),
 
     h2('What Makes One Job Slower Than Another'),
     p('Two parts of identical size can differ several-fold in machine time. The drivers are:'),
     li('Total cut length, not part area. An intricate jali pattern has many times the cut length of a plain panel.'),
     li('Pierce count, as above.'),
-    li('Material and thickness — thicker plate cuts slower and needs more gas.'),
+    li('Material and thickness - thicker plate cuts slower and needs more gas.'),
     li('Assist gas choice, since nitrogen consumption is significant.'),
     li('Tolerance requirements, which may force a slower, more controlled feed.'),
     rich('If you are new to the process, start with ', ['what is CNC fiber laser cutting', '/blog/what-is-cnc-fiber-laser-cutting'], ' for the wider picture.'),
@@ -88,7 +88,7 @@ export const post = makePost({
     title: 'How CNC Laser Cutting Works: Step by Step',
     sheetTitle: 'How CNC Laser Cutting Works',
     summary:
-        'The six stages between your CAD file and a finished metal part — file preparation, nesting, machine setup, piercing, cutting and inspection — and how each one affects your cost and lead time.',
+        'The six stages between your CAD file and a finished metal part - file preparation, nesting, machine setup, piercing, cutting and inspection - and how each one affects your cost and lead time.',
     tldr:
         'A CNC laser converts your drawing into a toolpath, nests parts to save material, then pierces and cuts with a focused beam while assist gas clears the melt. Cut length and pierce count drive cost far more than part area does.',
     readTime: '8 min read',
@@ -100,7 +100,7 @@ export const post = makePost({
     bannerBadge: 'STEP BY STEP',
     metaTitle: 'How CNC Laser Cutting Works: Process, Assist Gas & Piercing',
     metaDescription:
-        'How CNC laser cutting works, step by step: CAD prep, nesting, focus, assist gas, piercing and inspection — and how each stage affects your cost and lead time.',
+        'How CNC laser cutting works, step by step: CAD prep, nesting, focus, assist gas, piercing and inspection - and how each stage affects your cost and lead time.',
     keywords: [
         'how cnc laser cutting works',
         'laser cutting process',
@@ -122,7 +122,7 @@ export const post = makePost({
         ['Why do some laser cut parts cost more than others?',
             'Cost follows total cut length and pierce count, not part area. An intricate perforated panel can take many times longer than a plain blank of the same size.'],
         ['What is focal position in laser cutting?',
-            'The point where the beam converges to its narrowest. Its position relative to the sheet surface is set for the material and thickness — incorrect focus produces a wide, rough kerf or an incomplete cut.'],
+            'The point where the beam converges to its narrowest. Its position relative to the sheet surface is set for the material and thickness - incorrect focus produces a wide, rough kerf or an incomplete cut.'],
         ['Do laser cut parts need deburring?',
             'Usually not. A correctly parameterised fiber laser leaves minimal burr. Dross can appear on thicker plate or with wrong gas settings and is removed before dispatch.'],
         ['What accuracy can CNC laser cutting achieve?',

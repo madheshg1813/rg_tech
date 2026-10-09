@@ -11,12 +11,12 @@ import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
 
 /*
- * Laser cutting job work — the commercial pillar that sits above the nine
+ * Laser cutting job work - the commercial pillar that sits above the nine
  * category pillars.
  *
  * Structure is deliberately different from every other page type on the site,
  * because the question is different. A category pillar answers "can you cut
- * this?"; this page answers "how do I engage you, and what do I get back?" —
+ * this?"; this page answers "how do I engage you, and what do I get back?" -
  * so it leads with terms, then who already sends us work, then hands off to
  * whichever category the reader actually needs.
  *
@@ -78,13 +78,13 @@ export default function JobWorkPage({ city, works, articles }) {
                             </div>
                         </div>
 
-                        {/* Desktop only, and the sizes gate — not the CSS — is what
+                        {/* Desktop only, and the sizes gate - not the CSS - is what
                             stops a phone fetching a hero it never paints. */}
                         <div className="relative hidden lg:block">
                             <div className="framed relative z-10">
                                 <Image
                                     src={j.heroImage}
-                                    alt={`${j.heroAlt} — ${copy.h1} | RG Tech Engineering`}
+                                    alt={`${j.heroAlt} - ${copy.h1} | RG Tech Engineering`}
                                     width={1000}
                                     height={Math.round(1000 / j.heroRatio)}
                                     priority
@@ -116,7 +116,7 @@ export default function JobWorkPage({ city, works, articles }) {
                             The terms, before <span className="text-accent">the quote</span>
                         </h2>
                         <p className="section-lead mt-4 max-w-2xl mx-auto">
-                            Everything a buyer comparing subcontractors asks first — answered
+                            Everything a buyer comparing subcontractors asks first - answered
                             here rather than after three emails.
                         </p>
                     </div>
@@ -228,7 +228,7 @@ export default function JobWorkPage({ city, works, articles }) {
                         </h2>
                     </div>
 
-                    {/* Two independent flex columns, not a grid — a grid row is sized
+                    {/* Two independent flex columns, not a grid - a grid row is sized
                         to its tallest cell, so opening one answer would punch a hole
                         in the row beside it. */}
                     <div className="faq-columns">
@@ -282,7 +282,7 @@ export default function JobWorkPage({ city, works, articles }) {
                         <span className="text-accent">Send it across.</span>
                     </h2>
                     <p className="section-lead text-white/60 mb-10 max-w-2xl mx-auto">
-                        Itemised, engineer-verified pricing within 24 business hours — one
+                        Itemised, engineer-verified pricing within 24 business hours - one
                         piece or a production run.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

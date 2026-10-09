@@ -18,7 +18,7 @@ const CatalogueModal = dynamic(() => import('./CatalogueModal'), { ssr: false })
  * be a second Google panel stacked directly on the first.
  *
  * The four city prefixes cover every service page, locality page and deity page
- * — all of them go through ServiceClient or GodPage, both of which include the
+ * - all of them go through ServiceClient or GodPage, both of which include the
  * card.
  */
 const CITY_PREFIXES = ['/chennai', '/madurai', '/coimbatore', '/salem']
@@ -53,7 +53,7 @@ export default function LayoutWrapper({ children, designFaiths }) {
             )}
 
             <Footer />
-            {/* After the footer so it is last in the tab order — it is fixed
+            {/* After the footer so it is last in the tab order - it is fixed
                 furniture, not part of the page's reading flow. */}
             <FloatingContact />
             {catalogueModalOpen && (

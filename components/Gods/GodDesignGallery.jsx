@@ -91,7 +91,7 @@ const STEPS = [
     {
         icon: PenTool,
         title: 'We make it cuttable',
-        body: 'It is converted to a vector cutting file, and we check the design holds together once metal is removed — adding bridges where an ornament would otherwise float free.',
+        body: 'It is converted to a vector cutting file, and we check the design holds together once metal is removed - adding bridges where an ornament would otherwise float free.',
     },
     {
         icon: Flame,
@@ -103,7 +103,7 @@ const STEPS = [
 /** Prefilled WhatsApp link. Quoting the ref means the enquiry is unambiguous. */
 function waLink(design, image, index) {
     const msg = image
-        ? `Hi RG Tech, I'm interested in ${design.name} design ${designRef(design, index)} — ${image.title} (${image.material}). Please share sizes and pricing.`
+        ? `Hi RG Tech, I'm interested in ${design.name} design ${designRef(design, index)} - ${image.title} (${image.material}). Please share sizes and pricing.`
         : `Hi RG Tech, I'm interested in laser cut ${design.name} designs. Please share the catalogue, sizes and pricing.`
     return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`
 }
@@ -136,7 +136,7 @@ function Panel({ design, item, index, onOpen, className = '', sizes, decorative 
                 crop of them.
 
                 object-contain at every width, not just on phones. The original
-                Ganesh set is 1536 x 2752 — near 9:16, not 3:5 — and `cover`
+                Ganesh set is 1536 x 2752 - near 9:16, not 3:5 - and `cover`
                 would shave about 7% off the top and bottom of each one, which
                 on these designs means clipping the border frame. Matting costs
                 a few pixels of white either side, and the panels are on white
@@ -500,7 +500,7 @@ export default function GodDesignGallery({ design }) {
                         thing a page selling hand-checked work wants.
                     */}
                     <h1 className="display-title max-sm:text-[1.625rem] max-sm:leading-[1.15] text-fg text-balance mt-4 sm:mt-7">
-                        {design.name} Laser Cutting Designs –{' '}
+                        {design.name} Laser Cutting Designs -{' '}
                         <span className="text-accent">{places}</span>
                     </h1>
 
@@ -691,7 +691,7 @@ export default function GodDesignGallery({ design }) {
                         /*
                          * No images yet. The route is live so it can be checked, but
                          * the page is noindex and out of the sitemap until the first
-                         * image lands — see app/designs/gods/[god]/page.js.
+                         * image lands - see app/designs/gods/[god]/page.js.
                          */
                         <div className="max-w-3xl mx-auto py-14 px-6 sm:py-20 sm:px-8 text-center bg-white border border-line rounded-[1.5rem] sm:rounded-[3rem] shadow-xl shadow-line-strong/50">
                             <div className="w-24 h-24 bg-surface-2 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-line">
@@ -729,10 +729,10 @@ export default function GodDesignGallery({ design }) {
                         </h2>
                         <p className="text-base sm:text-lg text-fg-muted leading-relaxed">
                             {/* Was "a Vinayagar pooja room screen, or a bold
-                                Pillaiyar silhouette" — Ganesh's names, printed
+                                Pillaiyar silhouette" - Ganesh's names, printed
                                 on every gallery including Mother Mary's. */}
                             Every {design.name} design is cut from a vector drawing, so the detail
-                            stays crisp at any scale — fine line work on a 1 ft panel, or the same
+                            stays crisp at any scale - fine line work on a 1 ft panel, or the same
                             design scaled across a full 8 ft arch.
                         </p>
                     </div>
@@ -764,7 +764,7 @@ export default function GodDesignGallery({ design }) {
                         ))}
                     </ol>
 
-                    {/* Where these are used — four cards across, not a bullet
+                    {/* Where these are used - four cards across, not a bullet
                         list down one side. */}
                     <h3 className="card-title text-fg mt-12 sm:mt-14 mb-4 sm:mb-5">
                         Where these are used
@@ -794,7 +794,7 @@ export default function GodDesignGallery({ design }) {
                             </h3>
                             <p className="text-[0.9375rem] sm:text-base text-fg-muted mt-2 leading-relaxed max-w-xl">
                                 Share a photo, reference image or sketch on WhatsApp. We come back with
-                                a cutting-ready design, sizes and pricing — usually the same day.
+                                a cutting-ready design, sizes and pricing - usually the same day.
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 shrink-0">
@@ -953,7 +953,7 @@ export default function GodDesignGallery({ design }) {
                     onClick={close}
                     role="dialog"
                     aria-modal="true"
-                    aria-label={`${current.title} — full size`}
+                    aria-label={`${current.title} - full size`}
                 >
                     <button
                         onClick={close}

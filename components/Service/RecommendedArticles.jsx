@@ -7,8 +7,8 @@ import { buildAlt } from '@/lib/utils'
 /*
  * Recommended reading, last section before the footer on the service pillars.
  *
- * A server component: it resolves Sanity image URLs, and ServiceClient — where
- * this ends up — is a client component, so it is passed in as an already
+ * A server component: it resolves Sanity image URLs, and ServiceClient - where
+ * this ends up - is a client component, so it is passed in as an already
  * rendered element rather than imported there. Same slot pattern as OurWorks.
  *
  * The heading is per-service ("Guides for steel gates") rather than a flat
@@ -16,7 +16,7 @@ import { buildAlt } from '@/lib/utils'
  * dozen indexed pages says nothing about any of them, and this one names the
  * thing the page is actually about.
  *
- * Renders nothing when there are no posts — Sanity is fetched through
+ * Renders nothing when there are no posts - Sanity is fetched through
  * safeFetch, which returns [] rather than throwing if it is unreachable, and an
  * empty heading above an empty grid is worse than no section.
  */
@@ -42,7 +42,7 @@ export default function RecommendedArticles({ posts = [], serviceName }) {
                     <p className="eyebrow mb-3">Technical Blog</p>
                     <h2 className="section-title text-fg">{heading}</h2>
                     <p className="section-lead mt-4 max-w-2xl mx-auto">
-                        Written by the people who run the machine — what to send us,
+                        Written by the people who run the machine - what to send us,
                         what it costs, and what to expect back.
                     </p>
                 </div>

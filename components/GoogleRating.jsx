@@ -8,7 +8,7 @@ import { GMB_URL } from '@/lib/data'
  * of the type is set in.
  *
  * ---------------------------------------------------------------------------
- * IMPORTANT — this is a visual claim only, deliberately NOT schema markup.
+ * IMPORTANT - this is a visual claim only, deliberately NOT schema markup.
  *
  * components/GoogleBusinessCard.jsx notes that the site shows no hardcoded
  * rating, to avoid a stale number and a fake-review-markup penalty. Half of
@@ -21,7 +21,7 @@ import { GMB_URL } from '@/lib/data'
  *     displaying the figure and linking to the live listing is not.
  *
  * The rating is still a manually-kept number. If it slips below 5.0 and nobody
- * edits this file, the page is wrong — that is the accepted trade.
+ * edits this file, the page is wrong - that is the accepted trade.
  * ---------------------------------------------------------------------------
  */
 
@@ -60,7 +60,7 @@ export default function GoogleRating({ variant = 'inline', onDark = false, class
             href={GMB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${label} — open our Google Business Profile`}
+            aria-label={`${label} - open our Google Business Profile`}
             data-analytics="google-rating"
             className={`group inline-flex items-center gap-2.5 ${className}`}
         >

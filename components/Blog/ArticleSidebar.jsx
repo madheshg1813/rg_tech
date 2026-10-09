@@ -80,11 +80,11 @@ function TableOfContents({ headings }) {
 }
 
 /**
- * "Summarize with AI" — deep links the article URL into each assistant with a
+ * "Summarize with AI" - deep links the article URL into each assistant with a
  * pre-filled prompt. Rendered client-side because it needs the live URL.
  */
 function SummarizeWithAi({ url, title }) {
-    const prompt = `Summarise this article for me: ${title} — ${url}`
+    const prompt = `Summarise this article for me: ${title} - ${url}`
     const q = encodeURIComponent(prompt)
 
     // Logos are 32x32 PNGs in public/ai-logos, served as-is. They are UI chrome
@@ -144,7 +144,7 @@ function ShareRail({ url, title }) {
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
         } catch {
-            /* clipboard blocked — the share links still work */
+            /* clipboard blocked - the share links still work */
         }
     }
 
@@ -183,7 +183,7 @@ export default function ArticleSidebar({ headings = [], url, title }) {
         <aside className="lg:sticky lg:top-28 space-y-5">
             <TableOfContents headings={headings} />
 
-            {/* Conversion card — mirrors the reference layout's sidebar CTA slot */}
+            {/* Conversion card - mirrors the reference layout's sidebar CTA slot */}
             <div className="rounded-2xl bg-cta/10 border border-cta/25 p-6 text-center">
                 <p className="font-bold text-fg text-lg leading-snug">
                     Skip the guesswork.
@@ -191,7 +191,7 @@ export default function ArticleSidebar({ headings = [], url, title }) {
                     Send us your drawing.
                 </p>
                 <p className="text-sm text-fg-muted mt-2.5 leading-relaxed">
-                    CNC fiber laser cutting for MS, SS, aluminium, copper and brass — up to 45&nbsp;mm.
+                    CNC fiber laser cutting for MS, SS, aluminium, copper and brass - up to 45&nbsp;mm.
                 </p>
                 <Link href="/contact" className="btn btn-primary w-full mt-5">
                     Get a Free Quote <ArrowRight className="w-4 h-4" />

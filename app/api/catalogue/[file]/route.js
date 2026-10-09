@@ -8,7 +8,7 @@ import { catalogues } from '@/lib/data'
  * The four PDFs are 108 MB in total. They used to sit in /public, which meant
  * every deploy shipped them inside the container image and every clone dragged
  * them through Git LFS. They now live in a Railway bucket, which is private, so
- * this route mints a short-lived presigned URL and redirects to it — the bytes
+ * this route mints a short-lived presigned URL and redirects to it - the bytes
  * come straight from object storage and never pass through the app.
  *
  * The allowlist is derived from lib/data.js rather than taking the filename from
@@ -39,7 +39,7 @@ export async function GET(request, { params }) {
     const url = presignBucketObject(entry.key, 600, entry.filename)
 
     if (!url) {
-        // Bucket not configured — say so plainly rather than redirecting nowhere.
+        // Bucket not configured - say so plainly rather than redirecting nowhere.
         return NextResponse.json(
             { error: 'Catalogue storage is not configured on this server.' },
             { status: 503 }

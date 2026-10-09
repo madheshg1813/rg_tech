@@ -5,7 +5,7 @@
  *
  *   Desktop  a floating WhatsApp pill, bottom-right. White so the label stays
  *            readable over any section, with the badge in WhatsApp's own green
- *            — the one place on the site that green is not RG Tech's.
+ *            - the one place on the site that green is not RG Tech's.
  *   Mobile   a sticky two-action bar at the bottom of the viewport: Call and
  *            WhatsApp, both immediate. The pill collapses to just its badge and
  *            lifts clear of that bar.
@@ -14,7 +14,7 @@
  * which is a thing to fill in rather than a way to reach someone, and it would
  * compete with the two channels that actually get answered.
  *
- * A server component — it is two links and some CSS, so none of it needs to
+ * A server component - it is two links and some CSS, so none of it needs to
  * reach the browser as JavaScript.
  */
 
@@ -44,7 +44,7 @@ export default function FloatingContact() {
     return (
         <>
             {/* Desktop float. The label leads with what the customer gets back,
-                not with the channel — "Send your drawing" is a smaller ask than
+                not with the channel - "Send your drawing" is a smaller ask than
                 "Chat with us", and it says what to send. */}
             <a
                 className="wa"

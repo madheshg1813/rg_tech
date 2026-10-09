@@ -9,7 +9,7 @@ import { createEnquiry } from '@/lib/sanity'
  * matters for three reasons:
  *
  *  1. Apps Script does not answer CORS preflight, which is why the existing
- *     admin code uses `mode: 'no-cors'` — and an opaque response means the page
+ *     admin code uses `mode: 'no-cors'` - and an opaque response means the page
  *     cannot tell a success from a failure. Server-to-server has no CORS at all,
  *     so we can read the real result and tell the user the truth.
  *  2. The Apps Script URL stays out of the client bundle.
@@ -88,7 +88,7 @@ export async function POST(request) {
      * Two destinations, deliberately ordered.
      *
      * Sanity is the system of record and is already configured, so the lead is
-     * safe the moment it is stored. Google Sheets is a best-effort forward — if
+     * safe the moment it is stored. Google Sheets is a best-effort forward - if
      * the Apps Script is not deployed yet, or throws, the lead is still captured
      * and the visitor still gets a truthful confirmation.
      *

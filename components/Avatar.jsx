@@ -45,7 +45,7 @@ export default function Avatar({ name, image, size = 48, className = '' }) {
         return (
             <Image
                 src={image}
-                alt={`${name} — RG Tech Engineering client`}
+                alt={`${name} - RG Tech Engineering client`}
                 width={size}
                 height={size}
                 sizes={px}

@@ -4,13 +4,13 @@ const { p, h2, h3, li, nli, rich, image, table, callout, faqs } = createBuilder(
 
 const body = [
     p('A laser does exactly what the file tells it to. That is its great strength and the source of nearly every avoidable problem in a cutting job.'),
-    p('This is a practical guide to preparing a DXF that cuts first time — what the machine needs, what quietly breaks it, and how to check your own file before you send it.'),
+    p('This is a practical guide to preparing a DXF that cuts first time - what the machine needs, what quietly breaks it, and how to check your own file before you send it.'),
 
     callout('tldr', 'Draw 1:1 in millimetres. Every cut must be a closed, single-line contour with no duplicates, no open gaps and no construction geometry. Convert text to outlines. Delete everything that is not being cut.'),
 
     h2('What the Machine Actually Reads'),
     p('Cutting software does not see your drawing the way you do. It sees a set of closed loops and works out which side of each loop is scrap. From that it decides where to offset the toolpath by half a kerf, and in what order to cut.'),
-    p('Everything else in the file — dimensions, hatching, title blocks, layers you forgot about — is noise it has to be told to ignore. If a piece of noise happens to be a closed loop, it may get cut.'),
+    p('Everything else in the file - dimensions, hatching, title blocks, layers you forgot about - is noise it has to be told to ignore. If a piece of noise happens to be a closed loop, it may get cut.'),
 
     h2('The Rules That Matter'),
 
@@ -22,7 +22,7 @@ const body = [
     p('Most CAD packages have a join or heal command that closes gaps within a tolerance. Run it before exporting.'),
 
     h3('3. Remove duplicate lines'),
-    p('Two identical lines stacked on top of each other are invisible on screen and cut twice — once forwards, once back over the same path. At best it wastes time, at worst it burns the edge and drops the part into the bed.'),
+    p('Two identical lines stacked on top of each other are invisible on screen and cut twice - once forwards, once back over the same path. At best it wastes time, at worst it burns the edge and drops the part into the bed.'),
     p('This happens most often when geometry has been copied, mirrored or imported from another format.'),
 
     h3('4. Convert text to outlines'),
@@ -47,19 +47,19 @@ const body = [
             ['Tab and slot fits', 'Allow for kerf on both parts', 'Nominal dimensions produce an interference fit'],
         ]
     ),
-    p('These are guidelines, not absolute limits — thin sheet is far more forgiving than 25 mm plate. If a feature is close to the line, ask before redesigning around it.'),
+    p('These are guidelines, not absolute limits - thin sheet is far more forgiving than 25 mm plate. If a feature is close to the line, ask before redesigning around it.'),
 
     h2('Kerf: the Half-Millimetre That Catches People Out'),
     p('The beam removes a strip of material, typically 0.1 to 0.4 mm wide. Good software offsets the toolpath so the finished part matches your drawing, and for a standalone part you can ignore kerf entirely.'),
-    p('Where it matters is parts that fit into each other. If you draw a 10 mm tab and a 10 mm slot, both come out at their nominal size, and the tab will not go in — because the slot lost half a kerf on each side and the tab lost half a kerf on each side too.'),
+    p('Where it matters is parts that fit into each other. If you draw a 10 mm tab and a 10 mm slot, both come out at their nominal size, and the tab will not go in - because the slot lost half a kerf on each side and the tab lost half a kerf on each side too.'),
     rich('Design the clearance you want into the drawing rather than hoping the cut supplies it. The related accuracy questions are covered in ', ['laser cutting tolerances explained', '/blog/laser-cutting-tolerances-explained'], '.'),
 
     h2('Which File Format to Send'),
-    li('DXF — the most reliable and what we prefer. Export as R12 or 2000 if your software offers a choice; newer versions carry features that add nothing for cutting.'),
-    li('DWG — fine, and read directly.'),
-    li('STEP or IGES — good for 3D parts we need to flatten, but tell us which faces matter.'),
-    li('PDF — usable as a reference or for simple shapes, but vector-only. A scanned or rasterised PDF cannot be cut from.'),
-    li('Sketches and photos — genuinely fine as a starting point. We convert them to a cutting file and send it back for approval before anything is cut.'),
+    li('DXF - the most reliable and what we prefer. Export as R12 or 2000 if your software offers a choice; newer versions carry features that add nothing for cutting.'),
+    li('DWG - fine, and read directly.'),
+    li('STEP or IGES - good for 3D parts we need to flatten, but tell us which faces matter.'),
+    li('PDF - usable as a reference or for simple shapes, but vector-only. A scanned or rasterised PDF cannot be cut from.'),
+    li('Sketches and photos - genuinely fine as a starting point. We convert them to a cutting file and send it back for approval before anything is cut.'),
 
     h2('A Two-Minute Check Before You Send'),
     nli('Measure one known dimension in your CAD. Does it read the value you intended, in millimetres?'),
@@ -111,7 +111,7 @@ export const post = makePost({
         ['Why does text disappear from my laser cutting file?',
             'DXF stores text as a font reference rather than as shapes. If the machine does not have your font, the text vanishes or is substituted. Convert text to outlines or curves before exporting.'],
         ['Do I need to allow for kerf in my drawing?',
-            'Not for standalone parts — the software offsets the toolpath so the part matches your dimensions. You do need to allow for it on parts that fit together, since a nominal 10 mm tab and 10 mm slot will not assemble.'],
+            'Not for standalone parts - the software offsets the toolpath so the part matches your dimensions. You do need to allow for it on parts that fit together, since a nominal 10 mm tab and 10 mm slot will not assemble.'],
         ['Can you cut from a hand-drawn sketch?',
             'Yes. We convert sketches, photos and rough drawings into a cutting file and send it back for your approval before anything is cut.'],
         ['Why are duplicate lines a problem?',

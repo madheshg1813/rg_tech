@@ -5,7 +5,7 @@ export const runtime = 'nodejs'
 export async function GET(request) {
     const { searchParams } = new URL(request.url)
     const title = searchParams.get('title') || 'RG Tech Engineering'
-    const sub   = searchParams.get('sub')   || 'CNC Fiber Laser Cutting Specialist — Chennai'
+    const sub   = searchParams.get('sub')   || 'CNC Fiber Laser Cutting Specialist - Chennai'
 
     return new ImageResponse(
         (

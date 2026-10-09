@@ -7,13 +7,13 @@ import { JUSTDIAL_URL } from '@/lib/data'
  * stays crisp at any size, costs no request, and the brand colours stay exact
  * rather than being resampled from a PNG.
  *
- * The mark is the Justdial wordmark — blue "Just", orange "dial" — which is the
+ * The mark is the Justdial wordmark - blue "Just", orange "dial" - which is the
  * asset available to us. It is NOT the square "Jd" app tile from the reference
  * screenshot; we do not have that file, and redrawing someone else's logo by
  * hand is not something to guess at.
  *
  * Because the wordmark already says "Justdial", the label reads "Listed on"
- * rather than "Listed on Justdial" — the latter prints the name twice in a
+ * rather than "Listed on Justdial" - the latter prints the name twice in a
  * badge about three centimetres wide.
  *
  * The playbook allows a logo inside a badge or chip; what it forbids is a logo

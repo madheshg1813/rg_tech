@@ -35,8 +35,8 @@ const RESOURCE_LINKS = [
 
 /* Everything under the Designs menu, shared by the desktop and mobile navs.
  *
- * These are a product category of their own — something we make, not something
- * to read — which is why they sit next to Services rather than under Resources
+ * These are a product category of their own - something we make, not something
+ * to read - which is why they sit next to Services rather than under Resources
  * or inside Gallery.
  *
  * The parent /designs/gods carries all three with a filter; these link to the
@@ -70,7 +70,7 @@ const DESIGN_LINKS = [
  * What the Services menu lists for a city: the six pillarServices, plus the
  * standalone aluminum, copper and mild steel pillars.
  *
- * Both are deliberately absent from pillarServices — that array is what
+ * Both are deliberately absent from pillarServices - that array is what
  * drives locality page generation, and this category is pillars-only. The menu
  * is the one place the two need to look like a single list, so they are joined
  * here rather than by widening pillarServices.
@@ -98,7 +98,7 @@ function cityServiceLinks(citySlug) {
 }
 
 const Header = ({ setCatalogueModalOpen, designFaiths }) => {
-    // A faith with nothing published 404s on its own page — see app/layout.js.
+    // A faith with nothing published 404s on its own page - see app/layout.js.
     // No list means show them all, so the menu still works if a caller forgets.
     const designLinks = designFaiths
         ? DESIGN_LINKS.filter((l) => designFaiths.includes(l.faith))
@@ -113,7 +113,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
      * Each menu opened on its own button's mouseenter but closed only on its
      * own panel's mouseleave. Moving the pointer from Services across to
      * Designs opened Designs without ever entering the Services panel, so
-     * nothing closed it — and with three booleans there was nothing stopping
+     * nothing closed it - and with three booleans there was nothing stopping
      * all three being true at once, which is exactly what happened.
      *
      * A single value makes that unrepresentable: opening one closes the rest by
@@ -143,7 +143,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
     return (
         <>
             {/* Top Info Bar */}
-            {/* Running text, not a label — .meta-label's 0.18em tracking is for
+            {/* Running text, not a label - .meta-label's 0.18em tracking is for
                 two or three words, and pushes a phone number and an address off
                 the bar on narrow screens. */}
             <div className="bg-ink text-white/90 text-xs font-medium tracking-wide uppercase border-b border-white/5">
@@ -156,7 +156,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                         </div>
                         <div className="hidden lg:flex items-center gap-2 border-l border-white/10 pl-4">
                             <Clock className="w-3 h-3 text-accent" />
-                            <span>Mon–Sat: 09:00–19:00</span>
+                            <span>Mon-Sat: 09:00-19:00</span>
                         </div>
                     </div>
                     <div className="flex items-center gap-6">
@@ -176,7 +176,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
             {/*
                 Tailwind blur utilities, not the old `.glass` class. `.glass`
                 set backdrop-filter both plain and -webkit- prefixed, and the
-                CSS build collapsed the pair to the prefixed one alone — which
+                CSS build collapsed the pair to the prefixed one alone - which
                 Chrome ignores. With no blur, 78% white let every gallery photo
                 scrolling underneath show straight through the logo and menu.
                 The utilities compile with both properties intact, and 95% white
@@ -192,7 +192,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                         <Link href="/" className="flex items-center gap-3.5 group">
                             <Image
                                 src="https://res.cloudinary.com/o1ytbfuz/image/upload/v1785177077/rg-tech/rg-tech-logo"
-                                alt="RG Tech Engineering Works — CNC fiber laser cutting specialist in Chennai"
+                                alt="RG Tech Engineering Works - CNC fiber laser cutting specialist in Chennai"
                                 // Intrinsic ratio of the source file (2169x2362), scaled.
                                 // A mismatched ratio here makes next/image warn and can
                                 // reserve the wrong space before the image loads.
@@ -214,7 +214,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                     first h1 and its real h1 came second. The
                                     classes are unchanged and `block` restores
                                     the h1's display, so this renders
-                                    identically — it is a document-outline fix,
+                                    identically - it is a document-outline fix,
                                     not a visual one.
                                 */}
                                 <span className="card-title text-fg leading-none block">
@@ -263,7 +263,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                             {Object.values(CITIES).map((city) => (
                                                 <div key={city.slug}>
                                                     {/* The city name is the link to that city's job
-                                                        work hub — the pillar above the nine below it. */}
+                                                        work hub - the pillar above the nine below it. */}
                                                     <Link
                                                         href={jobWorkUrl(city.slug)}
                                                         onClick={closeMenus}
@@ -300,7 +300,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                             </div>
 
                             {/* Designs sits next to Services because it is the same
-                                kind of thing — something we make — rather than
+                                kind of thing - something we make - rather than
                                 something to read. */}
                             <div className="relative">
                                 <button
@@ -352,7 +352,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
 
                             <Link href="/gallery" className="nav-link">Gallery</Link>
 
-                            {/* Resources groups the reading material — Blog and About —
+                            {/* Resources groups the reading material - Blog and About -
                                 so the bar stays at four items as pages get added. */}
                             <div className="relative">
                                 <button
@@ -423,7 +423,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                     {mobileMenuOpen && (
                         /*
                          * Services collapse by default. Previously all six rendered
-                         * their eight localities at once — about 60 rows the user had
+                         * their eight localities at once - about 60 rows the user had
                          * to scroll past to reach Gallery or Contact.
                          * Capped height keeps the sticky header usable on short screens.
                          */
@@ -458,7 +458,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                             {open && (
                                                 <div className="bg-surface-2 border-t border-line px-2 py-2">
                                                     {/* The hub first, marked out from the categories
-                                                        below it — the city header itself is the
+                                                        below it - the city header itself is the
                                                         accordion toggle on mobile, so it cannot also
                                                         be the link. */}
                                                     <Link

@@ -20,13 +20,13 @@ import { cld, cldPoster } from '@/lib/cloudinary'
  * Sizing follows OurWorks rather than inventing its own: a fixed tile height
  * with the width falling out of each clip's aspect ratio. Phone footage is
  * portrait, and a portrait video given a full column turns into a tower that
- * pushes everything below it off the screen — these are meant to read as a row
+ * pushes everything below it off the screen - these are meant to read as a row
  * of small tiles sitting under the photographs, not as a feature.
  *
  * Every clip autoplays, muted and looping. `muted` and `playsInline` are what
  * make that permitted at all: an unmuted autoplay is blocked outright, and
  * without playsInline iOS takes the video fullscreen rather than playing it in
- * place. `controls` is not optional either — WCAG 2.2.2 wants a way to stop
+ * place. `controls` is not optional either - WCAG 2.2.2 wants a way to stop
  * motion running past five seconds, and a loop runs forever.
  *
  * The cost of running the whole row at once is paid down at delivery rather
@@ -39,7 +39,7 @@ import { cld, cldPoster } from '@/lib/cloudinary'
 // still big, sized so four portrait clips fit one line inside max-w-7xl: at
 // 440px tall a 9:16 clip is ~247px wide, so 4 tiles plus gaps come to ~1036px
 // against the 1232px of usable width. A fifth wraps rather than shrinking the
-// rest, which is the right failure — a row of five slivers reads as nothing.
+// rest, which is the right failure - a row of five slivers reads as nothing.
 const SOLO_H_MOBILE = 380
 const SOLO_H = 560
 const TILE_H_MOBILE = 300

@@ -4,7 +4,7 @@
  * Kept as a plain .mjs module, separate from lib/cities.js, so the release
  * script can import it under bare Node. lib/cities.js imports a JSON file,
  * which Node ESM will not load without an import assertion that the Next
- * bundler does not need — splitting the data avoids that mismatch entirely.
+ * bundler does not need - splitting the data avoids that mismatch entirely.
  */
 
 export const MADURAI_LOCALITIES = [
@@ -38,7 +38,7 @@ export const COIMBATORE_LOCALITIES = [
 
 /*
  * Salem. Ordered so the first releases are the areas with the most search
- * volume and the most industrial activity — Fairlands, Hasthampatti and Ammapet
+ * volume and the most industrial activity - Fairlands, Hasthampatti and Ammapet
  * first, the outlying district towns last. The cron releases from the top, so
  * this ordering decides which pages exist first.
  *

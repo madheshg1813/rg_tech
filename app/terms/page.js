@@ -9,7 +9,7 @@ import { organizationSchema, jsonLdGraph, jsonLdScript } from '@/lib/schema'
  * These are general commercial terms for metal job work, written to match how
  * this business actually operates (quote from a drawing, advance on order,
  * balance before dispatch, customer-supplied artwork). They are a starting
- * point, not legal advice — they should be reviewed by a solicitor before being
+ * point, not legal advice - they should be reviewed by a solicitor before being
  * relied on in a dispute, and the payment percentages and lead times below must
  * be confirmed against what the business really commits to.
  */
@@ -94,7 +94,7 @@ const SECTIONS = [
         id: 'changes',
         heading: 'Changes and cancellation',
         body: [
-            'Changes to a confirmed order — including revised drawings, material or quantity — must be requested in writing and are subject to a re-quote of price and lead time.',
+            'Changes to a confirmed order - including revised drawings, material or quantity - must be requested in writing and are subject to a re-quote of price and lead time.',
             'Once cutting has begun, an order cannot be cancelled without charge. Where you cancel after confirmation, you remain liable for material already purchased or committed for your job and for work already carried out.',
             'Custom and made-to-order parts cannot be returned for a refund where they conform to the drawing supplied.',
         ],
@@ -135,7 +135,7 @@ const SECTIONS = [
         heading: 'Governing law and jurisdiction',
         body: [
             'These terms and any order placed under them are governed by the laws of India. The courts at Chennai, Tamil Nadu have exclusive jurisdiction over any dispute arising from them.',
-            'We would ask that you raise any dispute with us directly first — most issues are resolved faster by a phone call to the workshop than by correspondence.',
+            'We would ask that you raise any dispute with us directly first - most issues are resolved faster by a phone call to the workshop than by correspondence.',
         ],
     },
 ]

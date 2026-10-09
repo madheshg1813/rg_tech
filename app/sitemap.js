@@ -78,7 +78,7 @@ export default async function sitemap() {
     }))
 
     /*
-     * Stainless steel laser cutting. Chennai only for now — the resolver exists
+     * Stainless steel laser cutting. Chennai only for now - the resolver exists
      * for every city, but the route is wired in app/chennai/[...slug] alone, so
      * listing the other three here would put 404s in the sitemap.
      */
@@ -90,7 +90,7 @@ export default async function sitemap() {
     }]
 
     // Laser cutting job work: the commercial pillar above the categories.
-    // Highest priority of the city pages — it is the top of the funnel and the
+    // Highest priority of the city pages - it is the top of the funnel and the
     // hub the others are linked from.
     const jobWorkPages = Object.values(CITIES).map((city) => ({
         url: `${BASE_URL}${jobWorkUrl(city.slug)}`,
@@ -103,7 +103,7 @@ export default async function sitemap() {
      * The 200 city deity pages used to be listed here. They now 301 to their
      * design gallery (see cityDeityRedirects in next.config.js), and a sitemap
      * that advertises a redirect asks Google to crawl a page only to be sent
-     * somewhere else — so they are gone rather than merely deprioritised.
+     * somewhere else - so they are gone rather than merely deprioritised.
      *
      * The galleries they point at are listed below, which is where the
      * crawl budget should go.
@@ -117,7 +117,7 @@ export default async function sitemap() {
      * fifty galleries and the destination the 200 redirected city pages now
      * funnel toward, so it is the page to have crawled soonest.
      *
-     * publishedGodDesigns() returns only galleries that actually have images —
+     * publishedGodDesigns() returns only galleries that actually have images -
      * an empty one is noindex on the page itself, so listing it here would
      * contradict that and point crawlers at a "coming soon" panel.
      */

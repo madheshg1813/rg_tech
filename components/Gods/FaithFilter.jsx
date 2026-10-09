@@ -7,7 +7,7 @@ import Link from 'next/link'
  * sections in place, so choosing "Christian" changed nothing in the address
  * bar: a filtered view could not be shared, bookmarked or reached with the
  * back button, and a refresh dropped you back on "All designs". Each faith
- * already had its own page — /designs/gods/hindu, /christian, /islamic — with
+ * already had its own page - /designs/gods/hindu, /christian, /islamic - with
  * its own title, lead and structured data, so the tabs now simply go there.
  *
  * That also means no client component. Every page is server-rendered with only

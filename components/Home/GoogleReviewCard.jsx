@@ -7,7 +7,7 @@ import { Stars, GoogleG, starsOf } from '@/components/Home/GoogleReviewParts'
 /*
  * One Google review, as a card in the site's own style.
  *
- * A client component, but only for the Read more toggle — the markup below
+ * A client component, but only for the Read more toggle - the markup below
  * still server-renders in full, which is the whole point (see the note in
  * components/Home/GoogleReviews.jsx about why the library's own renderer is
  * not used). Nothing here reads the DOM or runs an effect, so the collapsed
@@ -16,7 +16,7 @@ import { Stars, GoogleG, starsOf } from '@/components/Home/GoogleReviewParts'
 
 /*
  * Roughly the length at which a review overflows six clamped lines. Only used
- * to decide whether the toggle is worth showing — the clamp itself is CSS, so
+ * to decide whether the toggle is worth showing - the clamp itself is CSS, so
  * being a little out either way costs nothing but a redundant button.
  */
 const LIKELY_CLAMPED_OVER = 260
@@ -76,7 +76,7 @@ export default function GoogleReviewCard({ review }) {
             <blockquote className="mb-6 flex-1">
                 {/*
                     Plain, not italic and not in quote marks. These are somebody
-                    else's words shown verbatim under a Google mark — setting
+                    else's words shown verbatim under a Google mark - setting
                     them in quoted italics styles them as a pull-quote we chose,
                     which is exactly the impression a review section should not
                     give. It also costs legibility at six clamped lines.

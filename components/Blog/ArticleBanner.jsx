@@ -7,7 +7,7 @@ import Image from 'next/image'
  *
  * Stays dark while the page heroes are light. It sits inside the white article
  * page and needs presence, so it uses the dark band surface. .hero-grid-paper is
- * deliberately absent — its hairlines are --color-line and vanish on dark.
+ * deliberately absent - its hairlines are --color-line and vanish on dark.
  */
 export default function ArticleBanner({
     eyebrow,
