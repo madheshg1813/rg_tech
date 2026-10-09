@@ -105,22 +105,38 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
         : DESIGN_LINKS
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const [servicesDropdown, setServicesDropdown] = useState(false)
-    const [resourcesDropdown, setResourcesDropdown] = useState(false)
-    const [designsDropdown, setDesignsDropdown] = useState(false)
     const [openMobileService, setOpenMobileService] = useState(null)
+
+    /*
+     * One value naming the open menu, not three independent booleans.
+     *
+     * Each menu opened on its own button's mouseenter but closed only on its
+     * own panel's mouseleave. Moving the pointer from Services across to
+     * Designs opened Designs without ever entering the Services panel, so
+     * nothing closed it — and with three booleans there was nothing stopping
+     * all three being true at once, which is exactly what happened.
+     *
+     * A single value makes that unrepresentable: opening one closes the rest by
+     * construction.
+     */
+    const [openMenu, setOpenMenu] = useState(null)
+    const closeMenus = () => setOpenMenu(null)
+    const toggleMenu = (name) => setOpenMenu((prev) => (prev === name ? null : name))
+
+    const servicesDropdown = openMenu === 'services'
+    const designsDropdown = openMenu === 'designs'
+    const resourcesDropdown = openMenu === 'resources'
+
     const pathname = usePathname()
 
     const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev)
-    const toggleServicesDropdown = () => setServicesDropdown(prev => !prev)
-    const toggleResourcesDropdown = () => setResourcesDropdown(prev => !prev)
-    const toggleDesignsDropdown = () => setDesignsDropdown(prev => !prev)
+    const toggleServicesDropdown = () => toggleMenu('services')
+    const toggleResourcesDropdown = () => toggleMenu('resources')
+    const toggleDesignsDropdown = () => toggleMenu('designs')
 
     useEffect(() => {
         setMobileMenuOpen(false)
-        setServicesDropdown(false)
-        setResourcesDropdown(false)
-        setDesignsDropdown(false)
+        closeMenus()
         setOpenMobileService(null)
     }, [pathname])
 
@@ -210,11 +226,17 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                             </div>
                         </Link>
 
-                        <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
+                        <nav
+                            className="hidden lg:flex items-center gap-4 xl:gap-8"
+                            /* Leaving the bar entirely closes the open menu: the
+                               panels sit below the triggers, so a pointer can exit
+                               upward or sideways without crossing either. */
+                            onMouseLeave={closeMenus}
+                        >
                             <div className="relative group">
                                 <button
                                     onClick={toggleServicesDropdown}
-                                    onMouseEnter={() => !servicesDropdown && setServicesDropdown(true)}
+                                    onMouseEnter={() => setOpenMenu('services')}
                                     aria-expanded={servicesDropdown}
                                     className="nav-link flex items-center gap-1.5 py-2"
                                 >
@@ -230,7 +252,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                      * "Serving All Areas" grid on every page.
                                      */
                                     <div
-                                        onMouseLeave={() => setServicesDropdown(false)}
+                                        onMouseLeave={closeMenus}
                                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
                                     >
                                         {/* Two rows of two from the fourth city onward. A
@@ -244,7 +266,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                                         work hub — the pillar above the nine below it. */}
                                                     <Link
                                                         href={jobWorkUrl(city.slug)}
-                                                        onClick={() => setServicesDropdown(false)}
+                                                        onClick={closeMenus}
                                                         className="flex items-center gap-2 px-3 pb-3 mb-2 border-b border-line group/city hover:border-accent-ink/40 transition-colors"
                                                     >
                                                         <MapPin className="w-3.5 h-3.5 text-accent" />
@@ -261,7 +283,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                                         <Link
                                                             key={svc.href}
                                                             href={svc.href}
-                                                            onClick={() => setServicesDropdown(false)}
+                                                            onClick={closeMenus}
                                                             className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-surface-2 transition-colors group/link"
                                                         >
                                                             <ChevronRight className="w-3.5 h-3.5 text-fg-subtle group-hover/link:text-accent flex-shrink-0" />
@@ -283,7 +305,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                             <div className="relative">
                                 <button
                                     onClick={toggleDesignsDropdown}
-                                    onMouseEnter={() => !designsDropdown && setDesignsDropdown(true)}
+                                    onMouseEnter={() => setOpenMenu('designs')}
                                     aria-expanded={designsDropdown}
                                     className="nav-link flex items-center gap-1.5 py-2"
                                 >
@@ -292,7 +314,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                 </button>
                                 {designsDropdown && (
                                     <div
-                                        onMouseLeave={() => setDesignsDropdown(false)}
+                                        onMouseLeave={closeMenus}
                                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
                                     >
                                         <div className="bg-white rounded-2xl shadow-2xl border border-line p-2 w-[19rem]">
@@ -300,7 +322,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                                 <Link
                                                     key={href}
                                                     href={href}
-                                                    onClick={() => setDesignsDropdown(false)}
+                                                    onClick={closeMenus}
                                                     className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-surface-2 transition-colors group/link"
                                                 >
                                                     <span className="w-8 h-8 rounded-lg bg-cta/10 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -318,7 +340,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                             ))}
                                             <Link
                                                 href="/designs/gods"
-                                                onClick={() => setDesignsDropdown(false)}
+                                                onClick={closeMenus}
                                                 className="block px-3 py-2.5 mt-1 border-t border-line text-sm font-semibold text-accent hover:bg-surface-2 rounded-b-xl transition-colors"
                                             >
                                                 View all designs →
@@ -335,7 +357,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                             <div className="relative">
                                 <button
                                     onClick={toggleResourcesDropdown}
-                                    onMouseEnter={() => !resourcesDropdown && setResourcesDropdown(true)}
+                                    onMouseEnter={() => setOpenMenu('resources')}
                                     aria-expanded={resourcesDropdown}
                                     className="nav-link flex items-center gap-1.5 py-2"
                                 >
@@ -344,7 +366,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                 </button>
                                 {resourcesDropdown && (
                                     <div
-                                        onMouseLeave={() => setResourcesDropdown(false)}
+                                        onMouseLeave={closeMenus}
                                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 animate-in fade-in slide-in-from-top-2"
                                     >
                                         <div className="bg-white rounded-2xl shadow-2xl border border-line p-2 w-64">
@@ -352,7 +374,7 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                                 <Link
                                                     key={href}
                                                     href={href}
-                                                    onClick={() => setResourcesDropdown(false)}
+                                                    onClick={closeMenus}
                                                     className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-surface-2 transition-colors group/link"
                                                 >
                                                     <span className="flex-shrink-0 mt-0.5">
