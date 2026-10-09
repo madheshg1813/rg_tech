@@ -30,7 +30,7 @@ export function starsOf(starRating) {
 
 export function Stars({ count }) {
     return (
-        <span className="inline-flex gap-1" aria-label={`${count} out of 5 stars`}>
+        <span className="inline-flex gap-1" role="img" aria-label={`${count} out of 5 stars`}>
             {Array.from({ length: 5 }, (_, i) => (
                 <Star
                     key={i}

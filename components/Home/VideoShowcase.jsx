@@ -1,5 +1,6 @@
 import { videos } from '@/lib/videos'
 import { cld, cldPoster } from '@/lib/cloudinary'
+import LazyVideo from './LazyVideo'
 
 /*
  * Clips from the floor, between the hero and the Our Works strip.
@@ -65,10 +66,12 @@ function Clip({ video, solo }) {
 
     // Falls back to the local path until the upload script has run, and to the
     // entry's own poster (then to none) until Cloudinary can generate one.
-    // q_auto:eco rather than q_auto. It is a visible tradeoff on a full-bleed
-    // hero video and an invisible one at 250px, and here it is paid four times
-    // on every page load: 3.89MB across the row becomes 2.73MB.
-    const src = cld(video.src, { width: deliveryWidth, quality: 'auto:eco' })
+    //
+    // q_auto, not q_auto:eco. The eco tier was paying for a load-time problem
+    // that LazyVideo now solves outright -- a clip that is not fetched until it
+    // scrolls into view costs nothing on first paint whatever its quality, so
+    // there is no longer any reason to send a worse one.
+    const src = cld(video.src, { width: deliveryWidth })
     const poster = cldPoster(video.src, deliveryWidth) || (video.poster ? cld(video.poster) : undefined)
 
     return (
@@ -89,18 +92,12 @@ function Clip({ video, solo }) {
                     '--tile-w': `${Math.round(h * ratio)}px`,
                 }}
             >
-                <video
+                <LazyVideo
                     src={src}
                     poster={poster}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="auto"
                     // Deliberately generic without a label: one that names the
                     // wrong process is worse for a screen reader than none.
-                    aria-label={video.title || 'Video of work at RG Tech Engineering Works'}
+                    label={video.title || 'Video of work at RG Tech Engineering Works'}
                     className="block h-full w-full object-cover bg-ink"
                 />
             </div>

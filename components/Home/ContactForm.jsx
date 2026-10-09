@@ -167,8 +167,14 @@ const ContactForm = () => {
                             />
 
                             <div className="grid md:grid-cols-2 gap-6">
+                                {/* The first <option> is the visible label, but a
+                                    placeholder option is not an accessible name --
+                                    a screen reader announced these two only as
+                                    "combo box". aria-label supplies the name
+                                    without adding anything on screen. */}
                                 <select
                                     name="service" value={formData.service} onChange={handleInputChange}
+                                    aria-label="Select service"
                                     className={`${inputCls} appearance-none`} required disabled={sending}
                                 >
                                     <option value="">Select Service *</option>
@@ -178,6 +184,7 @@ const ContactForm = () => {
                                 </select>
                                 <select
                                     name="material" value={formData.material} onChange={handleInputChange}
+                                    aria-label="Select material"
                                     className={`${inputCls} appearance-none`} disabled={sending}
                                 >
                                     <option value="">Select Material</option>

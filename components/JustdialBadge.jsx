@@ -51,7 +51,10 @@ export default function JustdialBadge({ onDark = false, className = '' }) {
                     : 'border-line bg-surface hover:border-line-strong'
             } ${className}`}
         >
-            <span className={`meta-label ${onDark ? 'text-fg-invert-muted' : 'text-fg-subtle'}`}>
+            {/* fg-muted, not fg-subtle. At 11px bold this counts as normal-sized
+                text, so it needs the full 4.5:1 -- #8397AA on white measures
+                3.01:1 and fails. #54687C measures 5.76:1. */}
+            <span className={`meta-label ${onDark ? 'text-fg-invert-muted' : 'text-fg-muted'}`}>
                 Listed on
             </span>
             {/* Height-locked, width auto: the wordmark is 3.8:1, so a fixed

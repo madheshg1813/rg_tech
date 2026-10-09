@@ -45,12 +45,16 @@ function toCard(work) {
     const natural = size ? size.width / size.height : 1
     const ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, natural))
 
-    // The two slot sizes the layout renders, plus each at double density. The
-    // 2x entries are derived from the rounded 1x width rather than from the
-    // height, so a 2x device asks for a candidate that exists exactly instead
-    // of rounding past it to the next one up.
+    // Both card heights, each at 1x and 2x.
+    //
+    // This was briefly cut to one slot to shrink the HTML -- 50 photos rendered
+    // twice for the loop emit a lot of URL text, and every URL is written again
+    // into the hydration payload. Measured, that saved 58KB of HTML and moved
+    // the score not at all, while costing phones real image bytes: a 220px card
+    // was being handed the 260px candidate, which is 40% more pixels by area.
+    // Lighthouse put the waste at ~107KB across the strip. Reverted.
     const slots = [CARD_H_MOBILE, CARD_H].map((h) => ({ w: Math.round(h * ratio), h }))
-    const variants = [...slots, ...slots.map((s) => ({ w: s.w * 2, h: s.h * 2 }))]
+    const variants = [...slots, ...slots.map((v) => ({ w: v.w * 2, h: v.h * 2 }))]
         .sort((a, b) => a.w - b.w)
 
     // Only the frames that got clamped are actually cropped; g_auto keeps the

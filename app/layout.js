@@ -22,7 +22,11 @@ const sora = Sora({
     variable: "--font-display-brand",
     subsets: ["latin"],
     display: "swap",
-    weight: ["600", "700", "800"],
+    // 600 is deliberately absent: every --font-heading rule in globals.css
+    // sets 700 or 800, and every font-heading class in the components pairs
+    // with font-bold or font-extrabold. The two font-weight:600 rules on the
+    // site (.nav-link and the stat pill) set no family, so they inherit Inter.
+    weight: ["700", "800"],
 });
 
 // Inter for body copy. Designed for screen reading at small sizes, and neutral
