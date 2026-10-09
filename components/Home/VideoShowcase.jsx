@@ -72,15 +72,21 @@ function Clip({ video, solo }) {
     const poster = cldPoster(video.src, deliveryWidth) || (video.poster ? cld(video.poster) : undefined)
 
     return (
-        <figure className="m-0 flex flex-col">
+        <figure className="m-0 flex flex-col snap-center shrink-0 sm:shrink">
+            {/*
+                On a phone the width is viewport-relative, not a pixel tile: one
+                clip takes 72vw so the next one peeks at the edge, which is what
+                tells a thumb there is more to the right. Height follows the
+                clip's own ratio off that width. From 640px up it returns to the
+                fixed-height tile the row is built on.
+            */}
             <div
                 className="framed overflow-hidden h-[var(--tile-h-mobile)] sm:h-[var(--tile-h)] w-[var(--tile-w-mobile)] sm:w-[var(--tile-w)]"
                 style={{
-                    '--tile-h-mobile': `${hMobile}px`,
+                    '--tile-h-mobile': `calc(72vw / ${ratio.toFixed(4)})`,
                     '--tile-h': `${h}px`,
-                    '--tile-w-mobile': `${Math.round(hMobile * ratio)}px`,
+                    '--tile-w-mobile': '72vw',
                     '--tile-w': `${Math.round(h * ratio)}px`,
-                    maxWidth: '100%',
                 }}
             >
                 <video
@@ -119,7 +125,14 @@ const VideoShowcase = () => {
             className="relative isolate overflow-hidden bg-surface border-b border-line py-8 sm:py-10"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                {/*
+                    A snap rail on phones and the wrapped row from 640px up. The
+                    negative margin lets the rail bleed to both screen edges
+                    while scroll-padding keeps the first clip aligned with the
+                    page gutter, so it starts flush instead of jammed against
+                    the edge.
+                */}
+                <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-4 px-4 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-x-visible sm:px-0 sm:gap-4">
                     {videos.map((video) => (
                         <Clip key={video.src} video={video} solo={solo} />
                     ))}
