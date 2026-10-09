@@ -8,7 +8,6 @@ import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import Testimonials from '@/components/Home/Testimonials'
 import FindUsOnline from '@/components/Home/FindUsOnline'
 import Process from '@/components/Home/Process'
-import VideoShowcase from '@/components/Home/VideoShowcase'
 import FAQ from '@/components/Home/FAQ'
 import ContactForm from '@/components/Home/ContactForm'
 import { faqs } from '@/lib/data'
@@ -82,7 +81,6 @@ export default function Home() {
             <Hero />
             <TrustStrip />
             <OurWorks />
-            <VideoShowcase />
             <RollingLogos />
             <Services />
             <Industries />
