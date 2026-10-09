@@ -106,6 +106,27 @@ export default function LazyVideo({ src, poster, label, className }) {
         <div ref={hostRef} className="h-full w-full">
             {show ? (
                 <video
+                    /*
+                     * muted is set on the element itself, not left to the JSX
+                     * prop alone.
+                     *
+                     * React applies `muted` as a DOM property rather than
+                     * writing the attribute, and this element is created after
+                     * mount. By then the visitor has scrolled, so the page has
+                     * user activation and the browser will happily autoplay
+                     * WITH sound if the property has not landed before
+                     * playback starts. The ref runs before the browser gets a
+                     * chance, so the clip can never open loud.
+                     *
+                     * `controls` stays, so sound remains one click away for
+                     * anyone who wants it.
+                     */
+                    ref={(el) => {
+                        if (el) {
+                            el.muted = true
+                            el.defaultMuted = true
+                        }
+                    }}
                     src={src}
                     poster={poster}
                     autoPlay
