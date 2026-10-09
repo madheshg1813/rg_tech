@@ -29,23 +29,23 @@ const STATS = [
 
 const TrustStrip = () => {
     return (
-        <section className="border-b border-line bg-surface-2 py-8 sm:py-10">
+        <section className="border-b border-line bg-surface-2 py-5 sm:py-7">
             <div className="shell">
-                <dl className="grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4">
+                <dl className="grid grid-cols-2 gap-x-4 gap-y-5 lg:grid-cols-4">
                     {STATS.map(({ value, label }) => (
                         <div key={label} className="text-center">
                             <dt className="sr-only">{label}</dt>
                             <dd className="m-0">
-                                <span className="block font-heading text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-accent sm:text-[2.5rem]">
+                                <span className="block font-heading text-[1.75rem] font-extrabold leading-none tracking-[-0.03em] text-accent sm:text-[2.125rem]">
                                     {value}
                                 </span>
-                                <span className="meta-label mt-2 block text-fg-subtle">{label}</span>
+                                <span className="meta-label mt-1.5 block text-fg-subtle">{label}</span>
                             </dd>
                         </div>
                     ))}
                 </dl>
 
-                <p className="mt-6 text-center text-xs text-fg-subtle">
+                <p className="mt-4 text-center text-xs text-fg-subtle">
                     Cut and fabricated in Chennai · Delivered to {deliveryCities.length} cities across India
                 </p>
             </div>
