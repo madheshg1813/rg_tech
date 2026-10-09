@@ -52,10 +52,15 @@ const Hero = () => {
 
                     {/* ── Left column ──────────────────────────────────── */}
                     <div>
-                        <h2 className="display-title text-fg text-balance">
+                        {/*
+                            h1, now that components/Header.jsx no longer wraps the
+                            logo lockup in one. The homepage had been left with no
+                            h1 at all. Same class, so nothing moves.
+                        */}
+                        <h1 className="display-title text-fg text-balance">
                             <span className="text-accent">Precision</span>{' '}
                             CNC Laser Cutting &amp; Fabrication Services
-                        </h2>
+                        </h1>
 
                         <p className="section-lead mt-5 max-w-[54ch] sm:mt-6">
                             High-precision laser cutting, sheet metal fabrication and engineering

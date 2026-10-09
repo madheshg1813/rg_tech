@@ -183,9 +183,19 @@ const Header = ({ setCatalogueModalOpen, designFaiths }) => {
                                 style={{ width: "auto" }}
                             />
                             <div className="transition-all hidden sm:block">
-                                <h1 className="card-title text-fg leading-none">
+                                {/*
+                                    A span, not an h1. The logo lockup sits in
+                                    the header on all 1,287 pages, so every page
+                                    opened with "RG Tech Engineering" as its
+                                    first h1 and its real h1 came second. The
+                                    classes are unchanged and `block` restores
+                                    the h1's display, so this renders
+                                    identically — it is a document-outline fix,
+                                    not a visual one.
+                                */}
+                                <span className="card-title text-fg leading-none block">
                                     RG Tech <span className="text-accent">Engineering</span>
-                                </h1>
+                                </span>
                                 <p className="meta-label text-fg-muted mt-1 opacity-70 hidden sm:max-lg:block xl:block">
                                     CNC Fiber Laser Specialist
                                 </p>

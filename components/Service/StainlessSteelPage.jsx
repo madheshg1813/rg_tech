@@ -4,7 +4,7 @@ import {
     Zap, Layers, Wind, Shield, Ruler, Clock, Send, FileText, Truck,
     ArrowRight, MessageCircle, Phone, Check, Plus, MapPin,
 } from 'lucide-react'
-import { STAINLESS_STEEL, stainlessSteelCopy, stainlessSteelUrl } from '@/lib/stainlessSteel'
+import { STAINLESS_STEEL, stainlessSteelCopy, stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
 import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
@@ -24,6 +24,25 @@ import JustdialBadge from '@/components/JustdialBadge'
 
 const IconMap = { Zap, Layers, Wind, Shield, Ruler, Clock, Send, FileText, Truck }
 
+
+/*
+ * Cross-links to the other material pillars.
+ *
+ * The four material pages had no link between them: each linked only to
+ * /contact, WhatsApp, and itself in other cities. A buyer comparing stainless
+ * against mild steel had to go back to the menu, and the four pages passed no
+ * authority to one another.
+ *
+ * Built from the same chip markup as the "Also Serving" band below, so no new
+ * styling enters the page. `cities` lists where each pillar is routed.
+ */
+const MATERIAL_PILLARS = [
+    { slug: 'aluminum-laser-cutting-services',   label: 'Aluminium laser cutting', cities: ['chennai', 'madurai', 'coimbatore', 'salem'] },
+    { slug: 'copper-laser-cutting-services',     label: 'Copper laser cutting',    cities: ['chennai', 'madurai', 'coimbatore', 'salem'] },
+    { slug: 'mild-steel-laser-cutting-services', label: 'Mild steel laser cutting', cities: ['chennai', 'madurai', 'coimbatore', 'salem'] },
+    { slug: 'stainless-steel-laser-cutting',     label: 'Stainless steel laser cutting', cities: ['chennai'] },
+]
+
 const HERO_CREDENTIALS = ['15+ Years', '1000+ Projects']
 
 const OTHER_CITIES = Object.values(CITIES)
@@ -31,6 +50,13 @@ const OTHER_CITIES = Object.values(CITIES)
 export default function StainlessSteelPage({ city, works, articles }) {
     const copy = stainlessSteelCopy(city)
     const a = STAINLESS_STEEL
+
+    /* Other cities this pillar is actually routed in. Empty today (Chennai
+     * only), which is why the "Also Serving" band below is skipped entirely
+     * rather than rendering a heading with no links under it. */
+    const otherCities = OTHER_CITIES.filter(
+        (c) => c.slug !== city.slug && STAINLESS_STEEL_CITIES.includes(c.slug)
+    )
 
     return (
         <div className="bg-white">
@@ -210,7 +236,29 @@ export default function StainlessSteelPage({ city, works, articles }) {
                         </a>
                     </div>
                 </div>
-            </section>
+            
+                    {/* Other materials, linked from the same chip style used by
+                        the "Also Serving" band. Filtered to pillars actually
+                        routed in this city, so no link can 404. */}
+                    <div className="mt-14 pt-10 border-t border-line text-center">
+                        <p className="eyebrow mb-4">Other Materials We Cut</p>
+                        <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
+                            {MATERIAL_PILLARS
+                                .filter((m) => m.slug !== a.slug && m.cities.includes(city.slug))
+                                .map((m) => (
+                                    <li key={m.slug}>
+                                        <Link
+                                            href={`/${city.slug}/${m.slug}`}
+                                            className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-accent-ink/40 hover:text-fg transition-colors"
+                                        >
+                                            <Layers className="w-3.5 h-3.5 text-accent" />
+                                            {m.label} in {city.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                </section>
 
             {/* ── 6. FAQs ─────────────────────────────────────────────────── */}
             <section className="section bg-surface-2 border-t border-line">
@@ -251,11 +299,12 @@ export default function StainlessSteelPage({ city, works, articles }) {
                 pages to link up from, the header mega-menu only renders while it
                 is open, and the footer carries the Chennai URL only. Four pages
                 that cross-link each other are reachable from any one of them. */}
+            {otherCities.length > 0 && (
             <section className="py-14 bg-white border-t border-line">
                 <div className="shell max-w-5xl text-center">
                     <p className="eyebrow mb-4">Also Serving</p>
                     <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
-                        {OTHER_CITIES.filter((c) => c.slug !== city.slug).map((c) => (
+                        {otherCities.map((c) => (
                             <li key={c.slug}>
                                 <Link
                                     href={stainlessSteelUrl(c.slug)}
@@ -269,6 +318,7 @@ export default function StainlessSteelPage({ city, works, articles }) {
                     </ul>
                 </div>
             </section>
+            )}
 
             {/* ── 7. Related articles ─────────────────────────────────────── */}
             {articles}
