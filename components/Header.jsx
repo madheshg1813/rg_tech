@@ -12,6 +12,7 @@ import { pillarServices } from '@/lib/data'
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
 import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
+import { STAINLESS_STEEL, stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
 import { jobWorkUrl } from '@/lib/jobWork'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
@@ -86,6 +87,13 @@ function cityServiceLinks(citySlug) {
         { name: ALUMINUM.name, href: aluminumUrl(citySlug) },
         { name: COPPER.name, href: copperUrl(citySlug) },
         { name: MILD_STEEL.name, href: mildSteelUrl(citySlug) },
+        /* Only where the route exists. Unlike the other three material
+         * pillars this one is wired in Chennai alone, so listing it
+         * unconditionally would put a 404 in the menu on every other
+         * city's pages. */
+        ...(STAINLESS_STEEL_CITIES.includes(citySlug)
+            ? [{ name: STAINLESS_STEEL.name, href: stainlessSteelUrl(citySlug) }]
+            : []),
     ]
 }
 

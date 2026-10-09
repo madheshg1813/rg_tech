@@ -10,6 +10,7 @@ import { pillarServices, GMB_URL, GMB_MAP_URL, GMB_REVIEW_URL, JUSTDIAL_URL, SOC
 import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
 import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
+import { STAINLESS_STEEL, stainlessSteelUrl } from '@/lib/stainlessSteel'
 import { JOB_WORK, jobWorkUrl } from '@/lib/jobWork'
 
 // Only the channels RG Tech actually has. Facebook, LinkedIn and Twitter were
@@ -88,6 +89,10 @@ const Footer = () => {
                                 { name: ALUMINUM.name, href: aluminumUrl('chennai') },
                                 { name: COPPER.name, href: copperUrl('chennai') },
                                 { name: MILD_STEEL.name, href: mildSteelUrl('chennai') },
+                                // Stainless was missing, leaving that pillar with almost
+                                // no inbound internal links. Chennai is the only city the
+                                // route is wired in, which is what this list already uses.
+                                { name: STAINLESS_STEEL.name, href: stainlessSteelUrl('chennai') },
                             ].map(({ name, href }) => (
                                 <li key={href}>
                                     <Link href={href} className="text-white/60 hover:text-white flex items-center gap-2 group transition-colors font-medium">
