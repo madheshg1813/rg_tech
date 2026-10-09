@@ -81,8 +81,8 @@ export default function Home() {
             />
             <Hero />
             <TrustStrip />
-            <OurWorks />
             <VideoShowcase />
+            <OurWorks />
             <RollingLogos />
             <Services />
             <Industries />

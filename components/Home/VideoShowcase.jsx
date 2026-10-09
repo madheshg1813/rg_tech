@@ -2,7 +2,13 @@ import { videos } from '@/lib/videos'
 import { cld, cldPoster } from '@/lib/cloudinary'
 
 /*
- * Clips from the floor, directly under the Our Works strip.
+ * Clips from the floor, between the hero and the Our Works strip.
+ *
+ * No heading. The section used to announce itself with an "In Motion" eyebrow,
+ * an "Our Work in Motion" title and a line of description, which was three
+ * lines of furniture above four small clips that explain themselves. The row
+ * now sits bare between the hero and the works gallery, on the same white
+ * ground as the hero so the two read as one opening rather than as two bands.
  *
  * A server component, like OurWorks: <video> needs no JavaScript to play, the
  * controls are the browser's own, and resolving Cloudinary URLs at render time
@@ -110,19 +116,9 @@ const VideoShowcase = () => {
     return (
         <section
             id="on-the-floor"
-            className="relative isolate overflow-hidden bg-surface-2 border-b border-line py-10 sm:py-12"
+            className="relative isolate overflow-hidden bg-surface border-b border-line py-8 sm:py-10"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="text-center mb-6 sm:mb-8">
-                    <p className="eyebrow mb-2">In Motion</p>
-                    <h3 className="section-title text-fg text-balance">
-                        Our Work in Motion
-                    </h3>
-                    <p className="mt-2 text-sm text-fg-muted max-w-2xl mx-auto text-pretty">
-                        Short clips from our Chennai floor and from jobs standing on site.
-                    </p>
-                </div>
-
                 <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                     {videos.map((video) => (
                         <Clip key={video.src} video={video} solo={solo} />
