@@ -42,7 +42,18 @@ const ROW_COUNT = 3
 
 function toCard(work) {
     const size = cldSize(work.src)
-    const natural = size ? size.width / size.height : 1
+
+    /*
+     * A quarter turn swaps the frame. These photographs were taken with the
+     * camera held sideways and carry no EXIF orientation tag, so the stored
+     * dimensions describe the sideways frame: 581x1032 portrait holding a door
+     * that is lying down. Rotating it upright makes the frame 1032x581, and the
+     * card has to follow or the upright door gets squeezed into a portrait slot.
+     */
+    const quarterTurn = work.rot === 90 || work.rot === 270
+    const natural = size
+        ? (quarterTurn ? size.height / size.width : size.width / size.height)
+        : 1
     const ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, natural))
 
     // Both card heights, each at 1x and 2x.
@@ -60,7 +71,10 @@ function toCard(work) {
     // Only the frames that got clamped are actually cropped; g_auto keeps the
     // cut centred on the panel rather than on empty floor.
     const url = (v) =>
-        cld(work.src, { width: v.w, height: v.h, crop: 'fill', gravity: 'auto', dpr: false })
+        cld(work.src, {
+            width: v.w, height: v.h, crop: 'fill', gravity: 'auto', dpr: false,
+            ...(work.rot ? { angle: work.rot } : {}),
+        })
 
     return {
         ...work,
