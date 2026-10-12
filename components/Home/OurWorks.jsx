@@ -71,18 +71,53 @@ function toCard(work) {
     }
 }
 
-const cards = works.map(toCard)
-const per = Math.ceil(cards.length / ROW_COUNT)
-
 // Slightly different durations: three rows at one speed read as a single rigid
 // block sliding, rather than as separate strips.
 const DURATIONS = ['62s', '74s', '68s']
 
-const rows = Array.from({ length: ROW_COUNT }, (_, i) => ({
-    items: cards.slice(i * per, i * per + per),
-    duration: DURATIONS[i],
-    reverse: i % 2 === 1,
-}))
+/*
+ * A row needs this many photographs before it loops convincingly. Fewer and
+ * the same frame comes back around while its neighbour is still on screen.
+ */
+const MIN_PER_ROW = 5
+
+/*
+ * The photographs to show for a service.
+ *
+ * Every entry in lib/works.js carries a `cat` matching a pillar service slug,
+ * and a service page shows ONLY its own category - the gates page shows gates
+ * and nothing else. Topping a short category up from the rest was tried first
+ * and rejected: it put air-conditioner covers and temple panels on the steel
+ * gates page, which is the problem this was meant to solve.
+ *
+ * With no category - the home page - the order is left exactly as authored,
+ * because that order is deliberate: installed gates in daylight lead because
+ * they are the strongest proof the business has.
+ */
+function selectWorks(category) {
+    if (!category) return works
+    const own = works.filter((w) => w.cat === category)
+    // A category with no photographs of its own falls back rather than
+    // rendering an empty strip.
+    return own.length ? own : works
+}
+
+/*
+ * Row count follows the number of photographs rather than being fixed at three.
+ * Nine gates split across three rows is three per row, which reads as a stalled
+ * carousel; across two it loops properly. Small categories collapse to a single
+ * row, which is a full strip rather than three sparse ones.
+ */
+function buildRows(list) {
+    const cards = list.map(toCard)
+    const rowCount = Math.max(1, Math.min(ROW_COUNT, Math.floor(cards.length / MIN_PER_ROW)))
+    const per = Math.ceil(cards.length / rowCount)
+    return Array.from({ length: rowCount }, (_, i) => ({
+        items: cards.slice(i * per, i * per + per),
+        duration: DURATIONS[i % DURATIONS.length],
+        reverse: i % 2 === 1,
+    }))
+}
 
 function Card({ item }) {
     return (
@@ -132,7 +167,13 @@ function Row({ row }) {
     )
 }
 
-const OurWorks = () => {
+/**
+ * @param {string} [category] a pillar service slug, e.g. 'steel-gates'. Omit on
+ *   the home page to show everything in its authored order.
+ */
+const OurWorks = ({ category }) => {
+    const rows = buildRows(selectWorks(category))
+
     return (
         <section id="our-works" className="section bg-surface-2 border-y border-line overflow-hidden">
             <div className="shell mb-12">

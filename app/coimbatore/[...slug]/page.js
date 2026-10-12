@@ -185,7 +185,11 @@ export default async function Page({ params }) {
                 pathName={page.pathName}
                 metaTitle={page.metaTitle}
                 faqs={page.faqs}
-                works={isPillar ? <OurWorks /> : null}
+                /* The strip leads with this service's own work: a gates page
+                       opens with gates, a doors page with doors. Material
+                       pillars above keep the full set, since those pages are
+                       about the metal rather than one product. */
+                    works={isPillar ? <OurWorks category={serviceKeyOf(page.content)} /> : null}
                 articles={
                     isPillar && recommended.length
                         ? <RecommendedArticles posts={recommended} serviceName={page.content.name} />
