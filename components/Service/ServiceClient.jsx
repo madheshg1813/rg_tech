@@ -14,8 +14,9 @@ import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
 import ServiceAreas from '@/components/Service/ServiceAreas'
 
-// Matches the home hero. "ISO Certified" is deliberately absent from both:
-// the Google rating beside it is verifiable, an unlinked badge is not.
+// Matches the home hero. The ISO credential is confirmed and carried by the
+// standards ribbon instead of here, so these two stay on one line without
+// wrapping and the clickable Google rating keeps the hero's proof slot.
 const HERO_CREDENTIALS = ['15+ Years', '1000+ Projects']
 
 const IconMap = {
