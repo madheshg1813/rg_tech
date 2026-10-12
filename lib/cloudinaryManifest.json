@@ -10061,15 +10061,6 @@
     "format": "jpg",
     "bytes": 20589
   },
-  "/works/rg-work-04.jpg": {
-    "publicId": "rg-tech/works/rg-work-04",
-    "resourceType": "image",
-    "version": 1787764630,
-    "width": 720,
-    "height": 960,
-    "format": "jpg",
-    "bytes": 63745
-  },
   "/works/rg-work-05.jpg": {
     "publicId": "rg-tech/works/rg-work-05",
     "resourceType": "image",
@@ -10096,15 +10087,6 @@
     "height": 1040,
     "format": "jpg",
     "bytes": 77456
-  },
-  "/works/rg-work-08.jpg": {
-    "publicId": "rg-tech/works/rg-work-08",
-    "resourceType": "image",
-    "version": 1787764631,
-    "width": 1280,
-    "height": 1189,
-    "format": "jpg",
-    "bytes": 210295
   },
   "/works/rg-work-09.jpg": {
     "publicId": "rg-tech/works/rg-work-09",
@@ -10142,15 +10124,6 @@
     "format": "jpg",
     "bytes": 21220
   },
-  "/works/rg-work-13.jpg": {
-    "publicId": "rg-tech/works/rg-work-13",
-    "resourceType": "image",
-    "version": 1787764631,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 49014
-  },
   "/works/rg-work-14.jpg": {
     "publicId": "rg-tech/works/rg-work-14",
     "resourceType": "image",
@@ -10159,24 +10132,6 @@
     "height": 554,
     "format": "jpg",
     "bytes": 25591
-  },
-  "/works/rg-work-15.jpg": {
-    "publicId": "rg-tech/works/rg-work-15",
-    "resourceType": "image",
-    "version": 1787764631,
-    "width": 488,
-    "height": 1040,
-    "format": "jpg",
-    "bytes": 28767
-  },
-  "/works/rg-work-17.jpg": {
-    "publicId": "rg-tech/works/rg-work-17",
-    "resourceType": "image",
-    "version": 1787764631,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 198497
   },
   "/works/rg-work-18.jpg": {
     "publicId": "rg-tech/works/rg-work-18",
@@ -10205,114 +10160,6 @@
     "format": "jpg",
     "bytes": 245370
   },
-  "/works/rg-work-21.jpg": {
-    "publicId": "rg-tech/works/rg-work-21",
-    "resourceType": "image",
-    "version": 1787764632,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 179729
-  },
-  "/works/rg-work-22.jpg": {
-    "publicId": "rg-tech/works/rg-work-22",
-    "resourceType": "image",
-    "version": 1787764632,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 186896
-  },
-  "/works/rg-work-23.jpg": {
-    "publicId": "rg-tech/works/rg-work-23",
-    "resourceType": "image",
-    "version": 1787764632,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 161396
-  },
-  "/works/rg-work-24.jpg": {
-    "publicId": "rg-tech/works/rg-work-24",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 164425
-  },
-  "/works/rg-work-25.jpg": {
-    "publicId": "rg-tech/works/rg-work-25",
-    "resourceType": "image",
-    "version": 1787764632,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 181183
-  },
-  "/works/rg-work-26.jpg": {
-    "publicId": "rg-tech/works/rg-work-26",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1400,
-    "height": 1050,
-    "format": "jpg",
-    "bytes": 204280
-  },
-  "/works/rg-work-27.jpg": {
-    "publicId": "rg-tech/works/rg-work-27",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1050,
-    "height": 1400,
-    "format": "jpg",
-    "bytes": 166652
-  },
-  "/works/rg-work-28.jpg": {
-    "publicId": "rg-tech/works/rg-work-28",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1050,
-    "height": 1400,
-    "format": "jpg",
-    "bytes": 141261
-  },
-  "/works/rg-work-29.jpg": {
-    "publicId": "rg-tech/works/rg-work-29",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1050,
-    "height": 1400,
-    "format": "jpg",
-    "bytes": 227113
-  },
-  "/works/rg-work-30.jpg": {
-    "publicId": "rg-tech/works/rg-work-30",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1050,
-    "height": 1400,
-    "format": "jpg",
-    "bytes": 99044
-  },
-  "/works/rg-work-31.jpg": {
-    "publicId": "rg-tech/works/rg-work-31",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1050,
-    "height": 1400,
-    "format": "jpg",
-    "bytes": 126387
-  },
-  "/works/rg-work-32.jpg": {
-    "publicId": "rg-tech/works/rg-work-32",
-    "resourceType": "image",
-    "version": 1787764633,
-    "width": 1050,
-    "height": 1400,
-    "format": "jpg",
-    "bytes": 66793
-  },
   "/works/rg-work-33.jpg": {
     "publicId": "rg-tech/works/rg-work-33",
     "resourceType": "image",
@@ -10321,114 +10168,6 @@
     "height": 519,
     "format": "jpg",
     "bytes": 150473
-  },
-  "/works/rg-work-34.jpg": {
-    "publicId": "rg-tech/works/rg-work-34",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 960,
-    "height": 1280,
-    "format": "jpg",
-    "bytes": 215839
-  },
-  "/works/rg-work-35.jpg": {
-    "publicId": "rg-tech/works/rg-work-35",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 1280,
-    "height": 960,
-    "format": "jpg",
-    "bytes": 152686
-  },
-  "/works/rg-work-36.jpg": {
-    "publicId": "rg-tech/works/rg-work-36",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 960,
-    "height": 1280,
-    "format": "jpg",
-    "bytes": 247416
-  },
-  "/works/rg-work-37.jpg": {
-    "publicId": "rg-tech/works/rg-work-37",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 1280,
-    "height": 960,
-    "format": "jpg",
-    "bytes": 216736
-  },
-  "/works/rg-work-38.jpg": {
-    "publicId": "rg-tech/works/rg-work-38",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 1280,
-    "height": 960,
-    "format": "jpg",
-    "bytes": 243624
-  },
-  "/works/rg-work-39.jpg": {
-    "publicId": "rg-tech/works/rg-work-39",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 581,
-    "height": 1032,
-    "format": "jpg",
-    "bytes": 68992
-  },
-  "/works/rg-work-40.jpg": {
-    "publicId": "rg-tech/works/rg-work-40",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 774,
-    "height": 1032,
-    "format": "jpg",
-    "bytes": 98132
-  },
-  "/works/rg-work-41.jpg": {
-    "publicId": "rg-tech/works/rg-work-41",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 1280,
-    "height": 960,
-    "format": "jpg",
-    "bytes": 214928
-  },
-  "/works/rg-work-42.jpg": {
-    "publicId": "rg-tech/works/rg-work-42",
-    "resourceType": "image",
-    "version": 1787764634,
-    "width": 581,
-    "height": 1032,
-    "format": "jpg",
-    "bytes": 55495
-  },
-  "/works/rg-work-43.jpg": {
-    "publicId": "rg-tech/works/rg-work-43",
-    "resourceType": "image",
-    "version": 1787764635,
-    "width": 720,
-    "height": 1280,
-    "format": "jpg",
-    "bytes": 132610
-  },
-  "/works/rg-work-44.jpg": {
-    "publicId": "rg-tech/works/rg-work-44",
-    "resourceType": "image",
-    "version": 1787764635,
-    "width": 581,
-    "height": 1032,
-    "format": "jpg",
-    "bytes": 61025
-  },
-  "/works/rg-work-45.jpg": {
-    "publicId": "rg-tech/works/rg-work-45",
-    "resourceType": "image",
-    "version": 1787764635,
-    "width": 581,
-    "height": 1032,
-    "format": "jpg",
-    "bytes": 70620
   },
   "/works/rg-work-46.jpg": {
     "publicId": "rg-tech/works/rg-work-46",
@@ -10457,15 +10196,6 @@
     "format": "jpg",
     "bytes": 107623
   },
-  "/works/rg-work-49.jpg": {
-    "publicId": "rg-tech/works/rg-work-49",
-    "resourceType": "image",
-    "version": 1787764635,
-    "width": 607,
-    "height": 1080,
-    "format": "jpg",
-    "bytes": 50031
-  },
   "/works/rg-work-50.jpg": {
     "publicId": "rg-tech/works/rg-work-50",
     "resourceType": "image",
@@ -10493,15 +10223,6 @@
     "format": "jpg",
     "bytes": 235984
   },
-  "/works/rg-work-53.jpg": {
-    "publicId": "rg-tech/works/rg-work-53",
-    "resourceType": "image",
-    "version": 1787764636,
-    "width": 720,
-    "height": 960,
-    "format": "jpg",
-    "bytes": 96414
-  },
   "/works/rg-work-54.jpg": {
     "publicId": "rg-tech/works/rg-work-54",
     "resourceType": "image",
@@ -10520,7 +10241,178 @@
     "format": "jpg",
     "bytes": 133250
   },
-  "/works/rg-work-56.jpg": {
+  "/works/steel-gates/rg-work-08.jpg": {
+    "publicId": "rg-tech/works/rg-work-08",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 1280,
+    "height": 1189,
+    "format": "jpg",
+    "bytes": 210295
+  },
+  "/works/steel-gates/rg-work-17.jpg": {
+    "publicId": "rg-tech/works/rg-work-17",
+    "resourceType": "image",
+    "version": 1787764631,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 198497
+  },
+  "/works/steel-gates/rg-work-37.jpg": {
+    "publicId": "rg-tech/works/rg-work-37",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 216736
+  },
+  "/works/steel-gates/rg-work-36.jpg": {
+    "publicId": "rg-tech/works/rg-work-36",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 960,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 247416
+  },
+  "/works/steel-gates/rg-work-34.jpg": {
+    "publicId": "rg-tech/works/rg-work-34",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 960,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 215839
+  },
+  "/works/steel-gates/rg-work-41.jpg": {
+    "publicId": "rg-tech/works/rg-work-41",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 214928
+  },
+  "/works/steel-gates/rg-work-38.jpg": {
+    "publicId": "rg-tech/works/rg-work-38",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 243624
+  },
+  "/works/steel-gates/rg-work-35.jpg": {
+    "publicId": "rg-tech/works/rg-work-35",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 1280,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 152686
+  },
+  "/works/metal-safety-doors/rg-work-43.jpg": {
+    "publicId": "rg-tech/works/rg-work-43",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 720,
+    "height": 1280,
+    "format": "jpg",
+    "bytes": 132610
+  },
+  "/works/metal-safety-doors/rg-work-39.jpg": {
+    "publicId": "rg-tech/works/rg-work-39",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 68992
+  },
+  "/works/metal-safety-doors/rg-work-44.jpg": {
+    "publicId": "rg-tech/works/rg-work-44",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 61025
+  },
+  "/works/metal-safety-doors/rg-work-42.jpg": {
+    "publicId": "rg-tech/works/rg-work-42",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 55495
+  },
+  "/works/metal-safety-doors/rg-work-45.jpg": {
+    "publicId": "rg-tech/works/rg-work-45",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 581,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 70620
+  },
+  "/works/metal-safety-doors/rg-work-40.jpg": {
+    "publicId": "rg-tech/works/rg-work-40",
+    "resourceType": "image",
+    "version": 1787764634,
+    "width": 774,
+    "height": 1032,
+    "format": "jpg",
+    "bytes": 98132
+  },
+  "/works/metal-safety-doors/rg-work-53.jpg": {
+    "publicId": "rg-tech/works/rg-work-53",
+    "resourceType": "image",
+    "version": 1787764636,
+    "width": 720,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 96414
+  },
+  "/works/decorative-metal-panels/rg-work-30.jpg": {
+    "publicId": "rg-tech/works/rg-work-30",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 99044
+  },
+  "/works/decorative-metal-panels/rg-work-32.jpg": {
+    "publicId": "rg-tech/works/rg-work-32",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 66793
+  },
+  "/works/decorative-metal-panels/rg-work-49.jpg": {
+    "publicId": "rg-tech/works/rg-work-49",
+    "resourceType": "image",
+    "version": 1787764635,
+    "width": 607,
+    "height": 1080,
+    "format": "jpg",
+    "bytes": 50031
+  },
+  "/works/steel-gates/rg-work-04.jpg": {
+    "publicId": "rg-tech/works/rg-work-04",
+    "resourceType": "image",
+    "version": 1787764630,
+    "width": 720,
+    "height": 960,
+    "format": "jpg",
+    "bytes": 63745
+  },
+  "/works/decorative-metal-panels/rg-work-56.jpg": {
     "publicId": "rg-tech/works/rg-work-56",
     "resourceType": "image",
     "version": 1790257641,
@@ -10529,7 +10421,7 @@
     "format": "jpg",
     "bytes": 79288
   },
-  "/works/rg-work-57.jpg": {
+  "/works/decorative-metal-panels/rg-work-57.jpg": {
     "publicId": "rg-tech/works/rg-work-57",
     "resourceType": "image",
     "version": 1790257641,
@@ -10538,61 +10430,7 @@
     "format": "jpg",
     "bytes": 90717
   },
-  "/works/rg-work-58.jpg": {
-    "publicId": "rg-tech/works/rg-work-58",
-    "resourceType": "image",
-    "version": 1790257641,
-    "width": 720,
-    "height": 827,
-    "format": "jpg",
-    "bytes": 140849
-  },
-  "/works/rg-work-59.jpg": {
-    "publicId": "rg-tech/works/rg-work-59",
-    "resourceType": "image",
-    "version": 1790257641,
-    "width": 736,
-    "height": 1103,
-    "format": "jpg",
-    "bytes": 63261
-  },
-  "/works/rg-work-60.jpg": {
-    "publicId": "rg-tech/works/rg-work-60",
-    "resourceType": "image",
-    "version": 1790257641,
-    "width": 736,
-    "height": 981,
-    "format": "jpg",
-    "bytes": 43660
-  },
-  "/works/rg-work-61.jpg": {
-    "publicId": "rg-tech/works/rg-work-61",
-    "resourceType": "image",
-    "version": 1790257641,
-    "width": 736,
-    "height": 552,
-    "format": "jpg",
-    "bytes": 67885
-  },
-  "/works/rg-work-62.jpg": {
-    "publicId": "rg-tech/works/rg-work-62",
-    "resourceType": "image",
-    "version": 1790257640,
-    "width": 736,
-    "height": 736,
-    "format": "jpg",
-    "bytes": 55148
-  },
-  "/works/rg-work-63.jpg": {
-    "publicId": "rg-tech/works/rg-work-63",
-    "resourceType": "image",
-    "version": 1790257641,
-    "width": 736,
-    "height": 981,
-    "format": "jpg",
-    "bytes": 62933
-  },
-  "/works/rg-work-64.jpg": {
+  "/works/decorative-metal-panels/rg-work-64.jpg": {
     "publicId": "rg-tech/works/rg-work-64",
     "resourceType": "image",
     "version": 1790257642,
@@ -10601,7 +10439,7 @@
     "format": "jpg",
     "bytes": 85121
   },
-  "/works/rg-work-65.jpg": {
+  "/works/decorative-metal-panels/rg-work-65.jpg": {
     "publicId": "rg-tech/works/rg-work-65",
     "resourceType": "image",
     "version": 1790257642,
@@ -10610,16 +10448,16 @@
     "format": "jpg",
     "bytes": 108833
   },
-  "/works/rg-work-66.jpg": {
-    "publicId": "rg-tech/works/rg-work-66",
+  "/works/decorative-metal-panels/rg-work-63.jpg": {
+    "publicId": "rg-tech/works/rg-work-63",
     "resourceType": "image",
-    "version": 1790257642,
-    "width": 400,
-    "height": 400,
+    "version": 1790257641,
+    "width": 736,
+    "height": 981,
     "format": "jpg",
-    "bytes": 17179
+    "bytes": 62933
   },
-  "/works/rg-work-67.jpg": {
+  "/works/decorative-metal-panels/rg-work-67.jpg": {
     "publicId": "rg-tech/works/rg-work-67",
     "resourceType": "image",
     "version": 1790257642,
@@ -10628,25 +10466,70 @@
     "format": "jpg",
     "bytes": 79300
   },
-  "/works/rg-work-68.jpg": {
-    "publicId": "rg-tech/works/rg-work-68",
+  "/works/decorative-metal-panels/rg-work-74.jpg": {
+    "publicId": "rg-tech/works/rg-work-74",
+    "resourceType": "image",
+    "version": 1790257643,
+    "width": 736,
+    "height": 980,
+    "format": "jpg",
+    "bytes": 82785
+  },
+  "/works/fabrication-services/rg-work-58.jpg": {
+    "publicId": "rg-tech/works/rg-work-58",
+    "resourceType": "image",
+    "version": 1790257641,
+    "width": 720,
+    "height": 827,
+    "format": "jpg",
+    "bytes": 140849
+  },
+  "/works/fabrication-services/rg-work-61.jpg": {
+    "publicId": "rg-tech/works/rg-work-61",
+    "resourceType": "image",
+    "version": 1790257641,
+    "width": 736,
+    "height": 552,
+    "format": "jpg",
+    "bytes": 67885
+  },
+  "/works/fabrication-services/rg-work-66.jpg": {
+    "publicId": "rg-tech/works/rg-work-66",
     "resourceType": "image",
     "version": 1790257642,
-    "width": 682,
-    "height": 688,
+    "width": 400,
+    "height": 400,
     "format": "jpg",
-    "bytes": 47492
+    "bytes": 17179
   },
-  "/works/rg-work-69.jpg": {
-    "publicId": "rg-tech/works/rg-work-69",
+  "/works/sheet-metal-laser-cutting-services/rg-work-13.jpg": {
+    "publicId": "rg-tech/works/rg-work-13",
     "resourceType": "image",
-    "version": 1790257642,
-    "width": 735,
-    "height": 490,
+    "version": 1787764631,
+    "width": 1400,
+    "height": 1050,
     "format": "jpg",
-    "bytes": 29668
+    "bytes": 49014
   },
-  "/works/rg-work-70.jpg": {
+  "/works/sheet-metal-laser-cutting-services/rg-work-28.jpg": {
+    "publicId": "rg-tech/works/rg-work-28",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 141261
+  },
+  "/works/sheet-metal-laser-cutting-services/rg-work-26.jpg": {
+    "publicId": "rg-tech/works/rg-work-26",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 204280
+  },
+  "/works/decorative-metal-panels/rg-work-70.jpg": {
     "publicId": "rg-tech/works/rg-work-70",
     "resourceType": "image",
     "version": 1790257642,
@@ -10655,7 +10538,7 @@
     "format": "jpg",
     "bytes": 157862
   },
-  "/works/rg-work-71.jpg": {
+  "/works/decorative-metal-panels/rg-work-71.jpg": {
     "publicId": "rg-tech/works/rg-work-71",
     "resourceType": "image",
     "version": 1790257642,
@@ -10664,7 +10547,7 @@
     "format": "jpg",
     "bytes": 250728
   },
-  "/works/rg-work-72.jpg": {
+  "/works/decorative-metal-panels/rg-work-72.jpg": {
     "publicId": "rg-tech/works/rg-work-72",
     "resourceType": "image",
     "version": 1790257643,
@@ -10673,7 +10556,7 @@
     "format": "jpg",
     "bytes": 118464
   },
-  "/works/rg-work-73.jpg": {
+  "/works/decorative-metal-panels/rg-work-73.jpg": {
     "publicId": "rg-tech/works/rg-work-73",
     "resourceType": "image",
     "version": 1790257643,
@@ -10682,13 +10565,130 @@
     "format": "jpg",
     "bytes": 205809
   },
-  "/works/rg-work-74.jpg": {
-    "publicId": "rg-tech/works/rg-work-74",
+  "/works/decorative-metal-panels/rg-work-15.jpg": {
+    "publicId": "rg-tech/works/rg-work-15",
     "resourceType": "image",
-    "version": 1790257643,
-    "width": 736,
-    "height": 980,
+    "version": 1787764631,
+    "width": 488,
+    "height": 1040,
     "format": "jpg",
-    "bytes": 82785
+    "bytes": 28767
+  },
+  "/works/decorative-metal-panels/rg-work-23.jpg": {
+    "publicId": "rg-tech/works/rg-work-23",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 161396
+  },
+  "/works/decorative-metal-panels/rg-work-24.jpg": {
+    "publicId": "rg-tech/works/rg-work-24",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 164425
+  },
+  "/works/decorative-metal-panels/rg-work-25.jpg": {
+    "publicId": "rg-tech/works/rg-work-25",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 181183
+  },
+  "/works/decorative-metal-panels/rg-work-21.jpg": {
+    "publicId": "rg-tech/works/rg-work-21",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 179729
+  },
+  "/works/decorative-metal-panels/rg-work-22.jpg": {
+    "publicId": "rg-tech/works/rg-work-22",
+    "resourceType": "image",
+    "version": 1787764632,
+    "width": 1400,
+    "height": 1050,
+    "format": "jpg",
+    "bytes": 186896
+  },
+  "/works/decorative-metal-panels/rg-work-31.jpg": {
+    "publicId": "rg-tech/works/rg-work-31",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 126387
+  },
+  "/works/decorative-metal-panels/rg-work-27.jpg": {
+    "publicId": "rg-tech/works/rg-work-27",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 166652
+  },
+  "/works/decorative-metal-panels/rg-work-29.jpg": {
+    "publicId": "rg-tech/works/rg-work-29",
+    "resourceType": "image",
+    "version": 1787764633,
+    "width": 1050,
+    "height": 1400,
+    "format": "jpg",
+    "bytes": 227113
+  },
+  "/works/decorative-metal-panels/rg-work-59.jpg": {
+    "publicId": "rg-tech/works/rg-work-59",
+    "resourceType": "image",
+    "version": 1790257641,
+    "width": 736,
+    "height": 1103,
+    "format": "jpg",
+    "bytes": 63261
+  },
+  "/works/decorative-metal-panels/rg-work-60.jpg": {
+    "publicId": "rg-tech/works/rg-work-60",
+    "resourceType": "image",
+    "version": 1790257641,
+    "width": 736,
+    "height": 981,
+    "format": "jpg",
+    "bytes": 43660
+  },
+  "/works/decorative-metal-panels/rg-work-62.jpg": {
+    "publicId": "rg-tech/works/rg-work-62",
+    "resourceType": "image",
+    "version": 1790257640,
+    "width": 736,
+    "height": 736,
+    "format": "jpg",
+    "bytes": 55148
+  },
+  "/works/decorative-metal-panels/rg-work-68.jpg": {
+    "publicId": "rg-tech/works/rg-work-68",
+    "resourceType": "image",
+    "version": 1790257642,
+    "width": 682,
+    "height": 688,
+    "format": "jpg",
+    "bytes": 47492
+  },
+  "/works/decorative-metal-panels/rg-work-69.jpg": {
+    "publicId": "rg-tech/works/rg-work-69",
+    "resourceType": "image",
+    "version": 1790257642,
+    "width": 735,
+    "height": 490,
+    "format": "jpg",
+    "bytes": 29668
   }
 }
