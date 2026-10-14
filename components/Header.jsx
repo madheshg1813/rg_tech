@@ -87,10 +87,8 @@ function cityServiceLinks(citySlug) {
         { name: ALUMINUM.name, href: aluminumUrl(citySlug) },
         { name: COPPER.name, href: copperUrl(citySlug) },
         { name: MILD_STEEL.name, href: mildSteelUrl(citySlug) },
-        /* Only where the route exists. Unlike the other three material
-         * pillars this one is wired in Chennai alone, so listing it
-         * unconditionally would put a 404 in the menu on every other
-         * city's pages. */
+        /* Only where the route exists, so a city without the page never
+         * gets a 404 in its menu. */
         ...(STAINLESS_STEEL_CITIES.includes(citySlug)
             ? [{ name: STAINLESS_STEEL.name, href: stainlessSteelUrl(citySlug) }]
             : []),

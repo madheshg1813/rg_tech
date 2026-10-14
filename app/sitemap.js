@@ -5,7 +5,7 @@ import { FAITHS } from '@/lib/gods'
 import { aluminumUrl } from '@/lib/aluminum'
 import { copperUrl } from '@/lib/copper'
 import { mildSteelUrl } from '@/lib/mildSteel'
-import { stainlessSteelUrl } from '@/lib/stainlessSteel'
+import { stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
 import { jobWorkUrl } from '@/lib/jobWork'
 import { getPosts } from '@/lib/sanity'
 
@@ -77,17 +77,16 @@ export default async function sitemap() {
         priority: city.isPrimary ? 0.9 : 0.8,
     }))
 
-    /*
-     * Stainless steel laser cutting. Chennai only for now - the resolver exists
-     * for every city, but the route is wired in app/chennai/[...slug] alone, so
-     * listing the other three here would put 404s in the sitemap.
-     */
-    const stainlessSteelPages = [{
-        url: `${BASE_URL}${stainlessSteelUrl('chennai')}`,
-        lastModified: today,
-        changeFrequency: 'weekly',
-        priority: 0.9,
-    }]
+    // Stainless steel laser cutting: same pillars-only arrangement as above,
+    // limited to the cities its resolver accepts.
+    const stainlessSteelPages = Object.values(CITIES)
+        .filter((city) => STAINLESS_STEEL_CITIES.includes(city.slug))
+        .map((city) => ({
+            url: `${BASE_URL}${stainlessSteelUrl(city.slug)}`,
+            lastModified: today,
+            changeFrequency: 'weekly',
+            priority: city.isPrimary ? 0.9 : 0.8,
+        }))
 
     // Laser cutting job work: the commercial pillar above the categories.
     // Highest priority of the city pages - it is the top of the funnel and the

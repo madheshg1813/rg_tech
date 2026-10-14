@@ -4,7 +4,7 @@ import {
     Zap, Layers, Wind, Shield, Ruler, Clock, Send, FileText, Truck,
     ArrowRight, MessageCircle, Phone, Check, Plus, MapPin,
 } from 'lucide-react'
-import { STAINLESS_STEEL, stainlessSteelCopy, stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
+import { STAINLESS_STEEL, stainlessSteelCopy, stainlessSteelUrl, stainlessSteelFaqs, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
 import { otherMaterials } from '@/lib/materialPillars'
 import { CITIES } from '@/lib/cities'
 import GoogleRating from '@/components/GoogleRating'
@@ -35,9 +35,9 @@ export default function StainlessSteelPage({ city, works, articles }) {
     const copy = stainlessSteelCopy(city)
     const a = STAINLESS_STEEL
 
-    /* Other cities this pillar is actually routed in. Empty today (Chennai
-     * only), which is why the "Also Serving" band below is skipped entirely
-     * rather than rendering a heading with no links under it. */
+    /* Other cities this pillar is routed in. The "Also Serving" band below is
+     * skipped entirely if this is ever empty, rather than rendering a heading
+     * with no links under it. */
     const otherCities = OTHER_CITIES.filter(
         (c) => c.slug !== city.slug && STAINLESS_STEEL_CITIES.includes(c.slug)
     )
@@ -258,7 +258,7 @@ export default function StainlessSteelPage({ city, works, articles }) {
                     <div className="faq-columns">
                         {[0, 1].map((col) => (
                             <div key={col} className="faq-column">
-                                {a.faqs
+                                {stainlessSteelFaqs(city)
                                     .filter((_, i) => i % 2 === col)
                                     .map(([q, ans]) => (
                                         <details key={q} className="faq-card">
