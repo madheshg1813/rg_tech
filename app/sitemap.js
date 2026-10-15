@@ -7,6 +7,7 @@ import { copperUrl } from '@/lib/copper'
 import { mildSteelUrl } from '@/lib/mildSteel'
 import { stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
 import { jobWorkUrl } from '@/lib/jobWork'
+import { nameEngravingUrl, NAME_ENGRAVING_CITIES } from '@/lib/nameEngraving'
 import { getPosts } from '@/lib/sanity'
 
 /*
@@ -75,6 +76,14 @@ export default async function sitemap() {
         lastModified: today,
         changeFrequency: 'weekly',
         priority: city.isPrimary ? 0.9 : 0.8,
+    }))
+
+    // Name engraving / metal name plates: Chennai only, no locality variants.
+    const nameEngravingPages = NAME_ENGRAVING_CITIES.map((slug) => ({
+        url: `${BASE_URL}${nameEngravingUrl(slug)}`,
+        lastModified: today,
+        changeFrequency: 'monthly',
+        priority: 0.8,
     }))
 
     // Stainless steel laser cutting: same pillars-only arrangement as above,
@@ -157,5 +166,5 @@ export default async function sitemap() {
         priority: 0.7,
     }))
 
-    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...stainlessSteelPages, ...jobWorkPages, godDesignIndex, ...faithIndexPages, ...godDesignPages, ...blogPages]
+    return [...staticPages, ...cityPages, ...aluminumPages, ...copperPages, ...mildSteelPages, ...stainlessSteelPages, ...nameEngravingPages, ...jobWorkPages, godDesignIndex, ...faithIndexPages, ...godDesignPages, ...blogPages]
 }

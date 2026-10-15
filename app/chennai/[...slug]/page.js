@@ -10,11 +10,14 @@ import CopperPage from '@/components/Service/CopperPage'
 import MildSteelPage from '@/components/Service/MildSteelPage'
 import StainlessSteelPage from '@/components/Service/StainlessSteelPage'
 import JobWorkPage from '@/components/Service/JobWorkPage'
+import NameEngravingPage from '@/components/Service/NameEngravingPage'
 import { resolveAluminum, aluminumMetadata, aluminumGraph, ALUMINUM_SLUG } from '@/lib/aluminum'
 import { resolveCopper, copperMetadata, copperGraph } from '@/lib/copper'
 import { resolveMildSteel, mildSteelMetadata, mildSteelGraph } from '@/lib/mildSteel'
 import { resolveStainlessSteel, stainlessSteelMetadata, stainlessSteelGraph } from '@/lib/stainlessSteel'
 import { resolveJobWork, jobWorkMetadata, jobWorkGraph } from '@/lib/jobWork'
+import { resolveNameEngraving, nameEngravingMetadata, nameEngravingGraph, NAME_ENGRAVING } from '@/lib/nameEngraving'
+import { cld } from '@/lib/cloudinary'
 import { buildMetadata, buildServicePage, resolveGod } from '@/lib/servicePage'
 import { buildGodMetadata, buildGodPage } from '@/lib/godPage'
 import { jsonLdScript } from '@/lib/schema'
@@ -27,6 +30,9 @@ export async function generateMetadata({ params }) {
     if (resolveCopper(CITY, slug).copper) return copperMetadata(CITY)
     if (resolveMildSteel(CITY, slug).mildSteel) return mildSteelMetadata(CITY)
     if (resolveStainlessSteel(CITY, slug).stainlessSteel) return stainlessSteelMetadata(CITY)
+    if (resolveNameEngraving(CITY, slug).nameEngraving) {
+        return nameEngravingMetadata(CITY, cld(NAME_ENGRAVING.heroWork.src, { width: 1200, dpr: false }))
+    }
     if (resolveJobWork(CITY, slug).jobWork) return jobWorkMetadata(CITY)
     const { god } = resolveGod(CITY, slug)
     if (god) return buildGodMetadata(CITY, god, slug)
@@ -172,6 +178,24 @@ export default async function Page({ params }) {
                             : null
                     }
                 />
+            </>
+        )
+    }
+
+    /*
+     * Name engraving / metal name plates - same standalone-pillar arrangement
+     * as the material pages: exact slug only, no locality variants, Chennai
+     * only, checked before the service resolver.
+     */
+    const { city: neCity, nameEngraving } = resolveNameEngraving(CITY, slug)
+    if (nameEngraving) {
+        return (
+            <>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={jsonLdScript(nameEngravingGraph(CITY))}
+                />
+                <NameEngravingPage city={neCity} />
             </>
         )
     }
