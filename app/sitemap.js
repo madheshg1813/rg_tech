@@ -7,7 +7,7 @@ import { copperUrl } from '@/lib/copper'
 import { mildSteelUrl } from '@/lib/mildSteel'
 import { stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
 import { jobWorkUrl } from '@/lib/jobWork'
-import { nameEngravingUrl, NAME_ENGRAVING_CITIES } from '@/lib/nameEngraving'
+import { nameEngravingUrl, liveNameEngravingCities } from '@/lib/nameEngraving'
 import { getPosts } from '@/lib/sanity'
 
 /*
@@ -78,12 +78,15 @@ export default async function sitemap() {
         priority: city.isPrimary ? 0.9 : 0.8,
     }))
 
-    // Name engraving / metal name plates: Chennai only, no locality variants.
-    const nameEngravingPages = NAME_ENGRAVING_CITIES.map((slug) => ({
+    // Name engraving / metal name plates: no locality variants, and only the
+    // cities whose release time has passed. The sitemap revalidates every
+    // five minutes (`revalidate` above), so a city joins within five minutes
+    // of going live with no deploy.
+    const nameEngravingPages = liveNameEngravingCities().map((slug) => ({
         url: `${BASE_URL}${nameEngravingUrl(slug)}`,
         lastModified: today,
         changeFrequency: 'monthly',
-        priority: 0.8,
+        priority: slug === 'chennai' ? 0.8 : 0.7,
     }))
 
     // Stainless steel laser cutting: same pillars-only arrangement as above,

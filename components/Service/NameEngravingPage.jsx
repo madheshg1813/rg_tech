@@ -3,9 +3,13 @@ import Image from 'next/image'
 import {
     PenTool, Scissors, Home, Building2, DoorOpen, Factory, MessageCircle,
     ClipboardList, FileText, Settings, CheckCircle, Layers, Package,
-    ArrowRight, Phone, Check, Plus, Shield,
+    ArrowRight, Phone, Check, Plus, Shield, MapPin,
 } from 'lucide-react'
-import { NAME_ENGRAVING, NAME_PLATE_WORKS, STOCK_IMAGES, TYPE_IMAGES } from '@/lib/nameEngraving'
+import {
+    NAME_PLATE_WORKS, STOCK_IMAGES, TYPE_IMAGES,
+    nameEngravingFor, nameEngravingUrl, liveNameEngravingCities,
+} from '@/lib/nameEngraving'
+import { getCity } from '@/lib/cities'
 import { cld, cldSize } from '@/lib/cloudinary'
 import GoogleRating from '@/components/GoogleRating'
 import JustdialBadge from '@/components/JustdialBadge'
@@ -79,7 +83,13 @@ function CheckItem({ name, desc }) {
 }
 
 export default function NameEngravingPage({ city }) {
-    const a = NAME_ENGRAVING
+    const a = nameEngravingFor(city.slug)
+
+    /* Other cities whose page is live right now. Computed per request, so a
+     * city appears here the moment its release time passes. */
+    const otherCities = liveNameEngravingCities()
+        .filter((c) => c !== city.slug)
+        .map(getCity)
     const heroSrc = cld(a.heroWork.src)
     const heroSize = cldSize(a.heroWork.src) || { width: 1400, height: 1050 }
 
@@ -129,7 +139,7 @@ export default function NameEngravingPage({ city }) {
                             <div className="framed relative z-10">
                                 <Image
                                     src={heroSrc}
-                                    alt={`${a.heroWork.alt} - made by RG Tech Engineering, ${city.name}`}
+                                    alt={`${a.heroWork.alt} - made by RG Tech Engineering`}
                                     width={heroSize.width}
                                     height={heroSize.height}
                                     priority
@@ -184,6 +194,45 @@ export default function NameEngravingPage({ city }) {
                     </ul>
                 </div>
             </section>
+
+            {/* ── City section - Madurai, Coimbatore, Salem only ──────────
+                Written for each city in lib/nameEngravingCities.js, with the
+                localities plates are delivered to. Chennai has none, so its
+                page is unchanged. */}
+            {a.local && (
+                <section className="section bg-white border-t border-line">
+                    <div className="shell">
+                        <div className="grid lg:grid-cols-[1fr_minmax(0,420px)] gap-10 lg:gap-16 items-start">
+                            <div>
+                                <p className="eyebrow mb-3">{a.local.eyebrow}</p>
+                                <h2 className="section-title text-fg mb-6">
+                                    {a.local.title} <span className="text-accent">{a.local.accent}</span>
+                                </h2>
+                                <div className="space-y-4 max-w-[64ch]">
+                                    {a.local.paragraphs.map((p, i) => (
+                                        <p key={i} className="text-fg-muted leading-relaxed">{p}</p>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="framed-soft bg-surface-2 p-5 sm:p-6">
+                                <h3 className="card-title text-fg mb-4">{a.localitiesTitle}</h3>
+                                <ul className="flex flex-wrap gap-2 list-none p-0 mb-4">
+                                    {a.localities.map((l) => (
+                                        <li
+                                            key={l}
+                                            className="inline-flex items-center gap-1.5 framed-soft bg-white px-3 py-1.5 text-sm text-fg-muted"
+                                        >
+                                            <MapPin className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
+                                            {l}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <p className="text-sm text-fg-muted leading-relaxed">{a.localitiesNote}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* ── 3. Engraving vs laser-cut lettering ─────────────────────── */}
             <section className="section bg-white border-t border-line overflow-hidden">
@@ -282,9 +331,8 @@ export default function NameEngravingPage({ city }) {
                                 Choose the metal for <span className="text-accent">where it will hang</span>
                             </h2>
                             <p className="section-lead mb-10 max-w-[60ch]">
-                                A plate on a covered office door and one on a gate facing the
-                                sea need different metals. Tell us where yours is going and we
-                                will suggest the right one.
+                                {a.materialsLead ||
+                                    'A plate on a covered office door and one on a gate facing the sea need different metals. Tell us where yours is going and we will suggest the right one.'}
                             </p>
 
                             <h3 className="subsection-title text-fg mb-5">Materials</h3>
@@ -462,6 +510,32 @@ export default function NameEngravingPage({ city }) {
                     </div>
                 </div>
             </section>
+
+            {/* ── Also serving - live city pages only ────────────────────
+                The header and footer are left as they are, so this band is
+                what links the city pages to one another. Built from
+                liveNameEngravingCities(), so an unreleased city is never
+                linked. */}
+            {otherCities.length > 0 && (
+                <section className="py-14 bg-white border-t border-line">
+                    <div className="shell max-w-5xl text-center">
+                        <p className="eyebrow mb-4">Also Serving</p>
+                        <ul className="flex flex-wrap justify-center gap-3 list-none p-0">
+                            {otherCities.map((c) => (
+                                <li key={c.slug}>
+                                    <Link
+                                        href={nameEngravingUrl(c.slug)}
+                                        className="inline-flex items-center gap-2 framed-soft bg-surface-2 px-4 py-2.5 text-sm font-medium text-fg-muted hover:bg-white hover:border-accent-ink/40 hover:text-fg transition-colors"
+                                    >
+                                        <MapPin className="w-3.5 h-3.5 text-accent" />
+                                        Name engraving in {c.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            )}
 
             {/* ── 12. Closing CTA ─────────────────────────────────────────── */}
             <section className="section on-dark surface-dark relative overflow-hidden">
