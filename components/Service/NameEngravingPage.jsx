@@ -54,6 +54,27 @@ function workImage(work, w) {
     })
 }
 
+/*
+ * Phone layout: a card grid becomes one swipeable row, so the page does not
+ * stack forty cards into one long column. From sm up it is the normal grid;
+ * each use adds its own sm:grid-cols-* and sm:gap-*. The cards stay in the
+ * DOM at every width, so nothing is hidden from search engines.
+ */
+const RAIL =
+    'no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-5 px-5 pb-1 list-none ' +
+    'sm:mx-0 sm:grid sm:overflow-visible sm:px-0 sm:pb-0'
+const RAIL_ITEM = 'w-[78vw] shrink-0 snap-start sm:w-auto sm:shrink'
+
+/* The same row kept up to lg, for card lists that are a single column below
+ * lg - as a grid they would stack on tablets too. */
+const RAIL_LG =
+    'no-scrollbar -mx-5 sm:-mx-8 flex snap-x snap-mandatory gap-3 sm:gap-4 overflow-x-auto scroll-px-5 sm:scroll-px-8 px-5 sm:px-8 pb-1 list-none ' +
+    'lg:mx-0 lg:grid lg:grid-cols-1 lg:overflow-visible lg:px-0 lg:pb-0'
+const RAIL_LG_ITEM = 'w-[78vw] max-w-[22rem] shrink-0 snap-start lg:w-auto lg:max-w-none lg:shrink'
+
+/* FAQs shown on phones before "Show all questions". */
+const FAQS_ON_PHONE = 6
+
 /* Section heading block, matching the centred headers on the other pillars. */
 function SectionHead({ eyebrow, title, accent, lead }) {
     return (
@@ -68,9 +89,9 @@ function SectionHead({ eyebrow, title, accent, lead }) {
 }
 
 /* The check-mark list item used for sub-services on the other pillars. */
-function CheckItem({ name, desc }) {
+function CheckItem({ name, desc, className = '' }) {
     return (
-        <li className="framed-soft bg-white px-4 py-3 sm:px-5 sm:py-4 flex items-start gap-3">
+        <li className={`framed-soft bg-white px-4 py-3 sm:px-5 sm:py-4 flex items-start gap-3 ${className}`}>
             <Check className="w-4 h-4 flex-none text-accent mt-1" aria-hidden="true" />
             <span>
                 <span className="block font-heading font-bold text-[0.95rem] tracking-[-0.015em] text-fg">
@@ -100,7 +121,7 @@ export default function NameEngravingPage({ city }) {
             <section className="section hero-gradient relative overflow-hidden py-16 md:">
                 <div className="hero-grid-paper" aria-hidden="true" />
                 <div className="shell sm:px-6 relative z-10">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div>
                             <p className="stamp mb-6">
                                 <Shield className="w-3.5 h-3.5" aria-hidden="true" />
@@ -216,11 +237,12 @@ export default function NameEngravingPage({ city }) {
                             </div>
                             <div className="framed-soft bg-surface-2 p-5 sm:p-6">
                                 <h3 className="card-title text-fg mb-4">{a.localitiesTitle}</h3>
-                                <ul className="flex flex-wrap gap-2 list-none p-0 mb-4">
+                                {/* One scrolling line on phones, wrapped above. */}
+                                <ul className="no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 flex flex-nowrap overflow-x-auto sm:flex-wrap sm:overflow-visible gap-2 list-none p-0 mb-4">
                                     {a.localities.map((l) => (
                                         <li
                                             key={l}
-                                            className="inline-flex items-center gap-1.5 framed-soft bg-white px-3 py-1.5 text-sm text-fg-muted"
+                                            className="inline-flex shrink-0 items-center gap-1.5 framed-soft bg-white px-3 py-1.5 text-sm text-fg-muted whitespace-nowrap"
                                         >
                                             <MapPin className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                                             {l}
@@ -234,21 +256,56 @@ export default function NameEngravingPage({ city }) {
                 </section>
             )}
 
+            {/* ── Plates people search for - every city ──────────────────
+                One card per target phrase, written per city (NAME_ENGRAVING
+                for Chennai, lib/nameEngravingCities.js for the rest). */}
+            {a.focus && (
+                <section className="section bg-surface-2 border-t border-line">
+                    <div className="shell">
+                        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,360px)_1fr] gap-10 lg:gap-16 items-start">
+                            <div className="lg:sticky lg:top-28">
+                                <p className="eyebrow mb-3">{a.focus.eyebrow}</p>
+                                <h2 className="section-title text-fg mb-4">
+                                    {a.focus.title} <span className="text-accent">{a.focus.accent}</span>
+                                </h2>
+                                <p className="section-lead">{a.focus.lead}</p>
+                            </div>
+                            <ul className={RAIL_LG}>
+                                {a.focus.items.map((it) => (
+                                    <li key={it.title} className={`framed-soft bg-white p-5 sm:p-6 ${RAIL_LG_ITEM}`}>
+                                        <h3 className="card-title text-fg mb-2">{it.title}</h3>
+                                        <p className="text-sm text-fg-muted leading-relaxed mb-4">{it.desc}</p>
+                                        <ul className="flex flex-wrap gap-x-5 gap-y-2 list-none p-0">
+                                            {it.points.map((pt) => (
+                                                <li key={pt} className="inline-flex items-center gap-1.5 text-sm text-fg">
+                                                    <Check className="w-4 h-4 flex-none text-accent" aria-hidden="true" />
+                                                    {pt}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* ── 3. Engraving vs laser-cut lettering ─────────────────────── */}
             <section className="section bg-white border-t border-line overflow-hidden">
                 <div className="shell">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div>
                             <p className="eyebrow mb-3">Two Ways To Make A Name Plate</p>
                             <h2 className="section-title text-fg mb-8">
                                 Engraved into the metal, or{' '}
                                 <span className="text-accent">cut right through it</span>
                             </h2>
-                            <div className="grid gap-3 sm:gap-5">
+                            <div className={`${RAIL_LG} lg:gap-5`}>
                                 {a.methods.map((m) => {
                                     const Icon = IconMap[m.icon] || PenTool
                                     return (
-                                        <div key={m.title} className="framed-soft bg-white p-5 sm:p-6">
+                                        <div key={m.title} className={`framed-soft bg-white p-5 sm:p-6 ${RAIL_LG_ITEM}`}>
                                             <span className="inline-flex mb-4">
                                                 <Icon className="w-5 h-5" />
                                             </span>
@@ -259,7 +316,9 @@ export default function NameEngravingPage({ city }) {
                                 })}
                             </div>
                         </div>
-                        <div>
+                        {/* Illustrative stock photo - left off phones to keep
+                            the page short. */}
+                        <div className="hidden sm:block">
                             <div className="framed">
                                 <Image
                                     src={STOCK_IMAGES.engraving.src}
@@ -301,13 +360,13 @@ export default function NameEngravingPage({ city }) {
                             </li>
                         ))}
                     </ul>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+                    <div className={`${RAIL} sm:grid-cols-2 lg:grid-cols-4 sm:gap-5`}>
                         {a.types.map((t) => {
                             const Icon = IconMap[t.icon] || Home
                             return (
                                 <div
                                     key={t.name}
-                                    className="framed-soft bg-white p-5 sm:p-6 flex flex-col hover:shadow-lg transition-shadow duration-300"
+                                    className={`framed-soft bg-white p-5 sm:p-6 flex flex-col hover:shadow-lg transition-shadow duration-300 ${RAIL_ITEM}`}
                                 >
                                     <span className="inline-flex mb-3 sm:mb-5">
                                         <Icon className="w-5 h-5" />
@@ -324,7 +383,7 @@ export default function NameEngravingPage({ city }) {
             {/* ── 5. Materials and finishes ───────────────────────────────── */}
             <section className="section bg-white border-t border-line">
                 <div className="shell">
-                    <div className="grid lg:grid-cols-[1fr_minmax(0,380px)] gap-12 lg:gap-16 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,380px)] gap-12 lg:gap-16 items-start">
                         <div>
                             <p className="eyebrow mb-3">Materials &amp; Finishes</p>
                             <h2 className="section-title text-fg mb-4">
@@ -336,13 +395,13 @@ export default function NameEngravingPage({ city }) {
                             </p>
 
                             <h3 className="subsection-title text-fg mb-5">Materials</h3>
-                            <ul className="grid sm:grid-cols-2 gap-2 sm:gap-4 list-none p-0 mb-10">
-                                {a.materials.map((m) => <CheckItem key={m.name} {...m} />)}
+                            <ul className={`${RAIL} sm:grid-cols-2 sm:gap-4 mb-8 sm:mb-10`}>
+                                {a.materials.map((m) => <CheckItem key={m.name} {...m} className={RAIL_ITEM} />)}
                             </ul>
 
                             <h3 className="subsection-title text-fg mb-5">Finishes</h3>
-                            <ul className="grid sm:grid-cols-2 gap-2 sm:gap-4 list-none p-0">
-                                {a.finishes.map((f) => <CheckItem key={f.name} {...f} />)}
+                            <ul className={`${RAIL} sm:grid-cols-2 sm:gap-4`}>
+                                {a.finishes.map((f) => <CheckItem key={f.name} {...f} className={RAIL_ITEM} />)}
                             </ul>
                         </div>
                         <div className="hidden lg:block lg:sticky lg:top-28">
@@ -371,8 +430,23 @@ export default function NameEngravingPage({ city }) {
                         accent="your logo"
                         lead="Everything on the plate is set to your requirements, and you see the full layout before it is made."
                     />
-                    <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 list-none p-0">
-                        {a.customization.map((c) => <CheckItem key={c.name} {...c} />)}
+                    {/* Phones: a two-up grid of name-only tiles, all eight in
+                        view at once. The descriptions return from sm up. */}
+                    <ul className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 list-none p-0">
+                        {a.customization.map((c) => (
+                            <li
+                                key={c.name}
+                                className="framed-soft bg-white px-3 py-3 sm:px-5 sm:py-4 flex items-center sm:items-start gap-2 sm:gap-3"
+                            >
+                                <Check className="w-4 h-4 flex-none text-accent sm:mt-1" aria-hidden="true" />
+                                <span>
+                                    <span className="block font-heading font-bold text-sm sm:text-[0.95rem] leading-snug tracking-[-0.015em] text-fg">
+                                        {c.name}
+                                    </span>
+                                    <span className="hidden sm:block text-sm text-fg-muted mt-0.5">{c.desc}</span>
+                                </span>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </section>
@@ -385,8 +459,8 @@ export default function NameEngravingPage({ city }) {
                         title="Where our name plates"
                         accent="are fixed"
                     />
-                    <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 list-none p-0">
-                        {a.applications.map((ap) => <CheckItem key={ap.name} {...ap} />)}
+                    <ul className={`${RAIL} sm:grid-cols-2 lg:grid-cols-4 sm:gap-4`}>
+                        {a.applications.map((ap) => <CheckItem key={ap.name} {...ap} className={RAIL_ITEM} />)}
                     </ul>
                 </div>
             </section>
@@ -400,11 +474,11 @@ export default function NameEngravingPage({ city }) {
                         accent="a finished plate"
                         lead="Five steps. Nothing is engraved or cut until you have approved the layout."
                     />
-                    <ol className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-5 list-none p-0">
+                    <ol className={`${RAIL} sm:grid-cols-2 lg:grid-cols-5 sm:gap-5`}>
                         {a.process.map((s) => {
                             const Icon = IconMap[s.icon] || FileText
                             return (
-                                <li key={s.step} className="framed-soft bg-white p-5 sm:p-6 flex flex-col">
+                                <li key={s.step} className={`framed-soft bg-white p-5 sm:p-6 flex flex-col ${RAIL_ITEM}`}>
                                     <div className="flex items-center gap-4 mb-3 sm:mb-5">
                                         <span className="font-heading font-extrabold text-3xl leading-none tracking-[-0.04em] text-line-strong">
                                             {s.step}
@@ -430,13 +504,13 @@ export default function NameEngravingPage({ city }) {
                         title="Why Choose"
                         accent="RG Tech Engineering"
                     />
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+                    <div className={`${RAIL} sm:grid-cols-2 lg:grid-cols-4 sm:gap-5`}>
                         {a.reasons.map((r) => {
                             const Icon = IconMap[r.icon] || Settings
                             return (
                                 <div
                                     key={r.title}
-                                    className="framed-soft bg-white p-5 sm:p-6 flex flex-col hover:shadow-lg transition-shadow duration-300"
+                                    className={`framed-soft bg-white p-5 sm:p-6 flex flex-col hover:shadow-lg transition-shadow duration-300 ${RAIL_ITEM}`}
                                 >
                                     <span className="inline-flex mb-3 sm:mb-5">
                                         <Icon className="w-5 h-5" />
@@ -458,9 +532,9 @@ export default function NameEngravingPage({ city }) {
                         title="More from our"
                         accent={`${city.name} workshop`}
                     />
-                    <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 list-none p-0">
+                    <ul className={`${RAIL} sm:grid-cols-2 lg:grid-cols-3 sm:gap-4`}>
                         {a.related.map((r) => (
-                            <li key={r.href}>
+                            <li key={r.href} className={RAIL_ITEM}>
                                 <Link
                                     href={r.href}
                                     className="framed-soft bg-white px-5 py-4 flex items-start justify-between gap-3 h-full hover:shadow-lg transition-shadow duration-300"
@@ -491,22 +565,39 @@ export default function NameEngravingPage({ city }) {
 
                     {/* Two independent flex columns, not a grid - see the
                         note on StainlessSteelPage. */}
-                    <div className="faq-columns">
-                        {[0, 1].map((col) => (
-                            <div key={col} className="faq-column">
-                                {a.faqs
-                                    .filter((_, i) => i % 2 === col)
-                                    .map(([q, ans]) => (
-                                        <details key={q} className="faq-card">
-                                            <summary className="faq-q">
-                                                <span>{q}</span>
-                                                <Plus className="faq-icon" aria-hidden="true" />
-                                            </summary>
-                                            <div className="faq-a">{ans}</div>
-                                        </details>
-                                    ))}
-                            </div>
-                        ))}
+                    {/* Phones show the first FAQS_ON_PHONE questions; the
+                        checkbox reveals the rest with no JavaScript. Every
+                        answer stays in the DOM and in the FAQ schema. */}
+                    <div className="group">
+                        <div className="faq-columns">
+                            {[0, 1].map((col) => (
+                                <div key={col} className="faq-column">
+                                    {a.faqs
+                                        .map((f, i) => [f, i])
+                                        .filter(([, i]) => i % 2 === col)
+                                        .map(([[q, ans], i]) => (
+                                            <details
+                                                key={q}
+                                                className={`faq-card${i >= FAQS_ON_PHONE
+                                                    ? ' max-sm:hidden max-sm:group-has-checked:block' : ''}`}
+                                            >
+                                                <summary className="faq-q">
+                                                    <span>{q}</span>
+                                                    <Plus className="faq-icon" aria-hidden="true" />
+                                                </summary>
+                                                <div className="faq-a">{ans}</div>
+                                            </details>
+                                        ))}
+                                </div>
+                            ))}
+                        </div>
+                        {a.faqs.length > FAQS_ON_PHONE && (
+                            <label className="sm:hidden group-has-checked:hidden btn btn-secondary-light w-full justify-center mt-6 cursor-pointer">
+                                <input type="checkbox" className="sr-only" />
+                                Show all {a.faqs.length} questions
+                                <Plus className="w-4 h-4" aria-hidden="true" />
+                            </label>
+                        )}
                     </div>
                 </div>
             </section>
