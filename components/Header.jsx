@@ -13,6 +13,7 @@ import { ALUMINUM, aluminumUrl } from '@/lib/aluminum'
 import { COPPER, copperUrl } from '@/lib/copper'
 import { MILD_STEEL, mildSteelUrl } from '@/lib/mildSteel'
 import { STAINLESS_STEEL, stainlessSteelUrl, STAINLESS_STEEL_CITIES } from '@/lib/stainlessSteel'
+import { NAME_ENGRAVING, nameEngravingUrl, isNameEngravingLive } from '@/lib/nameEngraving'
 import { jobWorkUrl } from '@/lib/jobWork'
 import { CITIES, serviceUrl, serviceKeyOf, publishedLocalities } from '@/lib/cities'
 
@@ -68,7 +69,8 @@ const DESIGN_LINKS = [
 
 /*
  * What the Services menu lists for a city: the six pillarServices, plus the
- * standalone aluminum, copper and mild steel pillars.
+ * standalone aluminum, copper, mild steel, stainless steel and name engraving
+ * pillars.
  *
  * Both are deliberately absent from pillarServices - that array is what
  * drives locality page generation, and this category is pillars-only. The menu
@@ -91,6 +93,10 @@ function cityServiceLinks(citySlug) {
          * gets a 404 in its menu. */
         ...(STAINLESS_STEEL_CITIES.includes(citySlug)
             ? [{ name: STAINLESS_STEEL.name, href: stainlessSteelUrl(citySlug) }]
+            : []),
+        /* Same rule, plus the page's release time - an unreleased city 404s. */
+        ...(isNameEngravingLive(citySlug)
+            ? [{ name: `${NAME_ENGRAVING.name} & Name Plates`, href: nameEngravingUrl(citySlug) }]
             : []),
     ]
 }
