@@ -36,7 +36,10 @@ release-summary.json
 publish-summary.json
 
 # Local Claude Code config (dev-server launch profile)
-.claude/
+.claude/*
+# Skills are project automation and belong in the repo, so they reach every
+# machine this is cloned to. Everything else under .claude stays local.
+!.claude/skills/
 
 # Source drops that were processed into public/ — the compressed output is what
 # ships, not the original archives.
