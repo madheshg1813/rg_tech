@@ -1,11 +1,20 @@
 name: Page refresh audit
 
-# Daily audit of the blog, written to the approval sheet.
+# Daily audit of the landing pages, written to the approval sheet.
+#
+# Which pages are in the rotation is set in the sheet's Settings tab, not here,
+# so it can change without a deploy. It currently reads "service, pillar".
 #
 # Two fires a day, and the cron that fired decides the mode:
 #
-#   10:07 IST  audit   proposes, and writes only to the sheet
-#   17:43 IST  apply   publishes the rows a human approved in between
+#   08:40 IST  audit   writes the day's few suggestions to the sheet
+#   18:35 IST  apply   publishes the rows approved by the 18:00 deadline
+#
+# Audit runs well before 09:00 rather than at it, because a scheduled run on
+# GitHub can be held up by several minutes under load and the rows are supposed
+# to be waiting when the day starts, not arriving during it. Apply runs after
+# 18:00 for the same reason in reverse: the approval deadline has to have
+# passed before anything is published.
 #
 # The gap between them is the design. Nothing can reach the site on the same
 # run that proposed it, so there is always a person and several hours between a
@@ -18,8 +27,8 @@ name: Page refresh audit
 # here. Run the Claude skill by hand when you want the wording drafted.
 on:
   schedule:
-    - cron: '37 4 * * *'  # 10:07 IST - audit
-    - cron: '13 12 * * *' # 17:43 IST - apply
+    - cron: '10 3 * * *'  # 08:40 IST - audit
+    - cron: '5 13 * * *'  # 18:35 IST - apply
   workflow_dispatch:
     inputs:
       mode:
@@ -58,7 +67,7 @@ jobs:
         run: |
           if [ -n "${{ inputs.mode }}" ]; then
             MODE="${{ inputs.mode }}"
-          elif [ "${{ github.event.schedule }}" = "13 12 * * *" ]; then
+          elif [ "${{ github.event.schedule }}" = "5 13 * * *" ]; then
             MODE="apply"
           else
             MODE="audit"

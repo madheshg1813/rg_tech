@@ -105,6 +105,7 @@ async function settings() {
     }
     return {
         perDay: Number(get('Pages per day', 2)),
+        suggestionsPerDay: Number(get('Suggestions per day', 3)),
         reauditDays: Number(get('Days before a page is audited again', 60)),
         maxLinks: Number(get('Max internal links added per page', 3)),
         maxFaqs: Number(get('Max FAQs per page', 8)),
@@ -406,6 +407,26 @@ async function audit() {
 
     const rows = [], patches = []
     let n = 0
+/*
+ * How much a finding is worth doing, used to pick the day's few.
+ *
+ * Reach dominates: a truncated title on a page serving 198 URLs beats a dash in
+ * a callout on one. Category breaks the tie, because a title Google cuts off
+ * costs clicks in a way a punctuation mark never does.
+ */
+const CATEGORY_WEIGHT = {
+    'Meta / SEO': 5,
+    'Broken Link': 5,
+    'FAQ': 3,
+    'AI Wording': 3,
+    'Internal Link': 2,
+    'Image Alt': 2,
+    'Dash Style': 1,
+}
+const score = (row) =>
+    Math.log10(Math.max(1, Number(row['Pages Affected']) || 1) + 1) * 10
+    + (CATEGORY_WEIGHT[row.Category] || 1)
+
     /* `page` is {id, kind, title, url, source, reach} whichever kind it is. */
     const add = (page, o) => {
         n++
@@ -766,14 +787,38 @@ async function audit() {
         summary.push({ page, added: n - before, counts })
     }
 
+    /*
+     * Keep only the day's few, highest impact first.
+     *
+     * A page that had more to say than fitted today keeps an empty Last
+     * Audited, so once its open rows are cleared it comes straight back rather
+     * than disappearing for the whole re-audit window with its findings unmade.
+     */
+    const cap = cfg.suggestionsPerDay
+    const ranked = [...rows].sort((a, b) => score(b) - score(a))
+    const keep = new Set(ranked.slice(0, cap).map((r) => r['Suggestion ID']))
+    const held = rows.length - keep.size
+
+    const keptRows = rows.filter((r) => keep.has(r['Suggestion ID']))
+    const keptPatches = patches.filter((p) => keep.has(p['Suggestion ID']))
+    for (const s of summary) {
+        s.kept = keptRows.filter((r) => r['Page ID'] === s.page.id).length
+        s.heldBack = s.added - s.kept
+    }
+
     /* A7 */
+    rows.length = 0; rows.push(...keptRows)
+    patches.length = 0; patches.push(...keptPatches)
+
     if (DRY) {
         console.log(`[dry run] ${rows.length} suggestions, nothing written`)
     } else if (rows.length) {
         await sheet('upsert', 'Patches', patches)
         await sheet('append', 'Suggestions', rows)
         await sheet('upsert', 'Page Register', summary.map((s) => ({
-            'Page ID': s.page.id, 'Last Audited': TODAY, 'Open Suggestions': String(s.added),
+            'Page ID': s.page.id,
+            'Last Audited': s.heldBack > 0 ? '' : TODAY,
+            'Open Suggestions': String(s.kept),
         })))
     } else if (!DRY) {
         await sheet('upsert', 'Page Register', summary.map((s) => ({
@@ -787,9 +832,10 @@ async function audit() {
         const detail = Object.entries(s.counts).map(([k, v]) => `${k} ${v}`).join(' · ') || 'nothing to change'
         console.log(`  [${s.page.kind}] ${s.page.title}${s.page.reach > 1 ? `   (${s.page.reach} URLs)` : ''}`)
         console.log(`    ${s.page.url}`)
-        console.log(`    ${s.added} suggestion(s): ${detail}`)
+        console.log(`    ${s.added} found: ${detail}${s.heldBack > 0 ? `   (${s.kept} written, ${s.heldBack} held for another day)` : ''}`)
     }
-    console.log(`\n  ${rows.length} row(s) written, all Pending. Nothing reaches the site until Approval says Approved.`)
+    console.log(`\n  ${rows.length} row(s) written, all Pending${held > 0 ? `, ${held} held back to keep the day reviewable` : ''}.`)
+    console.log('  Nothing reaches the site until Approval says Approved.')
 }
 
 /* ------------------------------------------------------------- apply mode */
