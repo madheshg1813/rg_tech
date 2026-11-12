@@ -293,6 +293,26 @@ const PILLARS = [
     { id: 'jobWork', file: 'lib/jobWork.js', label: 'Laser cutting job work', slug: 'laser-cutting-job-work' },
 ]
 
+/*
+ * The six service landing pages, which are the commercial heart of the site.
+ *
+ * Their copy lives in `pillarServices` in lib/data.js and each entry drives a
+ * pillar URL in four cities plus every locality variant beneath it, so one of
+ * these is the widest-reaching edit the audit can propose. metaTitle and
+ * metaDescription are plain strings in the file, so unlike the material
+ * pillars, whose meta is assembled by a function, these can be fixed directly.
+ */
+async function loadServices() {
+    const mod = await import(new URL('../lib/data.js', import.meta.url).href)
+    return (mod.pillarServices || []).map((s) => ({
+        id: `service:${s.slug.split('/').pop()}`,
+        key: s.slug.split('/').pop(),
+        label: s.name,
+        file: 'lib/data.js',
+        data: s,
+    }))
+}
+
 /** Live URLs a pillar actually serves, counted from the sitemap, never guessed. */
 async function sitemapUrls() {
     const xml = await (await fetch(`${BASE}/sitemap.xml`)).text()
@@ -324,6 +344,7 @@ async function audit() {
     /* A1: keep the register in step with Sanity and the repo. Dry runs read only. */
     const urls = await sitemapUrls()
     const reach = (slug) => urls.filter((u) => u.includes(`/${slug}`)).length
+    const services = await loadServices().catch(() => [])
     if (!DRY) {
         await sheet('upsert', 'Page Register', [
             ...posts.map((p) => ({
@@ -333,6 +354,10 @@ async function audit() {
             ...PILLARS.map((p) => ({
                 'Page ID': `pillar:${p.id}`, Kind: 'pillar', Title: p.label,
                 URL: urls.find((u) => u.includes(`/${p.slug}`)) || '', Source: p.file,
+            })),
+            ...services.map((sv) => ({
+                'Page ID': sv.id, Kind: 'service', Title: sv.label,
+                URL: `${BASE}${sv.data.slug}`, Source: sv.file,
             })),
         ])
     }
@@ -372,6 +397,12 @@ async function audit() {
         pillarData[pl.id] = data
         for (const [q] of data.faqs || []) corpus.push({ owner: `pillar:${pl.id}`, where: `/chennai/${pl.slug}`, q, t: normalise(q) })
     }
+    for (const sv of services) {
+        for (const f of sv.data.faqs || []) {
+            const q = Array.isArray(f) ? f[0] : f.question
+            if (q) corpus.push({ owner: sv.id, where: sv.data.slug, q, t: normalise(q) })
+        }
+    }
 
     const rows = [], patches = []
     let n = 0
@@ -398,6 +429,110 @@ async function audit() {
 
     for (const entry of picked) {
         const before = n
+
+        /* ---- service landing page ---- */
+        if (entry.Kind === 'service') {
+            const sv = services.find((x) => x.id === entry['Page ID'])
+            if (!sv) continue
+            const d = sv.data
+            const page = {
+                id: sv.id, kind: 'service', title: sv.label,
+                url: `${BASE}${d.slug}`, source: sv.file,
+                reach: reach(sv.key) || 1,
+            }
+            const src = readFileSync(sv.file, 'utf8')
+            const counts = {}
+            const bump = (k) => { counts[k] = (counts[k] || 0) + 1 }
+
+            /* 1. meta title, measured with the brand suffix the layout adds */
+            const t = d.metaTitle || ''
+            const rendered = t.length + BRAND_SUFFIX.length
+            if (t && (rendered > 60 || rendered < 45) && occursOnce(src, t)) {
+                add(page, {
+                    cat: 'Meta / SEO', section: 'Meta title', field: 'repo',
+                    cur: `${t}   (${t.length} ch, renders as ${rendered} with "${BRAND_SUFFIX.trim()}")`,
+                    sug: '',
+                    why: rendered > 60
+                        ? `Renders at ${rendered} characters, so Google cuts it off. It has to be ${60 - BRAND_SUFFIX.length} or fewer before the suffix. This title is on ${page.reach} URLs.`
+                        : `Renders at only ${rendered} characters, wasting most of the width. Aim for 45 to 60 including the suffix.`,
+                    note: 'Needs wording from you',
+                    patch: { file: sv.file, find: t, budget: 60 - BRAND_SUFFIX.length },
+                })
+                bump('meta')
+            }
+
+            /* 2. meta description */
+            const dd = d.metaDescription || ''
+            if (dd && (dd.length > 155 || dd.length < 70) && occursOnce(src, dd)) {
+                add(page, {
+                    cat: 'Meta / SEO', section: 'Meta description', field: 'repo',
+                    cur: `${dd}   (${dd.length} ch)`, sug: '',
+                    why: dd.length > 155
+                        ? `${dd.length} characters, so the end is cut off in results. Trim to 155 or fewer. This description is on ${page.reach} URLs.`
+                        : `Only ${dd.length} characters, leaving most of the snippet unused.`,
+                    note: 'Needs wording from you',
+                    patch: { file: sv.file, find: dd, budget: 155 },
+                })
+                bump('meta')
+            }
+
+            /* 3. AI wording across the page's own prose */
+            const prose = [d.heroDesc, d.capabilityDesc, d.seoParagraph,
+                ...(d.subServices || []).map((x) => x.desc),
+                ...(d.whyCards || []).map((x) => x.desc || x.text)].filter((x) => typeof x === 'string')
+            for (const text of prose) {
+                const hit = AI_TERMS.find((term) => text.toLowerCase().includes(term))
+                if (!hit || !occursOnce(src, text)) continue
+                add(page, {
+                    cat: 'AI Wording', section: 'Page copy', field: 'repo',
+                    cur: text, sug: '',
+                    why: `Contains "${hit}", which reads as machine written. Rewrite it plainly in Your Edited Text. This copy is on ${page.reach} URLs.`,
+                    note: 'Needs wording from you',
+                    patch: { file: sv.file, find: text },
+                })
+                bump('ai')
+            }
+
+            /* 4. em and en dashes in this entry's own copy */
+            let budget = cfg.maxDashes
+            for (const text of [t, dd, ...prose]) {
+                if (budget <= 0) break
+                if (!/[\u2013\u2014]/.test(text) || !occursOnce(src, text)) continue
+                budget--
+                add(page, {
+                    cat: 'Dash Style', section: 'Page copy', field: 'repo',
+                    cur: text, sug: text.replace(/\s*[\u2013\u2014]\s*/g, ' - '),
+                    why: `The site style is hyphens only. This text is on ${page.reach} URLs.`,
+                    patch: { file: sv.file, find: text, replace: text.replace(/\s*[\u2013\u2014]\s*/g, ' - ') },
+                })
+                bump('dash')
+            }
+
+            /* 5. FAQ repetition across the whole site */
+            for (const f of d.faqs || []) {
+                const q = Array.isArray(f) ? f[0] : f.question
+                if (!q || !occursOnce(src, q)) continue
+                const mine = normalise(q)
+                let worst = null
+                for (const other of corpus) {
+                    if (other.owner === page.id) continue
+                    const score = jaccard(mine, other.t)
+                    if (score >= cfg.faqThreshold && (!worst || score > worst.score)) worst = { ...other, score }
+                }
+                if (!worst) continue
+                add(page, {
+                    cat: 'FAQ', section: 'FAQ', field: 'repo',
+                    cur: q, sug: '',
+                    why: `${Math.round(worst.score * 100)}% the same as a question on ${worst.where} ("${worst.q}"). This page serves ${page.reach} URLs, so the duplicate is multiplied. Make it specific to ${sv.label.toLowerCase()} in Your Edited Text, or reject if both pages genuinely need it.`,
+                    note: 'Needs wording from you',
+                    patch: { file: sv.file, find: q },
+                })
+                bump('faq')
+            }
+
+            summary.push({ page, added: n - before, counts })
+            continue
+        }
 
         /* ---- website pillar page ---- */
         if (entry.Kind === 'pillar') {
@@ -730,9 +865,11 @@ async function apply() {
 
     /* ---- website pages: edit the source, then commit and deploy ---- */
     for (const [pageId, rows] of byPage) {
-        if (!pageId.startsWith('pillar:')) continue
-        const pl = PILLARS.find((x) => `pillar:${x.id}` === pageId)
-        if (!pl) { rows.forEach((r) => updates.push({ 'Suggestion ID': r['Suggestion ID'], 'Applied Status': 'Failed', Notes: 'Unknown pillar', 'Applied At': TODAY })); continue }
+        if (!pageId.startsWith('pillar:') && !pageId.startsWith('service:')) continue
+        const pl = pageId.startsWith('service:')
+            ? { file: 'lib/data.js', label: rows[0]['Page Title'] || pageId }
+            : PILLARS.find((x) => `pillar:${x.id}` === pageId)
+        if (!pl) { rows.forEach((r) => updates.push({ 'Suggestion ID': r['Suggestion ID'], 'Applied Status': 'Failed', Notes: 'Unknown page', 'Applied At': TODAY })); continue }
 
         let src = readFileSync(pl.file, 'utf8')
         const original = src
