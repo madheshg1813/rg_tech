@@ -6,17 +6,22 @@
  *
  * SETUP, once:
  *
- *   1. Open the approval spreadsheet, Extensions > Apps Script, paste this file.
- *   2. Change SECRET below to a long random string of your own.
- *   3. Run setupTabs() once from the editor and grant the permissions it asks
- *      for. This creates the five tabs with their headers and the Approval
- *      dropdown. It never deletes a tab that already exists.
- *   4. Deploy > New deployment > Web app.
+ *   1. Make the spreadsheet: go to https://sheets.new and name it something
+ *      like "RG Tech page refresh approvals". It can be completely empty;
+ *      setupTabs() builds everything inside it.
+ *   2. In that sheet: Extensions > Apps Script. Delete the stub Code.gs
+ *      contents and paste this file in its place.
+ *   3. Change SECRET below to a long random string of your own.
+ *   4. Run setupTabs() once from the editor and grant the permissions it asks
+ *      for. This creates the five tabs with their headers, the Approval
+ *      dropdown and the text wrapping. It never deletes a tab that already
+ *      exists, so it is safe to run again after an update.
+ *   5. Deploy > New deployment > Web app.
  *        Execute as:        Me
  *        Who has access:    Anyone
  *      "Anyone" means anyone with the URL; the SECRET below is what actually
  *      guards it, which is why it must not be guessable.
- *   5. Copy the /exec URL into the repo's .env.local:
+ *   6. Copy the /exec URL into the repo's .env.local:
  *        REFRESH_SHEET_URL=https://script.google.com/macros/s/..../exec
  *        REFRESH_SHEET_SECRET=<the SECRET you set>
  *        REFRESH_SHEET_ID=<the spreadsheet id from its URL>
@@ -26,6 +31,15 @@
  */
 
 var SECRET = 'CHANGE-ME-to-a-long-random-string';
+
+/*
+ * Only needed if this script is NOT bound to the spreadsheet (that is, you
+ * made it from script.google.com rather than from Extensions > Apps Script
+ * inside the sheet). Paste the id from the sheet's own URL:
+ *   docs.google.com/spreadsheets/d/<THIS_IS_THE_ID>/edit
+ * Leave it empty for a bound script.
+ */
+var SHEET_ID = '';
 
 var TABS = {
   'Page Register': ['Page ID', 'Kind', 'Title', 'URL', 'Source', 'Last Audited', 'Open Suggestions'],
@@ -64,7 +78,7 @@ var APPROVAL_CHOICES = ['Pending', 'Approved', 'Rejected'];
 
 /** Run once by hand. Safe to re-run: it only adds what is missing. */
 function setupTabs() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = book();
 
   Object.keys(TABS).forEach(function (name) {
     var sh = ss.getSheetByName(name) || ss.insertSheet(name);
@@ -104,6 +118,13 @@ function setupTabs() {
   });
 
   ss.getSheetByName('Patches').hideSheet();
+
+  // A brand new spreadsheet arrives with an empty "Sheet1". Once the real tabs
+  // exist it is just clutter, so drop it - but only if nobody has typed in it.
+  var leftover = ss.getSheetByName('Sheet1');
+  if (leftover && !TABS['Sheet1'] && leftover.getLastRow() === 0 && ss.getSheets().length > 1) {
+    ss.deleteSheet(leftover);
+  }
 }
 
 
@@ -140,8 +161,16 @@ function doPost(e) {
 
 /* -------------------------------------------------------------- the work */
 
+/** The spreadsheet this bridge serves, bound or addressed by id. */
+function book() {
+  if (SHEET_ID) return SpreadsheetApp.openById(SHEET_ID);
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('Not bound to a spreadsheet: set SHEET_ID at the top of this file.');
+  return ss;
+}
+
 function sheetFor(tab) {
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(tab);
+  var sh = book().getSheetByName(tab);
   if (!sh) throw new Error('tab not found: ' + tab + ' (run setupTabs)');
   return sh;
 }
