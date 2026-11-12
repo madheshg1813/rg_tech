@@ -56,8 +56,10 @@ top of someone else's uncommitted work.
 
 ### 2. Config
 
-Read `.env.local` in the repo root for `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` and
-`SANITY_API_TOKEN`. Read the sheet bridge settings from the same file:
+Take `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` and `SANITY_API_TOKEN` from the
+environment when they are already set, and otherwise from `.env.local` in the repo root. A scheduled CI run
+has them in the environment and has no `.env.local`; a local run is the other way round. Same for the sheet
+bridge settings:
 
 | Key | Meaning |
 |---|---|
@@ -67,6 +69,16 @@ Read `.env.local` in the repo root for `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PU
 
 If any of the three is missing, stop and tell the user to deploy `apps-script/AuditBridge.gs` (instructions in
 that file's header) and add the keys. Do not fall back to a different sheet.
+
+In CI there is no `.env.local`, so build one from the environment before running anything that expects it:
+
+```
+printf 'NEXT_PUBLIC_SANITY_PROJECT_ID=%s\nNEXT_PUBLIC_SANITY_DATASET=%s\nSANITY_API_TOKEN=%s\n' \
+  "$NEXT_PUBLIC_SANITY_PROJECT_ID" "$NEXT_PUBLIC_SANITY_DATASET" "$SANITY_API_TOKEN" > .env.local
+chmod 600 .env.local
+```
+
+It is gitignored, so it can never be committed by `apply` mode.
 
 **Never print a token or secret** in output, in the sheet, or in a commit. Pass them through environment
 variables or a `chmod 600` file in the scratchpad.
@@ -283,6 +295,7 @@ off mid-word; this is 58 and puts the service first."
  "field": "body|faqs.add|faqs.edit|faqs.remove|metaTitle|metaDescription|summary|repo",
  "blockKey": "<block _key>", "spanKey": "<span _key>",
  "find": "<exact current text>", "replace": "<exact new text>",
+ "edits": [{"blockKey": "...", "spanKey": "...", "find": "...", "replace": "..."}],
  "faqKey": "<for faqs.edit and faqs.remove>",
  "faq": {"question": "...", "answer": "..."},
  "file": "<for kind repo>", "lineHint": 123}
@@ -292,6 +305,10 @@ off mid-word; this is 58 and puts the service first."
 - For `repo`, `find` must appear **exactly once in the whole file**. Widen it until it does. Record the file
   path relative to the repo root.
 - Two suggestions must never overlap the same text. Merge them into one row instead.
+- `edits` carries several replacements that are **one editorial decision**, so they are approved or rejected
+  together. Use it when fixing only part of a group would leave the page visibly inconsistent, for example a
+  six-line list where every line carries the same em dash. It counts as one row against the daily dash budget.
+  A single edit may use `edits` with one entry; prefer that, so the apply step has one shape to handle.
 
 Suggestion IDs: `S-<YYYYMMDD>-<NN>`, numbered across the whole run.
 

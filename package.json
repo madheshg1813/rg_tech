@@ -26,7 +26,11 @@
     "blog:force": "node scripts/publish-next.mjs --force",
     "locations:status": "node scripts/release-locations.mjs --status",
     "locations:dry": "node scripts/release-locations.mjs --dry-run",
-    "locations:release": "node scripts/release-locations.mjs"
+    "locations:release": "node scripts/release-locations.mjs",
+    "refresh:audit": "node scripts/page-refresh.mjs --mode audit",
+    "refresh:audit:dry": "node scripts/page-refresh.mjs --mode audit --dry-run",
+    "refresh:apply": "node scripts/page-refresh.mjs --mode apply",
+    "refresh:apply:dry": "node scripts/page-refresh.mjs --mode apply --dry-run"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",

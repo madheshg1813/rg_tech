@@ -1,0 +1,92 @@
+name: Page refresh audit
+
+# Daily audit of the blog, written to the approval sheet.
+#
+# Two fires a day, and the cron that fired decides the mode:
+#
+#   10:07 IST  audit   proposes, and writes only to the sheet
+#   17:43 IST  apply   publishes the rows a human approved in between
+#
+# The gap between them is the design. Nothing can reach the site on the same
+# run that proposed it, so there is always a person and several hours between a
+# suggestion and a live page.
+#
+# This runs scripts/page-refresh.mjs, which is deterministic: it measures
+# things and compares them. Where a fix needs a sentence written rather than
+# measured, the row carries the problem and an empty suggestion, and a person
+# fills in Your Edited Text. That keeps the daily run free - no model is called
+# here. Run the Claude skill by hand when you want the wording drafted.
+on:
+  schedule:
+    - cron: '37 4 * * *'  # 10:07 IST - audit
+    - cron: '13 12 * * *' # 17:43 IST - apply
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Which half to run'
+        type: choice
+        options: [audit, apply]
+        default: audit
+      dry_run:
+        description: 'Show what would happen without writing'
+        type: boolean
+        default: false
+
+# Never let an apply overlap an audit, or two applies overlap each other.
+concurrency:
+  group: page-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Decide the mode
+        id: mode
+        run: |
+          if [ -n "${{ inputs.mode }}" ]; then
+            MODE="${{ inputs.mode }}"
+          elif [ "${{ github.event.schedule }}" = "13 12 * * *" ]; then
+            MODE="apply"
+          else
+            MODE="audit"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "Running in $MODE mode"
+
+      - name: Run the page refresh
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
+          REFRESH_SHEET_URL: ${{ secrets.REFRESH_SHEET_URL }}
+          REFRESH_SHEET_SECRET: ${{ secrets.REFRESH_SHEET_SECRET }}
+          REFRESH_SHEET_ID: ${{ secrets.REFRESH_SHEET_ID }}
+        run: |
+          for v in NEXT_PUBLIC_SANITY_PROJECT_ID SANITY_API_TOKEN REFRESH_SHEET_URL REFRESH_SHEET_SECRET; do
+            if [ -z "${!v}" ]; then echo "::error::$v is not set in repository secrets"; exit 1; fi
+          done
+          ARGS="--mode ${{ steps.mode.outputs.mode }}"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          node scripts/page-refresh.mjs $ARGS | tee refresh-report.txt
+
+      # The report is the only record of a run nobody watched.
+      - name: Keep the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: refresh-report-${{ steps.mode.outputs.mode }}-${{ github.run_number }}
+          path: refresh-report.txt
+          retention-days: 30
