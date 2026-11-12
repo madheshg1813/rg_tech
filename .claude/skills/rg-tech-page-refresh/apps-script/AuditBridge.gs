@@ -151,6 +151,7 @@ function doPost(e) {
       case 'append': return out(appendRows(tab, body.rows || []));
       case 'upsert': return out(writeRows(tab, body.rows || [], true));
       case 'update': return out(writeRows(tab, body.rows || [], false));
+      case 'updateByRow': return out(writeByRow(tab, body.rows || []));
       default:       return out({ ok: false, error: 'unknown action: ' + body.action });
     }
   } catch (err) {
@@ -261,6 +262,31 @@ function writeRows(tab, rows, allowInsert) {
   }
 
   return { ok: true, updated: updated, inserted: inserted, missed: missed };
+}
+
+/**
+ * Writes rows addressed by their sheet row number rather than by key.
+ *
+ * The keyed writers cannot reach a row whose key is duplicated - they find the
+ * first match and stop - so repairing a duplicated id is impossible through
+ * them. Each row here carries `_row`, exactly as `read` returned it.
+ */
+function writeByRow(tab, rows) {
+  if (!rows.length) return { ok: true, updated: 0 };
+  var sh = sheetFor(tab);
+  var headers = headersFor(sh);
+  var updated = 0;
+
+  rows.forEach(function (r) {
+    var rowNum = Number(r._row);
+    if (!rowNum || rowNum < 2 || rowNum > sh.getLastRow()) return;
+    headers.forEach(function (h, c) {
+      if (h !== '' && r[h] !== undefined) sh.getRange(rowNum, c + 1).setValue(r[h]);
+    });
+    updated++;
+  });
+
+  return { ok: true, updated: updated };
 }
 
 function out(obj) {

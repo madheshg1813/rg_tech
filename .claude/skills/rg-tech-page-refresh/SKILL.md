@@ -15,8 +15,16 @@ Two modes. Take the mode from the request; a scheduled run names it.
 
 | Mode | Trigger | Steps |
 |---|---|---|
-| `audit` | "run the page audit", the morning scheduled run | A1 to A8 |
-| `apply` | "apply approved page changes", the evening scheduled run | P1 to P8 |
+| `draft` | "draft the wording", "fill in the suggestions" | D1 to D5 |
+| `audit` | "run the page audit" | A1 to A8 |
+| `apply` | "apply approved page changes" | P1 to P8 |
+
+**`draft` is the mode to run day to day.** `scripts/page-refresh.mjs` already does the
+measuring on a schedule and writes rows with the problem stated and the suggestion left
+empty, because a script can count characters but cannot write a sentence. This mode fills
+those blanks in, and it is the whole reason the skill still exists alongside the script.
+It costs nothing beyond the session it runs in - there is no API key anywhere in this
+system, by design.
 
 Every scheduled run starts with no memory. Read all state from the sheet, Sanity, the repo and the live site.
 Never rely on anything remembered from a previous run.
@@ -178,6 +186,82 @@ Hand-written copy lives in `lib/stainlessSteel.js`, `lib/nameEngraving.js`, `lib
 `lib/servicePage.js` is the shared template and `lib/data.js` holds `pillarServices`.
 
 ---
+
+## Mode: draft
+
+Fill in the wording for rows the script could not write. This is the half a model is
+needed for, and nothing else in the pipeline calls one.
+
+### D1. Read what is waiting
+
+`read` the `Suggestions` tab. Take rows where **Approval is `Pending`** and
+**`Suggested Text` is empty**. Those are exactly the rows the script marked
+"Needs wording from you". Leave every other row alone, including rows someone has
+already edited by hand.
+
+If there are none, say so in one line and stop.
+
+### D2. Read the page before writing a word
+
+For each row, open the page it belongs to and read enough of it to write in its voice:
+
+- `post:` rows - the Sanity document.
+- `pillar:` rows - the `lib/` file named in `Source`.
+- `service:` rows - the matching entry in `pillarServices` in `lib/data.js`.
+
+Never write from the row alone. A title rewritten without reading the page is a guess,
+and a guess that reads well is worse than a blank, because it gets approved.
+
+### D3. Write the suggestion
+
+One suggestion per row, in `Suggested Text`, as plain prose with no markup and no quotes
+around it. Obey the row's own constraint, which `Why It Helps` states:
+
+| Section | Constraint |
+|---|---|
+| Meta title | at most **50 characters**, because the layout appends ` \| RG Tech` and the pair must fit 60 |
+| Meta description | at most **155 characters** |
+| FAQ | `Q: ...` then a newline `A: ...`, answer 40 to 80 words |
+| Page copy, AI wording | the same sentence said plainly, same facts, same length or shorter |
+
+House style, all of it non-negotiable:
+
+- **Hyphens only.** Never an em or en dash. The apply step refuses wording containing one.
+- **No quotes or backslashes in a `repo` row.** The apply step refuses those too, because
+  they would be inserted into a JavaScript source file.
+- Plain, specific, and the way a fabricator talks. Name the thing: the material, the
+  thickness, the city. Never "unlock", "seamless", "elevate", "cutting-edge", or any of
+  the terms in check 1.
+- **Invent nothing.** Every fact in your wording must already be on that page or in the
+  repo. If a shorter title needs a fact you cannot source, write a shorter title that
+  drops the claim rather than one that invents a smaller one.
+
+For a duplicate FAQ, the fix is almost always to make the answer specific to this page's
+material rather than to delete the question. A buyer on the copper page really does want
+to know the file format. Change what makes it different, not that it exists.
+
+### D4. Check your own work before writing it
+
+For every suggestion, confirm:
+
+- it is within the character limit for its section, counted including the brand suffix
+  where one applies;
+- it contains no em dash, no en dash, and for a `repo` row no quote or backslash;
+- it contains none of the AI terms from check 1;
+- it says nothing the page does not already support.
+
+A suggestion failing any of these is not written. Leave the cell empty and say which row
+you could not write and why - a blank is honest, a bad suggestion is not.
+
+### D5. Write them back
+
+`update` the `Suggestions` tab, setting only `Suggested Text` on the rows you wrote.
+Never touch `Approval`, `Your Edited Text`, `Applied Status` or any other column: the
+approval is the human's and this mode does not have an opinion about it.
+
+Then report, grouped by page: the row id, what the suggestion now says, and anything you
+left blank with the reason. Say plainly that these are drafts awaiting approval and that
+the evening run will apply only the ones marked `Approved`.
 
 ## Mode: audit
 

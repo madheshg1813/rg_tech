@@ -417,8 +417,23 @@ async function audit() {
         }
     }
 
+    /*
+     * Suggestion ids must be unique for the lifetime of the sheet, because the
+     * Patches tab is keyed by them: two rows sharing an id means one patch
+     * silently overwrites the other and a row can be applied with a change that
+     * was never proposed for it. Numbering restarted at 01 on every run, so two
+     * runs on one day collided. Numbering now continues past whatever the sheet
+     * already holds for today.
+     */
+    const usedToday = new Set(
+        (await sheet('read', 'Suggestions')).rows
+            .map((r) => String(r['Suggestion ID'] || ''))
+            .filter((id) => id.startsWith(`S-${STAMP}-`))
+    )
     const rows = [], patches = []
-    let n = 0
+    let n = [...usedToday]
+        .map((id) => Number(id.split('-').pop()) || 0)
+        .reduce((a, b) => Math.max(a, b), 0)
 /*
  * How much a finding is worth doing, used to pick the day's few.
  *
@@ -442,7 +457,9 @@ const score = (row) =>
     /* `page` is {id, kind, title, url, source, reach} whichever kind it is. */
     const add = (page, o) => {
         n++
-        const id = `S-${STAMP}-${String(n).padStart(2, '0')}`
+        let id = `S-${STAMP}-${String(n).padStart(2, '0')}`
+        while (usedToday.has(id)) { n++; id = `S-${STAMP}-${String(n).padStart(2, '0')}` }
+        usedToday.add(id)
         rows.push({
             'Suggestion ID': id, Date: TODAY, 'Page Title': page.title,
             'Page URL': page.url, 'Page ID': page.id,
@@ -544,6 +561,7 @@ const score = (row) =>
             /* 5. FAQ repetition across the whole site */
             for (const f of d.faqs || []) {
                 const q = Array.isArray(f) ? f[0] : f.question
+                const a = Array.isArray(f) ? f[1] : f.answer
                 if (!q || !occursOnce(src, q)) continue
                 const mine = normalise(q)
                 let worst = null
@@ -553,12 +571,13 @@ const score = (row) =>
                     if (score >= cfg.faqThreshold && (!worst || score > worst.score)) worst = { ...other, score }
                 }
                 if (!worst) continue
+                const answer = typeof a === 'string' && occursOnce(src, a) ? a : null
                 add(page, {
-                    cat: 'FAQ', section: 'FAQ', field: 'repo',
-                    cur: q, sug: '',
+                    cat: 'FAQ', section: 'FAQ', field: 'repo.faq',
+                    cur: `Q: ${q}\nA: ${answer || '(answer not separately editable)'}`, sug: '',
                     why: `${Math.round(worst.score * 100)}% the same as a question on ${worst.where} ("${worst.q}"). This page serves ${page.reach} URLs, so the duplicate is multiplied. Make it specific to ${sv.label.toLowerCase()} in Your Edited Text, or reject if both pages genuinely need it.`,
                     note: 'Needs wording from you',
-                    patch: { file: sv.file, find: q },
+                    patch: { file: sv.file, find: q, findAnswer: answer },
                 })
                 bump('faq')
             }
@@ -612,7 +631,7 @@ const score = (row) =>
             }
 
             /* 3. FAQ repetition across the whole site, the real problem here */
-            for (const [q] of data.faqs || []) {
+            for (const [q, a] of data.faqs || []) {
                 const mine = normalise(q)
                 let worst = null
                 for (const other of corpus) {
@@ -621,12 +640,15 @@ const score = (row) =>
                     if (score >= cfg.faqThreshold && (!worst || score > worst.score)) worst = { ...other, score }
                 }
                 if (!worst || !occursOnce(src, q)) continue
+                /* The answer is carried too: on a duplicate pair it is usually the
+                   answer that is really the same, so a question-only fix is cosmetic. */
+                const answer = typeof a === 'string' && occursOnce(src, a) ? a : null
                 add(page, {
-                    cat: 'FAQ', section: 'FAQ', field: 'repo',
-                    cur: q, sug: '',
+                    cat: 'FAQ', section: 'FAQ', field: 'repo.faq',
+                    cur: `Q: ${q}\nA: ${answer || '(answer not separately editable)'}`, sug: '',
                     why: `${Math.round(worst.score * 100)}% the same as a question on ${worst.where} ("${worst.q}"). This page serves ${page.reach} URLs, so the duplicate is multiplied. Make it specific to ${pl.label.toLowerCase()} in Your Edited Text, or reject if both pages genuinely need it.`,
                     note: 'Needs wording from you',
-                    patch: { file: pl.file, find: q },
+                    patch: { file: pl.file, find: q, findAnswer: answer },
                 })
                 bump('faq')
             }
@@ -941,10 +963,21 @@ async function apply() {
     if (!approved.length) { console.log(`Page refresh ${TODAY}: no approved changes to publish.`); return }
 
     const { rows: patchRows } = await sheet('read', 'Patches')
-    const patchFor = (id) => {
+
+    /*
+     * A patch is fetched by suggestion id, so a duplicated id means a row can be
+     * handed a change that was proposed for a different page. Ids are generated
+     * uniquely now, but a sheet written before that, or edited by hand, can still
+     * hold a collision - so the pairing is checked rather than trusted. A patch
+     * whose pageId disagrees with the row's own Page ID is refused, not applied.
+     */
+    const patchFor = (id, row) => {
         const r = patchRows.find((x) => x['Suggestion ID'] === id)
         if (!r) return null
-        try { return JSON.parse(r['Patch JSON']) } catch { return null }
+        let patch
+        try { patch = JSON.parse(r['Patch JSON']) } catch { return null }
+        if (row && patch.pageId && patch.pageId !== row['Page ID']) return { mismatch: patch.pageId }
+        return patch
     }
 
     /* group by page, so each document or file is written once */
@@ -973,9 +1006,10 @@ async function apply() {
 
         for (const row of rows.sort((a, b) => a['Suggestion ID'].localeCompare(b['Suggestion ID']))) {
             const id = row['Suggestion ID']
-            const patch = patchFor(id)
+            const patch = patchFor(id, row)
             const mark = (status, note) => { updates.push({ 'Suggestion ID': id, 'Applied Status': status, Notes: note || '', 'Applied At': TODAY }); if (status !== 'Applied') skipped++ }
             if (!patch) { mark('Failed', 'No patch stored for this row'); continue }
+            if (patch.mismatch) { mark('Failed', `The stored change belongs to ${patch.mismatch}, not this page. Another row shares this suggestion id.`); continue }
             if (patch.field === 'report-only') { mark('Conflict - Skipped', 'This one needs a code change by hand'); continue }
 
             const human = (row['Your Edited Text'] || '').trim()
@@ -984,6 +1018,26 @@ async function apply() {
             if (/[\u2013\u2014]/.test(wording)) { mark('Failed', 'The wording contains an em or en dash, which the site style does not allow'); continue }
             if (/[`'"\\]/.test(wording)) { mark('Failed', 'Quotes and backslashes cannot be inserted into the source safely; edit this one by hand'); continue }
             if (!occursOnce(src, patch.find)) { mark('Conflict - Skipped', 'That text has changed in the repo since the audit'); continue }
+
+            /*
+             * An FAQ row carries both halves, because on a duplicate pair it is
+             * usually the answer that is really the same and a question-only fix
+             * is cosmetic. The wording arrives as "Q: ..." then "A: ...".
+             */
+            if (patch.field === 'repo.faq') {
+                const m = wording.match(/^\s*Q:\s*([\s\S]+?)\s*\n\s*A:\s*([\s\S]+?)\s*$/i)
+                if (!m) { mark('Failed', 'Write it as "Q: question" then a new line "A: answer"'); continue }
+                const [, newQ, newA] = m
+                if (patch.findAnswer && !occursOnce(src, patch.findAnswer)) { mark('Conflict - Skipped', 'That answer has changed in the repo since the audit'); continue }
+                if (!patch.findAnswer && newA.trim() !== '(answer not separately editable)') {
+                    mark('Conflict - Skipped', 'The answer on this page cannot be replaced safely; edit it by hand')
+                    continue
+                }
+                src = src.split(patch.find).join(newQ)
+                if (patch.findAnswer) src = src.split(patch.findAnswer).join(newA)
+                proofs.push(newQ)
+                applied++; mark('Applied'); continue
+            }
 
             src = src.split(patch.find).join(wording)
             proofs.push(wording)
@@ -1023,10 +1077,11 @@ async function apply() {
 
         for (const row of rows.sort((a, b) => a['Suggestion ID'].localeCompare(b['Suggestion ID']))) {
             const id = row['Suggestion ID']
-            const patch = patchFor(id)
+            const patch = patchFor(id, row)
             const mark = (status, note) => { updates.push({ 'Suggestion ID': id, 'Applied Status': status, Notes: note || '', 'Applied At': TODAY }); if (status !== 'Applied') skipped++ }
 
             if (!patch) { mark('Failed', 'No patch stored for this row'); continue }
+            if (patch.mismatch) { mark('Failed', `The stored change belongs to ${patch.mismatch}, not this page. Another row shares this suggestion id.`); continue }
 
             /* a human's wording wins; an edited Suggested Text counts as theirs */
             const human = (row['Your Edited Text'] || '').trim()
