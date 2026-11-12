@@ -24,7 +24,13 @@
  */
 
 import { createClient } from '@sanity/client'
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { register } from 'node:module'
+import { fileURLToPath } from 'node:url'
+
+/* Lets the pillar files, which are written for a bundler, import under node. */
+register(new URL('./lib/next-resolve.mjs', import.meta.url), import.meta.url)
 
 /* ------------------------------------------------------------------ config */
 
@@ -103,6 +109,7 @@ async function settings() {
         maxLinks: Number(get('Max internal links added per page', 3)),
         maxFaqs: Number(get('Max FAQs per page', 8)),
         maxDashes: Number(get('Max dash fixes per page per day', 5)),
+        kinds: String(get('Kinds allowed', 'post, pillar')).split(',').map((x) => x.trim()).filter(Boolean),
         faqThreshold: Number(get('FAQ similarity threshold', 0.6)),
         paused: String(get('Paused', 'No')).toLowerCase() === 'yes',
     }
@@ -265,6 +272,45 @@ function textNodes(post) {
     return out
 }
 
+/* ------------------------------------------------------------- website */
+
+/*
+ * The six hand-written pillar pages.
+ *
+ * These live in the repo rather than in Sanity, which changes three things:
+ * the words are read by importing the module, a fix is a string replacement in
+ * a source file, and publishing means a commit and a deploy rather than an API
+ * write. One pillar also serves several cities, so a single edit is never a
+ * single page - the row carries the real URL count and a person sees it before
+ * approving.
+ */
+const PILLARS = [
+    { id: 'stainlessSteel', file: 'lib/stainlessSteel.js', label: 'Stainless steel laser cutting', slug: 'stainless-steel-laser-cutting' },
+    { id: 'nameEngraving', file: 'lib/nameEngraving.js', label: 'Name engraving and metal name plates', slug: 'name-engraving-services' },
+    { id: 'aluminum', file: 'lib/aluminum.js', label: 'Aluminium laser cutting', slug: 'aluminum-laser-cutting-services' },
+    { id: 'copper', file: 'lib/copper.js', label: 'Copper laser cutting', slug: 'copper-laser-cutting-services' },
+    { id: 'mildSteel', file: 'lib/mildSteel.js', label: 'Mild steel laser cutting', slug: 'mild-steel-laser-cutting-services' },
+    { id: 'jobWork', file: 'lib/jobWork.js', label: 'Laser cutting job work', slug: 'laser-cutting-job-work' },
+]
+
+/** Live URLs a pillar actually serves, counted from the sitemap, never guessed. */
+async function sitemapUrls() {
+    const xml = await (await fetch(`${BASE}/sitemap.xml`)).text()
+    return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+}
+
+/** The pillar's exported data object, read by importing the real module. */
+async function loadPillar(p) {
+    const mod = await import(new URL(`../${p.file}`, import.meta.url).href)
+    const key = Object.keys(mod).find((k) => mod[k] && typeof mod[k] === 'object' && Array.isArray(mod[k].faqs))
+    return key ? mod[key] : null
+}
+
+/** A source string must be replaceable without ambiguity, or it is not touched. */
+function occursOnce(haystack, needle) {
+    return needle && haystack.split(needle).length - 1 === 1
+}
+
 /* ------------------------------------------------------------- audit mode */
 
 async function audit() {
@@ -275,56 +321,186 @@ async function audit() {
         '*[_type == "post" && defined(slug.current)]{_id,title,"slug":slug.current,summary,metaTitle,metaDescription,keywords,body,faqs} | order(title asc)'
     )
 
-    /* A1: keep the register in step with Sanity. A dry run reads only. */
+    /* A1: keep the register in step with Sanity and the repo. Dry runs read only. */
+    const urls = await sitemapUrls()
+    const reach = (slug) => urls.filter((u) => u.includes(`/${slug}`)).length
     if (!DRY) {
-        await sheet('upsert', 'Page Register', posts.map((p) => ({
-            'Page ID': `post:${p.slug}`, Kind: 'post', Title: p.title,
-            URL: `${BASE}/blog/${p.slug}`, Source: p._id,
-        })))
+        await sheet('upsert', 'Page Register', [
+            ...posts.map((p) => ({
+                'Page ID': `post:${p.slug}`, Kind: 'post', Title: p.title,
+                URL: `${BASE}/blog/${p.slug}`, Source: p._id,
+            })),
+            ...PILLARS.map((p) => ({
+                'Page ID': `pillar:${p.id}`, Kind: 'pillar', Title: p.label,
+                URL: urls.find((u) => u.includes(`/${p.slug}`)) || '', Source: p.file,
+            })),
+        ])
     }
 
     /* A2: oldest audited first, skipping anything inside the window or still open */
     const { rows: register } = await sheet('read', 'Page Register')
+    const KINDS = cfg.kinds
     const cutoff = new Date(Date.now() - cfg.reauditDays * 864e5).toISOString().slice(0, 10)
     const due = register
-        .filter((r) => r.Kind === 'post')
+        .filter((r) => KINDS.includes(r.Kind))
         .filter((r) => Number(r['Open Suggestions'] || 0) === 0)
         .filter((r) => !r['Last Audited'] || r['Last Audited'] < cutoff)
         .sort((a, b) => String(a['Last Audited'] || '').localeCompare(String(b['Last Audited'] || '')))
-        .slice(0, cfg.perDay)
 
-    if (!due.length) { console.log('Every page is inside the re-audit window. Nothing due today.'); return }
+    /*
+     * Round robin across kinds rather than straight down the list. Sorted purely
+     * by date, the twelve blog posts would all come up before a single website
+     * page did, because nothing has a date yet and posts are listed first. This
+     * way each run takes one of each while both have work due.
+     */
+    const queues = KINDS.map((k) => due.filter((r) => r.Kind === k))
+    const picked = []
+    for (let i = 0; picked.length < cfg.perDay && queues.some((q) => q.length); i++) {
+        const q = queues[i % queues.length]
+        if (q.length) picked.push(q.shift())
+    }
+
+    if (!picked.length) { console.log('Every page is inside the re-audit window. Nothing due today.'); return }
 
     /* A3: the FAQ corpus is site-wide, because repetition across pages is the problem */
     const corpus = []
-    for (const p of posts) for (const f of p.faqs || []) corpus.push({ slug: p.slug, q: f.question, key: f._key, t: normalise(f.question) })
+    for (const p of posts) for (const f of p.faqs || []) corpus.push({ owner: `post:${p.slug}`, where: `/blog/${p.slug}`, q: f.question, key: f._key, t: normalise(f.question) })
+    const pillarData = {}
+    for (const pl of PILLARS) {
+        const data = await loadPillar(pl).catch(() => null)
+        if (!data) continue
+        pillarData[pl.id] = data
+        for (const [q] of data.faqs || []) corpus.push({ owner: `pillar:${pl.id}`, where: `/chennai/${pl.slug}`, q, t: normalise(q) })
+    }
 
     const rows = [], patches = []
     let n = 0
-    const add = (post, o) => {
+    /* `page` is {id, kind, title, url, source, reach} whichever kind it is. */
+    const add = (page, o) => {
         n++
         const id = `S-${STAMP}-${String(n).padStart(2, '0')}`
         rows.push({
-            'Suggestion ID': id, Date: TODAY, 'Page Title': post.title,
-            'Page URL': `${BASE}/blog/${post.slug}`, 'Page ID': `post:${post.slug}`,
-            Kind: 'post', Category: o.cat, Section: o.section,
+            'Suggestion ID': id, Date: TODAY, 'Page Title': page.title,
+            'Page URL': page.url, 'Page ID': page.id,
+            Kind: page.kind, Category: o.cat, Section: o.section,
             'Current Text': o.cur, 'Suggested Text': o.sug || '', 'Your Edited Text': '',
-            'Why It Helps': o.why, 'Pages Affected': '1',
+            'Why It Helps': o.why, 'Pages Affected': String(page.reach),
             'Anchor Text': o.anchor || '', 'Link Target': o.target || '',
             Approval: 'Pending', Notes: o.note || '', 'Applied Status': 'Not Applied', 'Applied At': '',
         })
         patches.push({
-            'Suggestion ID': id, 'Page ID': `post:${post.slug}`, Field: o.field,
-            'Patch JSON': JSON.stringify({ id, pageId: `post:${post.slug}`, kind: 'post', source: post._id, field: o.field, ...o.patch }),
+            'Suggestion ID': id, 'Page ID': page.id, Field: o.field,
+            'Patch JSON': JSON.stringify({ id, pageId: page.id, kind: page.kind, source: page.source, field: o.field, ...o.patch }),
         })
     }
 
     const summary = []
 
-    for (const entry of due) {
+    for (const entry of picked) {
+        const before = n
+
+        /* ---- website pillar page ---- */
+        if (entry.Kind === 'pillar') {
+            const pl = PILLARS.find((x) => `pillar:${x.id}` === entry['Page ID'])
+            const data = pl && pillarData[pl.id]
+            if (!pl || !data) continue
+
+            const page = {
+                id: `pillar:${pl.id}`, kind: 'pillar', title: pl.label,
+                url: entry.URL || `${BASE}/chennai/${pl.slug}`, source: pl.file,
+                reach: reach(pl.slug) || 1,
+            }
+            const src = readFileSync(pl.file, 'utf8')
+            const counts = {}
+            const bump = (k) => { counts[k] = (counts[k] || 0) + 1 }
+
+            /* 1. em and en dashes in the source copy */
+            let budget = cfg.maxDashes
+            for (const line of [...new Set(src.split('\n').filter((l) => /[\u2013\u2014]/.test(l)))]) {
+                if (budget-- <= 0) break
+                const trimmed = line.trim()
+                if (!occursOnce(src, trimmed)) continue
+                add(page, {
+                    cat: 'Dash Style', section: 'Page copy', field: 'repo',
+                    cur: trimmed, sug: trimmed.replace(/\s*[\u2013\u2014]\s*/g, ' - '),
+                    why: 'The site style is hyphens only. This line is in the page source.',
+                    patch: { file: pl.file, find: trimmed, replace: trimmed.replace(/\s*[\u2013\u2014]\s*/g, ' - ') },
+                })
+                bump('dash')
+            }
+
+            /* 2. AI wording in the FAQ answers and page copy */
+            for (const [q, a] of data.faqs || []) {
+                const hit = AI_TERMS.find((t) => String(a).toLowerCase().includes(t))
+                if (!hit) continue
+                add(page, {
+                    cat: 'AI Wording', section: `FAQ: ${q}`, field: 'repo',
+                    cur: String(a), sug: '',
+                    why: `Contains "${hit}", which reads as machine written. Rewrite it plainly in Your Edited Text.`,
+                    note: 'Needs wording from you',
+                    patch: { file: pl.file, find: String(a) },
+                })
+                bump('ai')
+            }
+
+            /* 3. FAQ repetition across the whole site, the real problem here */
+            for (const [q] of data.faqs || []) {
+                const mine = normalise(q)
+                let worst = null
+                for (const other of corpus) {
+                    if (other.owner === page.id) continue
+                    const score = jaccard(mine, other.t)
+                    if (score >= cfg.faqThreshold && (!worst || score > worst.score)) worst = { ...other, score }
+                }
+                if (!worst || !occursOnce(src, q)) continue
+                add(page, {
+                    cat: 'FAQ', section: 'FAQ', field: 'repo',
+                    cur: q, sug: '',
+                    why: `${Math.round(worst.score * 100)}% the same as a question on ${worst.where} ("${worst.q}"). This page serves ${page.reach} URLs, so the duplicate is multiplied. Make it specific to ${pl.label.toLowerCase()} in Your Edited Text, or reject if both pages genuinely need it.`,
+                    note: 'Needs wording from you',
+                    patch: { file: pl.file, find: q },
+                })
+                bump('faq')
+            }
+
+            /* 4. meta title and description, measured as the live page renders them */
+            try {
+                const html = await (await fetch(page.url)).text()
+                const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || ''
+                const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || ''
+                if (title && (title.length > 60 || title.length < 45)) {
+                    add(page, {
+                        cat: 'Meta / SEO', section: 'Meta title', field: 'report-only',
+                        cur: `${title}   (${title.length} ch as rendered)`, sug: '',
+                        why: `${title.length > 60 ? 'Over 60 characters, so Google cuts it off' : 'Under 45 characters, which wastes the width'}. This title is built in ${pl.file}, so it needs a code change rather than a text swap.`,
+                        note: 'Code change, do this by hand',
+                        patch: { file: pl.file },
+                    })
+                    bump('meta')
+                }
+                if (desc && desc.length > 155) {
+                    add(page, {
+                        cat: 'Meta / SEO', section: 'Meta description', field: 'report-only',
+                        cur: `${desc}   (${desc.length} ch)`, sug: '',
+                        why: `${desc.length} characters, so the end is cut off in results. Built in ${pl.file}.`,
+                        note: 'Code change, do this by hand',
+                        patch: { file: pl.file },
+                    })
+                    bump('meta')
+                }
+            } catch { /* the live page being unreachable is not a finding */ }
+
+            summary.push({ page, added: n - before, counts })
+            continue
+        }
+
+        /* ---- blog post ---- */
         const post = posts.find((p) => `post:${p.slug}` === entry['Page ID'])
         if (!post) continue
-        const before = n
+        const page = {
+            id: `post:${post.slug}`, kind: 'post', title: post.title,
+            url: `${BASE}/blog/${post.slug}`, source: post._id, reach: 1,
+        }
         const counts = {}
         const bump = (k) => { counts[k] = (counts[k] || 0) + 1 }
 
@@ -332,7 +508,7 @@ async function audit() {
         const title = post.metaTitle || post.title
         const rendered = title.length + BRAND_SUFFIX.length
         if (rendered > 60 || rendered < 45) {
-            add(post, {
+            add(page, {
                 cat: 'Meta / SEO', section: 'Meta title', field: 'metaTitle',
                 cur: `${title}   (${title.length} ch, renders as ${rendered} with "${BRAND_SUFFIX.trim()}")`,
                 sug: '',
@@ -348,7 +524,7 @@ async function audit() {
         /* 2. meta description */
         const desc = post.metaDescription || post.summary || ''
         if (desc.length > 155 || desc.length < 70) {
-            add(post, {
+            add(page, {
                 cat: 'Meta / SEO', section: 'Meta description', field: 'metaDescription',
                 cur: `${desc}   (${desc.length} ch)`,
                 sug: '',
@@ -374,7 +550,7 @@ async function audit() {
         for (const [blockKey, group] of grouped) {
             if (dashBudget-- <= 0) break
             const swap = (x) => x.replace(/\s*[\u2013\u2014]\s*/g, ' - ')
-            add(post, {
+            add(page, {
                 cat: 'Dash Style',
                 section: group[0].where === 'callout' ? 'Callout' : group[0].where === 'table' ? 'Table' : 'Body',
                 field: 'dash',
@@ -391,7 +567,7 @@ async function audit() {
             if (t.style && t.style !== 'normal') continue
             const hit = AI_TERMS.find((term) => t.text.toLowerCase().includes(term))
             if (!hit) continue
-            add(post, {
+            add(page, {
                 cat: 'AI Wording', section: t.where === 'callout' ? 'Callout' : 'Body', field: 'prose',
                 cur: t.text, sug: '',
                 why: `Contains "${hit}", which reads as machine written. Rewrite it plainly in Your Edited Text, or reject this row if it reads fine to you.`,
@@ -406,16 +582,16 @@ async function audit() {
             const mine = normalise(f.question)
             let worst = null
             for (const other of corpus) {
-                if (other.slug === post.slug) continue
+                if (other.owner === page.id) continue
                 const score = jaccard(mine, other.t)
                 if (score >= cfg.faqThreshold && (!worst || score > worst.score)) worst = { ...other, score }
             }
             if (!worst) continue
-            add(post, {
+            add(page, {
                 cat: 'FAQ', section: 'FAQ', field: 'faqs.edit',
                 cur: `Q: ${f.question}`,
                 sug: '',
-                why: `${Math.round(worst.score * 100)}% the same as a question on /blog/${worst.slug} ("${worst.q}"). Two pages answering one question compete with each other in search. Rewrite this one to a different angle, or reject if they really are different questions.`,
+                why: `${Math.round(worst.score * 100)}% the same as a question on ${worst.where} ("${worst.q}"). Two pages answering one question compete with each other in search. Rewrite this one to a different angle, or reject if they really are different questions.`,
                 note: 'Needs wording from you',
                 patch: { faqKey: f._key, collidesWith: worst.slug },
             })
@@ -424,7 +600,7 @@ async function audit() {
 
         /* 6. internal links */
         for (const o of linkOpportunities(post, posts, cfg.maxLinks)) {
-            add(post, {
+            add(page, {
                 cat: 'Internal Link', section: 'Body', field: 'body.link',
                 cur: o.sentence,
                 sug: `Same sentence, with "${o.anchor}" linked to /blog/${o.target.slug}`,
@@ -438,7 +614,7 @@ async function audit() {
 
         /* 7. broken links and missing alt text */
         for (const b of await contentLinks(post)) {
-            add(post, {
+            add(page, {
                 cat: b.kind === 'link' ? 'Broken Link' : 'Image Alt',
                 section: b.kind === 'link' ? 'Body link' : 'Image', field: 'report-only',
                 cur: b.kind === 'link' ? `${b.url} returns ${b.status}` : `${b.url} has alt "${b.alt}"`,
@@ -452,7 +628,7 @@ async function audit() {
             bump(b.kind === 'link' ? 'broken' : 'alt')
         }
 
-        summary.push({ post, added: n - before, counts })
+        summary.push({ page, added: n - before, counts })
     }
 
     /* A7 */
@@ -462,11 +638,11 @@ async function audit() {
         await sheet('upsert', 'Patches', patches)
         await sheet('append', 'Suggestions', rows)
         await sheet('upsert', 'Page Register', summary.map((s) => ({
-            'Page ID': `post:${s.post.slug}`, 'Last Audited': TODAY, 'Open Suggestions': String(s.added),
+            'Page ID': s.page.id, 'Last Audited': TODAY, 'Open Suggestions': String(s.added),
         })))
     } else if (!DRY) {
         await sheet('upsert', 'Page Register', summary.map((s) => ({
-            'Page ID': `post:${s.post.slug}`, 'Last Audited': TODAY, 'Open Suggestions': '0',
+            'Page ID': s.page.id, 'Last Audited': TODAY, 'Open Suggestions': '0',
         })))
     }
 
@@ -474,8 +650,8 @@ async function audit() {
     console.log(`\nPage refresh audit ${TODAY}`)
     for (const s of summary) {
         const detail = Object.entries(s.counts).map(([k, v]) => `${k} ${v}`).join(' · ') || 'nothing to change'
-        console.log(`  ${s.post.title}`)
-        console.log(`    ${BASE}/blog/${s.post.slug}`)
+        console.log(`  [${s.page.kind}] ${s.page.title}${s.page.reach > 1 ? `   (${s.page.reach} URLs)` : ''}`)
+        console.log(`    ${s.page.url}`)
         console.log(`    ${s.added} suggestion(s): ${detail}`)
     }
     console.log(`\n  ${rows.length} row(s) written, all Pending. Nothing reaches the site until Approval says Approved.`)
@@ -542,7 +718,7 @@ async function apply() {
         try { return JSON.parse(r['Patch JSON']) } catch { return null }
     }
 
-    /* group by page, so each document is written once */
+    /* group by page, so each document or file is written once */
     const byPage = new Map()
     for (const r of approved) {
         if (!byPage.has(r['Page ID'])) byPage.set(r['Page ID'], [])
@@ -550,8 +726,57 @@ async function apply() {
     }
 
     const updates = [], log = []
+    const touchedFiles = new Set()
 
+    /* ---- website pages: edit the source, then commit and deploy ---- */
     for (const [pageId, rows] of byPage) {
+        if (!pageId.startsWith('pillar:')) continue
+        const pl = PILLARS.find((x) => `pillar:${x.id}` === pageId)
+        if (!pl) { rows.forEach((r) => updates.push({ 'Suggestion ID': r['Suggestion ID'], 'Applied Status': 'Failed', Notes: 'Unknown pillar', 'Applied At': TODAY })); continue }
+
+        let src = readFileSync(pl.file, 'utf8')
+        const original = src
+        let applied = 0, skipped = 0
+
+        for (const row of rows.sort((a, b) => a['Suggestion ID'].localeCompare(b['Suggestion ID']))) {
+            const id = row['Suggestion ID']
+            const patch = patchFor(id)
+            const mark = (status, note) => { updates.push({ 'Suggestion ID': id, 'Applied Status': status, Notes: note || '', 'Applied At': TODAY }); if (status !== 'Applied') skipped++ }
+            if (!patch) { mark('Failed', 'No patch stored for this row'); continue }
+            if (patch.field === 'report-only') { mark('Conflict - Skipped', 'This one needs a code change by hand'); continue }
+
+            const human = (row['Your Edited Text'] || '').trim()
+            const wording = human || (row['Suggested Text'] || '').trim()
+            if (!wording) { mark('Conflict - Skipped', 'Needs your wording in Your Edited Text'); continue }
+            if (/[\u2013\u2014]/.test(wording)) { mark('Failed', 'The wording contains an em or en dash, which the site style does not allow'); continue }
+            if (/[`'"\\]/.test(wording)) { mark('Failed', 'Quotes and backslashes cannot be inserted into the source safely; edit this one by hand'); continue }
+            if (!occursOnce(src, patch.find)) { mark('Conflict - Skipped', 'That text has changed in the repo since the audit'); continue }
+
+            src = src.split(patch.find).join(wording)
+            applied++; mark('Applied')
+        }
+
+        if (!applied) { log.push({ id: pageId, name: pl.label, applied: 0, skipped }); continue }
+
+        /* the file must still be valid JavaScript before anything is committed */
+        if (!DRY) {
+            writeFileSync(pl.file, src)
+            try {
+                execFileSync('node', ['--check', pl.file], { stdio: 'pipe' })
+                touchedFiles.add(pl.file)
+            } catch (e) {
+                writeFileSync(pl.file, original)
+                rows.forEach((r) => updates.push({ 'Suggestion ID': r['Suggestion ID'], 'Applied Status': 'Failed', Notes: 'The edit would have broken the file, so nothing was changed', 'Applied At': TODAY }))
+                log.push({ id: pageId, name: pl.label, applied: 0, skipped: rows.length, halted: 'the file would no longer parse' })
+                continue
+            }
+        }
+        log.push({ id: pageId, name: pl.label, applied, skipped, file: pl.file })
+    }
+
+    /* ---- blog posts: write to Sanity ---- */
+    for (const [pageId, rows] of byPage) {
+        if (!pageId.startsWith('post:')) continue
         const slug = pageId.replace(/^post:/, '')
         const doc = await sanity.fetch('*[_type == "post" && slug.current == $slug][0]', { slug })
         if (!doc) { rows.forEach((r) => updates.push({ 'Suggestion ID': r['Suggestion ID'], 'Applied Status': 'Failed', Notes: 'Post not found in Sanity', 'Applied At': TODAY })); continue }
@@ -672,24 +897,58 @@ async function apply() {
         log.push({ slug, applied, skipped })
     }
 
+    /*
+     * Repo edits only reach the site through a commit, so this is the publish
+     * step for a website page. Only the files this run actually changed are
+     * staged - never `git add -A`, which would sweep up whatever else is in the
+     * working tree. Railway deploys from main.
+     */
+    if (!DRY && touchedFiles.size) {
+        const files = [...touchedFiles]
+        const names = log.filter((l) => l.file && l.applied).map((l) => l.name).join(', ')
+        const body = [
+            `content: approved refresh edits to ${names}`,
+            '',
+            'Applied from the page refresh sheet, where each change was',
+            'approved by hand before this run picked it up.',
+            '',
+            ...log.filter((l) => l.file && l.applied).map((l) => `  ${l.name}: ${l.applied} change(s)`),
+        ].join('\n')
+        try {
+            execFileSync('git', ['add', ...files], { stdio: 'pipe' })
+            execFileSync('git', ['commit', '-m', body], { stdio: 'pipe' })
+            execFileSync('git', ['push', 'origin', 'HEAD:main'], { stdio: 'pipe' })
+            global.__refreshSha = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim()
+            console.log(`  committed ${global.__refreshSha} and pushed; Railway will deploy`)
+        } catch (e) {
+            console.error(`  ✖ could not commit or push: ${String(e.stderr || e.message).slice(0, 200)}`)
+            global.__refreshSha = 'push failed'
+        }
+    }
+
     if (!DRY) {
         await sheet('update', 'Suggestions', updates)
         await sheet('append', 'Apply Log', log.map((l) => ({
-            Date: TODAY, 'Page Title': l.slug, 'Page URL': `${BASE}/blog/${l.slug}`,
-            'Page ID': `post:${l.slug}`, Kind: 'post',
+            Date: TODAY, 'Page Title': l.name || l.slug,
+            'Page URL': l.file ? '' : `${BASE}/blog/${l.slug}`,
+            'Page ID': l.id || `post:${l.slug}`, Kind: l.file ? 'pillar' : 'post',
             'Changes Applied': String(l.applied), 'Changes Skipped': String(l.skipped),
             Summary: l.halted ? `Halted: ${l.halted}` : `${l.applied} applied, ${l.skipped} skipped`,
-            'Rollback Point': 'Sanity history', 'Live Check': l.applied ? 'Queued' : 'n/a',
+            'Rollback Point': l.file ? (global.__refreshSha || 'commit') : 'Sanity history',
+            'Live Check': l.applied ? 'Queued' : 'n/a',
         })))
         /* the register's open count drops by whatever is no longer pending */
         const { rows: after } = await sheet('read', 'Suggestions')
         const open = {}
         after.forEach((r) => { if (r['Applied Status'] === 'Not Applied' && r.Approval !== 'Rejected') open[r['Page ID']] = (open[r['Page ID']] || 0) + 1 })
-        await sheet('upsert', 'Page Register', log.map((l) => ({ 'Page ID': `post:${l.slug}`, 'Open Suggestions': String(open[`post:${l.slug}`] || 0) })))
+        await sheet('upsert', 'Page Register', log.map((l) => {
+            const id = l.id || `post:${l.slug}`
+            return { 'Page ID': id, 'Open Suggestions': String(open[id] || 0) }
+        }))
     }
 
     console.log(`\nPage refresh apply ${TODAY}`)
-    for (const l of log) console.log(`  ${l.slug}: ${l.applied} applied, ${l.skipped} skipped${l.halted ? ` (halted: ${l.halted})` : ''}`)
+    for (const l of log) console.log(`  ${l.name || l.slug}: ${l.applied} applied, ${l.skipped} skipped${l.halted ? ` (halted: ${l.halted})` : ''}`)
     console.log('\n  Blog pages revalidate hourly, so applied changes are live within the hour.')
 }
 
