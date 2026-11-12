@@ -105,7 +105,7 @@ async function settings() {
     }
     return {
         perDay: Number(get('Pages per day', 2)),
-        suggestionsPerDay: Number(get('Suggestions per day', 3)),
+        perPage: Number(get('Improvements per page', 3)),
         reauditDays: Number(get('Days before a page is audited again', 60)),
         maxLinks: Number(get('Max internal links added per page', 3)),
         maxFaqs: Number(get('Max FAQs per page', 8)),
@@ -366,12 +366,24 @@ async function audit() {
     /* A2: oldest audited first, skipping anything inside the window or still open */
     const { rows: register } = await sheet('read', 'Page Register')
     const KINDS = cfg.kinds
-    const cutoff = new Date(Date.now() - cfg.reauditDays * 864e5).toISOString().slice(0, 10)
-    const due = register
+    /*
+     * A page is taken once. Pages that have never been audited always come
+     * first, and one that has been seen before is only revisited when there is
+     * nothing fresh left anywhere - which is what makes a page with more
+     * findings than fit in a day eventually get finished without jumping the
+     * queue ahead of pages nobody has looked at yet.
+     *
+     * A page with rows still awaiting approval is never re-picked, so the sheet
+     * cannot fill up with work on a page nobody has acted on.
+     */
+    const eligible = register
         .filter((r) => KINDS.includes(r.Kind))
         .filter((r) => Number(r['Open Suggestions'] || 0) === 0)
-        .filter((r) => !r['Last Audited'] || r['Last Audited'] < cutoff)
-        .sort((a, b) => String(a['Last Audited'] || '').localeCompare(String(b['Last Audited'] || '')))
+    const fresh = eligible.filter((r) => !r['Last Audited'])
+    const revisit = eligible
+        .filter((r) => r['Last Audited'])
+        .sort((a, b) => String(a['Last Audited']).localeCompare(String(b['Last Audited'])))
+    const due = fresh.length ? fresh : revisit
 
     /*
      * Round robin across kinds rather than straight down the list. Sorted purely
@@ -788,30 +800,43 @@ const score = (row) =>
     }
 
     /*
-     * Keep only the day's few, highest impact first.
+     * Keep the best few from each page, rather than the best few overall.
      *
-     * A page that had more to say than fitted today keeps an empty Last
-     * Audited, so once its open rows are cleared it comes straight back rather
-     * than disappearing for the whole re-audit window with its findings unmade.
+     * Capping the run as a whole let one noisy page use the entire day's
+     * budget while the other page in the rotation contributed nothing. Each
+     * page now gets its own allowance, so two pages a day means two pages of
+     * work in the sheet.
+     *
+     * A page that had more to say than fitted keeps an empty Last Audited, so
+     * it returns once every page has had a first look and its open rows are
+     * cleared.
      */
-    const cap = cfg.suggestionsPerDay
-    const ranked = [...rows].sort((a, b) => score(b) - score(a))
-    const keep = new Set(ranked.slice(0, cap).map((r) => r['Suggestion ID']))
+    const keep = new Set()
+    for (const sm of summary) {
+        const mine = rows.filter((r) => r['Page ID'] === sm.page.id).sort((a, b) => score(b) - score(a))
+        mine.slice(0, cfg.perPage).forEach((r) => keep.add(r['Suggestion ID']))
+        sm.kept = Math.min(mine.length, cfg.perPage)
+        sm.heldBack = mine.length - sm.kept
+    }
     const held = rows.length - keep.size
-
     const keptRows = rows.filter((r) => keep.has(r['Suggestion ID']))
     const keptPatches = patches.filter((p) => keep.has(p['Suggestion ID']))
-    for (const s of summary) {
-        s.kept = keptRows.filter((r) => r['Page ID'] === s.page.id).length
-        s.heldBack = s.added - s.kept
-    }
 
     /* A7 */
     rows.length = 0; rows.push(...keptRows)
     patches.length = 0; patches.push(...keptPatches)
 
     if (DRY) {
-        console.log(`[dry run] ${rows.length} suggestions, nothing written`)
+        console.log(`[dry run] ${rows.length} suggestions, nothing written\n`)
+        /* Print the rows as a reviewer would read them in the sheet. */
+        for (const r of rows) {
+            console.log(`${'-'.repeat(72)}\n${r['Suggestion ID']}   ${r.Category}  ->  ${r['Page Title']}  (${r['Pages Affected']} URLs)`)
+            console.log(`  NOW : ${r['Current Text']}`)
+            console.log(`  NEW : ${r['Suggested Text'] || '(you write this in Your Edited Text)'}`)
+            console.log(`  WHY : ${r['Why It Helps']}`)
+            if (r.Notes) console.log(`  NOTE: ${r.Notes}`)
+        }
+        console.log(`${'-'.repeat(72)}`)
     } else if (rows.length) {
         await sheet('upsert', 'Patches', patches)
         await sheet('append', 'Suggestions', rows)
@@ -887,6 +912,29 @@ function writeNode(body, node, text) {
     return false
 }
 
+/*
+ * Confirm a change actually reached the public page.
+ *
+ * A push is not a deploy and a deploy is not a live page, so the run polls the
+ * URL until the new wording appears rather than assuming the commit was enough.
+ * A repo change waits on a Railway build, which takes a few minutes; a Sanity
+ * change waits on the page's own revalidate window, which can be an hour, so
+ * that one is reported as queued rather than being waited out.
+ */
+async function verifyLive(url, expect, { tries = 20, gapMs = 30000 } = {}) {
+    for (let i = 0; i < tries; i++) {
+        try {
+            const res = await fetch(url, { redirect: 'follow', cache: 'no-store' })
+            if (res.status === 200) {
+                const html = await res.text()
+                if (!expect || html.includes(expect)) return { ok: true, status: 200, tries: i + 1 }
+            }
+        } catch { /* a runner hiccup is not a failed deploy; keep polling */ }
+        if (i < tries - 1) await new Promise((r) => setTimeout(r, gapMs))
+    }
+    return { ok: false, tries }
+}
+
 async function apply() {
     const { rows: all } = await sheet('read', 'Suggestions')
     const approved = all.filter((r) => r.Approval === 'Approved' && (r['Applied Status'] === 'Not Applied' || r['Applied Status'] === ''))
@@ -919,6 +967,8 @@ async function apply() {
 
         let src = readFileSync(pl.file, 'utf8')
         const original = src
+        const proofs = []
+        const pageUrl = rows[0]['Page URL'] || BASE
         let applied = 0, skipped = 0
 
         for (const row of rows.sort((a, b) => a['Suggestion ID'].localeCompare(b['Suggestion ID']))) {
@@ -936,6 +986,7 @@ async function apply() {
             if (!occursOnce(src, patch.find)) { mark('Conflict - Skipped', 'That text has changed in the repo since the audit'); continue }
 
             src = src.split(patch.find).join(wording)
+            proofs.push(wording)
             applied++; mark('Applied')
         }
 
@@ -954,7 +1005,7 @@ async function apply() {
                 continue
             }
         }
-        log.push({ id: pageId, name: pl.label, applied, skipped, file: pl.file })
+        log.push({ id: pageId, name: pl.label, applied, skipped, file: pl.file, url: pageUrl, proof: proofs[0] })
     }
 
     /* ---- blog posts: write to Sanity ---- */
@@ -1102,7 +1153,15 @@ async function apply() {
             execFileSync('git', ['commit', '-m', body], { stdio: 'pipe' })
             execFileSync('git', ['push', 'origin', 'HEAD:main'], { stdio: 'pipe' })
             global.__refreshSha = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim()
-            console.log(`  committed ${global.__refreshSha} and pushed; Railway will deploy`)
+            console.log(`  committed ${global.__refreshSha} and pushed; waiting for the deploy`)
+
+            /* Verify, do not assume. Each repo page is checked on the live site. */
+            for (const l of log.filter((x) => x.file && x.applied)) {
+                const proof = (l.proof || '').slice(0, 120)
+                const res = await verifyLive(l.url, proof)
+                l.live = res.ok ? 'OK' : 'Not seen yet'
+                console.log(`    ${l.name}: ${res.ok ? `live after ${res.tries} check(s)` : `not visible after ${res.tries} checks; the deploy may still be running`}`)
+            }
         } catch (e) {
             console.error(`  ✖ could not commit or push: ${String(e.stderr || e.message).slice(0, 200)}`)
             global.__refreshSha = 'push failed'
@@ -1118,7 +1177,7 @@ async function apply() {
             'Changes Applied': String(l.applied), 'Changes Skipped': String(l.skipped),
             Summary: l.halted ? `Halted: ${l.halted}` : `${l.applied} applied, ${l.skipped} skipped`,
             'Rollback Point': l.file ? (global.__refreshSha || 'commit') : 'Sanity history',
-            'Live Check': l.applied ? 'Queued' : 'n/a',
+            'Live Check': l.applied ? (l.live || 'Queued') : 'n/a',
         })))
         /* the register's open count drops by whatever is no longer pending */
         const { rows: after } = await sheet('read', 'Suggestions')
