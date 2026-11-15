@@ -58,7 +58,18 @@ export function faithMetadata(slug) {
      * Chennai, 1 ft to 8 ft." - 79 characters that pushed every faith page past
      * 160 and got truncated. Shortened to the two facts a buyer scans for.
      */
-    const description = `${faith.lead} Cut in MS, SS, brass and copper, 1 ft to 8 ft, in Chennai.`
+    /*
+     * A fixed tail still overran on the longest lead, so the tail shortens
+     * until the whole line fits rather than being one chosen length.
+     */
+    const tails = [
+        ' Cut in MS, SS, brass and copper, 1 ft to 8 ft, in Chennai.',
+        ' Cut in MS, SS, brass and copper, in Chennai.',
+        ' Cut in Chennai.',
+    ]
+    const description =
+        tails.map((t) => `${faith.lead}${t}`).find((d) => d.length <= 155)
+        || `${faith.lead}${tails[tails.length - 1]}`
 
     return {
         // No brand suffix - app/layout.js applies the title template.
