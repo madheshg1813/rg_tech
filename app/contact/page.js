@@ -8,7 +8,7 @@ export const metadata = {
     // Brand removed: the layout template already appends it.
     title: 'Get a Laser Cutting Quote in Chennai',
     description:
-        'Send your drawing for a CNC fiber laser cutting or metal fabrication quote in Chennai. Engineer-verified pricing within 24 business hours. Call +91 63807 36439.',
+        'Send your drawing for a CNC laser cutting or metal fabrication quote in Chennai. Engineer-verified pricing within 24 business hours. Call +91 63807 36439.',
     alternates: { canonical: '/contact' },
     openGraph: {
         title: 'Contact RG Tech Engineering | Get a Laser Cutting Quote',

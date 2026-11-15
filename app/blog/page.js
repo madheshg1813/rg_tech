@@ -22,7 +22,7 @@ export const metadata = {
     // Brand removed: the layout template already appends it.
     title: 'CNC Laser Cutting & Fabrication Guides',
     description:
-        'Technical insights and deep dives into industrial laser cutting, fiber technology, and precision metal fabrication from RG Tech Engineering experts in Chennai.',
+        'Practical guides to industrial laser cutting, fiber technology and precision metal fabrication, written by the team cutting the parts in Chennai.',
     alternates: { canonical: '/blog' },
     openGraph: {
         title: 'Technical Blog | CNC Laser Cutting & Metal Fabrication | RG Tech',
