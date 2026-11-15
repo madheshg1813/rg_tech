@@ -153,6 +153,17 @@ const nextConfig = {
                 destination: '/api/catalogue/:file',
                 permanent: true,
             },
+            /*
+             * /designs has never been a page - the galleries live under
+             * /designs/gods - but it is the path a person shortens the URL to,
+             * and it answered with a 404 carrying a canonical pointing at the
+             * home page. Send it to the gallery index instead.
+             */
+            {
+                source: '/designs',
+                destination: '/designs/gods',
+                permanent: true,
+            },
             ...cityDeityRedirects(),
         ]
     },
